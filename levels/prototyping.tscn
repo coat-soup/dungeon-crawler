@@ -47,7 +47,7 @@ script = ExtResource("1_t1no0")
 
 [node name="NetworkManager" type="Node" parent="."]
 script = ExtResource("2_nb50o")
-spawn_position = Vector3(0, 5, 0)
+spawn_position = Vector3(0, 2, 0)
 
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.42227, 5.61139)
