@@ -1,0 +1,289 @@
+[gd_scene load_steps=6 format=3 uid="uid://db1lqpw1tim4q"]
+
+[ext_resource type="Script" uid="uid://cv83h2tcngfv3" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
+[ext_resource type="PackedScene" uid="uid://kd4fvkpy7af2" path="res://ui/scenes/lobby_entry.tscn" id="10_yfaaw"]
+
+[sub_resource type="Animation" id="Animation_68x3x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4x3be"]
+resource_name = "chat_fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g04y5"]
+_data = {
+&"RESET": SubResource("Animation_68x3x"),
+&"chat_fade": SubResource("Animation_4x3be")
+}
+
+[node name="UI" type="Control" groups=["ui"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_hp8fa")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InteractText" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 1016.0
+offset_top = 1147.0
+offset_right = 1516.0
+offset_bottom = 1189.0
+pivot_offset = Vector2(250, 0)
+theme_override_font_sizes/font_size = 30
+text = "INTERACT TEXT"
+horizontal_alignment = 1
+
+[node name="ChatBox" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2179.0
+offset_right = -1320.0
+offset_bottom = -259.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 3000)
+vertical_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/ChatBox"]
+libraries = {
+&"": SubResource("AnimationLibrary_g04y5")
+}
+
+[node name="HealthBar" type="ProgressBar" parent="HUD"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 40.0
+offset_top = 1302.0
+offset_right = 440.0
+offset_bottom = 1352.0
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="StaminaBar" type="ProgressBar" parent="HUD"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 0
+offset_left = 40.0
+offset_top = 1272.0
+offset_right = 440.0
+offset_bottom = 1296.0
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="CrosshairHolder" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair" type="TextureRect" parent="HUD/CrosshairHolder"]
+modulate = Color(1, 1, 1, 0.392157)
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+
+[node name="Hitmarker" type="TextureRect" parent="HUD/CrosshairHolder"]
+visible = false
+modulate = Color(1, 0.65, 0, 0.392157)
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+rotation = -0.785397
+scale = Vector2(3, 3)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+
+[node name="MissionPanel" type="VBoxContainer" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -500.0
+offset_bottom = 200.0
+grow_horizontal = 0
+
+[node name="MissionTitleLabel" type="Label" parent="HUD/MissionPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "MISSION TITLE"
+horizontal_alignment = 1
+
+[node name="MissionObjectivesLabel" type="Label" parent="HUD/MissionPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "- Objective 1
+- Objective 2"
+horizontal_alignment = 1
+
+[node name="NetworkPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="NetworkPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -700.0
+offset_top = -400.0
+offset_right = 700.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.18, 0.18, 0.501961)
+
+[node name="Separator" type="ColorRect" parent="NetworkPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -350.0
+offset_right = 5.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.18, 0.18, 1)
+
+[node name="ButtonHolder" type="VBoxContainer" parent="NetworkPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -475.0
+offset_top = -118.0
+offset_right = -225.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostSteam" type="Button" parent="NetworkPanel/ButtonHolder"]
+custom_minimum_size = Vector2(0, 47.745)
+layout_mode = 2
+text = "HOST STEAM"
+
+[node name="HostLocal" type="Button" parent="NetworkPanel/ButtonHolder"]
+custom_minimum_size = Vector2(0, 47.745)
+layout_mode = 2
+text = "HOST LOCAL"
+
+[node name="Join" type="Button" parent="NetworkPanel/ButtonHolder"]
+custom_minimum_size = Vector2(0, 47.745)
+layout_mode = 2
+text = "JOIN
+"
+
+[node name="LobbyIDTextField" type="TextEdit" parent="NetworkPanel/ButtonHolder"]
+custom_minimum_size = Vector2(0, 47.745)
+layout_mode = 2
+placeholder_text = "LOBBY ID"
+
+[node name="LobbySectionLabel" type="Label" parent="NetworkPanel"]
+layout_mode = 0
+offset_left = 274.0
+offset_top = -330.0
+offset_right = 459.0
+offset_bottom = -307.0
+theme_type_variation = &"GraphFrameTitleLabel"
+text = "Friend Lobbies"
+
+[node name="LobbyListPanel" type="ScrollContainer" parent="NetworkPanel"]
+layout_mode = 2
+offset_left = 86.0
+offset_top = -265.0
+offset_right = 671.0
+offset_bottom = 266.0
+
+[node name="LobbyListHolder" type="VBoxContainer" parent="NetworkPanel/LobbyListPanel"]
+layout_mode = 2
+
+[node name="LobbyEntry" parent="NetworkPanel/LobbyListPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
+layout_mode = 2
+
+[node name="LobbyEntry2" parent="NetworkPanel/LobbyListPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
+layout_mode = 2
+
+[node name="LobbyEntry3" parent="NetworkPanel/LobbyListPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
+layout_mode = 2
+
+[node name="LobbyEntry4" parent="NetworkPanel/LobbyListPanel/LobbyListHolder" instance=ExtResource("10_yfaaw")]
+layout_mode = 2
+
+[node name="RefreshLobbies" type="Button" parent="NetworkPanel"]
+custom_minimum_size = Vector2(0, 47.745)
+layout_mode = 0
+offset_left = 292.0
+offset_top = 316.0
+offset_right = 437.0
+offset_bottom = 363.745
+text = "REFRESH LOBBIES"

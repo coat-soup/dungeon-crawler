@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://in53wmskn8o"]
+
+[ext_resource type="Script" uid="uid://cp10hnk6llvdv" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://csxbl4ax1b4pk" path="res://player/player_movement.gd" id="2_rkbax"]
+[ext_resource type="Script" uid="uid://d4lsp6fkml3h3" path="res://player/stamina_manager.gd" id="3_g1dw6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rkbax"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_oul6g")
+
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("2_rkbax")
+body = NodePath("..")
+
+[node name="Stamina" type="Node" parent="."]
+script = ExtResource("3_g1dw6")
+max_stamina = null
+recharge_rate = null
+dash_stamina = null
+jump_stamina = null
+recharge_delay = null
+depleted_recharge_delay = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_oul6g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_rkbax")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499588, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CameraPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.305795, 0, 0.42)
+radius = 0.172643
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CameraPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.306, 0, 0.42)
+radius = 0.172643
