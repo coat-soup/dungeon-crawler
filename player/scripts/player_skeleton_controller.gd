@@ -18,7 +18,7 @@ class_name PlayerSkeletonController
 
 var held_item
 @onready var camera_rt: RemoteTransform3D = $Armature_001/Skeleton3D/CameraAttach/CameraRT
-@onready var weapon_rt: RemoteTransform3D = $Armature_001/Skeleton3D/Cube/WeaponRT
+@onready var weapon_rt: RemoteTransform3D = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT
 
 @export var weapon : Weapon
 
