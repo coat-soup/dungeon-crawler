@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj7p8kb5is0qr"]
+
+[ext_resource type="PackedScene" uid="uid://c831ald68nroa" path="res://weapons/models/longsword.glb" id="1_ocjsi"]
+[ext_resource type="Script" uid="uid://cgleucta3iiqc" path="res://weapons/scripts/weapon.gd" id="2_rbr83"]
+
+[node name="longsword" node_paths=PackedStringArray("hand_positions") instance=ExtResource("1_ocjsi")]
+script = ExtResource("2_rbr83")
+hand_positions = [NodePath(""), NodePath("")]

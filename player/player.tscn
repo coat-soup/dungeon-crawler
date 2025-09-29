@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://in53wmskn8o"]
+[gd_scene load_steps=17 format=3 uid="uid://in53wmskn8o"]
 
 [ext_resource type="Script" uid="uid://cp10hnk6llvdv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://csxbl4ax1b4pk" path="res://player/scripts/player_movement.gd" id="2_rkbax"]
@@ -11,10 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://bgupddqt4qcyb" path="res://sfx/footsteps/footsteps-004.wav" id="9_yllr7"]
 [ext_resource type="AudioStream" uid="uid://db7x6fc4ukeu4" path="res://sfx/footsteps/footsteps-005.wav" id="10_kb6p2"]
 [ext_resource type="AudioStream" uid="uid://b00ubnovfat3x" path="res://sfx/footsteps/jump-land.wav" id="11_2ieo8"]
-[ext_resource type="PackedScene" uid="uid://byoolwbycr4tk" path="res://player/models/player_model.glb" id="12_wodsf"]
-[ext_resource type="PackedScene" uid="uid://c831ald68nroa" path="res://weapons/models/longsword.glb" id="12_yllr7"]
-[ext_resource type="PackedScene" uid="uid://b56o06u83al10" path="res://weapons/models/mace.glb" id="13_kb6p2"]
-[ext_resource type="PackedScene" uid="uid://d1eb06r58joyp" path="res://weapons/models/warhammer.glb" id="14_kb6p2"]
+[ext_resource type="PackedScene" uid="uid://om525hroc3mr" path="res://player/models/player_model.tscn" id="12_wodsf"]
+[ext_resource type="PackedScene" uid="uid://cj7p8kb5is0qr" path="res://weapons/models/longsword_model.tscn" id="13_yllr7"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wodsf"]
 streams_count = 5
@@ -40,9 +38,13 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("NetworkManager:steam_user_id")
 properties/3/spawn = true
 properties/3/replication_mode = 2
+properties/4/path = NodePath("Movement:velocity_sync")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_oul6g")
+camera = NodePath("CameraPivot/Camera")
 
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body")]
 script = ExtResource("2_rkbax")
@@ -54,7 +56,7 @@ script = ExtResource("3_g1dw6")
 
 [node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("third_person_models", "username_label")]
 script = ExtResource("4_yw30f")
-third_person_models = [NodePath("../UsernameLabel"), NodePath("../player_model")]
+third_person_models = [NodePath("../UsernameLabel")]
 username_label = NodePath("../UsernameLabel")
 
 [node name="AudioManager" type="Node3D" parent="." node_paths=PackedStringArray("movement")]
@@ -70,8 +72,11 @@ stream = ExtResource("11_2ieo8")
 volume_db = -1.0
 max_distance = 25.0
 
-[node name="player_model" parent="." instance=ExtResource("12_wodsf")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.00119519, 0)
+[node name="player_model" parent="." node_paths=PackedStringArray("cam_holder", "movement_manager", "weapon") instance=ExtResource("12_wodsf")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+cam_holder = NodePath("../CameraPivot")
+movement_manager = NodePath("../Movement")
+weapon = NodePath("../longsword")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0012, 0)
@@ -82,17 +87,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8751, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
 
-[node name="longsword" parent="CameraPivot" instance=ExtResource("12_yllr7")]
-transform = Transform3D(1, 0, 0, 0, -0.707107, -0.707107, 0, 0.707107, -0.707107, 0.208407, -0.518431, -0.651206)
-
-[node name="mace" parent="CameraPivot" instance=ExtResource("13_kb6p2")]
-transform = Transform3D(1, 0, 0, 0, -0.707107, -0.707107, 0, 0.707107, -0.707107, 0.499758, -0.374178, -0.742044)
-visible = false
-
-[node name="warhammer" parent="CameraPivot" instance=ExtResource("14_kb6p2")]
-transform = Transform3D(1, 0, 0, 0, -0.707107, -0.707107, 0, 0.707107, -0.707107, 0.736065, -0.379164, -0.768467)
-visible = false
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_g1dw6")
 
@@ -100,3 +94,6 @@ replication_config = SubResource("SceneReplicationConfig_g1dw6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.21476, 0)
 billboard = 1
 text = "STEAM USER"
+
+[node name="longsword" parent="." instance=ExtResource("13_yllr7")]
+transform = Transform3D(0.806269, 0.10327, -0.582465, -6.9432e-09, 0.984644, 0.174576, 0.591549, -0.140755, 0.793888, 0.677402, 0.959438, -0.711704)

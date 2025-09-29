@@ -41,6 +41,7 @@ var debug_mode = false
 var interact_object
 
 @onready var stamina: Stamina = $"../Stamina"
+@export var velocity_sync : Vector3
 
 
 func _ready():
@@ -121,7 +122,7 @@ func _physics_process(delta: float) -> void:
 	#viewbob
 	t_bob += delta * body.velocity.length() * float(body.is_on_floor())
 	var b : float = bob_calc(t_bob)
-	camera.transform.origin = Vector3(0, b, 0)
+	#camera.transform.origin = Vector3(0, b, 0)
 	
 	#bob signals
 	if b/BOB_AMP < 0.05:
@@ -129,7 +130,9 @@ func _physics_process(delta: float) -> void:
 	elif b/BOB_AMP > 0.95:
 		bob_top.emit()
 	
+	velocity_sync = body.velocity
 	body.move_and_slide()
+
 
 func bob_calc(time : float) -> float:
 	return BOB_AMP * sin(time * BOB_FREQ)

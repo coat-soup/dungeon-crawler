@@ -69,6 +69,12 @@ use_collision = true
 size = Vector3(30, 1, 30)
 material = SubResource("ShaderMaterial_t1no0")
 
+[node name="Floor2" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 7)
+use_collision = true
+size = Vector3(6, 4, 1)
+material = SubResource("ShaderMaterial_t1no0")
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://in53wmskn8o")
 spawn_path = NodePath("../NetworkManager")
