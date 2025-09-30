@@ -76,6 +76,9 @@ func _physics_process(delta: float) -> void:
 	if held_item:
 		if len(held_item.hand_positions) > 0: hand_ik_r.target = held_item.hand_positions[0]
 		if len(held_item.hand_positions) > 1: hand_ik_r.target = held_item.hand_positions[1]
+	
+	var swing_speed = 1.0 if weapon_manager.attack_state == weapon_manager.AttackState.IDLE else weapon.speed_multiplier
+	animation_tree.set("parameters/swing_sword_timescale/scale", swing_speed)
 
 
 func start_damage_window(): damage_window_toggled.emit(true)
