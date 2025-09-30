@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://in53wmskn8o"]
+[gd_scene load_steps=17 format=3 uid="uid://in53wmskn8o"]
 
 [ext_resource type="Script" uid="uid://cp10hnk6llvdv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://csxbl4ax1b4pk" path="res://player/scripts/player_movement.gd" id="2_rkbax"]
 [ext_resource type="Script" uid="uid://d4lsp6fkml3h3" path="res://player/scripts/stamina_manager.gd" id="3_g1dw6"]
 [ext_resource type="Script" uid="uid://c4wl010wnfg3q" path="res://player/scripts/player_network_manager.gd" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://bqbukncxkv1fd" path="res://player/scripts/player_sound_manager.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://cecsid1iml5j8" path="res://player/weapon_manager.gd" id="5_yllr7"]
 [ext_resource type="AudioStream" uid="uid://cpbl0hysjsp1t" path="res://sfx/footsteps/footsteps-001.wav" id="6_8t03j"]
 [ext_resource type="AudioStream" uid="uid://i2v43f48ivts" path="res://sfx/footsteps/footsteps-002.wav" id="7_2ieo8"]
 [ext_resource type="AudioStream" uid="uid://dxtrxm7rb6wi1" path="res://sfx/footsteps/footsteps-003.wav" id="8_ebec5"]
@@ -58,6 +59,9 @@ script = ExtResource("4_yw30f")
 third_person_models = [NodePath("../UsernameLabel")]
 username_label = NodePath("../UsernameLabel")
 
+[node name="WeaponManager" type="Node" parent="."]
+script = ExtResource("5_yllr7")
+
 [node name="AudioManager" type="Node3D" parent="." node_paths=PackedStringArray("movement")]
 script = ExtResource("5_qjkh3")
 movement = NodePath("../Movement")
@@ -71,10 +75,11 @@ stream = ExtResource("11_2ieo8")
 volume_db = -1.0
 max_distance = 25.0
 
-[node name="player_model" parent="." node_paths=PackedStringArray("cam_holder", "movement_manager") instance=ExtResource("12_wodsf")]
+[node name="player_model" parent="." node_paths=PackedStringArray("cam_holder", "movement_manager", "weapon_manager") instance=ExtResource("12_wodsf")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 cam_holder = NodePath("../CameraPivot")
 movement_manager = NodePath("../Movement")
+weapon_manager = NodePath("../WeaponManager")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0012, 0)

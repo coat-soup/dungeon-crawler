@@ -1,6 +1,8 @@
 extends Node3D
 class_name PlayerSkeletonController
 
+signal damage_window_toggled(bool)
+
 @export var cam_holder : Node3D
 var cam : Node3D
 @export var movement_manager : PlayerMovement
@@ -23,6 +25,7 @@ var held_item
 @onready var weapon_rt: RemoteTransform3D = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT
 
 @export var weapon : Weapon
+@export var weapon_manager : WeaponManager
 
 
 func _ready() -> void:
@@ -38,6 +41,10 @@ func _ready() -> void:
 	
 	if is_multiplayer_authority():
 		$Armature_001/Skeleton3D/WeaponAttach/WeaponRT/WeaponHolder.position = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT/FirstPersonOffset.position
+		$Armature_001/Skeleton3D/FPHeadOverride.override_pose = true
+	
+	animation_tree.advance_expression_base_node = weapon_manager.get_path()
+	animation_tree.animation_finished.connect(weapon_manager.on_anim_finished)
 
 
 func _input(event: InputEvent) -> void:
@@ -60,6 +67,7 @@ func toggle_blocking(value : bool):
 func _physics_process(delta: float) -> void:
 	torso_ik.rotation = -cam_holder.rotation / 2
 	neck_rotator.rotation = -cam_holder.rotation / 2
+	
 	weapon_rotator.rotation.x = clamp(-cam_holder.rotation.x / 2, deg_to_rad(-30), deg_to_rad(30))
 	
 	var velocity = movement_manager.velocity_sync.length()
@@ -68,3 +76,11 @@ func _physics_process(delta: float) -> void:
 	if held_item:
 		if len(held_item.hand_positions) > 0: hand_ik_r.target = held_item.hand_positions[0]
 		if len(held_item.hand_positions) > 1: hand_ik_r.target = held_item.hand_positions[1]
+
+
+func start_damage_window(): damage_window_toggled.emit(true)
+func stop_damage_window(): damage_window_toggled.emit(false)
+
+func toggle_blocking_anim(value : bool):
+	print("skeleton blocking")
+	animation_tree.set("parameters/weapon_attacks_state_machine/blocking", value)

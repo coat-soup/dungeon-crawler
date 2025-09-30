@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj7p8kb5is0qr"]
+[gd_scene load_steps=4 format=3 uid="uid://cj7p8kb5is0qr"]
 
 [ext_resource type="PackedScene" uid="uid://c831ald68nroa" path="res://weapons/models/longsword.glb" id="1_ocjsi"]
 [ext_resource type="Script" uid="uid://cgleucta3iiqc" path="res://weapons/scripts/weapon.gd" id="2_rbr83"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rbr83"]
+size = Vector3(0.045, 0.8, 0.02)
 
 [node name="longsword" node_paths=PackedStringArray("hand_positions") instance=ExtResource("1_ocjsi")]
 script = ExtResource("2_rbr83")
@@ -12,3 +15,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0476347, 0)
 
 [node name="Marker3D2" type="Marker3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.141591, 0)
+
+[node name="Hitbox" type="Area3D" parent="." index="6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.403356, 0)
+shape = SubResource("BoxShape3D_rbr83")
