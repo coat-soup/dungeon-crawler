@@ -2,6 +2,7 @@ extends Node3D
 class_name PlayerSkeletonController
 
 @export var cam_holder : Node3D
+var cam : Node3D
 @export var movement_manager : PlayerMovement
 
 @onready var skeleton: Skeleton3D = $Armature_001/Skeleton3D
@@ -18,14 +19,18 @@ class_name PlayerSkeletonController
 @onready var hand_ik_l: SkeletonIK3D = $Armature_001/Skeleton3D/HandIK_L
 
 var held_item
-@onready var camera_rt: RemoteTransform3D = $Armature_001/Skeleton3D/CameraAttach/CameraRT
+@onready var camera_rt: RemoteTransform3D = $Armature_001/Skeleton3D/TorsoIK/NeckRotator/HeadRotator/CameraRT
 @onready var weapon_rt: RemoteTransform3D = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT
 
 @export var weapon : Weapon
 
 
 func _ready() -> void:
-	camera_rt.remote_path = cam_holder.get_child(0).get_path()
+	cam = cam_holder.get_child(0)
+	
+	cam.reparent(camera_rt)
+	cam.position = Vector3.ZERO
+	
 	weapon_rt.remote_path = weapon.get_path()
 	
 	hand_ik_r.start()
@@ -33,7 +38,6 @@ func _ready() -> void:
 	
 	if is_multiplayer_authority():
 		$Armature_001/Skeleton3D/WeaponAttach/WeaponRT/WeaponHolder.position = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT/FirstPersonOffset.position
-
 
 
 func _input(event: InputEvent) -> void:
