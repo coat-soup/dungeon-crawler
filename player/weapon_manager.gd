@@ -9,7 +9,7 @@ var attack_input_buffer_time : float = 0.5
 var attack_input_buffer_timer : float
 var attack_input_buffer : AttackState = -1
 
-@onready var player_model: PlayerSkeletonController = $"../player_model"
+@export var player_model: PlayerSkeletonController
 
 enum AttackState {IDLE, SWING, ALTSWING, LUNGE, OVERHEAD}
 
@@ -20,7 +20,8 @@ var can_damage : bool
 
 
 func _ready() -> void:
-	player_model.damage_window_toggled.connect(toggle_damage_window)
+	pass
+	#player_model.damage_window_toggled.connect(toggle_damage_window)
 
 
 func _input(event: InputEvent) -> void:

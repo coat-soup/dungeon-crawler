@@ -27,7 +27,7 @@ var chats : Array[String] = []
 @onready var mission_objectives_label: Label = $HUD/MissionPanel/MissionObjectivesLabel
 
 var prompt_time_remaining := 0.0
-var chat_fade_timer : Timer
+var chat_fade_timer := 0.0
 
 
 
@@ -37,10 +37,6 @@ func _ready():
 	host_steam.pressed.connect(network_manager._on_host_pressed)
 	host_local.pressed.connect(network_manager._on_host_local_pressed)
 	join.pressed.connect(network_manager._on_join_pressed)
-	
-	chat_fade_timer = Timer.new()
-	add_child(chat_fade_timer)
-	chat_fade_timer.timeout.connect(fade_chat)
 	
 	Steam.avatar_loaded.connect(on_avatar_loaded)
 	
@@ -58,6 +54,11 @@ func _process(delta: float) -> void:
 		prompt_time_remaining -= delta
 		if prompt_time_remaining <= 0:
 			interact_text.text = ""
+	
+	if chat_fade_timer > 0:
+		chat_fade_timer -= delta
+		if chat_fade_timer <= 0:
+			fade_chat()
 
 
 func toggle_network_menu(value : bool):
@@ -81,9 +82,9 @@ func display_prompt(prompt: String, time := 2.0):
 
 @rpc("any_peer", "call_local")
 func display_chat_message(message : String):
+	chat_anim.stop()
 	chat_box.modulate = Color.WHITE
-	chat_fade_timer.stop()
-	chat_fade_timer.start(5.0)
+	chat_fade_timer = 1.0
 	
 	chats.append("[Server]: " + message)
 	if chats.size() > 10:

@@ -59,8 +59,9 @@ script = ExtResource("4_yw30f")
 third_person_models = [NodePath("../UsernameLabel")]
 username_label = NodePath("../UsernameLabel")
 
-[node name="WeaponManager" type="Node" parent="."]
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player_model")]
 script = ExtResource("5_yllr7")
+player_model = NodePath("../player_model")
 
 [node name="AudioManager" type="Node3D" parent="." node_paths=PackedStringArray("movement")]
 script = ExtResource("5_qjkh3")
