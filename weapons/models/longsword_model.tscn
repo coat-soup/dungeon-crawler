@@ -5,4 +5,10 @@
 
 [node name="longsword" node_paths=PackedStringArray("hand_positions") instance=ExtResource("1_ocjsi")]
 script = ExtResource("2_rbr83")
-hand_positions = [null, null]
+hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
+
+[node name="Marker3D" type="Marker3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0476347, 0)
+
+[node name="Marker3D2" type="Marker3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.141591, 0)

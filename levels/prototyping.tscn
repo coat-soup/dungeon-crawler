@@ -78,3 +78,6 @@ material = SubResource("ShaderMaterial_t1no0")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://in53wmskn8o")
 spawn_path = NodePath("../NetworkManager")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.80981, -3.17818)

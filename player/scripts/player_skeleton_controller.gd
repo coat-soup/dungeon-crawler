@@ -7,14 +7,15 @@ class_name PlayerSkeletonController
 @onready var skeleton: Skeleton3D = $Armature_001/Skeleton3D
 @onready var animation_tree: AnimationTree = $AnimationTree
 
+@onready var weapon_rotator: Node3D = $Armature_001/Skeleton3D/TorsoIK/WeaponRotator
+@onready var weapon_rotator_ik: LookAtModifier3D = $Armature_001/Skeleton3D/WeaponRotatorIK
+
 @onready var torso_ik: LookAtModifier3D = $Armature_001/Skeleton3D/TorsoIK
 @onready var neck_rotator: Node3D = $Armature_001/Skeleton3D/TorsoIK/NeckRotator
 @onready var head_rotator: Node3D = $Armature_001/Skeleton3D/TorsoIK/NeckRotator/HeadRotator
-@export var right_arm_ik : Array[LookAtModifier3D]
-@export var left_arm_ik : Array[LookAtModifier3D]
 
-@onready var hand_target_r: Marker3D = $HandTarget_R
-@onready var hand_target_l: Marker3D = $HandTarget_L
+@onready var hand_ik_r: SkeletonIK3D = $Armature_001/Skeleton3D/HandIK_R
+@onready var hand_ik_l: SkeletonIK3D = $Armature_001/Skeleton3D/HandIK_L
 
 var held_item
 @onready var camera_rt: RemoteTransform3D = $Armature_001/Skeleton3D/CameraAttach/CameraRT
@@ -25,16 +26,21 @@ var held_item
 
 func _ready() -> void:
 	camera_rt.remote_path = cam_holder.get_child(0).get_path()
-	#cam_holder.get_child(0).reparent(camera_rt)
-	#camera_rt.get_child(0).position = Vector3.ZERO
 	weapon_rt.remote_path = weapon.get_path()
-	#held_item = weapon
-	#do_item_ik()
+	
+	hand_ik_r.start()
+	hand_ik_l.start()
+	
+	if is_multiplayer_authority():
+		$Armature_001/Skeleton3D/WeaponAttach/WeaponRT/WeaponHolder.position = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT/FirstPersonOffset.position
+
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("primary") and movement_manager.is_multiplayer_authority():
-		swing.rpc()
+	if not movement_manager.is_multiplayer_authority(): return
+	if event.is_action_pressed("primary"): swing.rpc()
+	if event.is_action_pressed("secondary"): toggle_blocking.rpc(true)
+	if event.is_action_released("secondary"): toggle_blocking.rpc(false)
 
 
 @rpc("any_peer", "call_local")
@@ -42,22 +48,19 @@ func swing():
 	animation_tree.set("parameters/swing_sword_oneshot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
-func _process(delta: float) -> void:
+@rpc("any_peer", "call_local")
+func toggle_blocking(value : bool):
+	animation_tree.set("parameters/idle_blocking_transition/transition_request", "state_blocking" if value else "state_idle")
+
+
+func _physics_process(delta: float) -> void:
 	torso_ik.rotation = -cam_holder.rotation / 2
 	neck_rotator.rotation = -cam_holder.rotation / 2
+	weapon_rotator.rotation.x = clamp(-cam_holder.rotation.x / 2, deg_to_rad(-30), deg_to_rad(30))
 	
 	var velocity = movement_manager.velocity_sync.length()
 	animation_tree.set("parameters/walk_velocity/blend_position", velocity/movement_manager.speed)
 	
 	if held_item:
-		if len(held_item.hand_positions) > 0:
-			hand_target_r.global_position = held_item.hand_positions[0].global_position
-			hand_target_r.global_rotation = held_item.hand_positions[0].global_rotation
-		if len(held_item.hand_positions) > 1:
-			hand_target_l.global_position = held_item.hand_positions[1].global_position
-			hand_target_l.global_rotation = held_item.hand_positions[1].global_rotation
-
-
-func do_item_ik():
-	for ik in right_arm_ik: ik.active = held_item and len(held_item.hand_positions) > 0
-	for ik in left_arm_ik: ik.active = held_item and len(held_item.hand_positions) > 1
+		if len(held_item.hand_positions) > 0: hand_ik_r.target = held_item.hand_positions[0]
+		if len(held_item.hand_positions) > 1: hand_ik_r.target = held_item.hand_positions[1]
