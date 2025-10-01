@@ -81,9 +81,11 @@ texture = ExtResource("8_32hag")
 modulate = Color(0.846926, 0.155291, 0, 1)
 metadata/_custom_type_script = "uid://bcnftja1gi4hk"
 
-[node name="AudioManager" type="Node3D" parent="." node_paths=PackedStringArray("movement")]
+[node name="AudioManager" type="Node3D" parent="." node_paths=PackedStringArray("movement", "skeleton_controller", "weapon_manager")]
 script = ExtResource("5_qjkh3")
 movement = NodePath("../Movement")
+skeleton_controller = NodePath("../player_model")
+weapon_manager = NodePath("../WeaponManager")
 
 [node name="FootstepAudio" type="AudioStreamPlayer3D" parent="AudioManager"]
 stream = SubResource("AudioStreamRandomizer_wodsf")

@@ -4,9 +4,10 @@ class_name WeaponManager
 signal started_attack
 signal block_state_changed(bool)
 signal hitbox_hit(Node3D)
+signal weapon_bounced
 
 @export var weapon : Weapon
-var attack_input_buffer_time : float = 0.5
+var attack_input_buffer_time : float = 0.3
 var attack_input_buffer_timer : float
 var attack_input_buffer : AttackState = -1
 
@@ -16,9 +17,13 @@ enum AttackState {IDLE, SWING, ALTSWING, LUNGE, OVERHEAD}
 
 var attack_state : AttackState
 
+var weapon_bouncing : bool
+
+var idle_pentalty_timer : float = 0.3
+var can_attack : bool = true
 var blocking : bool
 var can_damage : bool
-var damaged_objects : Array[Node3D]
+var damaged_objects : Array[Health]
 @onready var player : Player = $".."
 
 
@@ -40,24 +45,36 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
+	#print("buffer: ", attack_input_buffer)
+	
 	if attack_input_buffer_timer > 0:
 		attack_input_buffer_timer -= delta
 		if attack_input_buffer_time <= 0: attack_input_buffer = -1
 
 
 func try_start_attack(attack_type : AttackState):
-	if not is_multiplayer_authority(): return
-	start_attack.rpc(attack_type)
+	if not is_multiplayer_authority() or not can_attack: return
+	if attack_state == AttackState.IDLE:
+		#print("starting attack from idle ", attack_type)
+		start_attack.rpc(attack_type)
+	else:
+		if attack_state == AttackState.SWING and attack_type == AttackState.SWING: attack_type = AttackState.ALTSWING
+		attack_input_buffer = attack_type
+		attack_input_buffer_timer = attack_input_buffer_time
 
 
 @rpc("any_peer", "call_local")
 func start_attack(attack_type : AttackState):
-	if attack_state == AttackState.IDLE:
-		attack_state = attack_type
-	else:
-		if attack_state == AttackState.SWING: attack_type = AttackState.ALTSWING
-		attack_input_buffer = attack_type
-		attack_input_buffer_timer = attack_input_buffer_time
+	#print("prevstate for attack %d ->" % attack_state)
+	attack_state = attack_type
+	started_attack.emit()
+	#print("starting attack ", attack_state)
+
+
+@rpc("any_peer", "call_local")
+func set_attack_state(attack_type : AttackState):
+	attack_state = attack_type
+	#print("direct set to ", attack_state)
 
 
 @rpc("any_peer", "call_local")
@@ -72,18 +89,41 @@ func toggle_damage_window(value : bool):
 
 
 func on_anim_finished(anim_name : String):
-	if attack_input_buffer_timer > 0 and attack_input_buffer != -1 and attack_input_buffer != attack_state:
-		attack_state = attack_input_buffer
+	if not is_multiplayer_authority(): return
+	#print("anim finished. conditions for buffer: %d != -1 (%s) and %d != %d (%s)" % [attack_input_buffer, attack_input_buffer != -1, attack_input_buffer, attack_state, attack_input_buffer != attack_state])
+	if attack_input_buffer != -1 and attack_input_buffer != attack_state:
+		#print("buffering ", attack_input_buffer)
+		start_attack.rpc(attack_input_buffer)
 		attack_input_buffer = -1
 	else:
-		attack_state = AttackState.IDLE
+		#print("setting to idle")
+		can_attack = false
+		set_attack_state.rpc(AttackState.IDLE)
+		await get_tree().create_timer(idle_pentalty_timer).timeout
+		can_attack = true
 
 
 func on_weapon_hit(body : Node3D):
-	if not can_damage or body == player or body in damaged_objects: return
-	damaged_objects.append(body)
-	var health : Health = body.get_node("Health") as Health
+	if not can_damage or body == player: return
+	var health : Health = body.get_node_or_null("Health") as Health
 	if health:
+		if health in damaged_objects: return
+		damaged_objects.append(health)
 		AudioManager.spawn_sound_at_point(preload("res://sfx/sword_slice.wav"), body.global_position)
 		if is_multiplayer_authority():
 			health.take_damage.rpc(weapon.damage, int(player.name))
+	elif is_multiplayer_authority():
+		handle_bonk.rpc()
+
+
+@rpc("any_peer", "call_local")
+func handle_bonk():
+	toggle_damage_window(false)
+	
+	weapon_bounced.emit()
+	
+	weapon_bouncing = true
+	await get_tree().create_timer(0.3).timeout
+	weapon_bouncing = false
+	 
+	attack_state = AttackState.IDLE

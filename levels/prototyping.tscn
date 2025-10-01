@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4dr7y843yplj"]
+[gd_scene load_steps=12 format=3 uid="uid://c4dr7y843yplj"]
 
 [ext_resource type="Shader" uid="uid://caa45klo6bnd0" path="res://world/prototype_grid.gdshader" id="1_jh6tj"]
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/scripts/game_manager.gd" id="1_t1no0"]
@@ -43,6 +43,10 @@ shader_parameter/use_inside_uv = false
 shader_parameter/use_albedo_color = false
 shader_parameter/albedo_alpha = 0.5
 
+[sub_resource type="BoxMesh" id="BoxMesh_o6pmk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6pmk"]
+
 [node name="Prototyping" type="Node3D"]
 script = ExtResource("1_t1no0")
 
@@ -80,8 +84,15 @@ material = SubResource("ShaderMaterial_t1no0")
 _spawnable_scenes = PackedStringArray("uid://in53wmskn8o")
 spawn_path = NodePath("../NetworkManager")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.80981, -3.17818)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_o6pmk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_o6pmk")
 
 [node name="dummy" parent="." instance=ExtResource("5_o6pmk")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -7.77924, 0.5, 0.421566)

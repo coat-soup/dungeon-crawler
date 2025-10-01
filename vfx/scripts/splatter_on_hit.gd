@@ -12,8 +12,7 @@ func _ready() -> void:
 	health.took_damage.connect(on_damaged)
 
 
-func on_damaged(_source):
-	print("splashin decal")
+func on_damaged(_source, _damage):
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(global_position, global_position - Vector3.UP * 10)
 	var result = space_state.intersect_ray(query)
