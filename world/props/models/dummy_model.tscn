@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo386x2n2r7jx"]
+
+[ext_resource type="PackedScene" uid="uid://bvyn4imtp8i5r" path="res://world/props/models/dummy.glb" id="1_g8o4q"]
+
+[node name="dummy" instance=ExtResource("1_g8o4q")]

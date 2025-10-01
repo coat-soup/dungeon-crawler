@@ -14,15 +14,14 @@ func take_damage(amount: float, source_id : int = -1):
 	if cur_health <= 0:
 		return
 	
-	print(get_owner().name, " taking ", str(amount), " damage from source ", source_id)
+	#print(get_owner().name, " taking ", str(amount), " damage from source ", source_id)
 	
 	cur_health -= min(amount, cur_health)
-	took_damage.emit(source_id)
+	took_damage.emit(source_id, amount)
 	
 	var player : Player = Util.get_player_from_id(str(source_id), self)
 	if player and player.is_multiplayer_authority():
 		Global.ui.flash_hitmarker(cur_health <= 0)
-		print("flashing hit")
 	
 	if not is_multiplayer_authority(): return
 	

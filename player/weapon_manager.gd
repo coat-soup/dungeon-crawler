@@ -80,10 +80,10 @@ func on_anim_finished(anim_name : String):
 
 
 func on_weapon_hit(body : Node3D):
-	if not is_multiplayer_authority(): return
 	if not can_damage or body == player or body in damaged_objects: return
 	damaged_objects.append(body)
-	print(damaged_objects)
 	var health : Health = body.get_node("Health") as Health
 	if health:
-		health.take_damage.rpc(weapon.damage, int(player.name))
+		AudioManager.spawn_sound_at_point(preload("res://sfx/sword_slice.wav"), body.global_position)
+		if is_multiplayer_authority():
+			health.take_damage.rpc(weapon.damage, int(player.name))

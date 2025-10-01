@@ -107,7 +107,6 @@ func update_stamina_bar(value: float):
 
 
 func flash_hitmarker(dead : bool = false):
-	display_chat_message("Hit")
 	hitmarker.modulate = Color.ORANGE if dead else Color.hex(0xffffff64)
 	hitmarker.visible = true
 	await get_tree().create_timer(0.1).timeout

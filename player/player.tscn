@@ -113,6 +113,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8751, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
 
+[node name="AudioListener3D" type="AudioListener3D" parent="CameraPivot/Camera"]
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_g1dw6")
 
