@@ -8,7 +8,6 @@ signal dash
 
 #@onready var health: PlayerHealth = $Health
 @onready var weapon_manager: WeaponManager = $"../WeaponManager"
-@onready var collision_shape_3d: CollisionShape3D = $"../CollisionShape3D"
 
 @export var body : Player
 
@@ -50,12 +49,14 @@ func _ready():
 
 func _input(_event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
-	if Input.is_key_pressed(KEY_SEMICOLON) and false:
+	if Input.is_key_pressed(KEY_SEMICOLON):
 		debug_mode = !debug_mode
 		if debug_mode:
-			collision_shape_3d.disabled = true
+			body.collision_mask = 0
+			body.collision_layer = 0
 		else:
-			collision_shape_3d.disabled = false
+			body.collision_mask = Util.layer_mask([1])
+			body.collision_layer = Util.layer_mask([1])
 
 
 func _unhandled_input(event: InputEvent) -> void:

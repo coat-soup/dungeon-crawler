@@ -3,6 +3,7 @@ class_name WeaponManager
 
 signal started_attack
 signal block_state_changed(bool)
+signal hitbox_hit(Node3D)
 
 @export var weapon : Weapon
 var attack_input_buffer_time : float = 0.5
@@ -17,11 +18,14 @@ var attack_state : AttackState
 
 var blocking : bool
 var can_damage : bool
+var damaged_objects : Array[Node3D]
+@onready var player : Player = $".."
 
 
 func _ready() -> void:
-	pass
-	#player_model.damage_window_toggled.connect(toggle_damage_window)
+	weapon = player_model.weapon
+	player_model.damage_window_toggled.connect(toggle_damage_window)
+	weapon.hitbox.body_entered.connect(on_weapon_hit)
 
 
 func _input(event: InputEvent) -> void:
@@ -64,12 +68,22 @@ func toggle_blocking(value : bool):
 
 func toggle_damage_window(value : bool):
 	can_damage = value
+	if not can_damage: damaged_objects.clear()
 
 
 func on_anim_finished(anim_name : String):
-	print("Anim finished! Current buffer: %d (%ss)" % [attack_input_buffer, attack_input_buffer_timer])
 	if attack_input_buffer_timer > 0 and attack_input_buffer != -1 and attack_input_buffer != attack_state:
 		attack_state = attack_input_buffer
 		attack_input_buffer = -1
 	else:
 		attack_state = AttackState.IDLE
+
+
+func on_weapon_hit(body : Node3D):
+	if not is_multiplayer_authority(): return
+	if not can_damage or body == player or body in damaged_objects: return
+	damaged_objects.append(body)
+	print(damaged_objects)
+	var health : Health = body.get_node("Health") as Health
+	if health:
+		health.take_damage.rpc(weapon.damage, int(player.name))

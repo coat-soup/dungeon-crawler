@@ -47,6 +47,7 @@ func _ready() -> void:
 	
 	animation_tree.advance_expression_base_node = weapon_manager.get_path()
 	animation_tree.animation_finished.connect(weapon_manager.on_anim_finished)
+	$Armature_001/Skeleton3D/TorsoIK/TorsoCollisionRT.remote_path = get_parent().get_node("CollisionTop").get_path()
 
 
 func _input(event: InputEvent) -> void:

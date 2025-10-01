@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://db1lqpw1tim4q"]
+[gd_scene load_steps=7 format=3 uid="uid://db1lqpw1tim4q"]
 
 [ext_resource type="Script" uid="uid://cv83h2tcngfv3" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
+[ext_resource type="Texture2D" uid="uid://cqmkcefkf8vqf" path="res://ui/textures/hit_marker.png" id="2_1u8fv"]
 [ext_resource type="PackedScene" uid="uid://kd4fvkpy7af2" path="res://ui/scenes/lobby_entry.tscn" id="10_yfaaw"]
 
 [sub_resource type="Animation" id="Animation_68x3x"]
@@ -59,11 +60,18 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="InteractText" type="Label" parent="HUD"]
-layout_mode = 0
-offset_left = 1016.0
-offset_top = 1147.0
-offset_right = 1516.0
-offset_bottom = 1189.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -275.0
+offset_right = 250.0
+offset_bottom = -233.0
+grow_horizontal = 2
+grow_vertical = 0
 pivot_offset = Vector2(250, 0)
 theme_override_font_sizes/font_size = 30
 text = "INTERACT TEXT"
@@ -89,22 +97,30 @@ libraries = {
 
 [node name="HealthBar" type="ProgressBar" parent="HUD"]
 modulate = Color(1, 0, 0, 1)
-layout_mode = 0
-offset_left = 40.0
-offset_top = 1302.0
-offset_right = 440.0
-offset_bottom = 1352.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = -135.0
+offset_right = 439.0
+offset_bottom = -85.0
+grow_vertical = 0
 step = 1.0
 value = 100.0
 show_percentage = false
 
 [node name="StaminaBar" type="ProgressBar" parent="HUD"]
 modulate = Color(1, 1, 0, 1)
-layout_mode = 0
-offset_left = 40.0
-offset_top = 1272.0
-offset_right = 440.0
-offset_bottom = 1296.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = -169.0
+offset_right = 439.0
+offset_bottom = -145.0
+grow_vertical = 0
 max_value = 1.0
 value = 1.0
 show_percentage = false
@@ -145,6 +161,7 @@ rotation = -0.785397
 scale = Vector2(3, 3)
 pivot_offset = Vector2(16, 16)
 mouse_filter = 2
+texture = ExtResource("2_1u8fv")
 
 [node name="MissionPanel" type="VBoxContainer" parent="HUD"]
 visible = false

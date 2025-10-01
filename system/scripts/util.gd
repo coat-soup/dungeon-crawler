@@ -57,11 +57,7 @@ static func explode_at_point(position: Vector3, damage: float, radius: float, pa
 			player.movement_manager.add_velocity_impulse.rpc(30 * (player.global_position - position).normalized())
 			print("Hit player " + player.name)
 		
-		var ship := collider as ShipMovementClone
-		if ship:
-			for i in range(max(1, radius/5.0)):
-				ship.ship_manager.component_manager.take_damage_at_point(damage, position, source_id)
-			
+		
 	
 	
 	spawn_particles_for_time(position, particles, parent, 1.0)
@@ -73,13 +69,6 @@ static func spawn_particles_for_time(position: Vector3, particles: PackedScene, 
 	parent.add_child(particles_obj)
 	await particles_obj.get_tree().create_timer(time).timeout
 	#particles_obj.queue_free()
-
-
-static func get_gravitational_acceleration(pos : Vector3, planet : Planet) -> Vector3:
-	const G = 10.0
-	var direction = planet.position - pos
-	var force = G * planet.mass / (direction.length() ** 2)
-	return direction.normalized() * force
 
 
 static func random_point_in_sphere(radius : float, min_radius : float = 0.0, r : RandomNumberGenerator = RandomNumberGenerator.new()) -> Vector3:
