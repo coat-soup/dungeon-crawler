@@ -23,3 +23,6 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.422167, 0)
 shape = SubResource("BoxShape3D_rbr83")
+
+[node name="TipMarker" type="Marker3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.806181, 0)

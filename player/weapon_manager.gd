@@ -5,6 +5,7 @@ signal started_attack
 signal block_state_changed(bool)
 signal hitbox_hit(Node3D)
 signal weapon_bounced
+signal blocked_damage
 
 @export var weapon : Weapon
 var attack_input_buffer_time : float = 0.3
@@ -22,6 +23,8 @@ var weapon_bouncing : bool
 var idle_pentalty_timer : float = 0.3
 var can_attack : bool = true
 var blocking : bool
+var block_damage_delay : float = 0.3
+var blocking_damage : bool
 var can_damage : bool
 var damaged_objects : Array[Health]
 @onready var player : Player = $".."
@@ -30,22 +33,29 @@ var damaged_objects : Array[Health]
 func _ready() -> void:
 	weapon = player_model.weapon
 	player_model.damage_window_toggled.connect(toggle_damage_window)
+	player_model.block_window_toggled.connect(toggle_block_window)
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
 
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
-	if event.is_action_pressed("primary"): try_start_attack(AttackState.SWING)
-	if event.is_action_pressed("alt_swing"): try_start_attack(AttackState.ALTSWING)
+	if event.is_action_pressed("alt_swing"):
+		try_start_attack(AttackState.ALTSWING)
+	elif event.is_action_pressed("primary"): try_start_attack(AttackState.SWING)
 	if event.is_action_pressed("lunge"): try_start_attack(AttackState.LUNGE)
 	if event.is_action_pressed("overhead"): try_start_attack(AttackState.OVERHEAD)
 	
-	if event.is_action_pressed("secondary"): toggle_blocking.rpc(true)
+	#if event.is_action_pressed("secondary"): toggle_blocking.rpc(true) # handled in process
 	if event.is_action_released("secondary"): toggle_blocking.rpc(false)
 
 
 func _process(delta: float) -> void:
 	#print("buffer: ", attack_input_buffer)
+	if not is_multiplayer_authority(): return
+	
+	if Input.is_action_pressed("secondary") and not blocking: toggle_blocking.rpc(true)
+	
+	#Global.ui.display_chat_message("blocking damage: " + str(blocking_damage))
 	
 	if attack_input_buffer_timer > 0:
 		attack_input_buffer_timer -= delta
@@ -81,11 +91,19 @@ func set_attack_state(attack_type : AttackState):
 func toggle_blocking(value : bool):
 	blocking = value
 	block_state_changed.emit(value)
+	if not blocking: blocking_damage = false
+	else:
+		await get_tree().create_timer(block_damage_delay).timeout
+		blocking_damage = true
 
 
 func toggle_damage_window(value : bool):
 	can_damage = value
 	if not can_damage: damaged_objects.clear()
+
+
+func toggle_block_window(value : bool):
+	blocking_damage = value
 
 
 func on_anim_finished(anim_name : String):
@@ -111,7 +129,7 @@ func on_weapon_hit(body : Node3D):
 		damaged_objects.append(health)
 		AudioManager.spawn_sound_at_point(preload("res://sfx/sword_slice.wav"), body.global_position)
 		if is_multiplayer_authority():
-			health.take_damage.rpc(weapon.damage, int(player.name))
+			health.try_take_blockable_damage.rpc(weapon.damage, int(player.name))
 	elif is_multiplayer_authority():
 		handle_bonk.rpc()
 
@@ -127,3 +145,8 @@ func handle_bonk():
 	weapon_bouncing = false
 	 
 	attack_state = AttackState.IDLE
+
+
+@rpc("any_peer", "call_local")
+func did_block_damage():
+	blocked_damage.emit()

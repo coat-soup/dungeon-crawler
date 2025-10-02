@@ -2,6 +2,7 @@ extends Node3D
 class_name PlayerSkeletonController
 
 signal damage_window_toggled(bool)
+signal block_window_toggled(bool)
 
 @export var cam_holder : Node3D
 var cam : Node3D
@@ -83,6 +84,7 @@ func _physics_process(delta: float) -> void:
 
 func start_damage_window(): damage_window_toggled.emit(true)
 func stop_damage_window(): damage_window_toggled.emit(false)
+func start_block_window(): block_window_toggled.emit(true)
 
 func toggle_blocking_anim(value : bool):
 	print("skeleton blocking")

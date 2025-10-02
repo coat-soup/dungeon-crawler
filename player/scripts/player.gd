@@ -3,6 +3,7 @@ class_name Player
 
 @onready var movement: PlayerMovement = $Movement
 @export var camera: Camera3D
+@export var weapon_manager : WeaponManager
 
 
 func _enter_tree() -> void:

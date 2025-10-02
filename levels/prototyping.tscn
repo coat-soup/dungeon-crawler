@@ -97,5 +97,8 @@ shape = SubResource("BoxShape3D_o6pmk")
 [node name="dummy" parent="." instance=ExtResource("5_o6pmk")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -7.77924, 0.5, 0.421566)
 
+[node name="dummy3" parent="." instance=ExtResource("5_o6pmk")]
+transform = Transform3D(0.263983, 0, 0.202144, 0, 0.332489, 0, -0.202144, 0, 0.263983, -7.77924, 0.5, -2.35871)
+
 [node name="dummy2" parent="." instance=ExtResource("5_o6pmk")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -7.77924, 0.5, 2.42157)

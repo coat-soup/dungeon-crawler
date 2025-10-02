@@ -10,6 +10,12 @@ signal died
 
 
 @rpc("any_peer", "call_local")
+func try_take_blockable_damage(amount: float, source_id : int = -1):
+	if is_multiplayer_authority():
+		take_damage.rpc(amount, source_id)
+
+
+@rpc("any_peer", "call_local")
 func take_damage(amount: float, source_id : int = -1):
 	if cur_health <= 0:
 		return

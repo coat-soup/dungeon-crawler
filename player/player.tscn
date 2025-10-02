@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bqbukncxkv1fd" path="res://player/scripts/player_sound_manager.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://cecsid1iml5j8" path="res://player/weapon_manager.gd" id="5_yllr7"]
 [ext_resource type="AudioStream" uid="uid://cpbl0hysjsp1t" path="res://sfx/footsteps/footsteps-001.wav" id="6_8t03j"]
+[ext_resource type="Script" uid="uid://wl6u80irlrwi" path="res://system/scripts/health_blockable.gd" id="6_32hag"]
 [ext_resource type="AudioStream" uid="uid://i2v43f48ivts" path="res://sfx/footsteps/footsteps-002.wav" id="7_2ieo8"]
 [ext_resource type="Script" uid="uid://bcnftja1gi4hk" path="res://vfx/scripts/splatter_on_hit.gd" id="7_wodsf"]
 [ext_resource type="Texture2D" uid="uid://b0viems8r1p13" path="res://vfx/textures/smoke_medium.png" id="8_32hag"]
@@ -15,7 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://db7x6fc4ukeu4" path="res://sfx/footsteps/footsteps-005.wav" id="10_kb6p2"]
 [ext_resource type="AudioStream" uid="uid://b00ubnovfat3x" path="res://sfx/footsteps/jump-land.wav" id="11_2ieo8"]
 [ext_resource type="PackedScene" uid="uid://om525hroc3mr" path="res://player/models/player_model.tscn" id="12_wodsf"]
-[ext_resource type="Script" uid="uid://cj5ml78376k0s" path="res://system/scripts/health.gd" id="14_kb6p2"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wodsf"]
 streams_count = 5
@@ -46,11 +46,12 @@ properties/4/path = NodePath("Movement:velocity_sync")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera") groups=["player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "weapon_manager") groups=["player"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_oul6g")
 camera = NodePath("CameraPivot/Camera")
+weapon_manager = NodePath("WeaponManager")
 
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body")]
 script = ExtResource("2_rkbax")
@@ -69,8 +70,9 @@ username_label = NodePath("../UsernameLabel")
 script = ExtResource("5_yllr7")
 player_model = NodePath("../player_model")
 
-[node name="Health" type="Node" parent="."]
-script = ExtResource("14_kb6p2")
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("weapon_manager")]
+script = ExtResource("6_32hag")
+weapon_manager = NodePath("../WeaponManager")
 metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="SplatterOnHit" type="Node3D" parent="." node_paths=PackedStringArray("health")]
