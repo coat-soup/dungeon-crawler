@@ -1,9 +1,8 @@
-extends CharacterBody3D
+extends Character
 class_name Player
 
 @onready var movement: PlayerMovement = $Movement
 @export var camera: Camera3D
-@export var weapon_manager : WeaponManager
 
 
 func _enter_tree() -> void:
@@ -11,11 +10,12 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	super._ready()
 	if is_multiplayer_authority():
 		camera.current = true
 		(camera.get_child(0) as AudioListener3D).current = true
-		$Health.took_damage.connect(on_player_damaged)
+		health.took_damage.connect(on_player_damaged)
 
 
 func on_player_damaged(_source, _damage):
-	Global.ui.update_health_bar($Health.cur_health)
+	Global.ui.update_health_bar(health.cur_health)

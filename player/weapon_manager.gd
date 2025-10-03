@@ -37,23 +37,9 @@ func _ready() -> void:
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
 
 
-func _input(event: InputEvent) -> void:
-	if not is_multiplayer_authority(): return
-	if event.is_action_pressed("alt_swing"):
-		try_start_attack(AttackState.ALTSWING)
-	elif event.is_action_pressed("primary"): try_start_attack(AttackState.SWING)
-	if event.is_action_pressed("lunge"): try_start_attack(AttackState.LUNGE)
-	if event.is_action_pressed("overhead"): try_start_attack(AttackState.OVERHEAD)
-	
-	#if event.is_action_pressed("secondary"): toggle_blocking.rpc(true) # handled in process
-	if event.is_action_released("secondary"): toggle_blocking.rpc(false)
-
-
 func _process(delta: float) -> void:
 	#print("buffer: ", attack_input_buffer)
 	if not is_multiplayer_authority(): return
-	
-	if Input.is_action_pressed("secondary") and not blocking: toggle_blocking.rpc(true)
 	
 	#Global.ui.display_chat_message("blocking damage: " + str(blocking_damage))
 	
@@ -107,6 +93,7 @@ func toggle_block_window(value : bool):
 
 
 func on_anim_finished(anim_name : String):
+	return
 	if not is_multiplayer_authority(): return
 	#print("anim finished. conditions for buffer: %d != -1 (%s) and %d != %d (%s)" % [attack_input_buffer, attack_input_buffer != -1, attack_input_buffer, attack_state, attack_input_buffer != attack_state])
 	if attack_input_buffer != -1 and attack_input_buffer != attack_state:
