@@ -12,7 +12,7 @@ var attack_input_buffer_time : float = 0.3
 var attack_input_buffer_timer : float
 var attack_input_buffer : AttackState = -1
 
-@export var player_model: PlayerSkeletonController
+@export var character_model: CharacterSkeletonController
 
 enum AttackState {IDLE, SWING, ALTSWING, LUNGE, OVERHEAD}
 
@@ -27,13 +27,13 @@ var block_damage_delay : float = 0.3
 var blocking_damage : bool
 var can_damage : bool
 var damaged_objects : Array[Health]
-@onready var player : Player = $".."
+@onready var character : Character = $".."
 
 
 func _ready() -> void:
-	weapon = player_model.weapon
-	player_model.damage_window_toggled.connect(toggle_damage_window)
-	player_model.block_window_toggled.connect(toggle_block_window)
+	weapon = character_model.weapon
+	character_model.damage_window_toggled.connect(toggle_damage_window)
+	character_model.block_window_toggled.connect(toggle_block_window)
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
 
 
@@ -109,14 +109,14 @@ func on_anim_finished(anim_name : String):
 
 
 func on_weapon_hit(body : Node3D):
-	if not can_damage or body == player: return
+	if not can_damage or body == character: return
 	var health : Health = body.get_node_or_null("Health") as Health
 	if health:
 		if health in damaged_objects: return
 		damaged_objects.append(health)
 		AudioManager.spawn_sound_at_point(preload("res://sfx/sword_slice.wav"), body.global_position)
 		if is_multiplayer_authority():
-			health.try_take_blockable_damage.rpc(weapon.damage, int(player.name))
+			health.try_take_blockable_damage.rpc(weapon.damage, int(character.name))
 	elif is_multiplayer_authority():
 		handle_bonk.rpc()
 
@@ -137,3 +137,8 @@ func handle_bonk():
 @rpc("any_peer", "call_local")
 func did_block_damage():
 	blocked_damage.emit()
+
+
+func buffer_attack(attack_type : AttackState):
+	attack_input_buffer = attack_type
+	attack_input_buffer_timer = attack_input_buffer_time

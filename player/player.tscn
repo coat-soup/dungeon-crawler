@@ -63,7 +63,7 @@ properties/4/path = NodePath("Movement:velocity_sync")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "action_manager", "weapon_manager", "health") groups=["player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "action_manager", "weapon_manager", "health") groups=["character", "player"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_oul6g")
@@ -85,9 +85,9 @@ script = ExtResource("4_yw30f")
 third_person_models = [NodePath("../UsernameLabel")]
 username_label = NodePath("../UsernameLabel")
 
-[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player_model")]
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("character_model")]
 script = ExtResource("5_yllr7")
-player_model = NodePath("../player_model")
+character_model = NodePath("../player_model")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("weapon_manager")]
 script = ExtResource("6_32hag")

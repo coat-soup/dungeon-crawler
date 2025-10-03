@@ -1,0 +1,2 @@
+extends CharacterSkeletonController
+class_name EnemySkeletonController

@@ -23,10 +23,10 @@ static func layer_in_mask(mask: int, layer: int) -> bool:
 # 7 ship item physics dupe layer (both ship dupe and item dupe should have only this layer)
 
 
-static func get_player_from_id(id: String, source : Node) -> Player:
-	for player in source.get_tree().get_nodes_in_group("player"):
-		if player.name == id:
-			return player as Player
+static func get_character_from_id(id: String, source : Node) -> Character:
+	for character in source.get_tree().get_nodes_in_group("character"):
+		if character.name == id:
+			return character as Character
 	return null
 
 

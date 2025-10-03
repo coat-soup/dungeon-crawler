@@ -1,6 +1,9 @@
 extends Node
 class_name ActionManager
 
+signal performed_action(Action)
+signal ended_action(Action)
+
 @onready var character: Character = $".."
 @export var action_set : Array[Action]
 var current_actions : Array[Action]
@@ -21,7 +24,7 @@ func try_stop_action_by_name(action_name : String):
 
 
 func is_performing_action_by_name(action_name : String) -> bool:
-	for action in action_set:
+	for action in current_actions:
 		if action.action_name == action_name: return true
 	return false
 
@@ -42,14 +45,20 @@ func perform_action(action_id : int, args : Array = []):
 	c_action.action_ended.connect(on_action_ended.bind(c_action))
 	
 	if is_multiplayer_authority(): c_action.triggered_end_action.connect(on_action_triggered_end_action.bind(c_action))
+	
+	performed_action.emit(c_action)
 
 
 @rpc("any_peer", "call_local")
 func end_action(action_name : String):
+	var t_action : Action
 	Global.ui.display_chat_message(character.name + " ending action " + action_name)
 	for i in range(len(current_actions)):
 		if current_actions[i].action_name == action_name:
+			t_action = current_actions[i]
 			current_actions[i].end_action()
+	
+	ended_action.emit(t_action)
 
 
 func on_action_triggered_end_action(action : Action):
@@ -59,4 +68,6 @@ func on_action_triggered_end_action(action : Action):
 
 func on_action_ended(action : Action):
 	var id = current_actions.find(action)
-	if id != null: current_actions.remove_at(id)
+	if id != null:
+		print("removing action ", id, " from list")
+		current_actions.remove_at(id)

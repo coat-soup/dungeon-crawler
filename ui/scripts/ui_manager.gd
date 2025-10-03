@@ -84,7 +84,7 @@ func display_prompt(prompt: String, time := 2.0):
 func display_chat_message(message : String):
 	chat_anim.stop()
 	chat_box.modulate = Color.WHITE
-	chat_fade_timer = 1.0
+	chat_fade_timer = 5.0
 	
 	chats.append("[Server]: " + message)
 	if chats.size() > 10:

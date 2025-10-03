@@ -18,4 +18,11 @@ func on_weapon_bounced():
 
 func end_action():
 	super.end_action()
-	character.weapon_manager.attack_state = WeaponManager.AttackState.IDLE
+	var did_chain := false
+	
+	if character.weapon_manager.is_multiplayer_authority():
+		if character.weapon_manager.attack_input_buffer != -1 and character.weapon_manager.attack_input_buffer != character.weapon_manager.attack_state:
+			character.action_manager.try_perform_action_by_name("attack", [character.weapon_manager.attack_input_buffer])
+			did_chain = true
+	
+	if not did_chain: character.weapon_manager.attack_state = WeaponManager.AttackState.IDLE

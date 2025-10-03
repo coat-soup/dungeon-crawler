@@ -25,7 +25,7 @@ func take_damage(amount: float, source_id : int = -1):
 	cur_health -= min(amount, cur_health)
 	took_damage.emit(source_id, amount)
 	
-	var player : Player = Util.get_player_from_id(str(source_id), self)
+	var player : Player = Util.get_character_from_id(str(source_id), self) as Player
 	if player and player.is_multiplayer_authority():
 		Global.ui.flash_hitmarker(cur_health <= 0)
 	

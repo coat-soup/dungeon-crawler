@@ -1,0 +1,142 @@
+[gd_scene load_steps=27 format=3 uid="uid://xh7j8iie55hm"]
+
+[ext_resource type="Script" uid="uid://cje7dmfcnngfl" path="res://system/scripts/character.gd" id="1_st66r"]
+[ext_resource type="Script" uid="uid://cecsid1iml5j8" path="res://player/weapon_manager.gd" id="5_3agdk"]
+[ext_resource type="Script" uid="uid://wl6u80irlrwi" path="res://system/scripts/health_blockable.gd" id="6_st5e0"]
+[ext_resource type="Script" uid="uid://cqfvtidss3haf" path="res://system/scripts/action_manager.gd" id="7_tbaex"]
+[ext_resource type="Script" uid="uid://b2ibvmfs8hbrl" path="res://system/scripts/action.gd" id="8_cxwg0"]
+[ext_resource type="Script" uid="uid://dmdhvmx1tqdx4" path="res://enemies/scripts/ai_reaction.gd" id="9_5gqn5"]
+[ext_resource type="Script" uid="uid://ctjalyaequqcp" path="res://system/scripts/action_attack.gd" id="9_jnmqq"]
+[ext_resource type="Script" uid="uid://blrk4vd3srjdi" path="res://system/scripts/action_block.gd" id="10_oumu2"]
+[ext_resource type="Script" uid="uid://dmm4wscka65t6" path="res://enemies/scripts/ai_reaction_manager.gd" id="10_st66r"]
+[ext_resource type="Script" uid="uid://bcnftja1gi4hk" path="res://vfx/scripts/splatter_on_hit.gd" id="12_yceny"]
+[ext_resource type="Texture2D" uid="uid://b0viems8r1p13" path="res://vfx/textures/smoke_medium.png" id="13_8oecf"]
+[ext_resource type="AudioStream" uid="uid://cpbl0hysjsp1t" path="res://sfx/footsteps/footsteps-001.wav" id="15_d4mjl"]
+[ext_resource type="AudioStream" uid="uid://i2v43f48ivts" path="res://sfx/footsteps/footsteps-002.wav" id="16_5hqum"]
+[ext_resource type="AudioStream" uid="uid://dxtrxm7rb6wi1" path="res://sfx/footsteps/footsteps-003.wav" id="17_6a7ov"]
+[ext_resource type="AudioStream" uid="uid://bgupddqt4qcyb" path="res://sfx/footsteps/footsteps-004.wav" id="18_wmdei"]
+[ext_resource type="AudioStream" uid="uid://db7x6fc4ukeu4" path="res://sfx/footsteps/footsteps-005.wav" id="19_qjnmn"]
+[ext_resource type="PackedScene" uid="uid://b87lre0mdex5b" path="res://enemies/models/enemy_humanoid_model.tscn" id="19_st66r"]
+[ext_resource type="AudioStream" uid="uid://b00ubnovfat3x" path="res://sfx/footsteps/jump-land.wav" id="20_3p7iu"]
+
+[sub_resource type="Resource" id="Resource_bjvpn"]
+script = ExtResource("9_jnmqq")
+action_name = "attack"
+action_type = 0
+metadata/_custom_type_script = "uid://ctjalyaequqcp"
+
+[sub_resource type="Resource" id="Resource_s7qer"]
+script = ExtResource("10_oumu2")
+action_name = "block"
+action_type = 0
+metadata/_custom_type_script = "uid://blrk4vd3srjdi"
+
+[sub_resource type="Resource" id="Resource_st66r"]
+script = ExtResource("9_5gqn5")
+action_trigger_name = "attack"
+reaction_time = 0.2
+reaction_name = "block"
+check_again_on_trigger = true
+reaction_args = []
+metadata/_custom_type_script = "uid://dmdhvmx1tqdx4"
+
+[sub_resource type="Resource" id="Resource_5gqn5"]
+script = ExtResource("9_5gqn5")
+action_trigger_name = "block"
+reaction_time = 0.5
+reaction_name = "attack"
+check_again_on_trigger = true
+reaction_args = [1]
+metadata/_custom_type_script = "uid://dmdhvmx1tqdx4"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_st66r"]
+radius = 3.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wodsf"]
+streams_count = 5
+stream_0/stream = ExtResource("15_d4mjl")
+stream_1/stream = ExtResource("16_5hqum")
+stream_2/stream = ExtResource("17_6a7ov")
+stream_3/stream = ExtResource("18_wmdei")
+stream_4/stream = ExtResource("19_qjnmn")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
+radius = 0.390442
+height = 1.15903
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_g1dw6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="EnemyHumanoid" type="CharacterBody3D" node_paths=PackedStringArray("action_manager", "weapon_manager", "health") groups=["character"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_st66r")
+action_manager = NodePath("ActionManager")
+weapon_manager = NodePath("WeaponManager")
+health = NodePath("Health")
+
+[node name="Movement" type="Node" parent="."]
+
+[node name="Stamina" type="Node" parent="."]
+
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("character_model")]
+script = ExtResource("5_3agdk")
+character_model = NodePath("../enemy_humanoid_model")
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("weapon_manager")]
+script = ExtResource("6_st5e0")
+weapon_manager = NodePath("../WeaponManager")
+metadata/_custom_type_script = "uid://cj5ml78376k0s"
+
+[node name="ActionManager" type="Node" parent="."]
+script = ExtResource("7_tbaex")
+action_set = Array[ExtResource("8_cxwg0")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer")])
+
+[node name="ReactionManager" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("10_st66r")
+reactions = Array[ExtResource("9_5gqn5")]([SubResource("Resource_st66r"), SubResource("Resource_5gqn5")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReactionManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09491, 0)
+shape = SubResource("SphereShape3D_st66r")
+
+[node name="SplatterOnHit" type="Node3D" parent="." node_paths=PackedStringArray("health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.863035, 0)
+script = ExtResource("12_yceny")
+health = NodePath("../Health")
+texture = ExtResource("13_8oecf")
+modulate = Color(0.846926, 0.155291, 0, 1)
+metadata/_custom_type_script = "uid://bcnftja1gi4hk"
+
+[node name="AudioManager" type="Node3D" parent="."]
+
+[node name="FootstepAudio" type="AudioStreamPlayer3D" parent="AudioManager"]
+stream = SubResource("AudioStreamRandomizer_wodsf")
+max_distance = 20.0
+
+[node name="ImpactAudio" type="AudioStreamPlayer3D" parent="AudioManager"]
+stream = ExtResource("20_3p7iu")
+volume_db = -1.0
+max_distance = 25.0
+
+[node name="enemy_humanoid_model" parent="." node_paths=PackedStringArray("weapon_manager") instance=ExtResource("19_st66r")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+weapon_manager = NodePath("../WeaponManager")
+
+[node name="CollisionBottom" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.576873, 0)
+shape = SubResource("CapsuleShape3D_oul6g")
+
+[node name="CollisionTop" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47475, 0)
+shape = SubResource("CapsuleShape3D_oul6g")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_g1dw6")

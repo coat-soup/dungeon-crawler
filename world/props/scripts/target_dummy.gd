@@ -15,8 +15,8 @@ func _ready() -> void:
 
 func on_damaged(source_id, damage : float):
 	var dir : Vector3 = (Util.random_point_in_sphere(1.0, 1.0) * Vector3(1.0,0,1.0)).normalized()
-	var player = Util.get_player_from_id(str(source_id), self)
-	if player: dir = (global_position - player.global_position).normalized()
+	var character = Util.get_character_from_id(str(source_id), self)
+	if character: dir = (global_position - character.global_position).normalized()
 	rb.apply_impulse(dir * force * damage)
 
 
