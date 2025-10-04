@@ -9,15 +9,24 @@ var targets : Array[Character]
 var action_weights = {}
 var tick_speed = 5.0
 
+@export var agression_level = 1.0
+var desire_to_attack : float = 0.0
+
+
 func _ready() -> void:
 	body_entered.connect(on_body_entered)
 	body_exited.connect(on_body_exited)
 	collision_mask = Util.layer_mask([2])
 	
+	action_manager.performed_action.connect(on_action_performed)
+	
 	process_tick()
 
 
 func process_tick():
+	Global.ui.display_chat_message("Desire to attack: " + str(desire_to_attack))
+	desire_to_attack = min(1, desire_to_attack + (0.1 * agression_level) / tick_speed)
+	
 	check_action_weights()
 	await get_tree().create_timer(1.0/tick_speed).timeout
 	process_tick()
@@ -55,3 +64,8 @@ func on_body_exited(body : Node3D):
 	if char and char != character:
 		var id = targets.find(char)
 		if id != -1: targets.remove_at(id)
+
+
+func on_action_performed(action : Action):
+	if action.action_name == "attack":
+		desire_to_attack -= 0.2 * agression_level

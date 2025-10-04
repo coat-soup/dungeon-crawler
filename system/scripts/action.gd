@@ -34,7 +34,7 @@ func end_action():
 	action_ended.emit()
 
 
-static func get_ai_action_weight(ai : AIActionController) -> float:
+func get_ai_action_weight(ai : AIActionController) -> float:
 	return 0.0
 
 

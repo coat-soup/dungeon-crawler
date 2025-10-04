@@ -46,19 +46,19 @@ func _physics_process(delta: float) -> void:
 		body.velocity.z = lerp(body.velocity.z, dash_dir.z * dash_speed, delta * 10)
 	elif body.is_on_floor():
 		if input_direction:
-			body.velocity.x = input_direction.x * speed
-			body.velocity.z = input_direction.z * speed
+			body.velocity.x = input_direction.x * get_speed()
+			body.velocity.z = input_direction.z * get_speed()
 		else:
-			body.velocity.x = lerp(body.velocity.x, input_direction.x * speed, delta * 10)
-			body.velocity.z = lerp(body.velocity.z, input_direction.z * speed, delta * 10)
+			body.velocity.x = lerp(body.velocity.x, input_direction.x * get_speed(), delta * 10)
+			body.velocity.z = lerp(body.velocity.z, input_direction.z * get_speed(), delta * 10)
 		
 		if landing:
 			landing = false
 			if body.velocity.y < 1:
 				jump_land.emit()
 	else:
-		body.velocity.x = lerp(body.velocity.x, input_direction.x * speed, delta * 2)
-		body.velocity.z = lerp(body.velocity.z, input_direction.z * speed, delta * 2)
+		body.velocity.x = lerp(body.velocity.x, input_direction.x * get_speed(), delta * 2)
+		body.velocity.z = lerp(body.velocity.z, input_direction.z * get_speed(), delta * 2)
 		
 		if !landing:
 			landing = true
@@ -78,3 +78,7 @@ func dash_input():
 		dash.emit()
 		dash_dir = input_direction
 		dash_timer = dash_length
+
+
+func get_speed() -> float:
+	return speed

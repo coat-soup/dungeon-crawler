@@ -12,8 +12,8 @@ func end_action():
 	character.weapon_manager.blocking = false
 
 
-static func get_ai_action_weight(ai : AIActionController) -> float:
+func get_ai_action_weight(ai : AIActionController) -> float:
 	for t in ai.targets:
-		if t.weapon_manager.attack_state != 0: return 1.0
+		if t.weapon_manager.attack_state != 0: return 2.0
 	
 	return 0.0

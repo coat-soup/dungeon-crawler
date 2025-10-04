@@ -7,6 +7,11 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 	character.weapon_manager.start_attack(args[0])
 	character.weapon_manager.weapon_bounced.connect(on_weapon_bounced)
 	
+	var ai = character.get_node_or_null("AIActionController") as AIActionController
+	if ai:
+		character.movement_manager.set_nav_destination(ai.targets[0].global_position + (character.global_position - ai.targets[0].global_position).normalized() * 1.5)
+		character.movement_manager.body.global_rotation.y = -(character.global_position - ai.targets[0].global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
+	
 	await character.get_tree().create_timer(1.0).timeout
 	trigger_end_action()
 
@@ -28,10 +33,9 @@ func end_action():
 	if not did_chain: character.weapon_manager.attack_state = WeaponManager.AttackState.IDLE
 
 
-
-static func get_ai_action_weight(ai : AIActionController) -> float:
+func get_ai_action_weight(ai : AIActionController) -> float:
 	for t in ai.targets:
-		if t.global_position.distance_to(ai.global_position) <= 3.0: return 0.7
+		if t.global_position.distance_to(ai.global_position) <= 4.0: return 1.0 * ai.desire_to_attack
 	
 	return 0.0
 

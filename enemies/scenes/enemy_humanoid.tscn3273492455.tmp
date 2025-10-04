@@ -38,10 +38,10 @@ metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 
 [sub_resource type="Resource" id="Resource_6x60x"]
 script = ExtResource("10_kuufe")
-distance = 3.0
+distance = null
 action_name = "keep_distance"
 action_type = 1
-cancellable = true
+cancellable = null
 metadata/_custom_type_script = "uid://x3x62q3np3qf"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_st66r"]

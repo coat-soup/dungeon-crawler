@@ -9,10 +9,6 @@ signal ended_action(Action)
 var current_actions : Array[Action]
 
 
-func _ready() -> void:
-	try_perform_action_by_name("get_close")
-
-
 func try_perform_action_by_name(action_name : String, args : Array = []) -> bool:
 	for i in range(len(current_actions)):
 		if current_actions[i].action_name == action_name:
@@ -60,10 +56,10 @@ func perform_action(action_id : int, args : Array = []):
 @rpc("any_peer", "call_local")
 func end_action(action_name : String):
 	var t_action : Action
-	for i in range(len(current_actions)):
-		if current_actions[i].action_name == action_name:
-			t_action = current_actions[i]
-			current_actions[i].end_action()
+	for action in current_actions:
+		if action.action_name == action_name:
+			t_action = action
+			action.end_action()
 	
 	ended_action.emit(t_action)
 
