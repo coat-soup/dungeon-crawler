@@ -26,3 +26,15 @@ func end_action():
 			did_chain = true
 	
 	if not did_chain: character.weapon_manager.attack_state = WeaponManager.AttackState.IDLE
+
+
+
+static func get_ai_action_weight(ai : AIActionController) -> float:
+	for t in ai.targets:
+		if t.global_position.distance_to(ai.global_position) <= 3.0: return 0.7
+	
+	return 0.0
+
+
+static func get_ai_call_args(ai : AIActionController) -> Array:
+	return [[WeaponManager.AttackState.SWING, WeaponManager.AttackState.LUNGE, WeaponManager.AttackState.OVERHEAD].pick_random()]

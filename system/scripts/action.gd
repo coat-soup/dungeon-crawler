@@ -14,6 +14,7 @@ enum ActionType {BLOCKING, NONBLOCKING} # blocking actions cant be performed if 
 
 @export var action_name : String
 @export var action_type : ActionType
+@export var cancellable : bool = true
 
 
 func can_perform_action(_character : Character) -> bool:
@@ -31,3 +32,11 @@ func trigger_end_action():
 
 func end_action():
 	action_ended.emit()
+
+
+static func get_ai_action_weight(ai : AIActionController) -> float:
+	return 0.0
+
+
+static func get_ai_call_args(ai : AIActionController) -> Array:
+	return []

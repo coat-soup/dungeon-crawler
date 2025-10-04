@@ -1,6 +1,6 @@
 [gd_scene load_steps=53 format=3 uid="uid://om525hroc3mr"]
 
-[ext_resource type="PackedScene" uid="uid://byoolwbycr4tk" path="res://player/models/player_model.glb" id="1_xdlwj"]
+[ext_resource type="PackedScene" path="res://player/models/player_model.glb" id="1_xdlwj"]
 [ext_resource type="Script" uid="uid://b7g0hemb3mmh5" path="res://player/scripts/player_skeleton_controller.gd" id="2_r0a5i"]
 [ext_resource type="PackedScene" uid="uid://cj7p8kb5is0qr" path="res://weapons/models/longsword_model.tscn" id="3_1buoc"]
 [ext_resource type="Material" uid="uid://qyrv64vmclq2" path="res://player/models/player_model_mat_m.tres" id="4_cjpug"]

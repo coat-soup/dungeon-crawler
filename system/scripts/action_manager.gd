@@ -27,6 +27,9 @@ func try_perform_action_by_name(action_name : String, args : Array = []) -> bool
 
 
 func try_stop_action_by_name(action_name : String):
+	for i in range(len(current_actions)):
+		if current_actions[i].action_name == action_name and current_actions[i].cancellable == false:
+			return
 	end_action.rpc(action_name)
 
 

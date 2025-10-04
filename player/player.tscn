@@ -26,18 +26,21 @@
 script = ExtResource("9_x7c3f")
 action_name = "attack"
 action_type = 0
+cancellable = false
 metadata/_custom_type_script = "uid://ctjalyaequqcp"
 
 [sub_resource type="Resource" id="Resource_s7qer"]
 script = ExtResource("10_x7c3f")
 action_name = "block"
 action_type = 0
+cancellable = true
 metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 
 [sub_resource type="Resource" id="Resource_x7c3f"]
 script = ExtResource("8_65viv")
 action_name = "get_close"
 action_type = 1
+cancellable = true
 metadata/_custom_type_script = "uid://b2ibvmfs8hbrl"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wodsf"]

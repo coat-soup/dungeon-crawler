@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://xh7j8iie55hm"]
+[gd_scene load_steps=28 format=3 uid="uid://xh7j8iie55hm"]
 
 [ext_resource type="Script" uid="uid://cje7dmfcnngfl" path="res://system/scripts/character.gd" id="1_st66r"]
 [ext_resource type="Script" uid="uid://fuogjxe1gr3j" path="res://enemies/scripts/ai_movement_manager.gd" id="2_bmetn"]
@@ -7,10 +7,9 @@
 [ext_resource type="Script" uid="uid://wl6u80irlrwi" path="res://system/scripts/health_blockable.gd" id="6_st5e0"]
 [ext_resource type="Script" uid="uid://cqfvtidss3haf" path="res://system/scripts/action_manager.gd" id="7_tbaex"]
 [ext_resource type="Script" uid="uid://b2ibvmfs8hbrl" path="res://system/scripts/action.gd" id="8_cxwg0"]
-[ext_resource type="Script" uid="uid://dmdhvmx1tqdx4" path="res://enemies/scripts/ai_reaction.gd" id="9_5gqn5"]
 [ext_resource type="Script" uid="uid://ctjalyaequqcp" path="res://system/scripts/action_attack.gd" id="9_jnmqq"]
 [ext_resource type="Script" uid="uid://blrk4vd3srjdi" path="res://system/scripts/action_block.gd" id="10_oumu2"]
-[ext_resource type="Script" uid="uid://dmm4wscka65t6" path="res://enemies/scripts/ai_reaction_manager.gd" id="10_st66r"]
+[ext_resource type="Script" uid="uid://bagpr4ssytwj0" path="res://enemies/scripts/ai_action_controller.gd" id="12_6x60x"]
 [ext_resource type="Script" uid="uid://btk656i61o72l" path="res://system/scripts/character_sound_manager.gd" id="12_st66r"]
 [ext_resource type="Script" uid="uid://bcnftja1gi4hk" path="res://vfx/scripts/splatter_on_hit.gd" id="12_yceny"]
 [ext_resource type="Texture2D" uid="uid://b0viems8r1p13" path="res://vfx/textures/smoke_medium.png" id="13_8oecf"]
@@ -26,49 +25,22 @@
 script = ExtResource("9_jnmqq")
 action_name = "attack"
 action_type = 0
+cancellable = false
 metadata/_custom_type_script = "uid://ctjalyaequqcp"
 
 [sub_resource type="Resource" id="Resource_s7qer"]
 script = ExtResource("10_oumu2")
 action_name = "block"
 action_type = 0
+cancellable = true
 metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 
 [sub_resource type="Resource" id="Resource_bmetn"]
 script = ExtResource("8_cxwg0")
 action_name = "get_close"
 action_type = 1
+cancellable = true
 metadata/_custom_type_script = "uid://b2ibvmfs8hbrl"
-
-[sub_resource type="Resource" id="Resource_st66r"]
-script = ExtResource("9_5gqn5")
-action_trigger_name = "attack"
-reaction_time = 0.7
-reaction_name = "block"
-check_again_on_trigger = true
-reaction_args = []
-learnable = true
-metadata/_custom_type_script = "uid://dmdhvmx1tqdx4"
-
-[sub_resource type="Resource" id="Resource_5gqn5"]
-script = ExtResource("9_5gqn5")
-action_trigger_name = "block"
-reaction_time = 0.5
-reaction_name = "attack"
-check_again_on_trigger = true
-reaction_args = [1]
-learnable = true
-metadata/_custom_type_script = "uid://dmdhvmx1tqdx4"
-
-[sub_resource type="Resource" id="Resource_kuufe"]
-script = ExtResource("9_5gqn5")
-action_trigger_name = "get_close"
-reaction_time = 0.0
-reaction_name = "block"
-check_again_on_trigger = false
-reaction_args = []
-learnable = true
-metadata/_custom_type_script = "uid://dmdhvmx1tqdx4"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_st66r"]
 radius = 3.0
@@ -127,10 +99,17 @@ action_set = Array[ExtResource("8_cxwg0")]([SubResource("Resource_bjvpn"), SubRe
 [node name="ReactionManager" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("10_st66r")
-reactions = Array[ExtResource("9_5gqn5")]([SubResource("Resource_st66r"), SubResource("Resource_5gqn5"), SubResource("Resource_kuufe")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ReactionManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09491, 0)
+shape = SubResource("SphereShape3D_st66r")
+
+[node name="ReactionManager2" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("12_6x60x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReactionManager2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09491, 0)
 shape = SubResource("SphereShape3D_st66r")
 

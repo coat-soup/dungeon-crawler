@@ -90,7 +90,6 @@ size = Vector3(6, 4, 1)
 material = SubResource("ShaderMaterial_t1no0")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://in53wmskn8o")
 spawn_path = NodePath("../NetworkManager")
 
 [node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
