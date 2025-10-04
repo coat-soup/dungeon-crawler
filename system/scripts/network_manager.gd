@@ -98,7 +98,7 @@ func add_player(peer_id):
 	var player = PLAYER.instantiate()
 	player.name = str(peer_id)
 	print("playername: " + player.name)
-	add_child(player)
+	add_child(player, true)
 	player.position = spawn_position
 
 

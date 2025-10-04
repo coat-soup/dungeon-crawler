@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://in53wmskn8o"]
+[gd_scene load_steps=28 format=3 uid="uid://in53wmskn8o"]
 
 [ext_resource type="Script" uid="uid://cp10hnk6llvdv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://csxbl4ax1b4pk" path="res://player/scripts/player_movement.gd" id="2_rkbax"]
@@ -33,6 +33,12 @@ script = ExtResource("10_x7c3f")
 action_name = "block"
 action_type = 0
 metadata/_custom_type_script = "uid://blrk4vd3srjdi"
+
+[sub_resource type="Resource" id="Resource_x7c3f"]
+script = ExtResource("8_65viv")
+action_name = "get_close"
+action_type = 1
+metadata/_custom_type_script = "uid://b2ibvmfs8hbrl"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wodsf"]
 streams_count = 5
@@ -96,7 +102,7 @@ metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]
 script = ExtResource("7_tqiix")
-action_set = Array[ExtResource("8_65viv")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer")])
+action_set = Array[ExtResource("8_65viv")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_x7c3f")])
 
 [node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("action_manager")]
 script = ExtResource("18_e7oew")
@@ -111,6 +117,7 @@ modulate = Color(0.846926, 0.155291, 0, 1)
 metadata/_custom_type_script = "uid://bcnftja1gi4hk"
 
 [node name="AudioManager" type="Node3D" parent="." node_paths=PackedStringArray("movement", "skeleton_controller", "weapon_manager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11966, 0)
 script = ExtResource("5_qjkh3")
 movement = NodePath("../Movement")
 skeleton_controller = NodePath("../player_model")

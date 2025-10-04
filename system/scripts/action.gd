@@ -16,13 +16,12 @@ enum ActionType {BLOCKING, NONBLOCKING} # blocking actions cant be performed if 
 @export var action_type : ActionType
 
 
-func can_perform_action(character : Character) -> bool:
-	return true if action_type == ActionType.NONBLOCKING else not character.action_manager.is_performing_blocking_action()
+func can_perform_action(_character : Character) -> bool:
+	return true if action_type == ActionType.NONBLOCKING else not _character.action_manager.is_performing_blocking_action()
 
 
-func perform_action(_character : Character, args : Array = []):
+func perform_action(_character : Character, _args : Array = []):
 	character = _character
-	print("Performing action ", action_name)
 	action_started.emit()
 
 

@@ -6,5 +6,6 @@ func spawn_sound_at_point(stream : AudioStream, position : Vector3):
 	add_child(sound)
 	sound.stream = stream
 	sound.pitch_scale = randf_range(0.9, 1.1)
+	sound.global_position = position
 	sound.play()
 	sound.finished.connect(sound.queue_free)

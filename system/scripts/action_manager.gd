@@ -9,14 +9,21 @@ signal ended_action(Action)
 var current_actions : Array[Action]
 
 
-func try_perform_action_by_name(action_name : String, args : Array = []):
+func _ready() -> void:
+	try_perform_action_by_name("get_close")
+
+
+func try_perform_action_by_name(action_name : String, args : Array = []) -> bool:
 	for i in range(len(current_actions)):
 		if current_actions[i].action_name == action_name:
-			return
+			return false
 	
 	for i in range(len(action_set)):
 		if action_set[i].action_name == action_name and action_set[i].can_perform_action(character):
 			perform_action.rpc(i, args)
+			return true
+	
+	return false
 
 
 func try_stop_action_by_name(action_name : String):
@@ -37,9 +44,7 @@ func is_performing_blocking_action() -> bool:
 
 @rpc("any_peer", "call_local")
 func perform_action(action_id : int, args : Array = []):
-	Global.ui.display_chat_message(character.name + " performing action " + action_set[action_id].action_name)
 	var c_action = action_set[action_id].duplicate()
-	print("made new action ", c_action)
 	current_actions.append(c_action)
 	c_action.perform_action(character, args)
 	c_action.action_ended.connect(on_action_ended.bind(c_action))
@@ -52,7 +57,6 @@ func perform_action(action_id : int, args : Array = []):
 @rpc("any_peer", "call_local")
 func end_action(action_name : String):
 	var t_action : Action
-	Global.ui.display_chat_message(character.name + " ending action " + action_name)
 	for i in range(len(current_actions)):
 		if current_actions[i].action_name == action_name:
 			t_action = current_actions[i]
@@ -69,5 +73,4 @@ func on_action_triggered_end_action(action : Action):
 func on_action_ended(action : Action):
 	var id = current_actions.find(action)
 	if id != null:
-		print("removing action ", id, " from list")
 		current_actions.remove_at(id)

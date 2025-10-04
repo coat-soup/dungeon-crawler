@@ -3,9 +3,9 @@ class_name WeaponManager
 
 signal started_attack
 signal block_state_changed(bool)
-signal hitbox_hit(Node3D)
 signal weapon_bounced
 signal blocked_damage
+signal did_damage
 
 @export var weapon : Weapon
 var attack_input_buffer_time : float = 0.3
@@ -114,7 +114,7 @@ func on_weapon_hit(body : Node3D):
 	if health:
 		if health in damaged_objects: return
 		damaged_objects.append(health)
-		AudioManager.spawn_sound_at_point(preload("res://sfx/sword_slice.wav"), body.global_position)
+		#AudioManager.spawn_sound_at_point(preload("res://sfx/sword_slice.wav"), body.global_position)
 		if is_multiplayer_authority():
 			health.try_take_blockable_damage.rpc(weapon.damage, int(character.name))
 	elif is_multiplayer_authority():
@@ -137,6 +137,10 @@ func handle_bonk():
 @rpc("any_peer", "call_local")
 func did_block_damage():
 	blocked_damage.emit()
+
+@rpc("any_peer", "call_local")
+func did_did_damage():
+	did_damage.emit()
 
 
 func buffer_attack(attack_type : AttackState):

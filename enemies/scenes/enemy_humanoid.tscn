@@ -1,6 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://xh7j8iie55hm"]
+[gd_scene load_steps=32 format=3 uid="uid://xh7j8iie55hm"]
 
 [ext_resource type="Script" uid="uid://cje7dmfcnngfl" path="res://system/scripts/character.gd" id="1_st66r"]
+[ext_resource type="Script" uid="uid://fuogjxe1gr3j" path="res://enemies/scripts/ai_movement_manager.gd" id="2_bmetn"]
+[ext_resource type="Script" uid="uid://d4lsp6fkml3h3" path="res://player/scripts/stamina_manager.gd" id="3_kuufe"]
 [ext_resource type="Script" uid="uid://cecsid1iml5j8" path="res://player/weapon_manager.gd" id="5_3agdk"]
 [ext_resource type="Script" uid="uid://wl6u80irlrwi" path="res://system/scripts/health_blockable.gd" id="6_st5e0"]
 [ext_resource type="Script" uid="uid://cqfvtidss3haf" path="res://system/scripts/action_manager.gd" id="7_tbaex"]
@@ -9,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ctjalyaequqcp" path="res://system/scripts/action_attack.gd" id="9_jnmqq"]
 [ext_resource type="Script" uid="uid://blrk4vd3srjdi" path="res://system/scripts/action_block.gd" id="10_oumu2"]
 [ext_resource type="Script" uid="uid://dmm4wscka65t6" path="res://enemies/scripts/ai_reaction_manager.gd" id="10_st66r"]
+[ext_resource type="Script" uid="uid://btk656i61o72l" path="res://system/scripts/character_sound_manager.gd" id="12_st66r"]
 [ext_resource type="Script" uid="uid://bcnftja1gi4hk" path="res://vfx/scripts/splatter_on_hit.gd" id="12_yceny"]
 [ext_resource type="Texture2D" uid="uid://b0viems8r1p13" path="res://vfx/textures/smoke_medium.png" id="13_8oecf"]
 [ext_resource type="AudioStream" uid="uid://cpbl0hysjsp1t" path="res://sfx/footsteps/footsteps-001.wav" id="15_d4mjl"]
@@ -31,13 +34,20 @@ action_name = "block"
 action_type = 0
 metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 
+[sub_resource type="Resource" id="Resource_bmetn"]
+script = ExtResource("8_cxwg0")
+action_name = "get_close"
+action_type = 1
+metadata/_custom_type_script = "uid://b2ibvmfs8hbrl"
+
 [sub_resource type="Resource" id="Resource_st66r"]
 script = ExtResource("9_5gqn5")
 action_trigger_name = "attack"
-reaction_time = 0.2
+reaction_time = 0.7
 reaction_name = "block"
 check_again_on_trigger = true
 reaction_args = []
+learnable = true
 metadata/_custom_type_script = "uid://dmdhvmx1tqdx4"
 
 [sub_resource type="Resource" id="Resource_5gqn5"]
@@ -47,6 +57,17 @@ reaction_time = 0.5
 reaction_name = "attack"
 check_again_on_trigger = true
 reaction_args = [1]
+learnable = true
+metadata/_custom_type_script = "uid://dmdhvmx1tqdx4"
+
+[sub_resource type="Resource" id="Resource_kuufe"]
+script = ExtResource("9_5gqn5")
+action_trigger_name = "get_close"
+reaction_time = 0.0
+reaction_name = "block"
+check_again_on_trigger = false
+reaction_args = []
+learnable = true
 metadata/_custom_type_script = "uid://dmdhvmx1tqdx4"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_st66r"]
@@ -71,6 +92,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("Movement:velocity_sync")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="EnemyHumanoid" type="CharacterBody3D" node_paths=PackedStringArray("action_manager", "weapon_manager", "health") groups=["character"]]
 collision_layer = 2
@@ -80,9 +104,12 @@ action_manager = NodePath("ActionManager")
 weapon_manager = NodePath("WeaponManager")
 health = NodePath("Health")
 
-[node name="Movement" type="Node" parent="."]
+[node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("2_bmetn")
+body = NodePath("..")
 
 [node name="Stamina" type="Node" parent="."]
+script = ExtResource("3_kuufe")
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("character_model")]
 script = ExtResource("5_3agdk")
@@ -95,13 +122,13 @@ metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]
 script = ExtResource("7_tbaex")
-action_set = Array[ExtResource("8_cxwg0")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer")])
+action_set = Array[ExtResource("8_cxwg0")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_bmetn")])
 
 [node name="ReactionManager" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("10_st66r")
-reactions = Array[ExtResource("9_5gqn5")]([SubResource("Resource_st66r"), SubResource("Resource_5gqn5")])
+reactions = Array[ExtResource("9_5gqn5")]([SubResource("Resource_st66r"), SubResource("Resource_5gqn5"), SubResource("Resource_kuufe")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ReactionManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09491, 0)
@@ -115,7 +142,10 @@ texture = ExtResource("13_8oecf")
 modulate = Color(0.846926, 0.155291, 0, 1)
 metadata/_custom_type_script = "uid://bcnftja1gi4hk"
 
-[node name="AudioManager" type="Node3D" parent="."]
+[node name="AudioManager" type="Node3D" parent="." node_paths=PackedStringArray("skeleton_controller", "weapon_manager")]
+script = ExtResource("12_st66r")
+skeleton_controller = NodePath("../enemy_humanoid_model")
+weapon_manager = NodePath("../WeaponManager")
 
 [node name="FootstepAudio" type="AudioStreamPlayer3D" parent="AudioManager"]
 stream = SubResource("AudioStreamRandomizer_wodsf")
@@ -140,3 +170,5 @@ shape = SubResource("CapsuleShape3D_oul6g")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_g1dw6")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

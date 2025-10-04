@@ -6,7 +6,7 @@ signal stamina_depleted
 signal alert_depleted
 
 
-@onready var movement: PlayerMovement = $"../Movement"
+@onready var movement: CharacterMovementManager = $"../Movement"
 
 @export var max_stamina : float = 100.0
 var cur_stamina : float
