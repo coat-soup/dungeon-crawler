@@ -14,6 +14,6 @@ func end_action():
 
 func get_ai_action_weight(ai : AIActionController) -> float:
 	for t in ai.targets:
-		if t.weapon_manager.attack_state != 0: return 2.0
+		if t.weapon_manager.attack_state != 0: return 2.0 * (ai.character.stamina.cur_stamina/ai.character.stamina.max_stamina)
 	
 	return 0.0

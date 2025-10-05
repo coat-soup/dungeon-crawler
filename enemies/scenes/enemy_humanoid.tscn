@@ -1,6 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://xh7j8iie55hm"]
+[gd_scene load_steps=32 format=3 uid="uid://xh7j8iie55hm"]
 
-[ext_resource type="Script" uid="uid://cje7dmfcnngfl" path="res://system/scripts/character.gd" id="1_st66r"]
+[ext_resource type="Script" uid="uid://c4sskw3sldb6b" path="res://enemies/scenes/enemy_character.gd" id="1_kuufe"]
 [ext_resource type="Script" uid="uid://fuogjxe1gr3j" path="res://enemies/scripts/ai_movement_manager.gd" id="2_bmetn"]
 [ext_resource type="Script" uid="uid://d4lsp6fkml3h3" path="res://player/scripts/stamina_manager.gd" id="3_kuufe"]
 [ext_resource type="Script" uid="uid://cecsid1iml5j8" path="res://player/weapon_manager.gd" id="5_3agdk"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ctjalyaequqcp" path="res://system/scripts/action_attack.gd" id="9_jnmqq"]
 [ext_resource type="Script" uid="uid://x3x62q3np3qf" path="res://system/scripts/action_keep_distance.gd" id="10_kuufe"]
 [ext_resource type="Script" uid="uid://blrk4vd3srjdi" path="res://system/scripts/action_block.gd" id="10_oumu2"]
+[ext_resource type="Script" uid="uid://bjtmtlxcwwpmd" path="res://system/scripts/action_dash.gd" id="11_6x60x"]
 [ext_resource type="Script" uid="uid://bagpr4ssytwj0" path="res://enemies/scripts/ai_action_controller.gd" id="12_6x60x"]
 [ext_resource type="Script" uid="uid://btk656i61o72l" path="res://system/scripts/character_sound_manager.gd" id="12_st66r"]
 [ext_resource type="Script" uid="uid://bcnftja1gi4hk" path="res://vfx/scripts/splatter_on_hit.gd" id="12_yceny"]
@@ -27,6 +28,8 @@ script = ExtResource("9_jnmqq")
 action_name = "attack"
 action_type = 0
 cancellable = false
+stamina_cost = 15
+sustained_stamina_cost = 0
 metadata/_custom_type_script = "uid://ctjalyaequqcp"
 
 [sub_resource type="Resource" id="Resource_s7qer"]
@@ -34,15 +37,29 @@ script = ExtResource("10_oumu2")
 action_name = "block"
 action_type = 0
 cancellable = true
+stamina_cost = 0
+sustained_stamina_cost = 8
 metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 
 [sub_resource type="Resource" id="Resource_6x60x"]
 script = ExtResource("10_kuufe")
 distance = 3.0
+move_speed = 3.0
 action_name = "keep_distance"
 action_type = 1
 cancellable = true
+stamina_cost = 0
+sustained_stamina_cost = 0
 metadata/_custom_type_script = "uid://x3x62q3np3qf"
+
+[sub_resource type="Resource" id="Resource_ly86r"]
+script = ExtResource("11_6x60x")
+action_name = "dash"
+action_type = 0
+cancellable = true
+stamina_cost = 20
+sustained_stamina_cost = 0
+metadata/_custom_type_script = "uid://bjtmtlxcwwpmd"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_st66r"]
 radius = 8.0
@@ -70,14 +87,18 @@ properties/2/path = NodePath("Movement:velocity_sync")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="EnemyHumanoid" type="CharacterBody3D" node_paths=PackedStringArray("action_manager", "weapon_manager", "health", "movement_manager") groups=["character"]]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kuufe"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="EnemyHumanoid" type="CharacterBody3D" node_paths=PackedStringArray("action_manager", "weapon_manager", "health", "movement_manager", "stamina") groups=["character"]]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("1_st66r")
+script = ExtResource("1_kuufe")
 action_manager = NodePath("ActionManager")
 weapon_manager = NodePath("WeaponManager")
 health = NodePath("Health")
 movement_manager = NodePath("Movement")
+stamina = NodePath("Stamina")
 
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body")]
 script = ExtResource("2_bmetn")
@@ -97,7 +118,7 @@ metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]
 script = ExtResource("7_tbaex")
-action_set = Array[ExtResource("8_cxwg0")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_6x60x")])
+action_set = Array[ExtResource("8_cxwg0")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_6x60x"), SubResource("Resource_ly86r")])
 
 [node name="ReactionManager" type="Area3D" parent="."]
 collision_layer = 0
@@ -154,3 +175,44 @@ shape = SubResource("CapsuleShape3D_oul6g")
 replication_config = SubResource("SceneReplicationConfig_g1dw6")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.16514, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_kuufe")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+size = Vector2i(300, 300)
+
+[node name="HealthBar" type="ProgressBar" parent="Sprite3D/SubViewport"]
+modulate = Color(0.803922, 0, 0.117647, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -13.5
+offset_right = 50.0
+offset_bottom = -2.94501
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+show_percentage = false
+
+[node name="StaminaBar" type="ProgressBar" parent="Sprite3D/SubViewport"]
+modulate = Color(0.765429, 0.487928, 7.70092e-07, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -1.09
+offset_right = 50.0
+offset_bottom = 6.14
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+show_percentage = false

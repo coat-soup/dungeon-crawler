@@ -1,8 +1,12 @@
 extends Node
 class_name PlayerInputManager
 
+@export var movement : PlayerMovement
 @export var action_manager : ActionManager
+var block_reset := true
 
+func _ready() -> void:
+	action_manager.performed_action.connect(on_action_performed)
 
 func _input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
@@ -12,12 +16,21 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("overhead"): attack_or_buffer(WeaponManager.AttackState.OVERHEAD)
 	
 	#if event.is_action_pressed("secondary"): toggle_blocking.rpc(true) # handled in process
-	if event.is_action_released("secondary"): action_manager.try_stop_action_by_name("block")
+	if event.is_action_released("secondary"):
+		action_manager.try_stop_action_by_name("block")
+		block_reset = true
+	
+	if event.is_action_pressed("jump"):
+		if movement.player_input_dir.y < 0 or movement.player_input_dir == Vector2.ZERO: movement.jump_input()
+		else:
+			print("player dashing")
+			action_manager.try_perform_action_by_name("dash")
 
 
 func _process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
-	if Input.is_action_pressed("secondary"): action_manager.try_perform_action_by_name("block")
+	if block_reset and Input.is_action_pressed("secondary"):
+		action_manager.try_perform_action_by_name("block")
 
 
 func attack_or_buffer(attack_type : WeaponManager.AttackState):
@@ -28,3 +41,7 @@ func attack_or_buffer(attack_type : WeaponManager.AttackState):
 		action_manager.character.weapon_manager.buffer_attack(attack_type)
 	else:
 		action_manager.try_perform_action_by_name("attack", [attack_type])
+
+
+func on_action_performed(action : Action):
+	if action.action_name == "block": block_reset = false

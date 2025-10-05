@@ -81,4 +81,6 @@ func dash_input():
 
 
 func get_speed() -> float:
-	return speed
+	var relative_input = (Vector3(input_direction.x, 0, input_direction.z) * body.transform.basis).normalized()
+	print(relative_input)
+	return speed if relative_input.z < 0 else speed * 0.6

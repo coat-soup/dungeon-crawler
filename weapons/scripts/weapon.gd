@@ -3,7 +3,8 @@ class_name Weapon
 
 @export var hand_positions : Array[Node3D]
 @export var speed_multiplier : float = 1.0
-@export var damage : int = 10
+@export var damage : int = 30
+@export var block_stamina_drain : float = 2.0
 
 @export var hitbox: Area3D
 

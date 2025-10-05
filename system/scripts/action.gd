@@ -15,22 +15,34 @@ enum ActionType {BLOCKING, NONBLOCKING} # blocking actions cant be performed if 
 @export var action_name : String
 @export var action_type : ActionType
 @export var cancellable : bool = true
+@export var stamina_cost : int = 0
+@export var sustained_stamina_cost : int = 0
+var ticking := true
+var stamina_tick_speed := 16.0
 
 
 func can_perform_action(_character : Character) -> bool:
+	if (stamina_cost > 0 or sustained_stamina_cost > 0) and _character.stamina.cur_stamina <= 0: return false
 	return true if action_type == ActionType.NONBLOCKING else not _character.action_manager.is_performing_blocking_action()
 
 
 func perform_action(_character : Character, _args : Array = []):
 	character = _character
+	if stamina_cost > 0 and character.is_multiplayer_authority(): character.stamina.drain_stamina.rpc(stamina_cost)
+	if sustained_stamina_cost > 0 and character.is_multiplayer_authority():
+		stamina_tick()
+		character.stamina.stamina_depleted.connect(trigger_end_action)
+	
 	action_started.emit()
 
 
 func trigger_end_action():
+	print("action end triggered")
 	triggered_end_action.emit()
 
 
 func end_action():
+	ticking = false
 	action_ended.emit()
 
 
@@ -40,3 +52,10 @@ func get_ai_action_weight(ai : AIActionController) -> float:
 
 static func get_ai_call_args(ai : AIActionController) -> Array:
 	return []
+
+
+func stamina_tick():
+	if not ticking or not character.is_multiplayer_authority(): return
+	character.stamina.drain_stamina.rpc(sustained_stamina_cost / stamina_tick_speed)
+	await character.get_tree().create_timer(1.0 / stamina_tick_speed).timeout
+	stamina_tick()

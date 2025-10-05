@@ -22,8 +22,6 @@ var recharge_delay_timer : float = 0
 
 func _ready() -> void:
 	cur_stamina = max_stamina
-	movement.jump_start.connect(on_jump)
-	movement.dash.connect(on_dash)
 
 
 func _process(delta: float) -> void:
@@ -34,12 +32,7 @@ func _process(delta: float) -> void:
 		recharge_delay_timer -= delta
 
 
-func on_jump():
-	drain_stamina(jump_stamina)
-	
-func on_dash():
-	drain_stamina(dash_stamina)
-
+@rpc("any_peer", "call_local")
 func drain_stamina(amount: float):
 	recharge_delay_timer = recharge_delay
 	
@@ -51,12 +44,15 @@ func drain_stamina(amount: float):
 		cur_stamina = 0
 		stamina_depleted.emit()
 		alert_depleted.emit()
-	
-	Global.ui.update_stamina_bar(cur_stamina/max_stamina)
+
 
 func add_stamina(amount: float):
 	cur_stamina = min(cur_stamina + amount, max_stamina)
-	Global.ui.update_stamina_bar(cur_stamina/max_stamina)
+
 
 func alert_anim():
 	alert_depleted.emit()
+
+
+func get_ratio() -> float:
+	return cur_stamina/max_stamina

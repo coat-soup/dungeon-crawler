@@ -15,7 +15,7 @@ func try_take_blockable_damage(amount: float, source_id : int = -1):
 			var angle = rad_to_deg((-weapon_manager.character_model.head_rotator.global_basis.z).angle_to(weapon_manager.character_model.head_rotator.global_position - character.weapon_manager.weapon.global_position)) # character.weapon_manager.weapon.swing_direction))
 			Global.ui.display_chat_message("BLOCK ANGLE: " + str(angle))
 			if angle < 90.0:
-				weapon_manager.did_block_damage.rpc()
+				weapon_manager.did_block_damage.rpc(amount)
 				did_block = true
 	
 	if not did_block: take_damage.rpc(amount, source_id)

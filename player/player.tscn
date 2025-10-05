@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://in53wmskn8o"]
+[gd_scene load_steps=29 format=3 uid="uid://in53wmskn8o"]
 
 [ext_resource type="Script" uid="uid://cp10hnk6llvdv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://csxbl4ax1b4pk" path="res://player/scripts/player_movement.gd" id="2_rkbax"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://db7x6fc4ukeu4" path="res://sfx/footsteps/footsteps-005.wav" id="10_kb6p2"]
 [ext_resource type="Script" uid="uid://blrk4vd3srjdi" path="res://system/scripts/action_block.gd" id="10_x7c3f"]
 [ext_resource type="AudioStream" uid="uid://b00ubnovfat3x" path="res://sfx/footsteps/jump-land.wav" id="11_2ieo8"]
+[ext_resource type="Script" uid="uid://bjtmtlxcwwpmd" path="res://system/scripts/action_dash.gd" id="11_bjvpn"]
 [ext_resource type="PackedScene" uid="uid://om525hroc3mr" path="res://player/models/player_model.tscn" id="12_wodsf"]
 [ext_resource type="Script" uid="uid://dxfqns3wgrg1n" path="res://player/scripts/player_input_manager.gd" id="18_e7oew"]
 
@@ -27,6 +28,8 @@ script = ExtResource("9_x7c3f")
 action_name = "attack"
 action_type = 0
 cancellable = false
+stamina_cost = 15
+sustained_stamina_cost = 0
 metadata/_custom_type_script = "uid://ctjalyaequqcp"
 
 [sub_resource type="Resource" id="Resource_s7qer"]
@@ -34,14 +37,18 @@ script = ExtResource("10_x7c3f")
 action_name = "block"
 action_type = 0
 cancellable = true
+stamina_cost = 0
+sustained_stamina_cost = 8
 metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 
-[sub_resource type="Resource" id="Resource_x7c3f"]
-script = ExtResource("8_65viv")
-action_name = "get_close"
-action_type = 1
+[sub_resource type="Resource" id="Resource_g4c7l"]
+script = ExtResource("11_bjvpn")
+action_name = "dash"
+action_type = 0
 cancellable = true
-metadata/_custom_type_script = "uid://b2ibvmfs8hbrl"
+stamina_cost = 20
+sustained_stamina_cost = 0
+metadata/_custom_type_script = "uid://bjtmtlxcwwpmd"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wodsf"]
 streams_count = 5
@@ -72,7 +79,7 @@ properties/4/path = NodePath("Movement:velocity_sync")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "action_manager", "weapon_manager", "health", "movement_manager") groups=["character", "player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "action_manager", "weapon_manager", "health", "movement_manager", "stamina") groups=["character", "player"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_oul6g")
@@ -81,6 +88,7 @@ action_manager = NodePath("ActionManager")
 weapon_manager = NodePath("WeaponManager")
 health = NodePath("Health")
 movement_manager = NodePath("Movement")
+stamina = NodePath("Stamina")
 
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("body")]
 script = ExtResource("2_rkbax")
@@ -106,10 +114,11 @@ metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]
 script = ExtResource("7_tqiix")
-action_set = Array[ExtResource("8_65viv")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_x7c3f")])
+action_set = Array[ExtResource("8_65viv")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_g4c7l")])
 
-[node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("action_manager")]
+[node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("movement", "action_manager")]
 script = ExtResource("18_e7oew")
+movement = NodePath("../Movement")
 action_manager = NodePath("../ActionManager")
 
 [node name="SplatterOnHit" type="Node3D" parent="." node_paths=PackedStringArray("health")]

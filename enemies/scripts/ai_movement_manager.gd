@@ -7,10 +7,10 @@ signal process_ticked
 
 var process_tick_speed = 10.0
 
+var override_desired_speed : float = -1
 
 func _ready() -> void:
 	process_tick()
-	set_nav_destination(Vector3.ZERO)
 
 
 func process_tick():
@@ -25,6 +25,8 @@ func set_nav_destination(position : Vector3):
 
 
 func get_speed(slow_dist : float = 1.0) -> float:
+	var _s = super.get_speed()
+	if override_desired_speed > 0: _s = min(override_desired_speed, _s)
 	var d = nav_agent.distance_to_target()
-	if d > slow_dist: return speed
-	return speed * (d/slow_dist)
+	if d > slow_dist: return _s
+	return _s * (d/slow_dist)

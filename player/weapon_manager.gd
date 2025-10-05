@@ -45,7 +45,8 @@ func _process(delta: float) -> void:
 	
 	if attack_input_buffer_timer > 0:
 		attack_input_buffer_timer -= delta
-		if attack_input_buffer_time <= 0: attack_input_buffer = -1
+		if attack_input_buffer_timer <= 0:
+			attack_input_buffer = -1
 
 
 func try_start_attack(attack_type : AttackState):
@@ -135,8 +136,10 @@ func handle_bonk():
 
 
 @rpc("any_peer", "call_local")
-func did_block_damage():
+func did_block_damage(amount : int):
+	character.stamina.drain_stamina(amount * weapon.block_stamina_drain)
 	blocked_damage.emit()
+
 
 @rpc("any_peer", "call_local")
 func did_did_damage():

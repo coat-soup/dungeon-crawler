@@ -36,10 +36,6 @@ func _input(event: InputEvent) -> void:
 		else:
 			body.collision_mask = Util.layer_mask([1])
 			body.collision_layer = Util.layer_mask([1])
-	
-	if event.is_action_pressed("jump"):
-		if player_input_dir.y < 0 or player_input_dir == Vector2.ZERO: jump_input()
-		else: dash_input()
 
 
 func _unhandled_input(event: InputEvent) -> void:
