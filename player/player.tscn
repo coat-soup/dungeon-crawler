@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://in53wmskn8o"]
+[gd_scene load_steps=31 format=3 uid="uid://in53wmskn8o"]
 
 [ext_resource type="Script" uid="uid://cp10hnk6llvdv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://csxbl4ax1b4pk" path="res://player/scripts/player_movement.gd" id="2_rkbax"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://bjtmtlxcwwpmd" path="res://system/scripts/action_dash.gd" id="11_bjvpn"]
 [ext_resource type="PackedScene" uid="uid://om525hroc3mr" path="res://player/models/player_model.tscn" id="12_wodsf"]
 [ext_resource type="Script" uid="uid://dxfqns3wgrg1n" path="res://player/scripts/player_input_manager.gd" id="18_e7oew"]
+[ext_resource type="Script" uid="uid://l2i2p2rer3y8" path="res://player/scripts/camera_shake.gd" id="23_s7qer"]
 
 [sub_resource type="Resource" id="Resource_bjvpn"]
 script = ExtResource("9_x7c3f")
@@ -61,6 +62,11 @@ stream_4/stream = ExtResource("10_kb6p2")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
 radius = 0.390442
 height = 1.15903
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s7qer"]
+noise_type = 0
+frequency = 0.0224
+fractal_octaves = 4
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_g1dw6"]
 properties/0/path = NodePath(".:position")
@@ -163,6 +169,8 @@ shape = SubResource("CapsuleShape3D_oul6g")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8751, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
+script = ExtResource("23_s7qer")
+noise = SubResource("FastNoiseLite_s7qer")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="CameraPivot/Camera"]
 
