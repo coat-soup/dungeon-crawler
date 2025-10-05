@@ -36,7 +36,7 @@ _subresources={
 "animations": {
 "BlockSword": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://player/animations/player_blocksword_anim.res",
 "settings/loop_mode": 1,
 "slice_1/end_frame": 0,
@@ -3634,7 +3634,7 @@ _subresources={
 },
 "LungeSword": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://player/animations/player_lungesword_anim.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
@@ -5433,7 +5433,7 @@ _subresources={
 },
 "OverheadSword": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://player/animations/player_overheadsword_anim.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
@@ -7232,7 +7232,7 @@ _subresources={
 },
 "SwingSword": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://player/animations/player_swingsword_anim.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
@@ -9031,7 +9031,7 @@ _subresources={
 },
 "SwingSwordAlt": {
 "save_to_file/enabled": true,
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "res://player/animations/player_swingswordalt_anim.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,

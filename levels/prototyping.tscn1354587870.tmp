@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4dr7y843yplj"]
+[gd_scene load_steps=20 format=3 uid="uid://c4dr7y843yplj"]
 
 [ext_resource type="Shader" uid="uid://caa45klo6bnd0" path="res://world/prototype_grid.gdshader" id="1_jh6tj"]
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/scripts/game_manager.gd" id="1_t1no0"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://b56o06u83al10" path="res://weapons/models/mace.glb" id="9_d533k"]
 [ext_resource type="Script" uid="uid://dtr6wdyf2ykk0" path="res://system/scripts/debug_weapon_equip.gd" id="9_pxb1o"]
 [ext_resource type="PackedScene" uid="uid://d1eb06r58joyp" path="res://weapons/models/warhammer.glb" id="10_pxb1o"]
-[ext_resource type="PackedScene" uid="uid://cmpn5yesi4qfp" path="res://weapons/models/rapier.glb" id="11_pxb1o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t1no0"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -27,8 +26,8 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_svve8"]
-vertices = PackedVector3Array(2, 1, 14.5, 2.25, 1, 8.25, 0.5, 1, 8, -14.5, 1, 14.5, 0.5, 1, 6.25, 2.75, 1, -14.5, -14.5, 1, -14.5, 2.75, 1, 6, 9.5, 1, 6, 9.75, 1, 7, 14.5, 1, 7, 14.5, 1, -14.5, 9.25, 1, 8.25, 8, 1, 14.5, 14.5, 1, 14.5, 7.75, 1, 8.25)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 3), PackedInt32Array(4, 2, 3), PackedInt32Array(5, 7, 4), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(7, 5, 8), PackedInt32Array(8, 5, 11), PackedInt32Array(9, 10, 12), PackedInt32Array(12, 10, 14), PackedInt32Array(12, 14, 13), PackedInt32Array(13, 15, 12), PackedInt32Array(1, 15, 0), PackedInt32Array(0, 15, 13)]
+vertices = PackedVector3Array(2, 1, 14.5, 2.25, 1, 8.25, 0.5, 1, 8, -14.5, 1, 14.5, 0.5, 1, 6.25, 2.75, 1, -14.5, -14.5, 1, -14.5, 2.75, 1, 6, 7.5, 1, 6, 7.75, 1, 7, 14.5, 1, 7, 14.5, 1, -14.5, 7.25, 1, 8.25, 14.5, 1, 14.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 3), PackedInt32Array(4, 2, 3), PackedInt32Array(5, 7, 4), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 5), PackedInt32Array(8, 7, 5), PackedInt32Array(12, 9, 10), PackedInt32Array(0, 1, 12), PackedInt32Array(10, 13, 12), PackedInt32Array(12, 13, 0)]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t1no0"]
 render_priority = 0
@@ -92,9 +91,9 @@ size = Vector3(30, 1, 30)
 material = SubResource("ShaderMaterial_t1no0")
 
 [node name="Floor2" type="CSGBox3D" parent="World/NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 7)
 use_collision = true
-size = Vector3(8, 4, 1)
+size = Vector3(6, 4, 1)
 material = SubResource("ShaderMaterial_t1no0")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
@@ -131,7 +130,7 @@ enemy = ExtResource("6_km4ku")
 metadata/_custom_type_script = "uid://dp0lj1lpir5eu"
 
 [node name="longsword" parent="." instance=ExtResource("8_40cv7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.34933, 1.76784, 6.48005)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.44246, 1.76784, 6.48005)
 
 [node name="Area3D" type="Area3D" parent="longsword"]
 script = ExtResource("9_pxb1o")
@@ -141,7 +140,7 @@ weapon_path = "res://weapons/models/longsword_model.tscn"
 shape = SubResource("SphereShape3D_40cv7")
 
 [node name="mace" parent="." instance=ExtResource("9_d533k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.57224, 1.73033, 6.43649)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.64804, 1.73033, 6.43649)
 
 [node name="Area3D" type="Area3D" parent="mace"]
 script = ExtResource("9_pxb1o")
@@ -151,21 +150,11 @@ weapon_path = "res://weapons/models/mace_model.tscn"
 shape = SubResource("SphereShape3D_40cv7")
 
 [node name="warhammer" parent="." instance=ExtResource("10_pxb1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.71734, 1.76961, 6.45968)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8018, 1.76961, 6.45968)
 
 [node name="Area3D" type="Area3D" parent="warhammer"]
 script = ExtResource("9_pxb1o")
 weapon_path = "res://weapons/models/warhammer_model.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="warhammer/Area3D"]
-shape = SubResource("SphereShape3D_40cv7")
-
-[node name="rapier" parent="." instance=ExtResource("11_pxb1o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98807, 1.73333, 6.43938)
-
-[node name="Area3D" type="Area3D" parent="rapier"]
-script = ExtResource("9_pxb1o")
-weapon_path = "res://weapons/models/rapier_model.tscn"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="rapier/Area3D"]
 shape = SubResource("SphereShape3D_40cv7")

@@ -28,6 +28,7 @@ var blocking_damage : bool
 var can_damage : bool
 var damaged_objects : Array[Health]
 @onready var character : Character = $".."
+@export var starting_weapon_path : String = "res://weapons/models/longsword_model.tscn"
 
 
 func _ready() -> void:
@@ -35,6 +36,9 @@ func _ready() -> void:
 	character_model.damage_window_toggled.connect(toggle_damage_window)
 	character_model.block_window_toggled.connect(toggle_block_window)
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
+	
+	await get_tree().process_frame
+	equip_weapon.rpc(starting_weapon_path)
 
 
 func _process(delta: float) -> void:
@@ -149,3 +153,13 @@ func did_did_damage():
 func buffer_attack(attack_type : AttackState):
 	attack_input_buffer = attack_type
 	attack_input_buffer_timer = attack_input_buffer_time
+
+
+@rpc("any_peer", "call_local")
+func equip_weapon(weapon_path : String):
+	weapon.queue_free()
+	weapon = load(weapon_path).instantiate()
+	character_model.weapon_holder.add_child(weapon)
+	character_model.handle_weapon_equip(weapon)
+	weapon.hitbox.body_entered.connect(on_weapon_hit)
+	character.action_manager.get_action_by_name("attack").stamina_cost = weapon.swing_stamina_drain

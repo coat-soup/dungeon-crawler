@@ -37,7 +37,6 @@ func perform_action(_character : Character, _args : Array = []):
 
 
 func trigger_end_action():
-	print("action end triggered")
 	triggered_end_action.emit()
 
 

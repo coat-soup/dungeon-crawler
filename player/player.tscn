@@ -29,7 +29,7 @@ script = ExtResource("9_x7c3f")
 action_name = "attack"
 action_type = 0
 cancellable = false
-stamina_cost = 15
+stamina_cost = 10
 sustained_stamina_cost = 0
 metadata/_custom_type_script = "uid://ctjalyaequqcp"
 

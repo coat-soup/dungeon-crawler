@@ -12,10 +12,10 @@ hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
 hitbox = NodePath("Hitbox")
 
 [node name="Marker3D" type="Marker3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0476347, 0)
+transform = Transform3D(-0.179606, -0.973934, 0.138542, -0.039734, 0.1479, 0.988204, -0.982936, 0.171982, -0.065262, 0.0660651, -0.0685303, -0.0210091)
 
 [node name="Marker3D2" type="Marker3D" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.141591, 0)
+transform = Transform3D(-0.208498, -0.977031, -0.0440262, -0.0038957, -0.0441855, 0.999016, -0.978015, 0.208464, 0.00540636, 0.096892, -0.148744, 0.00965346)
 
 [node name="Hitbox" type="Area3D" parent="." index="6"]
 collision_mask = 3
@@ -23,6 +23,3 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526083, 0)
 shape = SubResource("BoxShape3D_rbr83")
-
-[node name="TipMarker" type="Marker3D" parent="." index="7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.806181, 0)

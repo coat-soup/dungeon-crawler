@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://4vl3hnk6ruqg"]
+
+[ext_resource type="PackedScene" uid="uid://cmpn5yesi4qfp" path="res://weapons/models/rapier.glb" id="1_6b7qb"]
+[ext_resource type="Script" uid="uid://cgleucta3iiqc" path="res://weapons/scripts/weapon.gd" id="2_56n53"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_56n53"]
+size = Vector3(0.11, 0.878565, 0.04)
+
+[node name="rapier" node_paths=PackedStringArray("hand_positions", "hitbox") instance=ExtResource("1_6b7qb")]
+script = ExtResource("2_56n53")
+hand_positions = [NodePath("Marker3D")]
+speed_multiplier = 2.0
+damage = 20
+swing_stamina_drain = 5.0
+block_stamina_drain = 1.0
+hitbox = NodePath("Hitbox")
+
+[node name="Marker3D" type="Marker3D" parent="." index="8"]
+transform = Transform3D(-0.179606, -0.973934, 0.138542, -0.039734, 0.1479, 0.988204, -0.982936, 0.171982, -0.065262, 0.0660651, -0.0685303, -0.0210091)
+
+[node name="Hitbox" type="Area3D" parent="." index="9"]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442366, 0)
+shape = SubResource("BoxShape3D_56n53")

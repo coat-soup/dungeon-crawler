@@ -19,6 +19,7 @@ signal block_window_toggled(bool)
 
 var held_item
 @onready var weapon_rt: RemoteTransform3D = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT
+@onready var weapon_holder: Node3D = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT/WeaponHolder
 
 @export var weapon : Weapon
 @export var weapon_manager : WeaponManager
@@ -34,6 +35,14 @@ func _ready() -> void:
 	animation_tree.animation_finished.connect(weapon_manager.on_anim_finished)
 	$Armature_001/Skeleton3D/TorsoIK/TorsoCollisionRT.remote_path = get_parent().get_node("CollisionTop").get_path()
 
+
+func handle_weapon_equip(_weapon : Weapon):
+	weapon = _weapon
+	var left_needed = len(weapon.hand_positions) > 1
+	hand_ik_r.target_node = weapon.hand_positions[0].get_path()
+	if left_needed: hand_ik_l.target_node = weapon.hand_positions[1].get_path()
+	else: hand_ik_l.stop()
+	animation_tree.set("parameters/left_arm_item_blend/blend_amount", 0.0 if left_needed else 1.0)
 
 func start_damage_window(): damage_window_toggled.emit(true)
 func stop_damage_window(): damage_window_toggled.emit(false)

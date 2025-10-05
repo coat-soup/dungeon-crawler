@@ -6,17 +6,24 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 	super.perform_action(_character, args)
 	character.weapon_manager.start_attack(args[0])
 	character.weapon_manager.weapon_bounced.connect(on_weapon_bounced)
+	character.health.took_damage.connect(on_took_damage)
+	character.weapon_manager.blocked_damage.connect(on_took_damage)
 	
 	var ai = character.get_node_or_null("AIActionController") as AIActionController
 	if ai:
 		character.movement_manager.set_nav_destination(ai.targets[0].global_position + (character.global_position - ai.targets[0].global_position).normalized() * 1.5)
 		character.movement_manager.body.global_rotation.y = -(character.global_position - ai.targets[0].global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
 	
-	await character.get_tree().create_timer(1.0).timeout
+	await character.get_tree().create_timer(1.0 / character.weapon_manager.weapon.speed_multiplier).timeout
 	trigger_end_action()
 
 
 func on_weapon_bounced():
+	if character.is_multiplayer_authority():
+		trigger_end_action()
+
+
+func on_took_damage(_source, _amount):
 	if character.is_multiplayer_authority():
 		trigger_end_action()
 
@@ -30,7 +37,9 @@ func end_action():
 			character.action_manager.try_perform_action_by_name("attack", [character.weapon_manager.attack_input_buffer])
 			did_chain = true
 	
-	if not did_chain: character.weapon_manager.attack_state = WeaponManager.AttackState.IDLE
+	if not did_chain:
+		character.weapon_manager.attack_state = WeaponManager.AttackState.IDLE
+		character.weapon_manager.toggle_damage_window(false) # animation may not call if interrupted
 
 
 func get_ai_action_weight(ai : AIActionController) -> float:

@@ -22,9 +22,9 @@ func try_perform_action_by_name(action_name : String, args : Array = []) -> bool
 	return false
 
 
-func try_stop_action_by_name(action_name : String):
+func try_stop_action_by_name(action_name : String, override_cancellable : bool = false):
 	for i in range(len(current_actions)):
-		if current_actions[i].action_name == action_name and current_actions[i].cancellable == false:
+		if current_actions[i].action_name == action_name and not current_actions[i].cancellable and not override_cancellable:
 			return
 	end_action.rpc(action_name)
 
@@ -73,3 +73,9 @@ func on_action_ended(action : Action):
 	var id = current_actions.find(action)
 	if id != null:
 		current_actions.remove_at(id)
+
+
+func get_action_by_name(action_name : String) -> Action:
+	for action in action_set:
+		if action.action_name == action_name: return action
+	return null
