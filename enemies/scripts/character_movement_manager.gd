@@ -11,6 +11,12 @@ signal dash
 @export var speed = 5.0
 @export var jump_velocity = 4.5
 
+@export var sprint_speed : float = 7.0
+var sprinting = false
+
+var applied_impulse : Vector3
+var impulse_timer : float = 0.0
+
 @export var dash_speed = 15
 @export var dash_length = 0.2
 @export var dash_cooldown = 1.5
@@ -37,8 +43,10 @@ func _physics_process(delta: float) -> void:
 	
 	if dash_cooldown_timer > 0:
 		dash_cooldown_timer -= delta
-		
-	if dash_timer > 0:
+	if impulse_timer > 0:
+		impulse_timer -= delta
+		body.velocity = lerp(body.velocity, applied_impulse, delta * 20)
+	elif dash_timer > 0:
 		dash_timer -= delta
 		if dash_timer <= 0:
 			dash_cooldown_timer = dash_cooldown
@@ -82,4 +90,12 @@ func dash_input():
 
 func get_speed() -> float:
 	var relative_input = (Vector3(input_direction.x, 0, input_direction.z) * body.transform.basis).normalized()
-	return speed if relative_input.z < 0 else speed * 0.6
+	var s = speed if not sprinting else sprint_speed
+	return s if relative_input.z < 0 else s * 0.6
+
+
+@rpc("any_peer", "call_local")
+func apply_impulse(impulse : Vector3, duration : float):
+	if not is_multiplayer_authority(): return
+	applied_impulse = impulse
+	impulse_timer = duration

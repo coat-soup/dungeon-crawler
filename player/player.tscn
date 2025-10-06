@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://in53wmskn8o"]
+[gd_scene load_steps=36 format=3 uid="uid://in53wmskn8o"]
 
 [ext_resource type="Script" uid="uid://cp10hnk6llvdv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://csxbl4ax1b4pk" path="res://player/scripts/player_movement.gd" id="2_rkbax"]
@@ -20,14 +20,16 @@
 [ext_resource type="Script" uid="uid://blrk4vd3srjdi" path="res://system/scripts/action_block.gd" id="10_x7c3f"]
 [ext_resource type="AudioStream" uid="uid://b00ubnovfat3x" path="res://sfx/footsteps/jump-land.wav" id="11_2ieo8"]
 [ext_resource type="Script" uid="uid://bjtmtlxcwwpmd" path="res://system/scripts/action_dash.gd" id="11_bjvpn"]
+[ext_resource type="Script" uid="uid://b6sa48cxaul1x" path="res://system/scripts/action_sprint.gd" id="12_g4c7l"]
 [ext_resource type="PackedScene" uid="uid://om525hroc3mr" path="res://player/models/player_model.tscn" id="12_wodsf"]
+[ext_resource type="Script" uid="uid://b57gmoj05g64n" path="res://system/scripts/action_kick.gd" id="13_knn7v"]
 [ext_resource type="Script" uid="uid://dxfqns3wgrg1n" path="res://player/scripts/player_input_manager.gd" id="18_e7oew"]
 [ext_resource type="Script" uid="uid://l2i2p2rer3y8" path="res://player/scripts/camera_shake.gd" id="23_s7qer"]
 
 [sub_resource type="Resource" id="Resource_bjvpn"]
 script = ExtResource("9_x7c3f")
 action_name = "attack"
-action_type = 0
+action_type = 1
 cancellable = false
 stamina_cost = 10
 sustained_stamina_cost = 0
@@ -36,7 +38,7 @@ metadata/_custom_type_script = "uid://ctjalyaequqcp"
 [sub_resource type="Resource" id="Resource_s7qer"]
 script = ExtResource("10_x7c3f")
 action_name = "block"
-action_type = 0
+action_type = 1
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 8
@@ -50,6 +52,24 @@ cancellable = true
 stamina_cost = 20
 sustained_stamina_cost = 0
 metadata/_custom_type_script = "uid://bjtmtlxcwwpmd"
+
+[sub_resource type="Resource" id="Resource_knn7v"]
+script = ExtResource("12_g4c7l")
+action_name = "sprint"
+action_type = 0
+cancellable = true
+stamina_cost = 0
+sustained_stamina_cost = 0
+metadata/_custom_type_script = "uid://b6sa48cxaul1x"
+
+[sub_resource type="Resource" id="Resource_7pqkx"]
+script = ExtResource("13_knn7v")
+action_name = "kick"
+action_type = 1
+cancellable = false
+stamina_cost = 10
+sustained_stamina_cost = 0
+metadata/_custom_type_script = "uid://b57gmoj05g64n"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wodsf"]
 streams_count = 5
@@ -84,6 +104,8 @@ properties/3/replication_mode = 2
 properties/4/path = NodePath("Movement:velocity_sync")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_knn7v"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "action_manager", "weapon_manager", "health", "movement_manager", "stamina") groups=["character", "player"]]
 collision_layer = 2
@@ -120,7 +142,7 @@ metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]
 script = ExtResource("7_tqiix")
-action_set = Array[ExtResource("8_65viv")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_g4c7l")])
+action_set = Array[ExtResource("8_65viv")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_g4c7l"), SubResource("Resource_knn7v"), SubResource("Resource_7pqkx")])
 
 [node name="InputManager" type="Node" parent="." node_paths=PackedStringArray("movement", "action_manager")]
 script = ExtResource("18_e7oew")
@@ -181,3 +203,7 @@ replication_config = SubResource("SceneReplicationConfig_g1dw6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.21476, 0)
 billboard = 1
 text = "STEAM USER"
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_knn7v")
+target_position = Vector3(0, 0, 1)

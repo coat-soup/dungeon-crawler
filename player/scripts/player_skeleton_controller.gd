@@ -21,6 +21,9 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		$Armature_001/Skeleton3D/WeaponAttach/WeaponRT/WeaponHolder.position = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT/FirstPersonOffset.position
 		$Armature_001/Skeleton3D/FPHeadOverride.override_pose = true
+		#(animation_tree.tree_root.get_node("weapon_attacks_state_machine") as AnimationNodeStateMachine).get_node("idle_anim").animation = "IdleSwordFP"
+		#load("res://player/models/player_model.tscn::AnimationNodeAnimation_6nhyr").animation = "IdleSwordFP"
+		animation_tree.set("parameters/first_third_person_kick_blend/blend_amount", 1.0)
 
 
 func _input(event: InputEvent) -> void:

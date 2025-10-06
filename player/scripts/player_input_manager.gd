@@ -15,6 +15,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("lunge"): attack_or_buffer(WeaponManager.AttackState.LUNGE)
 	if event.is_action_pressed("overhead"): attack_or_buffer(WeaponManager.AttackState.OVERHEAD)
 	
+	if event.is_action_pressed("kick"): action_manager.try_perform_action_by_name("kick")
+	
 	#if event.is_action_pressed("secondary"): toggle_blocking.rpc(true) # handled in process
 	if event.is_action_released("secondary"):
 		action_manager.try_stop_action_by_name("block")
@@ -25,6 +27,9 @@ func _input(event: InputEvent) -> void:
 		else:
 			print("player dashing")
 			action_manager.try_perform_action_by_name("dash")
+	
+	if event.is_action_pressed("sprint") : action_manager.try_perform_action_by_name("sprint")
+	if event.is_action_released("sprint") : action_manager.try_stop_action_by_name("sprint")
 
 
 func _process(delta: float) -> void:

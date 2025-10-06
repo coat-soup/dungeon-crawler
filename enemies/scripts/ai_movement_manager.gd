@@ -10,6 +10,7 @@ var process_tick_speed = 10.0
 var override_desired_speed : float = -1
 
 func _ready() -> void:
+	await get_tree().process_frame
 	process_tick()
 
 

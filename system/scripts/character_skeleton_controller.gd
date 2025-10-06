@@ -33,6 +33,7 @@ func _ready() -> void:
 	
 	animation_tree.advance_expression_base_node = weapon_manager.get_path()
 	animation_tree.animation_finished.connect(weapon_manager.on_anim_finished)
+	weapon_manager.started_kick.connect(on_started_kick)
 	$Armature_001/Skeleton3D/TorsoIK/TorsoCollisionRT.remote_path = get_parent().get_node("CollisionTop").get_path()
 
 
@@ -40,9 +41,16 @@ func handle_weapon_equip(_weapon : Weapon):
 	weapon = _weapon
 	var left_needed = len(weapon.hand_positions) > 1
 	hand_ik_r.target_node = weapon.hand_positions[0].get_path()
-	if left_needed: hand_ik_l.target_node = weapon.hand_positions[1].get_path()
+	if left_needed:
+		hand_ik_l.start()
+		hand_ik_l.target_node = weapon.hand_positions[1].get_path()
 	else: hand_ik_l.stop()
 	animation_tree.set("parameters/left_arm_item_blend/blend_amount", 0.0 if left_needed else 1.0)
+
+
+func on_started_kick():
+	animation_tree.set("parameters/kick_one_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
 
 func start_damage_window(): damage_window_toggled.emit(true)
 func stop_damage_window(): damage_window_toggled.emit(false)

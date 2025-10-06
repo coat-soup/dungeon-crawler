@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj7p8kb5is0qr"]
+[gd_scene load_steps=5 format=3 uid="uid://cj7p8kb5is0qr"]
 
 [ext_resource type="PackedScene" uid="uid://c831ald68nroa" path="res://weapons/models/longsword.glb" id="1_ocjsi"]
 [ext_resource type="Script" uid="uid://cgleucta3iiqc" path="res://weapons/scripts/weapon.gd" id="2_rbr83"]
@@ -6,10 +6,14 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_rbr83"]
 size = Vector3(0.11, 1.046, 0.04)
 
-[node name="longsword" node_paths=PackedStringArray("hand_positions", "hitbox") instance=ExtResource("1_ocjsi")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_08b5h"]
+size = Vector3(0.289, 1.046, 0.085)
+
+[node name="longsword" node_paths=PackedStringArray("hand_positions", "hitbox", "block_area") instance=ExtResource("1_ocjsi")]
 script = ExtResource("2_rbr83")
 hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
 hitbox = NodePath("Hitbox")
+block_area = NodePath("BlockArea")
 
 [node name="Marker3D" type="Marker3D" parent="." index="4"]
 transform = Transform3D(-0.179606, -0.973934, 0.138542, -0.039734, 0.1479, 0.988204, -0.982936, 0.171982, -0.065262, 0.0660651, -0.0685303, -0.0210091)
@@ -23,3 +27,10 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526083, 0)
 shape = SubResource("BoxShape3D_rbr83")
+
+[node name="BlockArea" type="Area3D" parent="." index="7"]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461305, 0.526083, 0)
+shape = SubResource("BoxShape3D_08b5h")

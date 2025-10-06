@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0dhmtusdifw1"]
+[gd_scene load_steps=6 format=3 uid="uid://c0dhmtusdifw1"]
 
 [ext_resource type="PackedScene" uid="uid://d1eb06r58joyp" path="res://weapons/models/warhammer.glb" id="1_8nwgi"]
 [ext_resource type="Script" uid="uid://cgleucta3iiqc" path="res://weapons/scripts/weapon.gd" id="2_6lh4x"]
@@ -10,12 +10,16 @@ size = Vector3(0.302412, 0.30637, 0.105)
 height = 0.459277
 radius = 0.0488281
 
-[node name="warhammer" node_paths=PackedStringArray("hand_positions", "hitbox") instance=ExtResource("1_8nwgi")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_3aran"]
+size = Vector3(0.379, 1.51, 0.15)
+
+[node name="warhammer" node_paths=PackedStringArray("hand_positions", "hitbox", "block_area") instance=ExtResource("1_8nwgi")]
 script = ExtResource("2_6lh4x")
 hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
 speed_multiplier = 0.8
 damage = 40
 hitbox = NodePath("Hitbox")
+block_area = NodePath("BlockArea")
 
 [node name="Marker3D" type="Marker3D" parent="." index="7"]
 transform = Transform3D(-0.164307, -0.973934, 0.156382, 0.062728, 0.147899, 0.987011, -0.984413, 0.171983, 0.036792, 0.055, 0.162619, -0.032)
@@ -33,3 +37,10 @@ shape = SubResource("BoxShape3D_6lh4x")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hitbox" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.499583, 0)
 shape = SubResource("CylinderShape3D_3aran")
+
+[node name="BlockArea" type="Area3D" parent="." index="10"]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461305, 0.254226, 0)
+shape = SubResource("BoxShape3D_3aran")

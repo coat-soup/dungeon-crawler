@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxk8ybyliq0yq"]
+[gd_scene load_steps=6 format=3 uid="uid://cxk8ybyliq0yq"]
 
 [ext_resource type="PackedScene" uid="uid://b56o06u83al10" path="res://weapons/models/mace.glb" id="1_8qj4r"]
 [ext_resource type="Script" uid="uid://cgleucta3iiqc" path="res://weapons/scripts/weapon.gd" id="2_mvefq"]
@@ -10,12 +10,17 @@ radius = 0.213671
 height = 0.441986
 radius = 0.0488281
 
-[node name="mace" node_paths=PackedStringArray("hand_positions", "hitbox") instance=ExtResource("1_8qj4r")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_flkb3"]
+height = 0.837524
+radius = 0.199219
+
+[node name="mace" node_paths=PackedStringArray("hand_positions", "hitbox", "block_area") instance=ExtResource("1_8qj4r")]
 script = ExtResource("2_mvefq")
 hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
 speed_multiplier = 1.5
 damage = 20
 hitbox = NodePath("Hitbox")
+block_area = NodePath("BlockArea")
 
 [node name="Marker3D" type="Marker3D" parent="." index="10"]
 transform = Transform3D(-0.212946, -0.926488, 0.31028, -0.0152441, 0.320676, 0.947066, -0.976945, 0.196944, -0.0824101, 0.0558604, 0.0267626, -0.0244543)
@@ -33,3 +38,10 @@ shape = SubResource("SphereShape3D_mvefq")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hitbox" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.318375, 0)
 shape = SubResource("CylinderShape3D_mvefq")
+
+[node name="BlockArea" type="Area3D" parent="." index="13"]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461305, 0.46368, 0)
+shape = SubResource("CylinderShape3D_flkb3")

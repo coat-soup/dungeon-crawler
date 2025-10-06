@@ -4,8 +4,10 @@ class_name WeaponManager
 signal started_attack
 signal block_state_changed(bool)
 signal weapon_bounced
+signal weapon_hit_blocker
 signal blocked_damage
 signal did_damage
+signal started_kick
 
 @export var weapon : Weapon
 var attack_input_buffer_time : float = 0.3
@@ -14,7 +16,7 @@ var attack_input_buffer : AttackState = -1
 
 @export var character_model: CharacterSkeletonController
 
-enum AttackState {IDLE, SWING, ALTSWING, LUNGE, OVERHEAD}
+enum AttackState {IDLE, SWING, ALTSWING, LUNGE, OVERHEAD, KICK}
 
 var attack_state : AttackState
 
@@ -33,9 +35,11 @@ var damaged_objects : Array[Health]
 
 func _ready() -> void:
 	weapon = character_model.weapon
+	weapon.manager = self
 	character_model.damage_window_toggled.connect(toggle_damage_window)
 	character_model.block_window_toggled.connect(toggle_block_window)
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
+	weapon.hitbox.area_entered.connect(on_weapon_entered_area)
 	
 	await get_tree().process_frame
 	equip_weapon.rpc(starting_weapon_path)
@@ -116,14 +120,38 @@ func on_anim_finished(anim_name : String):
 func on_weapon_hit(body : Node3D):
 	if not can_damage or body == character: return
 	var health : Health = body.get_node_or_null("Health") as Health
+	
 	if health:
 		if health in damaged_objects: return
 		damaged_objects.append(health)
 		#AudioManager.spawn_sound_at_point(preload("res://sfx/sword_slice.wav"), body.global_position)
 		if is_multiplayer_authority():
 			health.try_take_blockable_damage.rpc(weapon.damage, int(character.name))
+			print("weapon doing damage")
 	elif is_multiplayer_authority():
 		handle_bonk.rpc()
+
+
+func on_weapon_entered_area(area : Area3D):
+	return
+	if not is_multiplayer_authority(): return
+	var other_weapon : Weapon = area.get_parent() as Weapon
+	if can_damage and other_weapon and other_weapon.manager.blocking and area == other_weapon.block_area:
+		handle_block_bounce.rpc()
+		print("weapon blocked by weapon")
+
+
+@rpc("any_peer", "call_local")
+func handle_block_bounce():
+	toggle_damage_window(false)
+	
+	weapon_hit_blocker.emit()
+	
+	weapon_bouncing = true
+	await get_tree().create_timer(0.5).timeout
+	weapon_bouncing = false
+	 
+	attack_state = AttackState.IDLE
 
 
 @rpc("any_peer", "call_local")
@@ -141,8 +169,35 @@ func handle_bonk():
 
 @rpc("any_peer", "call_local")
 func did_block_damage(amount : int):
-	character.stamina.drain_stamina(amount * weapon.block_stamina_drain)
+	character.stamina.drain_stamina(amount * weapon.block_stamina_drain_damage_mul)
 	blocked_damage.emit()
+
+
+@rpc("any_peer", "call_local")
+func kick():
+	if attack_state == AttackState.IDLE:
+		attack_state = AttackState.KICK
+		started_kick.emit()
+		
+		var cast = ShapeCast3D.new()
+		character.add_child(cast)
+		cast.target_position = Vector3(0,1,-1.5)
+		cast.shape = SphereShape3D.new()
+		cast.shape.radius = 0.5
+		cast.collision_mask = Util.layer_mask([2])
+		await get_tree().create_timer(0.3).timeout
+		
+		for i in cast.get_collision_count():
+			print("CAST HIT ", cast.get_collider(i))
+		
+		if cast.is_colliding():
+			print("KICK CAST COLLIDING")
+			var c = cast.get_collider(0) as Character
+			if c:
+				c.movement_manager.apply_impulse.rpc(-character.global_basis.z * 10, 0.2)
+				print("HIT CHARACTER!!!!!!!!!!!!!!")
+		else:
+			print("cast not colliding")
 
 
 @rpc("any_peer", "call_local")
@@ -159,7 +214,10 @@ func buffer_attack(attack_type : AttackState):
 func equip_weapon(weapon_path : String):
 	weapon.queue_free()
 	weapon = load(weapon_path).instantiate()
+	weapon.manager = self
 	character_model.weapon_holder.add_child(weapon)
 	character_model.handle_weapon_equip(weapon)
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
+	weapon.hitbox.area_entered.connect(on_weapon_entered_area)
 	character.action_manager.get_action_by_name("attack").stamina_cost = weapon.swing_stamina_drain
+	character.action_manager.get_action_by_name("block").sustained_stamina_cost = weapon.block_sustain_stamina_drain

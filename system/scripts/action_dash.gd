@@ -14,6 +14,6 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 func get_ai_action_weight(ai : AIActionController) -> float:
 	if ai.character.stamina.cur_stamina <= 0: return 0
 	for t in ai.targets:
-		if t.global_position.distance_to(ai.global_position) <= 4.0 and t.weapon_manager.attack_state != 0: return 1 - ai.character.stamina.get_ratio()
+		if t.global_position.distance_to(ai.global_position) <= 2.0 and t.weapon_manager.attack_state != 0: return 1 - ai.character.stamina.get_ratio()
 	
 	return 0.0

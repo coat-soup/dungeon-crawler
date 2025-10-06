@@ -1,318 +1,110 @@
-[gd_scene load_steps=54 format=3 uid="uid://om525hroc3mr"]
+[gd_scene load_steps=5 format=3 uid="uid://om525hroc3mr"]
 
 [ext_resource type="PackedScene" uid="uid://byoolwbycr4tk" path="res://player/models/player_model.glb" id="1_xdlwj"]
 [ext_resource type="Script" uid="uid://b7g0hemb3mmh5" path="res://player/scripts/player_skeleton_controller.gd" id="2_r0a5i"]
 [ext_resource type="PackedScene" uid="uid://cj7p8kb5is0qr" path="res://weapons/models/longsword_model.tscn" id="3_1buoc"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rod26"]
-animation = &"LungeSword"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_va6rn"]
-animation = &"OverheadSword"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qrrq2"]
-animation = &"SwingSwordAlt"
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_3wonp"]
-fadein_time = 0.3
-fadeout_time = 0.3
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_afu65"]
-fadein_time = 0.3
-fadeout_time = 0.3
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_lc625"]
-fadein_time = 0.1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3wonp"]
-animation = &"ArmsIdle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2pwlm"]
-animation = &"BlockSword"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8gm5m"]
-
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_1buoc"]
-xfade_time = 0.1
-input_0/name = "state_idle"
-input_0/auto_advance = false
-input_0/break_loop_at_end = false
-input_0/reset = true
-input_1/name = "state_blocking"
-input_1/auto_advance = false
-input_1/break_loop_at_end = false
-input_1/reset = true
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cjpug"]
-animation = &"IdleSword"
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_1buoc"]
-filter_enabled = true
-filters = ["Armature_001/Skeleton3D:ArmLower.L", "Armature_001/Skeleton3D:ArmUpper.L", "Armature_001/Skeleton3D:FingerIndexEnd.L", "Armature_001/Skeleton3D:FingerIndexMiddle.L", "Armature_001/Skeleton3D:FingerIndexStart.L", "Armature_001/Skeleton3D:FingerMiddleEnd.L", "Armature_001/Skeleton3D:FingerMiddleMiddle.L", "Armature_001/Skeleton3D:FingerMiddleStart.L", "Armature_001/Skeleton3D:FingerPinkyEnd.L", "Armature_001/Skeleton3D:FingerPinkyMiddle.L", "Armature_001/Skeleton3D:FingerPinkyStart.L", "Armature_001/Skeleton3D:FingerRingEnd.L", "Armature_001/Skeleton3D:FingerRingMiddle.L", "Armature_001/Skeleton3D:FingerRingStart.L", "Armature_001/Skeleton3D:Hand.L", "Armature_001/Skeleton3D:Shoulder.L", "Armature_001/Skeleton3D:Thumb.L", "Armature_001/Skeleton3D:ThumbEnd.L"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xm6ps"]
-animation = &"SwingSword"
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_2pwlm"]
-fadein_time = 0.1
-fadeout_time = 0.2
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_r0a5i"]
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_xm6ps"]
-filter_enabled = true
-filters = ["", "AnimationTree", "Armature_001", "Armature_001/Skeleton3D/TorsoIK", "Armature_001/Skeleton3D/WeaponAttach/WeaponRT/WeaponHolder/longsword", "Armature_001/Skeleton3D:ArmLower.L.001", "Armature_001/Skeleton3D:ArmLower.R.001", "Armature_001/Skeleton3D:Foot.L", "Armature_001/Skeleton3D:Foot.R", "Armature_001/Skeleton3D:FootIK.L", "Armature_001/Skeleton3D:FootIK.R", "Armature_001/Skeleton3D:Hip", "Armature_001/Skeleton3D:LegIKPole.L", "Armature_001/Skeleton3D:LegLower.L", "Armature_001/Skeleton3D:LegLower.R", "Armature_001/Skeleton3D:LegUpper.L", "Armature_001/Skeleton3D:LegUpper.R", "Armature_001/Skeleton3D:Toes.L", "Armature_001/Skeleton3D:Toes.R"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qsg40"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m8ild"]
-animation = &"Walk"
-use_custom_timeline = true
-timeline_length = 0.45
-stretch_time_scale = true
-start_offset = 0.0
-loop_mode = 1
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_iqfnt"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_qsg40")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_m8ild")
-blend_point_1/pos = 1.0
-min_space = 0.0
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_con8a"]
-animation = &"BlockSword"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6nhyr"]
-animation = &"IdleSword"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_66ws1"]
-animation = &"LungeSword"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7eich"]
-animation = &"OverheadSword"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wrf5w"]
-animation = &"SwingSword"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1svr2"]
-animation = &"SwingSwordAlt"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_con8a"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8gm5m"]
-advance_mode = 2
-advance_expression = "attack_state == AttackState.LUNGE"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rod26"]
-advance_mode = 2
-advance_expression = "attack_state == AttackState.SWING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_va6rn"]
-advance_mode = 2
-advance_expression = "attack_state == AttackState.ALTSWING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qrrq2"]
-advance_mode = 2
-advance_expression = "attack_state == AttackState.OVERHEAD"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w1kgk"]
-xfade_time = 0.3
-advance_mode = 2
-advance_expression = "attack_state == AttackState.IDLE"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8xo8o"]
-xfade_time = 0.3
-advance_mode = 2
-advance_expression = "attack_state == AttackState.IDLE"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wvgrf"]
-xfade_time = 0.3
-advance_mode = 2
-advance_expression = "attack_state == AttackState.IDLE"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tx5dt"]
-xfade_time = 0.3
-advance_mode = 2
-advance_expression = "attack_state == AttackState.IDLE"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3wonp"]
-xfade_time = 0.2
-advance_mode = 2
-advance_expression = "blocking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_afu65"]
-xfade_time = 0.3
-advance_mode = 2
-advance_expression = "!blocking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1buoc"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.LUNGE"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cjpug"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.OVERHEAD"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xm6ps"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.ALTSWING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2pwlm"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.OVERHEAD"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6nhyr"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.LUNGE"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_66ws1"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.SWING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7eich"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.ALTSWING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wrf5w"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.SWING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1svr2"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.OVERHEAD"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lc625"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.SWING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_orouq"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.ALTSWING"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_46meh"]
-xfade_time = 0.3
-switch_mode = 2
-advance_mode = 2
-advance_expression = "attack_state == AttackState.LUNGE"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wd76y"]
-states/BlockSword/node = SubResource("AnimationNodeAnimation_con8a")
-states/BlockSword/position = Vector2(362, -95)
-states/End/position = Vector2(1216, 67)
-states/IdleSword/node = SubResource("AnimationNodeAnimation_6nhyr")
-states/IdleSword/position = Vector2(372, 74)
-states/LungeSword/node = SubResource("AnimationNodeAnimation_66ws1")
-states/LungeSword/position = Vector2(870, -53)
-states/OverheadSword/node = SubResource("AnimationNodeAnimation_7eich")
-states/OverheadSword/position = Vector2(878, 140)
-states/Start/position = Vector2(111, 86)
-states/SwingSword/node = SubResource("AnimationNodeAnimation_wrf5w")
-states/SwingSword/position = Vector2(646, -129)
-states/SwingSwordAlt/node = SubResource("AnimationNodeAnimation_1svr2")
-states/SwingSwordAlt/position = Vector2(646, 238)
-transitions = ["Start", "IdleSword", SubResource("AnimationNodeStateMachineTransition_con8a"), "IdleSword", "LungeSword", SubResource("AnimationNodeStateMachineTransition_8gm5m"), "IdleSword", "SwingSword", SubResource("AnimationNodeStateMachineTransition_rod26"), "IdleSword", "SwingSwordAlt", SubResource("AnimationNodeStateMachineTransition_va6rn"), "IdleSword", "OverheadSword", SubResource("AnimationNodeStateMachineTransition_qrrq2"), "OverheadSword", "IdleSword", SubResource("AnimationNodeStateMachineTransition_w1kgk"), "LungeSword", "IdleSword", SubResource("AnimationNodeStateMachineTransition_8xo8o"), "SwingSword", "IdleSword", SubResource("AnimationNodeStateMachineTransition_wvgrf"), "SwingSwordAlt", "IdleSword", SubResource("AnimationNodeStateMachineTransition_tx5dt"), "IdleSword", "BlockSword", SubResource("AnimationNodeStateMachineTransition_3wonp"), "BlockSword", "IdleSword", SubResource("AnimationNodeStateMachineTransition_afu65"), "SwingSword", "LungeSword", SubResource("AnimationNodeStateMachineTransition_1buoc"), "LungeSword", "OverheadSword", SubResource("AnimationNodeStateMachineTransition_cjpug"), "OverheadSword", "SwingSwordAlt", SubResource("AnimationNodeStateMachineTransition_xm6ps"), "SwingSwordAlt", "OverheadSword", SubResource("AnimationNodeStateMachineTransition_2pwlm"), "OverheadSword", "LungeSword", SubResource("AnimationNodeStateMachineTransition_6nhyr"), "LungeSword", "SwingSword", SubResource("AnimationNodeStateMachineTransition_66ws1"), "SwingSword", "SwingSwordAlt", SubResource("AnimationNodeStateMachineTransition_7eich"), "SwingSwordAlt", "SwingSword", SubResource("AnimationNodeStateMachineTransition_wrf5w"), "SwingSword", "OverheadSword", SubResource("AnimationNodeStateMachineTransition_1svr2"), "OverheadSword", "SwingSword", SubResource("AnimationNodeStateMachineTransition_lc625"), "LungeSword", "SwingSwordAlt", SubResource("AnimationNodeStateMachineTransition_orouq"), "SwingSwordAlt", "LungeSword", SubResource("AnimationNodeStateMachineTransition_46meh")]
-graph_offset = Vector2(-122, -188)
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xm6ps"]
-graph_offset = Vector2(-1301.66, -160.752)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_qrrq2")
-nodes/Animation/position = Vector2(-2100, 300)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_rod26")
-"nodes/Animation 2/position" = Vector2(-1720, 300)
-"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_va6rn")
-"nodes/Animation 3/position" = Vector2(-1536.23, 506.835)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_lc625")
-nodes/OneShot/position = Vector2(-1520, 0)
-"nodes/OneShot 2/node" = SubResource("AnimationNodeOneShot_3wonp")
-"nodes/OneShot 2/position" = Vector2(-1280, 120)
-"nodes/OneShot 3/node" = SubResource("AnimationNodeOneShot_afu65")
-"nodes/OneShot 3/position" = Vector2(-1080, 320)
-nodes/arms_idle/node = SubResource("AnimationNodeAnimation_3wonp")
-nodes/arms_idle/position = Vector2(-320, 100)
-nodes/block_sword/node = SubResource("AnimationNodeAnimation_2pwlm")
-nodes/block_sword/position = Vector2(-2360, -80)
-"nodes/filter must be ENABLED to edit track, but DISABLED to actually trigger the function/node" = SubResource("AnimationNodeAnimation_8gm5m")
-"nodes/filter must be ENABLED to edit track, but DISABLED to actually trigger the function/position" = Vector2(240, 360)
-nodes/idle_blocking_transition/node = SubResource("AnimationNodeTransition_1buoc")
-nodes/idle_blocking_transition/position = Vector2(-2100, -260)
-nodes/idle_sword/node = SubResource("AnimationNodeAnimation_cjpug")
-nodes/idle_sword/position = Vector2(-2360, -260)
-nodes/left_arm_item_blend/node = SubResource("AnimationNodeBlend2_1buoc")
-nodes/left_arm_item_blend/position = Vector2(-40, -80)
-nodes/output/position = Vector2(580, 220)
-nodes/swing_sword/node = SubResource("AnimationNodeAnimation_xm6ps")
-nodes/swing_sword/position = Vector2(-2080, 40)
-nodes/swing_sword_oneshot/node = SubResource("AnimationNodeOneShot_2pwlm")
-nodes/swing_sword_oneshot/position = Vector2(-1820, -100)
-nodes/swing_sword_timescale/node = SubResource("AnimationNodeTimeScale_r0a5i")
-nodes/swing_sword_timescale/position = Vector2(-300, -120)
-nodes/torso_legs_blend/node = SubResource("AnimationNodeBlend2_xm6ps")
-nodes/torso_legs_blend/position = Vector2(300, 180)
-nodes/walk_velocity/node = SubResource("AnimationNodeBlendSpace1D_iqfnt")
-nodes/walk_velocity/position = Vector2(-220, 380)
-nodes/weapon_attacks_state_machine/node = SubResource("AnimationNodeStateMachine_wd76y")
-nodes/weapon_attacks_state_machine/position = Vector2(-780, -220)
-node_connections = [&"OneShot", 0, &"swing_sword_oneshot", &"OneShot", 1, &"Animation", &"OneShot 2", 0, &"OneShot", &"OneShot 2", 1, &"Animation 2", &"OneShot 3", 0, &"OneShot 2", &"OneShot 3", 1, &"Animation 3", &"idle_blocking_transition", 0, &"idle_sword", &"idle_blocking_transition", 1, &"block_sword", &"left_arm_item_blend", 0, &"swing_sword_timescale", &"left_arm_item_blend", 1, &"arms_idle", &"output", 0, &"torso_legs_blend", &"swing_sword_oneshot", 0, &"idle_blocking_transition", &"swing_sword_oneshot", 1, &"swing_sword", &"swing_sword_timescale", 0, &"weapon_attacks_state_machine", &"torso_legs_blend", 0, &"left_arm_item_blend", &"torso_legs_blend", 1, &"walk_velocity"]
+[ext_resource type="PackedScene" uid="uid://411nf870j1o3" path="res://player/animations/humanoid_animation_tree.tscn" id="3_cjpug"]
 
 [node name="player_model" node_paths=PackedStringArray("weapon") instance=ExtResource("1_xdlwj")]
 script = ExtResource("2_r0a5i")
 weapon = NodePath("Armature_001/Skeleton3D/WeaponAttach/WeaponRT/WeaponHolder/longsword")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="0"]
-tree_root = SubResource("AnimationNodeBlendTree_xm6ps")
+[node name="AnimationTree" parent="." index="0" instance=ExtResource("3_cjpug")]
+root_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/OneShot/active = false
-parameters/OneShot/internal_active = false
-parameters/OneShot/request = 0
-"parameters/OneShot 2/active" = false
-"parameters/OneShot 2/internal_active" = false
-"parameters/OneShot 2/request" = 0
-"parameters/OneShot 3/active" = false
-"parameters/OneShot 3/internal_active" = false
-"parameters/OneShot 3/request" = 0
-parameters/idle_blocking_transition/current_state = "state_idle"
-parameters/idle_blocking_transition/transition_request = ""
-parameters/idle_blocking_transition/current_index = 0.0
-parameters/left_arm_item_blend/blend_amount = 0.0
-parameters/swing_sword_oneshot/active = false
-parameters/swing_sword_oneshot/internal_active = false
-parameters/swing_sword_oneshot/request = 0
-parameters/swing_sword_timescale/scale = 1.0
-parameters/torso_legs_blend/blend_amount = true
-parameters/walk_velocity/blend_position = -0.0358577
+
+[node name="player_model" parent="AnimationTree" index="0"]
+visible = false
+
+[node name="Skeleton3D" parent="AnimationTree/player_model/Armature_001" index="0"]
+bones/0/position = Vector3(1.75165e-33, 0.884602, -0.0355277)
+bones/0/rotation = Quaternion(-2.98023e-08, 1.19209e-07, -2.11758e-22, 1)
+bones/1/rotation = Quaternion(-0.000652307, 0.0250204, 0.999527, -0.0178762)
+bones/2/rotation = Quaternion(-0.114058, 0.00051451, -0.0111282, 0.993412)
+bones/3/rotation = Quaternion(0.764245, -0.0520815, 0.052855, 0.640643)
+bones/4/rotation = Quaternion(-0.000562797, 0.00332753, 0.0180392, 0.999832)
+bones/5/rotation = Quaternion(0.00646964, 0.0249159, 0.999506, 0.0180216)
+bones/6/rotation = Quaternion(-0.113988, 0.00497039, 0.0118259, 0.993399)
+bones/7/rotation = Quaternion(0.76499, 0.0626625, -0.0406744, 0.639695)
+bones/8/rotation = Quaternion(-4.24416e-05, -0.00694903, -0.018048, 0.999813)
+bones/11/rotation = Quaternion(0.00288137, 3.55284e-15, 6.86971e-10, 0.999996)
+bones/12/rotation = Quaternion(-0.00288137, -1.77227e-14, -6.86971e-10, 0.999996)
+bones/13/rotation = Quaternion(-2.32831e-10, -7.10543e-15, -5.55111e-17, 1)
+bones/14/rotation = Quaternion(-0.00310769, -0.000596304, -0.831314, 0.555794)
+bones/15/rotation = Quaternion(-0.0300401, 0.016698, -0.451363, 0.891678)
+bones/16/rotation = Quaternion(0.127498, -0.00477604, -0.0973345, 0.98704)
+bones/17/rotation = Quaternion(0.0108857, -0.00764785, 0.00995328, 0.999862)
+bones/18/rotation = Quaternion(0.274689, -0.0582695, -0.0446485, 0.958727)
+bones/19/rotation = Quaternion(0.150751, -0.0154209, -0.0206551, 0.988236)
+bones/20/position = Vector3(-0.0088766, 0.0918684, 0.0339776)
+bones/20/rotation = Quaternion(0.113348, -0.00559918, -0.0332006, 0.992985)
+bones/21/rotation = Quaternion(-0.0207487, -0.000104923, -0.00488569, 0.999773)
+bones/22/rotation = Quaternion(0.0281996, 0.00103071, -0.0263201, 0.999255)
+bones/23/position = Vector3(-0.002193, 0.105307, 0.00673659)
+bones/23/rotation = Quaternion(0.0620364, -0.00319114, -0.0495921, 0.996836)
+bones/24/rotation = Quaternion(-0.0218102, -7.20509e-05, 0.0168426, 0.99962)
+bones/25/rotation = Quaternion(-0.00175643, 1.38243e-09, 1.6013e-05, 0.999998)
+bones/26/position = Vector3(-0.00252012, 0.10214, -0.0159719)
+bones/26/rotation = Quaternion(-0.0405691, -0.00250089, -0.100844, 0.994072)
+bones/27/rotation = Quaternion(0.00906772, 0.000367856, 0.00395707, 0.999951)
+bones/28/rotation = Quaternion(0.0490286, 0.00313955, 0.0641567, 0.99673)
+bones/29/position = Vector3(0.00777636, 0.0870187, -0.0417323)
+bones/29/rotation = Quaternion(-0.115329, -0.0117, -0.148594, 0.982081)
+bones/30/rotation = Quaternion(-0.00432747, -0.0010991, -0.0238907, 0.999705)
+bones/31/rotation = Quaternion(0.0112048, 0.00249416, 0.0493994, 0.998713)
+bones/32/rotation = Quaternion(0.00669007, -0.00595437, 0.831293, 0.555762)
+bones/33/rotation = Quaternion(-0.0161909, -0.0230145, 0.452072, 0.891538)
+bones/34/rotation = Quaternion(0.128302, 0.0338169, 0.0962714, 0.986472)
+bones/35/rotation = Quaternion(0.0109109, -0.0109312, -0.00992566, 0.999831)
+bones/36/rotation = Quaternion(0.278198, -0.106012, -0.00729456, 0.954628)
+bones/37/rotation = Quaternion(0.148409, 0.015421, -0.0335742, 0.988236)
+bones/38/rotation = Quaternion(0.1139, 0.00451414, 0.0312531, 0.99299)
+bones/39/rotation = Quaternion(-0.0206562, 0.000105157, 0.00526314, 0.999773)
+bones/40/rotation = Quaternion(0.0286748, -0.00103071, 0.0258016, 0.999255)
+bones/41/rotation = Quaternion(0.0629057, 0.00151652, 0.0484846, 0.99684)
+bones/42/rotation = Quaternion(-0.0221233, 0.000659055, -0.0164292, 0.99962)
+bones/43/rotation = Quaternion(-0.00175641, 8.58564e-10, 1.6011e-05, 0.999998)
+bones/44/rotation = Quaternion(-0.0390064, 0.0030955, 0.101459, 0.99407)
+bones/45/rotation = Quaternion(0.00900102, -0.0020584, -0.00410651, 0.999949)
+bones/46/rotation = Quaternion(0.0478508, -0.00313978, -0.0650399, 0.99673)
+bones/47/rotation = Quaternion(-0.112765, 0.0106269, 0.150549, 0.982093)
+bones/48/rotation = Quaternion(-0.00389108, 0.0010936, 0.0239656, 0.999705)
+bones/49/rotation = Quaternion(0.0102937, -0.00265605, -0.0495972, 0.998713)
+bones/51/position = Vector3(-0.337047, 0.0423437, 0.7505)
+bones/51/rotation = Quaternion(5.35518e-17, 0.999908, 1.89875e-15, 0.0135807)
+bones/51/scale = Vector3(1, 1, 1)
+bones/58/position = Vector3(0.153415, 0.0372633, -0.103784)
+bones/58/rotation = Quaternion(0.00479742, -0.70709, 0.707091, -0.00479742)
+bones/59/position = Vector3(-0.153415, 0.0372633, -0.103784)
+bones/59/rotation = Quaternion(0.00458585, 0.707092, -0.707092, -0.00458585)
+bones/60/rotation = Quaternion(-0.0126777, 0.706993, 0.706993, -0.0126777)
+bones/61/position = Vector3(-0.146956, 0.512624, 0.774651)
+bones/62/position = Vector3(0.337047, 0.934358, 0.00843076)
+bones/62/rotation = Quaternion(-0.0170672, 0.706901, 0.706901, -0.0170672)
+bones/62/scale = Vector3(1, 1, 1)
+bones/64/position = Vector3(-0.320898, 1.28422, -0.446731)
+
+[node name="Longsword" parent="AnimationTree/player_model/Armature_001/Skeleton3D" index="0"]
+transform = Transform3D(0.0334443, 7.67209e-08, -0.999441, 1.71255e-08, -1, -8.17819e-08, -0.999441, -5.58528e-09, -0.0334443, -0.312905, 0.90942, 0.0734488)
+
+[node name="Cube" parent="AnimationTree/player_model/Armature_001/Skeleton3D" index="1"]
+transform = Transform3D(0.0334443, 7.67209e-08, -0.999441, 1.71255e-08, -1, -8.17819e-08, -0.999441, -5.58528e-09, -0.0334443, -0.312905, 1.2994, 0.0734488)
+
+[node name="Cube_001" parent="AnimationTree/player_model/Armature_001/Skeleton3D" index="2"]
+transform = Transform3D(0.0334443, 7.67209e-08, -0.999441, 1.71255e-08, -1, -8.17819e-08, -0.999441, -5.58528e-09, -0.0334443, -0.312905, 0.999202, 0.0734488)
+
+[node name="Cylinder_001" parent="AnimationTree/player_model/Armature_001/Skeleton3D" index="3"]
+transform = Transform3D(0.0334443, 7.67209e-08, -0.999441, 1.71255e-08, -1, -8.17819e-08, -0.999441, -5.58528e-09, -0.0334443, -0.312905, 0.788595, 0.0734488)
 
 [node name="Skeleton3D" parent="Armature_001" index="0"]
 modifier_callback_mode_process = 0
 bones/0/position = Vector3(2.64698e-22, 0.884602, -0.0355277)
+bones/0/rotation = Quaternion(-2.98023e-08, 1.19209e-07, -2.52435e-29, 1)
 bones/1/rotation = Quaternion(0.00255316, 0.025039, 0.999517, -0.0182175)
 bones/2/rotation = Quaternion(-0.114061, 0.000514509, -0.0111285, 0.993411)
 bones/3/rotation = Quaternion(0.764245, -0.0520815, 0.052855, 0.640643)
 bones/4/rotation = Quaternion(-0.000562796, 0.00332753, 0.0180392, 0.999832)
+bones/5/position = Vector3(-0.134036, -0.00773418, -6.68618e-08)
 bones/5/rotation = Quaternion(-0.00257312, 0.0249567, 0.999505, 0.018984)
 bones/6/rotation = Quaternion(-0.113989, 0.00497039, 0.011826, 0.993399)
 bones/7/rotation = Quaternion(0.76499, 0.0626625, -0.0406744, 0.639695)
@@ -321,9 +113,9 @@ bones/11/rotation = Quaternion(0.00288137, 3.59366e-15, 6.86971e-10, 0.999996)
 bones/12/rotation = Quaternion(-0.00288137, -1.77226e-14, -6.86971e-10, 0.999996)
 bones/13/rotation = Quaternion(0.0066188, -1.19207e-07, 7.89012e-10, 0.999978)
 bones/14/rotation = Quaternion(-0.00310769, -0.000596304, -0.831314, 0.555794)
-bones/15/rotation = Quaternion(0.231634, -0.0420676, -0.619826, 0.748593)
-bones/16/rotation = Quaternion(0.520492, -0.00365692, -0.397355, 0.755767)
-bones/17/rotation = Quaternion(0.122118, 0.419534, 0.518301, 0.735148)
+bones/15/rotation = Quaternion(0.230861, -0.0425264, -0.619712, 0.7489)
+bones/16/rotation = Quaternion(0.523785, -0.00363949, -0.399869, 0.752158)
+bones/17/rotation = Quaternion(0.11791, 0.421336, 0.51825, 0.73484)
 bones/18/rotation = Quaternion(0.401598, -0.0210936, -0.288497, 0.868933)
 bones/19/rotation = Quaternion(-0.15803, -0.0083817, -0.024376, 0.987098)
 bones/20/position = Vector3(0.00269278, 0.0976004, 0.0355213)
@@ -343,9 +135,9 @@ bones/29/rotation = Quaternion(-0.00465023, -0.0762163, -0.325104, 0.942591)
 bones/30/rotation = Quaternion(-0.00208329, -0.00394899, -0.758146, 0.652069)
 bones/31/rotation = Quaternion(0.00568066, 0.009975, -0.706536, 0.707584)
 bones/32/rotation = Quaternion(0.00669007, -0.00595437, 0.831293, 0.555762)
-bones/33/rotation = Quaternion(0.165121, 0.185436, 0.419908, 0.872941)
-bones/34/rotation = Quaternion(0.658376, 0.0194561, 0.494012, 0.567551)
-bones/35/rotation = Quaternion(-0.0738022, -0.102995, -0.292639, 0.947791)
+bones/33/rotation = Quaternion(0.166722, 0.186672, 0.422642, 0.871052)
+bones/34/rotation = Quaternion(0.659292, 0.0193991, 0.494699, 0.565889)
+bones/35/rotation = Quaternion(-0.0791767, -0.106201, -0.294109, 0.946548)
 bones/36/rotation = Quaternion(0.547824, -0.459674, 0.185082, 0.674042)
 bones/37/rotation = Quaternion(-0.0513861, 0.0217989, -0.0298301, 0.997995)
 bones/38/rotation = Quaternion(0.0945015, -0.0637419, 0.612635, 0.782103)
@@ -360,18 +152,19 @@ bones/46/rotation = Quaternion(0.0394447, -0.0272703, 0.456117, 0.888627)
 bones/47/rotation = Quaternion(-0.0820463, 0.0780851, 0.725637, 0.678692)
 bones/48/rotation = Quaternion(-0.0026592, 0.00304384, 0.566881, 0.82379)
 bones/49/rotation = Quaternion(0.00746816, -0.00756586, 0.470386, 0.882397)
-bones/51/position = Vector3(-0.131945, 0.356676, 0.176681)
-bones/51/rotation = Quaternion(0.06975, 0.982542, -0.152844, -0.0799027)
+bones/51/position = Vector3(-0.130653, 0.355824, 0.173334)
+bones/51/rotation = Quaternion(0.0695844, 0.982653, -0.152619, -0.0791062)
 bones/58/position = Vector3(0.153415, 0.0372633, -0.103784)
 bones/58/rotation = Quaternion(0.00479742, -0.707091, 0.707091, -0.00479742)
 bones/59/position = Vector3(-0.153415, 0.0372633, -0.103784)
 bones/59/rotation = Quaternion(0.00458585, 0.707092, -0.707092, -0.00458585)
 bones/60/rotation = Quaternion(-0.0126777, 0.706993, 0.706993, -0.0126777)
-bones/62/position = Vector3(-0.0829067, 1.41963, 0.316202)
+bones/61/position = Vector3(-0.146956, 0.512624, 0.774651)
+bones/62/position = Vector3(-0.0817517, 1.4229, 0.315342)
 bones/64/position = Vector3(-0.320898, 1.28422, -0.446731)
 
 [node name="Longsword" parent="Armature_001/Skeleton3D" index="0"]
-transform = Transform3D(-0.12572, 0.4092, -0.903742, -0.5979, -0.758189, -0.260122, -0.79165, 0.507645, 0.33998, 0.0331548, 2.22584, 0.459198)
+transform = Transform3D(-0.0816633, 0.198139, -0.976766, -0.312571, -0.935687, -0.163674, -0.946378, 0.291943, 0.138344, -0.0957125, 1.51611, 0.387653)
 visible = false
 
 [node name="TorsoIK" type="LookAtModifier3D" parent="Armature_001/Skeleton3D" index="1"]
@@ -437,12 +230,12 @@ bone = 13
 primary_rotation_axis = 0
 
 [node name="CameraAttach" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="5"]
-transform = Transform3D(1, -5.29139e-09, 2.38359e-07, -2.37441e-13, 0.999753, 0.0221949, -2.38417e-07, -0.0221949, 0.999753, -8.46005e-11, 1.79311, -0.0342684)
+transform = Transform3D(1, -5.29139e-09, 2.38359e-07, -2.37224e-13, 0.999753, 0.0221949, -2.38417e-07, -0.0221949, 0.999753, -8.46005e-11, 1.79311, -0.0342684)
 bone_name = "Head"
 bone_idx = 13
 
 [node name="WeaponAttach" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="6"]
-transform = Transform3D(-0.978219, 0.114319, -0.173259, -0.129122, 0.318412, 0.939117, 0.162527, 0.941034, -0.296716, -0.132896, 1.51175, 0.324156)
+transform = Transform3D(-0.97851, 0.114285, -0.171627, -0.12766, 0.31787, 0.939501, 0.161926, 0.941221, -0.29645, -0.131587, 1.51508, 0.323278)
 bone_name = "HandIK.R"
 bone_idx = 51
 
@@ -464,23 +257,23 @@ transform = Transform3D(-0.212946, -0.92649, 0.31028, -0.0152441, 0.320676, 0.94
 [node name="longsword" parent="Armature_001/Skeleton3D/WeaponAttach/WeaponRT/WeaponHolder" index="2" instance=ExtResource("3_1buoc")]
 
 [node name="FPHeadOverride" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="7"]
-transform = Transform3D(1, -7.81321e-10, 2.38416e-07, -2.39234e-13, 0.999994, 0.00327817, -2.38418e-07, -0.00327817, 0.999994, -2.14741e-14, 1.68486, -0.0339135)
+transform = Transform3D(1, -7.81321e-10, 2.38416e-07, -2.39017e-13, 0.999994, 0.00327817, -2.38418e-07, -0.00327817, 0.999994, -2.14429e-14, 1.68486, -0.0339135)
 bone_name = "Neck"
 bone_idx = 12
 
 [node name="Cube" parent="Armature_001/Skeleton3D" index="8"]
-transform = Transform3D(-0.12572, 0.4092, -0.903742, -0.5979, -0.758189, -0.260122, -0.79165, 0.507645, 0.33998, -0.126427, 2.52152, 0.261224)
+transform = Transform3D(-0.0816633, 0.198139, -0.976766, -0.312571, -0.935687, -0.163674, -0.946378, 0.291943, 0.138344, -0.172984, 1.88101, 0.2738)
 visible = false
 
 [node name="Cube" parent="Armature_001/Skeleton3D/Cube" index="0"]
 visible = false
 
 [node name="Cube_001" parent="Armature_001/Skeleton3D" index="9"]
-transform = Transform3D(-0.12572, 0.4092, -0.903742, -0.5979, -0.758189, -0.260122, -0.79165, 0.507645, 0.33998, -0.00358394, 2.29391, 0.413621)
+transform = Transform3D(-0.0816633, 0.198139, -0.976766, -0.312571, -0.935687, -0.163674, -0.946378, 0.291943, 0.138344, -0.113502, 1.60012, 0.361442)
 visible = false
 
 [node name="Cylinder_001" parent="Armature_001/Skeleton3D" index="10"]
-transform = Transform3D(-0.12572, 0.4092, -0.903742, -0.5979, -0.758189, -0.260122, -0.79165, 0.507645, 0.33998, 0.0825964, 2.13423, 0.520534)
+transform = Transform3D(-0.0816633, 0.198139, -0.976766, -0.312571, -0.935687, -0.163674, -0.946378, 0.291943, 0.138344, -0.0717723, 1.40305, 0.422927)
 visible = false
 
 [node name="Cylinder_001" parent="Armature_001/Skeleton3D/Cylinder_001" index="0"]
@@ -504,3 +297,6 @@ tip_bone = &"Hand.L"
 target_node = NodePath("../WeaponAttach/WeaponRT/WeaponHolder/HandIKTarget_L")
 min_distance = 0.001
 max_iterations = 20
+
+[editable path="AnimationTree"]
+[editable path="AnimationTree/player_model"]

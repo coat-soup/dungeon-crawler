@@ -6,11 +6,11 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 	super.perform_action(_character, args)
 	character.weapon_manager.start_attack(args[0])
 	character.weapon_manager.weapon_bounced.connect(on_weapon_bounced)
+	character.weapon_manager.weapon_hit_blocker.connect(on_weapon_bounced)
 	character.health.took_damage.connect(on_took_damage)
-	character.weapon_manager.blocked_damage.connect(on_took_damage)
 	
 	var ai = character.get_node_or_null("AIActionController") as AIActionController
-	if ai:
+	if ai and ai.is_multiplayer_authority():
 		character.movement_manager.set_nav_destination(ai.targets[0].global_position + (character.global_position - ai.targets[0].global_position).normalized() * 1.5)
 		character.movement_manager.body.global_rotation.y = -(character.global_position - ai.targets[0].global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
 	
@@ -32,7 +32,7 @@ func end_action():
 	super.end_action()
 	var did_chain := false
 	
-	if character.weapon_manager.is_multiplayer_authority():
+	if character.weapon_manager.is_multiplayer_authority() and character.stamina.cur_stamina > 0:
 		if character.weapon_manager.attack_input_buffer != -1 and character.weapon_manager.attack_input_buffer != character.weapon_manager.attack_state:
 			character.action_manager.try_perform_action_by_name("attack", [character.weapon_manager.attack_input_buffer])
 			did_chain = true

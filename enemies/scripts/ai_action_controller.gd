@@ -24,7 +24,6 @@ func _ready() -> void:
 
 
 func process_tick():
-	Global.ui.display_chat_message("Desire to attack: " + str(desire_to_attack))
 	desire_to_attack = min(1, desire_to_attack + (0.1 * agression_level) / tick_speed)
 	
 	check_action_weights()
@@ -68,4 +67,4 @@ func on_body_exited(body : Node3D):
 
 func on_action_performed(action : Action):
 	if action.action_name == "attack":
-		desire_to_attack -= 0.2 * agression_level
+		desire_to_attack -= 0.3 * agression_level

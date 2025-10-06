@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://xh7j8iie55hm"]
+[gd_scene load_steps=38 format=3 uid="uid://xh7j8iie55hm"]
 
 [ext_resource type="Script" uid="uid://c4sskw3sldb6b" path="res://enemies/scenes/enemy_character.gd" id="1_kuufe"]
 [ext_resource type="Script" uid="uid://fuogjxe1gr3j" path="res://enemies/scripts/ai_movement_manager.gd" id="2_bmetn"]
@@ -9,12 +9,15 @@
 [ext_resource type="Script" uid="uid://b2ibvmfs8hbrl" path="res://system/scripts/action.gd" id="8_cxwg0"]
 [ext_resource type="Script" uid="uid://ctjalyaequqcp" path="res://system/scripts/action_attack.gd" id="9_jnmqq"]
 [ext_resource type="Script" uid="uid://x3x62q3np3qf" path="res://system/scripts/action_keep_distance.gd" id="10_kuufe"]
+[ext_resource type="Script" uid="uid://c3j4mokeedbn2" path="res://system/scripts/action_engage.gd" id="10_n0bl4"]
 [ext_resource type="Script" uid="uid://blrk4vd3srjdi" path="res://system/scripts/action_block.gd" id="10_oumu2"]
 [ext_resource type="Script" uid="uid://bjtmtlxcwwpmd" path="res://system/scripts/action_dash.gd" id="11_6x60x"]
 [ext_resource type="Script" uid="uid://bagpr4ssytwj0" path="res://enemies/scripts/ai_action_controller.gd" id="12_6x60x"]
+[ext_resource type="Script" uid="uid://b6sa48cxaul1x" path="res://system/scripts/action_sprint.gd" id="12_ly86r"]
 [ext_resource type="Script" uid="uid://btk656i61o72l" path="res://system/scripts/character_sound_manager.gd" id="12_st66r"]
 [ext_resource type="Script" uid="uid://bcnftja1gi4hk" path="res://vfx/scripts/splatter_on_hit.gd" id="12_yceny"]
 [ext_resource type="Texture2D" uid="uid://b0viems8r1p13" path="res://vfx/textures/smoke_medium.png" id="13_8oecf"]
+[ext_resource type="Script" uid="uid://b57gmoj05g64n" path="res://system/scripts/action_kick.gd" id="14_3agdk"]
 [ext_resource type="AudioStream" uid="uid://cpbl0hysjsp1t" path="res://sfx/footsteps/footsteps-001.wav" id="15_d4mjl"]
 [ext_resource type="AudioStream" uid="uid://i2v43f48ivts" path="res://sfx/footsteps/footsteps-002.wav" id="16_5hqum"]
 [ext_resource type="AudioStream" uid="uid://dxtrxm7rb6wi1" path="res://sfx/footsteps/footsteps-003.wav" id="17_6a7ov"]
@@ -26,7 +29,7 @@
 [sub_resource type="Resource" id="Resource_bjvpn"]
 script = ExtResource("9_jnmqq")
 action_name = "attack"
-action_type = 0
+action_type = 1
 cancellable = false
 stamina_cost = 10
 sustained_stamina_cost = 0
@@ -35,18 +38,29 @@ metadata/_custom_type_script = "uid://ctjalyaequqcp"
 [sub_resource type="Resource" id="Resource_s7qer"]
 script = ExtResource("10_oumu2")
 action_name = "block"
-action_type = 0
+action_type = 1
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 8
 metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 
+[sub_resource type="Resource" id="Resource_3agdk"]
+script = ExtResource("10_n0bl4")
+distance = 2.0
+move_speed = 2.0
+action_name = ""
+action_type = 0
+cancellable = true
+stamina_cost = 0
+sustained_stamina_cost = 0
+metadata/_custom_type_script = "uid://c3j4mokeedbn2"
+
 [sub_resource type="Resource" id="Resource_6x60x"]
 script = ExtResource("10_kuufe")
-distance = 3.0
+distance = 4.0
 move_speed = 3.0
 action_name = "keep_distance"
-action_type = 1
+action_type = 0
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 0
@@ -60,6 +74,24 @@ cancellable = true
 stamina_cost = 20
 sustained_stamina_cost = 0
 metadata/_custom_type_script = "uid://bjtmtlxcwwpmd"
+
+[sub_resource type="Resource" id="Resource_n0bl4"]
+script = ExtResource("12_ly86r")
+action_name = "sprint"
+action_type = 0
+cancellable = true
+stamina_cost = 0
+sustained_stamina_cost = 0
+metadata/_custom_type_script = "uid://b6sa48cxaul1x"
+
+[sub_resource type="Resource" id="Resource_st5e0"]
+script = ExtResource("14_3agdk")
+action_name = "kick"
+action_type = 1
+cancellable = false
+stamina_cost = 10
+sustained_stamina_cost = 0
+metadata/_custom_type_script = "uid://b57gmoj05g64n"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_st66r"]
 radius = 8.0
@@ -118,7 +150,7 @@ metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]
 script = ExtResource("7_tbaex")
-action_set = Array[ExtResource("8_cxwg0")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_6x60x"), SubResource("Resource_ly86r")])
+action_set = Array[ExtResource("8_cxwg0")]([SubResource("Resource_bjvpn"), SubResource("Resource_s7qer"), SubResource("Resource_3agdk"), SubResource("Resource_6x60x"), SubResource("Resource_ly86r"), SubResource("Resource_n0bl4"), SubResource("Resource_st5e0")])
 
 [node name="ReactionManager" type="Area3D" parent="."]
 collision_layer = 0

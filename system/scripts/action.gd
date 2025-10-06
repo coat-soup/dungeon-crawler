@@ -7,7 +7,7 @@ signal triggered_end_action
 
 var character : Character
 
-enum ActionType {BLOCKING, NONBLOCKING} # blocking actions cant be performed if there is already a blocking action being performed
+enum ActionType {NONBLOCKING, BLOCKING} # blocking actions cant be performed if there is already a blocking action being performed
 										# nonblocking actions can be performed whenever (even multiple at a time)
 										# eg. blocking: swing_sword, block_with_shield, kick
 										# eg. nonblocking: crouch, dash, move

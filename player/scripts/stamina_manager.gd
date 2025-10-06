@@ -15,7 +15,7 @@ var cur_stamina : float
 @export var dash_stamina : float = 25
 @export var jump_stamina : float = 15
 
-@export var recharge_delay : float = 1
+@export var recharge_delay : float = 0.75
 @export var depleted_recharge_delay: float = 3
 var recharge_delay_timer : float = 0
 
