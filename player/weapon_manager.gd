@@ -179,6 +179,8 @@ func kick():
 		attack_state = AttackState.KICK
 		started_kick.emit()
 		
+		AudioManager.spawn_sound_at_point(preload("res://sfx/kick.wav"), weapon.global_position, character, 0.05)
+		
 		var cast = ShapeCast3D.new()
 		character.add_child(cast)
 		cast.target_position = Vector3(0,1,-1.5)

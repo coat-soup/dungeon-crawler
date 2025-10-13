@@ -16,6 +16,7 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 
 
 func tick():
+	if len(ai_action_controller.targets) <= 0: return
 	var dist := character.global_position - ai_action_controller.targets[0].global_position
 	if len(ai_action_controller.targets) > 0 and character.weapon_manager.attack_state == 0 and dist.length() < distance:
 		var low_stam_dist_mul = 1.0 if character.stamina.get_ratio() > 0.2 else 1.0

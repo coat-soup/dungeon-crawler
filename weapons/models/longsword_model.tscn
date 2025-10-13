@@ -1,7 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://cj7p8kb5is0qr"]
+[gd_scene load_steps=9 format=3 uid="uid://cj7p8kb5is0qr"]
 
 [ext_resource type="PackedScene" uid="uid://c831ald68nroa" path="res://weapons/models/longsword.glb" id="1_ocjsi"]
 [ext_resource type="Script" uid="uid://cgleucta3iiqc" path="res://weapons/scripts/weapon.gd" id="2_rbr83"]
+[ext_resource type="Texture2D" uid="uid://dp4oxnh5kb1nw" path="res://weapons/textures/longsword.png" id="3_xrshg"]
+[ext_resource type="Texture2D" uid="uid://cddo6jaslarts" path="res://weapons/textures/longsword_m.png" id="4_86ggp"]
+[ext_resource type="Texture2D" uid="uid://dmlqi1g2ucow1" path="res://weapons/textures/longsword_n.png" id="5_03msu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eina3"]
+albedo_texture = ExtResource("3_xrshg")
+metallic = 1.0
+metallic_texture = ExtResource("4_86ggp")
+roughness_texture = ExtResource("4_86ggp")
+roughness_texture_channel = 2
+normal_enabled = true
+normal_texture = ExtResource("5_03msu")
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rbr83"]
 size = Vector3(0.11, 1.046, 0.04)
@@ -14,6 +27,18 @@ script = ExtResource("2_rbr83")
 hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
 hitbox = NodePath("Hitbox")
 block_area = NodePath("BlockArea")
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_eina3")
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_eina3")
+
+[node name="Cylinder" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_eina3")
+
+[node name="Cylinder_001" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_eina3")
 
 [node name="Marker3D" type="Marker3D" parent="." index="4"]
 transform = Transform3D(-0.179606, -0.973934, 0.138542, -0.039734, 0.1479, 0.988204, -0.982936, 0.171982, -0.065262, 0.0660651, -0.0685303, -0.0210091)

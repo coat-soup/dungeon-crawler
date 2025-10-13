@@ -8,6 +8,7 @@ func _ready() -> void:
 	movement.bob_bottom.connect(_on_player_bob_bottom)
 	movement.bob_top.connect(_on_player_bob_top)
 	movement.jump_land.connect(_on_player_jump_land)
+	
 
 
 func _on_player_bob_bottom() -> void:

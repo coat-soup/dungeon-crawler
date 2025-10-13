@@ -83,7 +83,7 @@ func jump_input():
 
 func dash_input():
 	if body.is_on_floor():
-		dash.emit()
+		signal_dash.rpc()
 		dash_dir = input_direction
 		dash_timer = dash_length
 
@@ -99,3 +99,9 @@ func apply_impulse(impulse : Vector3, duration : float):
 	if not is_multiplayer_authority(): return
 	applied_impulse = impulse
 	impulse_timer = duration
+
+
+@rpc("any_peer", "call_local")
+func signal_dash():
+	dash.emit()
+	AudioManager.spawn_sound_at_point(preload("res://sfx/dash.wav"), body.global_position)

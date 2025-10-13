@@ -16,7 +16,8 @@ func on_took_damage(source : int, amount : int):
 
 
 func on_died():
-	pass
+	if is_multiplayer_authority():
+		queue_free()
 
 
 func on_stamina_changed():
