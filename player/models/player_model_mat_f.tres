@@ -3,5 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://v6sx4umultws" path="res://player/textures/player_f.png" id="1_biyr5"]
 
 [resource]
+diffuse_mode = 3
 albedo_texture = ExtResource("1_biyr5")
+metallic_specular = 0.0
+roughness = 0.0
 texture_filter = 0

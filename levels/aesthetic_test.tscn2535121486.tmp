@@ -1,0 +1,243 @@
+[gd_scene load_steps=16 format=3 uid="uid://djtth4fko4q6a"]
+
+[ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/scripts/network_manager.gd" id="1_6mrcl"]
+[ext_resource type="Texture2D" uid="uid://268khqah7fpl" path="res://world/props/textures/brick_wall.png" id="1_g7tah"]
+[ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/scripts/game_manager.gd" id="1_h2qx6"]
+[ext_resource type="Texture2D" uid="uid://bd4iveb1ysfxy" path="res://world/props/textures/brick_wall_n.png" id="2_8g0ls"]
+[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/scenes/ui.tscn" id="2_h2qx6"]
+[ext_resource type="Script" uid="uid://uojf0yryynw8" path="res://vfx/scripts/compositor_effect_basic.gd" id="4_e5exh"]
+[ext_resource type="PackedScene" uid="uid://byoolwbycr4tk" path="res://player/models/player_model.glb" id="6_37i5v"]
+[ext_resource type="PackedScene" uid="uid://bdst4tv46kcy2" path="res://world/props/scenes/brazier.tscn" id="7_o0j8l"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o0j8l"]
+sky_top_color = Color(0.129648, 0.157866, 0.246466, 1)
+sky_horizon_color = Color(0.19345, 0.198293, 0.218369, 1)
+ground_bottom_color = Color(0.0327391, 0.0238974, 0.0155985, 1)
+ground_horizon_color = Color(0.19345, 0.198293, 0.218369, 1)
+energy_multiplier = 0.2
+
+[sub_resource type="Sky" id="Sky_e5exh"]
+sky_material = SubResource("ProceduralSkyMaterial_o0j8l")
+
+[sub_resource type="Environment" id="Environment_pxkha"]
+background_mode = 2
+sky = SubResource("Sky_e5exh")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_pxkha"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("4_e5exh")
+saturation = 0.79
+shader_file_path = "res://vfx/shaders/desaturate.glsl"
+metadata/_custom_type_script = "uid://uojf0yryynw8"
+
+[sub_resource type="Compositor" id="Compositor_o0j8l"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_pxkha")])
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mrcl"]
+albedo_texture = ExtResource("1_g7tah")
+normal_enabled = true
+normal_texture = ExtResource("2_8g0ls")
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_37i5v"]
+top_radius = 0.0
+bottom_radius = 1.5
+
+[node name="AestheticTest" type="Node3D"]
+script = ExtResource("1_h2qx6")
+
+[node name="NetworkManager" type="Node" parent="."]
+script = ExtResource("1_6mrcl")
+spawn_position = Vector3(0, 2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="NetworkManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.42227, 5.61139)
+
+[node name="UI" parent="." node_paths=PackedStringArray("network_manager") instance=ExtResource("2_h2qx6")]
+network_manager = NodePath("../NetworkManager")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_pxkha")
+compositor = SubResource("Compositor_o0j8l")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4512, -6.76465, -10.63)
+use_collision = true
+size = Vector3(44.057, 14.5293, 25.5425)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9461, 1.0472, -8.83549)
+use_collision = true
+size = Vector3(12.5989, 6.20166, 7.33105)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22414, 4.49727, -8.83549)
+use_collision = true
+size = Vector3(12.5989, 13.1018, 7.33105)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5613, 4.49727, -17.459)
+use_collision = true
+size = Vector3(20.3845, 13.1018, 10.028)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55546, 4.49727, -22.6666)
+use_collision = true
+size = Vector3(20.3845, 13.1018, 10.028)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.0272, 1.0472, -10.806)
+use_collision = true
+size = Vector3(3.26801, 6.20166, 3.39014)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.550408, 0.834896, 0, -0.834896, 0.550408, -9.0272, 0.723146, -6.93872)
+use_collision = true
+size = Vector3(3.26801, 7.37915, 3.39014)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.581, 3.65431, -2.93797)
+use_collision = true
+size = Vector3(2.37016, 0.987427, 4.74786)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, -3.45158, 1.02692, 1.76668)
+use_collision = true
+size = Vector3(24.4988, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, 2.17302, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, 4.27056, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, 6.09995, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, 8.02168, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, 0.291248, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, -1.70875, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, -3.46687, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, -5.28192, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, -7.21542, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, -9.16328, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, -11.0382, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="World"]
+transform = Transform3D(0.991594, 0, 0, 0, 1, 0, 0, 0, 0.37349, -13.2975, 2.0246, 1.76668)
+use_collision = true
+size = Vector3(1.02252, 1.03149, 1.93085)
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="player_model" parent="World" instance=ExtResource("6_37i5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95868, 0.490097, 1.15551)
+
+[node name="Cone" type="MeshInstance3D" parent="World"]
+transform = Transform3D(3.50899, 0, 0, 0, 4.99157, 0, 0, 0, 3.50899, -17.4841, 17.518, 1.69043)
+mesh = SubResource("CylinderMesh_37i5v")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="Cone2" type="MeshInstance3D" parent="World"]
+transform = Transform3D(3.50899, 0, 0, 0, 4.99157, 0, 0, 0, 3.50899, 9.15018, 23.9954, -9.00189)
+mesh = SubResource("CylinderMesh_37i5v")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.29352, 6.24845, -9.00531)
+use_collision = true
+radius = 4.46631
+height = 26.4174
+sides = 12
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4841, 1.90445, 1.69043)
+use_collision = true
+radius = 4.46631
+height = 21.832
+sides = 12
+material = SubResource("StandardMaterial3D_6mrcl")
+
+[node name="brazier" parent="World" instance=ExtResource("7_o0j8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88547, 0.495782, -4.09754)
+
+[node name="brazier2" parent="World" instance=ExtResource("7_o0j8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.344, 4.14153, -5.87045)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://in53wmskn8o")
+spawn_path = NodePath("../NetworkManager")
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://xh7j8iie55hm")
+spawn_path = NodePath("../NetworkManager")

@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://cbrhpp0jjkxn2"
+path="res://.godot/imported/posterise.glsl-8deed74f1654bbc8d2921f86627681e5.res"
+
+[deps]
+
+source_file="res://vfx/shaders/posterise.glsl"
+dest_files=["res://.godot/imported/posterise.glsl-8deed74f1654bbc8d2921f86627681e5.res"]
+
+[params]
+
