@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bfr4c3qbn6vji"]
+
+[ext_resource type="Texture2D" uid="uid://dub0qdr2ia4jv" path="res://world/props/textures/stone_wall.png" id="1_t8r31"]
+[ext_resource type="Texture2D" uid="uid://bd4iveb1ysfxy" path="res://world/props/textures/brick_wall_n.png" id="2_itow1"]
+
+[resource]
+resource_local_to_scene = true
+diffuse_mode = 3
+albedo_texture = ExtResource("1_t8r31")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_scale = 0.0
+normal_texture = ExtResource("2_itow1")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0w5qw5qkydcx"]
+
+[ext_resource type="PackedScene" uid="uid://cgqh7y417pne1" path="res://world/props/models/rocks.glb" id="1_hvmfk"]
+[ext_resource type="Material" uid="uid://bfr4c3qbn6vji" path="res://world/materials/level_element_master_mat.tres" id="2_nj0sg"]
+[ext_resource type="Material" uid="uid://beii8641e0o8o" path="res://world/materials/rock_mat.tres" id="3_nj0sg"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8f6h6"]
+points = PackedVector3Array(-0.00308704, 15.7694, 15.7713, 12.5139, 15.9623, 3.47417, -14.3757, 15.9347, -11.56, -15.7713, 15.7694, -0.00126457, -11.8779, 10.542, 13.6484, -12.7177, 2.28426, 15.608, -0.00308704, -0.00229645, 15.7713, 7.50897, -23.9629, 9.23579, 15.7713, 15.7694, -0.00126457, -1.48203, 15.7488, -14.9289, -1.04669, -1.46927, -20.4953, -15.7713, -0.00229645, -15.7738, -15.7713, -0.00229645, -0.00126457, -3.44264, -50.5614, -2.28035, 0.64839, -47.5517, 4.88351, 1.57775, -24.4519, 11.3374, 5.81698, -47.2418, 5.58996, 15.7713, -0.00229645, -0.00126457, 9.60234, 13.6, -16.0472, 15.7713, -0.00229645, -15.7738, 9.37078, -30.1752, -15.7738, 2.87761, -35.2924, -15.7738, -4.8938, -29.211, -15.7738, -3.44264, -50.5614, -12.2452, 1.46968, -54.3976, -2.28035, 5.57306, -51.1675, -2.28035, 5.57306, -51.1675, -12.2452, 1.46968, -54.3976, -12.2452)
+
+[node name="rock_01" instance=ExtResource("1_hvmfk")]
+
+[node name="Rock01" parent="." index="0"]
+visible = false
+material_override = ExtResource("2_nj0sg")
+
+[node name="Rock02" parent="." index="1"]
+material_override = ExtResource("3_nj0sg")
+surface_material_override/0 = ExtResource("2_nj0sg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Rock02" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock02/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_8f6h6")
+
+[node name="Rock03" parent="." index="2"]
+visible = false
+surface_material_override/0 = ExtResource("2_nj0sg")

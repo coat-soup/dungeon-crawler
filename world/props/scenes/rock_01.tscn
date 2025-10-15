@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvj58tbs4ucoh"]
+
+[ext_resource type="PackedScene" uid="uid://cgqh7y417pne1" path="res://world/props/models/rocks.glb" id="1_c5ekp"]
+[ext_resource type="Material" uid="uid://bfr4c3qbn6vji" path="res://world/materials/level_element_master_mat.tres" id="2_8f6h6"]
+[ext_resource type="Material" uid="uid://beii8641e0o8o" path="res://world/materials/rock_mat.tres" id="2_pdtnw"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c5ekp"]
+points = PackedVector3Array(0.413053, 8.40239, 20.6626, 0.413053, 3.76397, 20.6626, 11.9624, -16.5714, 15.1117, 13.932, 3.10783, 14.0626, 14.192, 11.8951, 9.93416, -1.41246, 16.0691, 18.4219, -2.29131, 15.5594, 19.2333, -7.84698, 10.9765, 16.3033, -11.1363, -1.58611, 13.7876, -8.37825, -15.3247, 14.3002, -4.88829, -28.9169, 12.4397, 10.6399, -33.2626, 11.2005, 11.2672, -25.7119, 12.5925, 14.8476, 7.77653, 0.23442, 14.2344, 11.8446, 9.92737, 14.0196, -0.00127029, 8.71533, 14.1722, -5.02328, -0.0847178, 10.5071, 13.9745, 4.23043, 0.251977, 16.3215, 12.6061, -11.3935, 14.02, -2.63103, -10.7661, 14.02, -0.00323582, -8.44889, 11.2743, 14.7076, -12.5577, 6.09075, 7.00421, -14.0215, -0.00127029, -0.00323582, -12.2271, -16.5966, 0.879485, -6.73076, -31.0418, 5.31685, 1.56036, -33.9541, 10.2805, 1.74969, -35.2411, 2.7332, 10.8094, -33.2576, 8.84434, 11.5498, -30.2242, 2.64493, 12.9769, -18.9335, -2.05047, 11.7815, -1.37917, -10.1274, 14.842, 7.77148, 0.217444, 7.37601, 13.4597, -7.11253, 7.39014, 13.4749, -7.02765, 3.73911, 13.7424, -10.4838, -0.00235176, 14.02, -9.45514, -10.6418, 12.1878, -9.37705, -12.7018, 12.6925, -5.66962, -14.0215, 6.56519, -0.00323582, -13.9085, -11.7109, -11.6619, -0.00235176, -14.0225, -14.0215, 9.46716, -33.5503, 3.43598, 8.30855, -15.9506, -6.90543, -0.00235176, 9.81562, -14.0215, 3.76171, 13.7323, -10.4974, -5.13414, 9.69953, -13.1524, -11.9728, 11.9556, -8.79649, -13.9085, 2.31036, -11.6619)
+
+[node name="rock_01" instance=ExtResource("1_c5ekp")]
+
+[node name="Rock01" parent="." index="0"]
+material_override = ExtResource("2_pdtnw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Rock01" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock01/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_c5ekp")
+
+[node name="Rock02" parent="." index="1"]
+visible = false
+surface_material_override/0 = ExtResource("2_8f6h6")
+
+[node name="Rock03" parent="." index="2"]
+visible = false
+surface_material_override/0 = ExtResource("2_8f6h6")

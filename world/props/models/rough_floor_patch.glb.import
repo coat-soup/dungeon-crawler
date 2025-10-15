@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://buqypdn20jtjb"
-path="res://.godot/imported/torch.glb-6985f62078212999d143aa179b9949d7.scn"
+uid="uid://ds4hi5ccwwskx"
+path="res://.godot/imported/rough_floor_patch.glb-00bcc3b1eeb7414ed7cd9c71620c4654.scn"
 
 [deps]
 
-source_file="res://world/props/models/torch.glb"
-dest_files=["res://.godot/imported/torch.glb-6985f62078212999d143aa179b9949d7.scn"]
+source_file="res://world/props/models/rough_floor_patch.glb"
+dest_files=["res://.godot/imported/rough_floor_patch.glb-00bcc3b1eeb7414ed7cd9c71620c4654.scn"]
 
 [params]
 

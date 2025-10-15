@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3 uid="uid://dc1qly2aqubar"]
+
+[ext_resource type="PackedScene" uid="uid://buqypdn20jtjb" path="res://world/props/models/hand_torch.glb" id="1_8d4wb"]
+[ext_resource type="Texture2D" uid="uid://cp4lwnh2jkhm5" path="res://world/props/textures/torch.png" id="2_rtwms"]
+[ext_resource type="Texture2D" uid="uid://bcbds0tv3to71" path="res://world/props/textures/torch_n.png" id="3_svevo"]
+[ext_resource type="AudioStream" uid="uid://ctihvcxl1nwl6" path="res://sfx/fire.wav" id="4_svevo"]
+[ext_resource type="Script" uid="uid://dvwskny5ynpdm" path="res://system/scripts/maintain_rotation.gd" id="5_nvlr2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxbkb"]
+albedo_texture = ExtResource("2_rtwms")
+normal_enabled = true
+normal_texture = ExtResource("3_svevo")
+texture_filter = 0
+
+[sub_resource type="Gradient" id="Gradient_nvlr2"]
+offsets = PackedFloat32Array(0, 0.666667)
+colors = PackedColorArray(0.824601, 0.690302, 7.70092e-07, 1, 0.989671, 0.111635, 3.85046e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_187lx"]
+gradient = SubResource("Gradient_nvlr2")
+
+[sub_resource type="Curve" id="Curve_k3xhr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.282609, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.120879), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_huwf1"]
+curve = SubResource("Curve_k3xhr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d8d5i"]
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 0.999998
+linear_accel_max = 0.999998
+scale_min = 0.1
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_huwf1")
+color_ramp = SubResource("GradientTexture1D_187lx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrytd"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_u4ro7"]
+material = SubResource("StandardMaterial3D_yrytd")
+
+[node name="torch" instance=ExtResource("1_8d4wb")]
+
+[node name="Cylinder" parent="." index="0"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_sxbkb")
+
+[node name="Cylinder_001" parent="." index="1"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_sxbkb")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.162172, 0)
+stream = ExtResource("4_svevo")
+autoplay = true
+max_distance = 5.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="3"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.162172, 0)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_d8d5i")
+draw_pass_1 = SubResource("QuadMesh_u4ro7")
+script = ExtResource("5_nvlr2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.233103, 0)
+light_color = Color(0.853129, 0.51791, 0.188832, 1)
+shadow_enabled = true
+omni_attenuation = 0.0

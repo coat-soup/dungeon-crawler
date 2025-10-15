@@ -1,0 +1,740 @@
+[gd_scene load_steps=25 format=4 uid="uid://cuhkwocop1mx7"]
+
+[ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/scripts/game_manager.gd" id="1_0nv80"]
+[ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/scripts/network_manager.gd" id="2_4p34j"]
+[ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/scenes/ui.tscn" id="3_1jqj6"]
+[ext_resource type="PackedScene" uid="uid://b0w5qw5qkydcx" path="res://world/props/scenes/rock_02.tscn" id="5_6wf1f"]
+[ext_resource type="Script" uid="uid://ttnv7co8ljcb" path="res://vfx/scripts/compositor_effect_downsample.gd" id="5_8s55e"]
+[ext_resource type="PackedScene" uid="uid://cvj58tbs4ucoh" path="res://world/props/scenes/rock_01.tscn" id="6_6wf1f"]
+[ext_resource type="PackedScene" uid="uid://2qkw2kjvnue" path="res://world/props/scenes/rock_03.tscn" id="6_ftq5n"]
+[ext_resource type="Material" uid="uid://khh6k54woa1a" path="res://world/materials/stone_wall_mat.tres" id="7_ftq5n"]
+[ext_resource type="PackedScene" uid="uid://ds4hi5ccwwskx" path="res://world/props/models/rough_floor_patch.glb" id="8_11ood"]
+[ext_resource type="Material" uid="uid://bn0fq2xxsmv4j" path="res://world/materials/dirt_mat.tres" id="9_q222i"]
+[ext_resource type="PackedScene" uid="uid://dkvlyhno4cx23" path="res://world/props/scenes/pillar_square.tscn" id="10_q222i"]
+[ext_resource type="PackedScene" uid="uid://brhb85u6e8n26" path="res://world/props/models/arch.glb" id="10_qlufj"]
+[ext_resource type="PackedScene" uid="uid://bdst4tv46kcy2" path="res://world/props/scenes/brazier.tscn" id="11_emmfv"]
+[ext_resource type="PackedScene" uid="uid://cabbkpdw7um5w" path="res://world/props/scenes/stairs.tscn" id="14_1jqj6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wf1f"]
+sky_top_color = Color(0.484482, 0.54318, 0.717929, 1)
+sky_horizon_color = Color(1.10793, 1.13196, 1.19073, 1)
+ground_bottom_color = Color(0.467048, 0.504443, 0.564778, 1)
+ground_horizon_color = Color(1.10793, 1.13196, 1.19073, 1)
+
+[sub_resource type="Sky" id="Sky_ftq5n"]
+sky_material = SubResource("ProceduralSkyMaterial_6wf1f")
+
+[sub_resource type="Environment" id="Environment_ip335"]
+background_mode = 2
+sky = SubResource("Sky_ftq5n")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_4p34j"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("5_8s55e")
+downsamples = 2.0
+metadata/_custom_type_script = "uid://ttnv7co8ljcb"
+
+[sub_resource type="Compositor" id="Compositor_1jqj6"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_4p34j")])
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_11ood"]
+size = Vector3(10, 0.504, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dm6yn"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cwh3w"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 7, 2),
+"format": 34896613377,
+"index_count": 132,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAwAAAAQABAAAAAIAAwAEAAUABAACAAYABQAEAAYAAwAFAAcAAwAHAAEABQAGAAcAAQAIAAIAAgAJAAYAAgAIAAkABgAKAAcABgAJAAoABwALAAEAAQALAAgABwAKAAsACAAMAAkACQANAAoACQAMAA0ACgAOAAsACgANAA4ACwAPAAgACAAPAAwACwAOAA8AEAANAAwAEQAOAA0AEQANABAAEgAPAA4AEgAOABEAEwAMAA8AEwAPABIAEAAMABMAEgAUABMAEAAVABEAEQAWABIAEgAWABQAEQAVABYAEwAUABcAEwAXABAAFwAUABYAEAAXABUAFwAWABUA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAJIkAAAAAAAAkiT//wAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAA//+SJP//AAD//5IkAAAAAJk1kiRlygAAZcqSJGXKAABlypIkmTUAAJk1kiSZNQAAZcps22XKAABlymzbmTUAAJk1bNuZNQAAmTVs22XKAAD//2zbAAAAAAAAbNsAAAAAAABs2///AAD//2zb//8AAP///////wAAAAD//wAAAAAAAP////8AAP////8AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_phd15"]
+resource_name = "pillar_square_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 7, 2),
+"attribute_data": PackedByteArray("grF7E/OTmE7zk3sTgrGYToKxmE7zk7aJ85OYToKxtomCsbaJ85PTxPOTtomCsdPEgrHTxPOT8f/zk9PEgrHx/w0AKzsrOw0AKzsrOw0ADQArO2R2yi6nRys7RzvKLgRqLM/TxJ6xtoksz7aJnrHTxEc7ZHYEagRqZHZkdqhHBGorO0c7bgyoRw0ARzvKLqhHDQBkdsouBGorO2R2bgwEamR2KztHOw0AZHYNAEc7Kzssz5hOnrF7EyzPexOesZhOLM/x/56x08Qsz9PEnrHx/yzPtomesZhOLM+YTp6xtonXk5TdDQA4u9eTOLsNAJTd15PcmA0AgHbXk4B2DQDcmNeT8f8NAJTd15OU3Q0A8f/Xkzi7DQDcmNeT3JgNADi7DQBHO24MBGoNAGR2bgyoR2R2RzuoR6dHRztHOwRqp0dHO0c7qEcEakc7ZHaoR6hHZHZkdgRqp0dkdkc7BGoEag=="),
+"format": 34896613399,
+"index_count": 132,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUASABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUABTAFEAVABVAFYAVABXAFUA"),
+"material": SubResource("StandardMaterial3D_dm6yn"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 88,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAJIkAABU1QAAkiT//1TVAAAAAAAAVNUAAAAAAAD/////kiQAAP//AACSJAAA/////wAAAAD/////AAAAAFTV//+SJP//VNX//5IkAABU1f//AAD//1TV//8AAP///78AAJIk////v///kiT///+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v///bNv//1TVmTVs22XKVNUAAGzb//9U1WXKbNtlylTV//9s2///VNX/////AABU1f//bNsAAFTV////////VNX//5Ik//9U1WXKkiSZNVTV//+SJAAAVNVlypIkZcpU1QAAbNv//1TVmTVs25k1VNUAAGzbAABU1Zk1bNtlylTV//9s2wAAVNVlymzbZcpU1f//bNv//1TVZcps25k1VNX/////AABU1QAA/////1TVAAD//wAAVNX///////9U1QAAbNsAAFTVAAD/////VNUAAGzb//9U1QAA//8AAFTVAABs2////7//////////v///bNv///+/AAD//////7///2zbAAD//wAA//8AAP//AABs2wAA////////AAD//2XKkiRlylTVZcps25k1VNVlypIkmTVU1WXKbNtlylTVmTWSJJk1VNWZNWzbZcpU1Zk1kiRlylTVmTVs25k1VNWZNZIkZcr/v2XKbNtlyv+/ZcqSJGXK/7+ZNWzbZcr/v2XKkiSZNf//mTVs25k1//+ZNZIkmTX//2XKbNuZNf//AABs2wAAVNVlymzbmTVU1f//bNsAAFTVmTVs25k1VNUAAJIkAABU1Zk1kiRlylTVAACSJP//VNWZNZIkmTVU1QAAkiT//1TVZcqSJGXKVNX//5Ik//9U1Zk1kiRlylTV//+SJAAAVNWZNZIkmTVU1QAAkiQAAFTVZcqSJJk1VNVUVaqqVFWqqlRVqqpUVaqq/z//v/8//7//P/+//z//v6qqVFWqqlRVqqpUVaqqVFX/f/9//3//f/9//3//f/9/AAD/fwAA/38AAP9/AAD/f6oqVNWqKlTVqipU1aoqVNWpqlRVqapUVamqVFWpqlRVVNWqKlTVqipU1aoqVNWqKqoqVNWqKlTVqipU1aoqVNWqKlTVqipU1aoqVNWqKlTVVNWqKlTVqipU1aoqVNWqKlRVqqpUVaqqVFWqqlRVqqr/f/9//3//f/9//3//f/9//z//v/8//7//P/+//z//v6mqVFWpqlRVqapUVamqVFVUVamqVFWqqlRVqapUVaqq/3//f/9//3//f/9//3//f/8//7//P/+//z//v/8//7+qKlTVqipU1aoqVNWqKlTVVNWqKlTVqipU1aoqVNWqKlTVqipU1aoqVNWqKlTVqipU1aoqVNWqKlTVqipU1aoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_cwh3w")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_65325"]
+data = PackedVector3Array(-1, 0, 1, -1, 1, -1, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, -1, -1, 0, -1, 1, 1, -1, -1, 1, -1, -1, 0, -1, 1, 0, -1, 1, 1, -1, 1, 0, -1, 1, 1, 1, 1, 1, -1, 1, 0, -1, 1, 0, 1, 1, 1, 1, 1, 0, 1, -1, 1, 1, 1, 1, 1, 1, 0, 1, -1, 0, 1, -1, 1, 1, -1, 0, -1, 1, 0, 1, 1, 0, -1, -1, 0, -1, -1, 0, 1, 1, 0, 1, 1, 5.9999, 1, -0.5813, 5.9999, 0.5812, -1, 5.9999, 1, 1, 5.9999, 1, 0.5812, 5.9999, 0.5812, -0.5813, 5.9999, 0.5812, 1, 5.9999, 1, 1, 7, -1, 1, 5.9999, -1, 1, 5.9999, 1, 1, 7, 1, 1, 7, -1, 1, 1, 1, 0.5812, 1, -0.5813, 1, 1, -1, 1, 1, 1, 0.5812, 1, 0.5812, 0.5812, 1, -0.5813, -1, 5.9999, 1, -0.5813, 5.9999, -0.5813, -1, 5.9999, -1, -1, 5.9999, 1, -0.5813, 5.9999, 0.5812, -0.5813, 5.9999, -0.5813, 1, 5.9999, -1, 0.5812, 5.9999, 0.5812, 1, 5.9999, 1, 1, 5.9999, -1, 0.5812, 5.9999, -0.5813, 0.5812, 5.9999, 0.5812, 1, 7, -1, -1, 7, 1, -1, 7, -1, 1, 7, -1, 1, 7, 1, -1, 7, 1, -1, 5.9999, -1, -1, 7, 1, -1, 5.9999, 1, -1, 5.9999, -1, -1, 7, -1, -1, 7, 1, -1, 5.9999, 1, 1, 7, 1, 1, 5.9999, 1, -1, 5.9999, 1, -1, 7, 1, 1, 7, 1, 1, 5.9999, -1, -1, 7, -1, -1, 5.9999, -1, 1, 5.9999, -1, 1, 7, -1, -1, 7, -1, 0.5812, 1, 0.5812, 0.5812, 5.9999, -0.5813, 0.5812, 1, -0.5813, 0.5812, 1, 0.5812, 0.5812, 5.9999, 0.5812, 0.5812, 5.9999, -0.5813, -0.5813, 1, -0.5813, -0.5813, 5.9999, 0.5812, -0.5813, 1, 0.5812, -0.5813, 1, -0.5813, -0.5813, 5.9999, -0.5813, -0.5813, 5.9999, 0.5812, -0.5813, 1, 0.5812, 0.5812, 5.9999, 0.5812, 0.5812, 1, 0.5812, -0.5813, 1, 0.5812, -0.5813, 5.9999, 0.5812, 0.5812, 5.9999, 0.5812, 0.5812, 1, -0.5813, -0.5813, 5.9999, -0.5813, -0.5813, 1, -0.5813, 0.5812, 1, -0.5813, 0.5812, 5.9999, -0.5813, -0.5813, 5.9999, -0.5813, -1, 5.9999, -1, 0.5812, 5.9999, -0.5813, 1, 5.9999, -1, -1, 5.9999, -1, -0.5813, 5.9999, -0.5813, 0.5812, 5.9999, -0.5813, -1, 1, -1, -0.5813, 1, 0.5812, -1, 1, 1, -1, 1, -1, -0.5813, 1, -0.5813, -0.5813, 1, 0.5812, -1, 1, 1, 0.5812, 1, 0.5812, 1, 1, 1, -1, 1, 1, -0.5813, 1, 0.5812, 0.5812, 1, 0.5812, 1, 1, -1, -0.5813, 1, -0.5813, -1, 1, -1, 1, 1, -1, 0.5812, 1, -0.5813, -0.5813, 1, -0.5813)
+
+[node name="AestheticTest" type="Node3D"]
+script = ExtResource("1_0nv80")
+
+[node name="NetworkManager" type="Node" parent="."]
+script = ExtResource("2_4p34j")
+spawn_position = Vector3(11.0702, -4.28044, -9.99249)
+
+[node name="Camera3D" type="Camera3D" parent="NetworkManager"]
+transform = Transform3D(0.513272, -0.118789, 0.849965, 0, 0.990375, 0.138412, -0.858226, -0.0710432, 0.508332, 55.1084, 21.1227, 43.968)
+
+[node name="Marker3D" type="Marker3D" parent="NetworkManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0702, -4.28044, -9.99249)
+
+[node name="UI" parent="." node_paths=PackedStringArray("network_manager") instance=ExtResource("3_1jqj6")]
+network_manager = NodePath("../NetworkManager")
+
+[node name="World" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -23.6734, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_ip335")
+compositor = SubResource("Compositor_1jqj6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="RockIsland" type="Node3D" parent="World"]
+
+[node name="rocks" parent="World/RockIsland" instance=ExtResource("6_6wf1f")]
+transform = Transform3D(-0.413313, 0.0890002, -0.906229, 0.124406, 0.991399, 0.0406256, 0.902051, -0.0959495, -0.42083, -9.41399, -0.826818, 25.5728)
+
+[node name="rocks2" parent="World/RockIsland" instance=ExtResource("6_6wf1f")]
+transform = Transform3D(-0.743652, 0.069296, -1.10995, 0.223838, 0.771909, 0.0497584, 1.62301, -0.0747068, -0.515434, -35.624, 6.16044, -31.0001)
+
+[node name="rocks3" parent="World/RockIsland" instance=ExtResource("6_6wf1f")]
+transform = Transform3D(-0.356902, -0.0359097, -0.538381, 0.0149713, 0.374766, -0.0664549, 0.795088, -0.023176, -0.240419, -49.0125, -54.5618, -14.1815)
+
+[node name="rock_01" parent="World/RockIsland" instance=ExtResource("5_6wf1f")]
+transform = Transform3D(1.54308, 0, 0, 0, 1.54308, 0, 0, 0, 1.54308, -4.92388, -8.00512, -0.971119)
+
+[node name="rock_03" parent="World/RockIsland" instance=ExtResource("5_6wf1f")]
+transform = Transform3D(-1.51884, 0, 0.272434, 0, 0.639694, 0, -0.272434, 0, -1.51884, -34.7024, 5.9213, 23.9964)
+
+[node name="rock_05" parent="World/RockIsland" instance=ExtResource("5_6wf1f")]
+transform = Transform3D(-1.51884, 0, 0.272434, 0, 0.639694, 0, -0.272434, 0, -1.51884, -5.00552, 5.53561, -39.3822)
+
+[node name="rock_06" parent="World/RockIsland" instance=ExtResource("5_6wf1f")]
+transform = Transform3D(0.337394, 0, 0.32151, 0, 0.346102, 0, -0.32151, 0, 0.337394, 21.4736, -22.7111, -51.337)
+
+[node name="rock_07" parent="World/RockIsland" instance=ExtResource("5_6wf1f")]
+transform = Transform3D(0.277852, 0, -0.374168, 0, 0.346102, 0, 0.374168, 0, 0.277852, -4.75815, -20.0118, 62.7466)
+
+[node name="rock_04" parent="World/RockIsland" instance=ExtResource("5_6wf1f")]
+transform = Transform3D(1.44042, 0, -0.553443, 0, 0.639694, 0, 0.553443, 0, 1.44042, 20.1344, 7.03835, 8.1939)
+
+[node name="rock_02" parent="World/RockIsland" instance=ExtResource("6_ftq5n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.7709, 3.2479, -0.839359)
+
+[node name="rock_08" parent="World/RockIsland" instance=ExtResource("6_ftq5n")]
+transform = Transform3D(-0.0782479, 0, 0.581255, 0, 0.269766, 0, -0.581255, 0, -0.0782479, -24.4476, 19.2171, -20.8548)
+
+[node name="rock_09" parent="World/RockIsland" instance=ExtResource("6_ftq5n")]
+transform = Transform3D(-0.0782479, 0, 0.581255, 0, 0.834813, 0, -0.581255, 0, -0.0782479, -38.5914, 20.7917, -11.6885)
+
+[node name="rock_10" parent="World/RockIsland" instance=ExtResource("6_ftq5n")]
+transform = Transform3D(-0.145897, 0, 1.08378, 0, 1.55655, 0, -1.08378, 0, -0.145897, -26.6246, 18.1155, 1.95536)
+
+[node name="Castle" type="Node3D" parent="World"]
+
+[node name="FightRing" type="Node3D" parent="World/Castle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.771, 15.6388, -8.77811)
+
+[node name="InnerRing" type="Node3D" parent="World/Castle/FightRing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494901, 2.89706, -0.404456)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(1.44845, 0, 0.5, 0, 1, 0, -0.836264, 0, 0.866025, -11.005, -0.0317764, 6.05561)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(1.44845, 0, -0.5, 0, 1, 0, 0.836264, 0, 0.866025, -10.5549, -0.0317764, -6.92001)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(1.67253, 0, 0, 0, 1, 0, 0, 0, 1, -11.9641, -0.0469742, -0.0670557)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-1.44845, 0, -0.5, 0, 1, 0, 0.836263, 0, -0.866025, 12.0154, -0.0317764, -7.78554)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 7.43896)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-1.44845, 0, 0.5, 0, 1, 0, -0.836264, 0, -0.866025, 11.9042, -0.0317764, 7.81379)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 7.07507)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 15.3958, 0.895355, -4.05391)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(4.39083, 4.47034, 3)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 23.1081, 1.8197, -4.05391)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(4.8647, 6.31903, 3)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 18.8013, -3.28032, -0.041378)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(6.28577, 4.04636, 8.00293)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 20.2439, 3.90013, -0.041378)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(6.28577, 2.57208, 5.11755)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 17.3882, 0.895355, 3.89579)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(6.77327, 4.47034, 1.10059)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(0.836263, 0, -0.866025, 0, 1, 0, 1.44845, 0, 0.5, -5.54077, -0.0317764, -12.1409)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-0.836264, 0, -0.866025, 0, 1, 0, 1.44845, 0, -0.5, 7.43485, -0.0317764, -11.6907)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 0.581897, -0.0469742, -13.0999)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(-0.836263, 0, 0.866025, 0, 1, 0, -1.44845, 0, -0.5, 7.19142, -0.0317764, 12.5199)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(0.836264, 0, 0.866025, 0, 1, 0, -1.44845, 0, 0.5, -5.7842, -0.0317764, 12.0697)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+transform = Transform3D(2.19325e-07, 0, 1, 0, 1, 0, -1.67253, 0, 1.31134e-07, 1.06875, -0.0469742, 13.4789)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="arch2" parent="World/Castle/FightRing/InnerRing" instance=ExtResource("10_qlufj")]
+transform = Transform3D(-5.96046e-08, 0, 2.72326, 0, 1, 0, -1, 0, -1.62319e-07, 14.465, 2.1159, 0.469988)
+
+[node name="Cube" parent="World/Castle/FightRing/InnerRing/arch2" index="0"]
+transform = Transform3D(1.00897, 0, 0, 0, 1, 0, 0, 0, 2.07012, 0, 0, 1.06865)
+material_override = ExtResource("7_ftq5n")
+
+[node name="UpperRing" type="Node3D" parent="World/Castle/FightRing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.480397, 14.2772, -0.438651)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(1.44845, 0, 0.5, 0, 1, 0, -0.836264, 0, 0.866025, -11.005, 14.0247, 6.05561)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(1.44845, 0, -0.5, 0, 1, 0, 0.836264, 0, 0.866025, -10.5549, 14.0247, -6.92001)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(1.67253, 0, 0, 0, 1, 0, 0, 0, 1, -11.9641, 14.0095, -0.0670557)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(-1.44845, 0, -0.5, 0, 1, 0, 0.836263, 0, -0.866025, 12.6557, 14.0247, -6.67658)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(-1.44845, 0, 0.5, 0, 1, 0, -0.836264, 0, -0.866025, 12.2055, 14.0247, 6.29904)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 13.6148, 14.0095, -0.553912)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(0.836263, 0, -0.866025, 0, 1, 0, 1.44845, 0, 0.5, -5.54077, 14.0247, -12.1409)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(-0.836264, 0, -0.866025, 0, 1, 0, 1.44845, 0, -0.5, 7.43485, 14.0247, -11.6907)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 0.581897, 14.0095, -13.0999)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(-0.836263, 0, 0.866025, 0, 1, 0, -1.44845, 0, -0.5, 7.19142, 14.0247, 12.5199)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(0.836264, 0, 0.866025, 0, 1, 0, -1.44845, 0, 0.5, -5.7842, 14.0247, 12.0697)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+transform = Transform3D(2.19325e-07, 0, 1, 0, 1, 0, -1.67253, 0, 1.31134e-07, 1.06875, 14.0095, 13.4789)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 35, 10)
+material = ExtResource("7_ftq5n")
+
+[node name="OuterRing" type="Node3D" parent="World/Castle/FightRing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494901, 2.89706, -0.404456)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(1.44845, 0, 0.5, 0, 2.60122, 0, -0.836264, 0, 0.866025, -13.945, -0.023665, 7.75301)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(1.44845, 0, -0.5, 0, 2.60122, 0, 0.836264, 0, 0.866025, -13.4949, -0.023665, -8.61741)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(1.67253, 0, 0, 0, 2.60122, 0, 0, 0, 1, -15.3589, -0.0631976, -0.0670557)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(-1.44845, 0, -0.5, 0, 2.60122, 0, 0.836263, 0, -0.866025, 14.5519, -0.023665, -10.1818)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 11)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(-1.44845, 0, 0.5, 0, 2.60122, 0, -0.836264, 0, -0.866025, 14.3003, -0.023665, 9.46042)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 11.7941)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 2.60122, 0, -1.46217e-07, 0, -1, 17.0096, 5.60097, -0.553912)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 2, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(0.836263, 0, -0.866025, 0, 2.60122, 0, 1.44845, 0, 0.5, -7.23817, -0.023665, -15.0808)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(-0.836264, 0, -0.866025, 0, 2.60122, 0, 1.44845, 0, -0.5, 9.13225, -0.023665, -14.6307)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(-7.31085e-08, 0, -1, 0, 2.60122, 0, 1.67253, 0, -4.37114e-08, 0.581897, -0.0631976, -16.4947)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(-0.836263, 0, 0.866025, 0, 2.60122, 0, -1.44845, 0, -0.5, 8.88882, -0.023665, 15.4599)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(0.836264, 0, 0.866025, 0, 2.60122, 0, -1.44845, 0, 0.5, -7.4816, -0.023665, 15.0097)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+transform = Transform3D(2.19325e-07, 0, 1, 0, 2.60122, 0, -1.67253, 0, 1.31134e-07, 1.06875, -0.0631976, 16.8737)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.261, 6.355, 15.175)
+material = ExtResource("7_ftq5n")
+
+[node name="Pillars" type="Node3D" parent="World/Castle/FightRing"]
+
+[node name="arch" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_qlufj")]
+transform = Transform3D(1.87766, 0, 1.70306, 0, 4.21416, 0, -1.87766, 0, 1.70306, 7.42855, 23.7295, 7.45796)
+
+[node name="Cube" parent="World/Castle/FightRing/Pillars/arch" index="0"]
+material_override = ExtResource("7_ftq5n")
+
+[node name="arch2" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_qlufj")]
+transform = Transform3D(1.87766, 0, -1.70306, 0, 4.21416, 0, 1.87766, 0, 1.70306, -5.97121, 23.7295, 7.45796)
+
+[node name="Cube" parent="World/Castle/FightRing/Pillars/arch2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("7_ftq5n")
+
+[node name="arch3" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_qlufj")]
+transform = Transform3D(-1.87766, 0, -1.70306, 0, 4.21416, 0, 1.87766, 0, -1.70306, -5.97121, 23.7295, -5.9418)
+
+[node name="Cube" parent="World/Castle/FightRing/Pillars/arch3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.42761, 5.96046e-08, 0, 0.813871)
+material_override = ExtResource("7_ftq5n")
+
+[node name="arch4" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_qlufj")]
+transform = Transform3D(-1.87766, 0, 1.70306, 0, 4.21416, 0, -1.87766, 0, -1.70306, 7.42855, 23.7295, -5.9418)
+
+[node name="Cube" parent="World/Castle/FightRing/Pillars/arch4" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.394859)
+material_override = ExtResource("7_ftq5n")
+
+[node name="pillar_square" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_q222i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.628395, 1.54112, -11.5615)
+
+[node name="Cube" parent="World/Castle/FightRing/Pillars/pillar_square" index="0"]
+transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 0, 0, 0)
+material_override = ExtResource("7_ftq5n")
+
+[node name="pillar_square2" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_q222i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.628782, 1.541, 11.562)
+
+[node name="Cube" parent="World/Castle/FightRing/Pillars/pillar_square2" index="0"]
+transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 0, 0, 0)
+material_override = ExtResource("7_ftq5n")
+
+[node name="pillar_square3" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_q222i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.628395, 11.0793, -11.5615)
+
+[node name="Cube" parent="World/Castle/FightRing/Pillars/pillar_square3" index="0"]
+transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 0, 0, 0)
+material_override = ExtResource("7_ftq5n")
+
+[node name="pillar_square4" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_q222i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.628782, 11.0792, 11.562)
+
+[node name="Cube" parent="World/Castle/FightRing/Pillars/pillar_square4" index="0"]
+transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 0, 0, 0)
+material_override = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/FightRing/Pillars"]
+transform = Transform3D(7.54979e-08, 0, 1, -0.121263, 0.99262, 9.1551e-09, -0.99262, -0.121263, 7.49408e-08, 0.651593, 32.5142, 10.7884)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(3.89661, 23.4695, 2.67285)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="World/Castle/FightRing/Pillars"]
+transform = Transform3D(-1.62276e-07, -1.06011e-08, -1, -0.121263, 0.99262, 9.1551e-09, 0.99262, 0.121263, -1.62364e-07, 0.651593, 32.0755, -10.8111)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(3.89661, 24.3534, 2.67285)
+material = ExtResource("7_ftq5n")
+
+[node name="FloorBase" type="CSGBox3D" parent="World/Castle/FightRing"]
+transform = Transform3D(2.19325e-07, 0, 1, 0, 1, 0, -1.67253, 0, 1.31134e-07, 0, 0, 0)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(14.426, 3.13713, 24.4827)
+material = ExtResource("7_ftq5n")
+
+[node name="brazier" parent="World/Castle/FightRing" instance=ExtResource("11_emmfv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.94538, 1.61576, 3.92497)
+
+[node name="brazier2" parent="World/Castle/FightRing" instance=ExtResource("11_emmfv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.97048, 1.61576, -4.37235)
+
+[node name="rock_01" parent="World/Castle/FightRing" instance=ExtResource("6_6wf1f")]
+transform = Transform3D(0.0377843, 0.0263564, 0.0118995, -0.0236505, 0.0168976, 0.0376701, 0.0166407, -0.0358291, 0.0265193, 1.03678, 1.79845, 4.29332)
+
+[node name="rock_02" parent="World/Castle/FightRing" instance=ExtResource("6_6wf1f")]
+transform = Transform3D(0.0590758, 0, 0, 0, 0.0579958, 0, 0, 0, 0.0590758, 2.04833, 2.46597, 3.83835)
+
+[node name="rough_floor_patch" parent="World/Castle/FightRing" instance=ExtResource("8_11ood")]
+transform = Transform3D(1.48693, 0, 0, 0, 1, 0, 0, 0, 1.48693, 1.7095, 1.8276, -1.75557)
+
+[node name="Plane" parent="World/Castle/FightRing/rough_floor_patch" index="0"]
+transform = Transform3D(1.74545, 0, 0, 0, 1, 0, 0, 0, 1.74545, 0, -0.194406, 0)
+material_override = ExtResource("9_q222i")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Castle/FightRing/rough_floor_patch/Plane" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Castle/FightRing/rough_floor_patch/Plane/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248108, 0)
+shape = SubResource("BoxShape3D_11ood")
+
+[node name="Balcony" type="Node3D" parent="World/Castle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4479, 16.1811, -3.40017)
+
+[node name="rough_floor_patch2" parent="World/Castle/Balcony" instance=ExtResource("8_11ood")]
+transform = Transform3D(0.630668, 0, -0.227353, 0, 0.450861, 0, 0.227353, 0, 0.630668, -5.76387, 3.70049, 13.7869)
+
+[node name="Plane" parent="World/Castle/Balcony/rough_floor_patch2" index="0"]
+transform = Transform3D(2.2349, 0, 0, 0, 1, 0, 0, 0, 3.77602, 3.45437, -1.49817, 5.43148)
+material_override = ExtResource("9_q222i")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Castle/Balcony/rough_floor_patch2/Plane" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Castle/Balcony/rough_floor_patch2/Plane/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248108, 0)
+shape = SubResource("BoxShape3D_11ood")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, -0.456688, -1.51606, -0.839036)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.75355, 2, 16.8149)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, 1.37535, 2.19542, 4.97015)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.43537, 0.689331, 10.4445)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, 4.39712, 3.92342, 15.8312)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.43537, 0.881775, 6.53203)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.55029, 0, 0.37527, 0, 2.60122, 0, -0.627649, 0, -0.926916, 3.45468, 3.92342, 22.1859)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.43537, 0.881775, 9.7874)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-0.818353, 0, 0.872121, 0, 2.60122, 0, -1.45864, 0, -0.489291, -4.51661, 3.92342, 29.6412)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.43537, 0.881775, 16.2531)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.64511, 0, 0.18033, 0, 6.41334, 0, -0.301607, 0, -0.983606, -13.1801, 5.17417, 16.177)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.75355, 1.61826, 15.2848)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.4529, 0, -0.495368, 0, 6.41334, 0, 0.828516, 0, -0.868683, -13.2431, 5.17417, 26.0725)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.75355, 1.61826, 10.697)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-0.489558, 0, 0.956203, 0, 6.41334, 0, -1.59927, 0, -0.292705, -8.41925, 5.14951, 7.93616)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.75355, 1.61057, 15.2848)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, 0.563194, 7.04856, -0.859202)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(3.93781, 0.374756, 17.3039)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, -1.75964, 2.93965, 2.71406)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(0.707828, 2.87207, 10.7159)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, 3.13643, 1.65618, 1.33319)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(0.707828, 1.88525, 11.1509)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, 6.12078, 2.60172, 12.4709)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(0.707828, 2.61224, 12.2122)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.55185, 0, 0.372955, 0, 2.60122, 0, -0.623778, 0, -0.927849, 5.66115, 2.60172, 23.1202)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(0.707828, 2.61224, 11.1593)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-0.810627, 0, 0.874696, 0, 2.60122, 0, -1.46295, 0, -0.484672, -1.61304, 2.60172, 31.0271)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(0.707828, 2.61224, 12.5525)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, 1.04636, 1.32541, -6.46709)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(0.707828, 0.704712, 5)
+material = ExtResource("7_ftq5n")
+
+[node name="pillar_square" parent="World/Castle/Balcony" instance=ExtResource("10_q222i")]
+transform = Transform3D(0.12472, 0, -0.465463, 0, 0.481883, 0, 0.465463, 0, 0.12472, 0.446552, 2.19599, -8.39942)
+
+[node name="Cube" parent="World/Castle/Balcony/pillar_square" index="0"]
+transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 1.0201, 0, -0.104657)
+material_override = ExtResource("7_ftq5n")
+
+[node name="Cube2" type="MeshInstance3D" parent="World/Castle/Balcony/pillar_square"]
+transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 8.70297, 0, -0.104657)
+material_override = ExtResource("7_ftq5n")
+mesh = SubResource("ArrayMesh_phd15")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Castle/Balcony/pillar_square/Cube2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Castle/Balcony/pillar_square/Cube2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_65325")
+
+[node name="pillar_square2" parent="World/Castle/Balcony" instance=ExtResource("10_q222i")]
+transform = Transform3D(0.12472, 0, -0.465463, 0, 0.276903, 0, 0.465463, 0, 0.12472, 4.25789, 4.03446, 5.82469)
+
+[node name="Cube" parent="World/Castle/Balcony/pillar_square2" index="0"]
+transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 1.0201, 0, -0.104657)
+material_override = ExtResource("7_ftq5n")
+
+[node name="arch2" parent="World/Castle/Balcony" instance=ExtResource("10_qlufj")]
+transform = Transform3D(-0.38124, 0, 0.861157, 0, 1, 0, -0.660327, 0, -0.497189, -10.238, 8.39215, 33.1482)
+
+[node name="Cube" parent="World/Castle/Balcony/arch2" index="0"]
+transform = Transform3D(1.00897, 0, 0, 0, 1, 0, 0, 0, 2.15715, 0, 0.969865, 1.06865)
+material_override = ExtResource("7_ftq5n")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://in53wmskn8o")
+spawn_path = NodePath("../NetworkManager")
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://xh7j8iie55hm")
+spawn_path = NodePath("../NetworkManager")
+
+[node name="stairs" parent="." instance=ExtResource("14_1jqj6")]
+transform = Transform3D(0.258819, 0, -1.91782, 0, 1, 0, 0.965926, 0, 0.513879, 36.1434, -6.39174, -4.92198)
+
+[node name="stairs2" parent="." instance=ExtResource("14_1jqj6")]
+transform = Transform3D(0.258819, 0, -1.91782, 0, 1, 0, 0.965926, 0, 0.513879, 39.5656, -4.41679, 7.84977)
+
+[node name="stairs3" parent="." instance=ExtResource("14_1jqj6")]
+transform = Transform3D(0.489169, 0, -0.897985, 0, 1.05001, 0, 0.872189, 0, 0.503637, 28.0167, -4.52399, 24.3829)
+
+[editable path="World/Castle/FightRing/InnerRing/arch2"]
+[editable path="World/Castle/FightRing/Pillars/arch"]
+[editable path="World/Castle/FightRing/Pillars/arch2"]
+[editable path="World/Castle/FightRing/Pillars/arch3"]
+[editable path="World/Castle/FightRing/Pillars/arch4"]
+[editable path="World/Castle/FightRing/Pillars/pillar_square"]
+[editable path="World/Castle/FightRing/Pillars/pillar_square2"]
+[editable path="World/Castle/FightRing/Pillars/pillar_square3"]
+[editable path="World/Castle/FightRing/Pillars/pillar_square4"]
+[editable path="World/Castle/FightRing/rough_floor_patch"]
+[editable path="World/Castle/Balcony/rough_floor_patch2"]
+[editable path="World/Castle/Balcony/pillar_square"]
+[editable path="World/Castle/Balcony/pillar_square2"]
+[editable path="World/Castle/Balcony/arch2"]

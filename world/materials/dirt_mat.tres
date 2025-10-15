@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bn0fq2xxsmv4j"]
+
+[ext_resource type="Shader" uid="uid://c7psas68fv356" path="res://world/shaders/level_element_master_shader.gdshader" id="1_8k445"]
+[ext_resource type="Texture2D" uid="uid://c53iq56jxmy5x" path="res://world/props/textures/dirt.png" id="2_8k445"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8k445")
+shader_parameter/albedo = Color(0.613972, 0.468284, 0.34529, 1)
+shader_parameter/texture_albedo = ExtResource("2_8k445")
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 0.0
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.25, 0.25, 0.25)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)

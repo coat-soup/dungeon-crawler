@@ -106,6 +106,7 @@ max_distance = 10.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86708, 0)
-light_color = Color(0.853129, 0.51791, 0.188832, 1)
+light_color = Color(0.854902, 0.517647, 0.188235, 1)
 shadow_enabled = true
 omni_range = 20.0
+omni_attenuation = 0.0

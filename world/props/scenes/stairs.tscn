@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cabbkpdw7um5w"]
+
+[ext_resource type="PackedScene" uid="uid://badco0215vk6t" path="res://world/props/models/stairs.glb" id="1_trw1w"]
+[ext_resource type="Material" uid="uid://khh6k54woa1a" path="res://world/materials/stone_wall_mat.tres" id="2_nnbr5"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nnbr5"]
+points = PackedVector3Array(1.49804, 2.00092, 0.999994, 1.49804, 2.00092, -0.999994, -1.49681, 0, 0.999994, 1.49804, 0, 0.999994, 1.49804, 0, -0.999994, -1.49681, 0, -0.999994)
+
+[node name="stairs" instance=ExtResource("1_trw1w")]
+
+[node name="Cube" parent="." index="0"]
+material_override = ExtResource("2_nnbr5")
+
+[node name="CollisionShape" parent="." index="1"]
+visible = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="CollisionShape" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionShape/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_nnbr5")
