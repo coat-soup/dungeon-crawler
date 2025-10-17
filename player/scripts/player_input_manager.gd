@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
-	if not is_multiplayer_authority(): return
+	if not active or not is_multiplayer_authority(): return
 	if block_reset and Input.is_action_pressed("secondary"):
 		action_manager.try_perform_action_by_name("block")
 

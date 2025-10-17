@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://db1lqpw1tim4q"]
+[gd_scene load_steps=9 format=3 uid="uid://db1lqpw1tim4q"]
 
 [ext_resource type="Script" uid="uid://cv83h2tcngfv3" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
 [ext_resource type="Texture2D" uid="uid://cqmkcefkf8vqf" path="res://ui/textures/hit_marker.png" id="2_1u8fv"]
 [ext_resource type="Script" uid="uid://ol2oio1vwx3t" path="res://ui/scripts/options_menu_manager.gd" id="4_3i8ig"]
+[ext_resource type="Script" uid="uid://d2ag8w6ck2est" path="res://ui/scripts/settings_panel_manager.gd" id="5_ky4nr"]
 [ext_resource type="PackedScene" uid="uid://kd4fvkpy7af2" path="res://ui/scenes/lobby_entry.tscn" id="10_yfaaw"]
 
 [sub_resource type="Animation" id="Animation_68x3x"]
@@ -188,6 +189,7 @@ text = "- Objective 1
 horizontal_alignment = 1
 
 [node name="NetworkPanel" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -308,6 +310,7 @@ text = "REFRESH LOBBIES"
 
 [node name="OptionsPanel" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -323,7 +326,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.18, 0.18, 0.18, 0.501961)
 
-[node name="ButtonHolder" type="VBoxContainer" parent="OptionsPanel/Background"]
+[node name="ButtonHolder" type="VBoxContainer" parent="OptionsPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -337,27 +341,27 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ReturnButton" type="Button" parent="OptionsPanel/Background/ButtonHolder"]
+[node name="ReturnButton" type="Button" parent="OptionsPanel/ButtonHolder"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "RETURN TO GAME"
 
-[node name="LeaveButton" type="Button" parent="OptionsPanel/Background/ButtonHolder"]
+[node name="LeaveButton" type="Button" parent="OptionsPanel/ButtonHolder"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "LEAVE GAME"
 
-[node name="QuitButton" type="Button" parent="OptionsPanel/Background/ButtonHolder"]
+[node name="QuitButton" type="Button" parent="OptionsPanel/ButtonHolder"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "QUIT GAME"
 
-[node name="SettingsButton" type="Button" parent="OptionsPanel/Background/ButtonHolder"]
+[node name="SettingsButton" type="Button" parent="OptionsPanel/ButtonHolder"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "OPTIONS"
 
-[node name="GameInfoLabel" type="RichTextLabel" parent="OptionsPanel/Background"]
+[node name="GameInfoLabel" type="RichTextLabel" parent="OptionsPanel"]
 modulate = Color(1, 1, 1, 0.356863)
 layout_mode = 1
 anchors_preset = 2
@@ -370,3 +374,166 @@ offset_bottom = -12.0
 grow_vertical = 0
 text = "Dungeon Crawler - vx.x.xn"
 scroll_active = false
+
+[node name="SettingsPanel" type="Control" parent="OptionsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_ky4nr")
+
+[node name="Background" type="ColorRect" parent="OptionsPanel/SettingsPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -250.0
+offset_right = 350.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.18, 0.18, 0.501961)
+
+[node name="TitleBackground" type="ColorRect" parent="OptionsPanel/SettingsPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.0
+offset_top = 444.0
+offset_right = 97.0
+offset_bottom = 497.0
+grow_horizontal = 2
+color = Color(0.18, 0.18, 0.18, 1)
+
+[node name="Label" type="Label" parent="OptionsPanel/SettingsPanel/TitleBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -21.0
+offset_right = 69.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "SETTINGS"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel/SettingsPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -8.0
+offset_right = 250.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sensetivity" type="Control" parent="OptionsPanel/SettingsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="SensetivityLabel" type="Label" parent="OptionsPanel/SettingsPanel/VBoxContainer/Sensetivity"]
+layout_mode = 2
+offset_right = 500.0
+offset_bottom = 25.0
+text = "Sensetivity"
+
+[node name="SensetivityValueLabel" type="Label" parent="OptionsPanel/SettingsPanel/VBoxContainer/Sensetivity"]
+layout_mode = 2
+offset_left = 150.0
+offset_right = 650.0
+offset_bottom = 25.0
+text = "1.0"
+
+[node name="SensetivitySlider" type="HSlider" parent="OptionsPanel/SettingsPanel/VBoxContainer/Sensetivity"]
+layout_mode = 2
+offset_left = 225.0
+offset_right = 558.0
+offset_bottom = 22.0
+max_value = 2.0
+step = 0.05
+value = 1.0
+
+[node name="Volume" type="Control" parent="OptionsPanel/SettingsPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="OptionsPanel/SettingsPanel/VBoxContainer/Volume"]
+layout_mode = 2
+offset_right = 500.0
+offset_bottom = 25.0
+text = "Volume"
+
+[node name="VolumeValueLabel" type="Label" parent="OptionsPanel/SettingsPanel/VBoxContainer/Volume"]
+layout_mode = 2
+offset_left = 150.0
+offset_right = 650.0
+offset_bottom = 25.0
+text = "1.0"
+
+[node name="VolumeSlider" type="HSlider" parent="OptionsPanel/SettingsPanel/VBoxContainer/Volume"]
+layout_mode = 2
+offset_left = 225.0
+offset_right = 558.0
+offset_bottom = 22.0
+max_value = 2.0
+step = 0.05
+value = 1.0
+
+[node name="SaveButton" type="Button" parent="OptionsPanel/SettingsPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -516.0
+offset_right = -273.0
+offset_bottom = -485.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "SAVE"
+
+[node name="ResetButton" type="Button" parent="OptionsPanel/SettingsPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = -516.0
+offset_right = 79.0
+offset_bottom = -485.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "RESET TO DEFUALTS"
+
+[node name="CancelButton" type="Button" parent="OptionsPanel/SettingsPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 253.0
+offset_top = -516.0
+offset_right = 322.0
+offset_bottom = -485.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "CANCEL"
