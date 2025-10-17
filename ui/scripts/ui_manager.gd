@@ -2,6 +2,10 @@ extends Control
 
 class_name UIManager
 
+@onready var hud: Control = $HUD
+@onready var network_panel: Control = $NetworkPanel
+@onready var options_panel: OptionsMenuManager = $OptionsPanel
+
 @onready var lobby_id_text_field: TextEdit = $NetworkPanel/ButtonHolder/LobbyIDTextField
 @onready var interact_text: Label = $HUD/InteractText
 @onready var chat_box: Label = $HUD/ChatBox
@@ -42,6 +46,10 @@ func _ready():
 	
 	refresh_lobbies.pressed.connect(build_lobby_list)
 	build_lobby_list()
+	
+	hud.visible = true
+	network_panel.visible = true
+	options_panel.visible = false
 
 
 func _input(event):
@@ -174,3 +182,10 @@ func on_friend_lobby_join_pressed(steam_id: int, lobby_id: int) -> bool:
 		return true
 	
 	return false
+
+
+func toggle_options_menu(value : bool):
+	options_panel.visible = value
+	hud.visible = !value
+	if Global.local_player: Global.local_player.input_manager.active = !value
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if (value or network_panel.visible) else Input.MOUSE_MODE_CAPTURED

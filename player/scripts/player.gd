@@ -3,6 +3,7 @@ class_name Player
 
 @onready var movement: PlayerMovement = $Movement
 @export var camera: CameraShake
+@export var input_manager : PlayerInputManager
 
 
 func _enter_tree() -> void:
@@ -12,6 +13,8 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	super._ready()
 	if is_multiplayer_authority():
+		Global.local_player = self
+		
 		camera.current = true
 		(camera.get_child(0) as AudioListener3D).current = true
 		health.took_damage.connect(on_player_damaged)

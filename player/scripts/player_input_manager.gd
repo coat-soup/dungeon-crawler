@@ -5,11 +5,15 @@ class_name PlayerInputManager
 @export var action_manager : ActionManager
 var block_reset := true
 
+var active : bool = true
+
+
 func _ready() -> void:
 	action_manager.performed_action.connect(on_action_performed)
 
+
 func _input(event: InputEvent) -> void:
-	if not is_multiplayer_authority(): return
+	if not active or not is_multiplayer_authority(): return
 	if event.is_action_pressed("alt_swing"): attack_or_buffer(WeaponManager.AttackState.ALTSWING)
 	elif event.is_action_pressed("primary"): attack_or_buffer(WeaponManager.AttackState.SWING)
 	if event.is_action_pressed("lunge"): attack_or_buffer(WeaponManager.AttackState.LUNGE)

@@ -19,7 +19,7 @@ const ALPHABET := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 @export var spawn_position := Vector3.ZERO
 
 const APP_ID = 2932440
-
+var connected_to_lobby := false
 
 func _ready() -> void:
 	Global.network_manager = self
@@ -29,6 +29,12 @@ func _ready() -> void:
 	Steam.steamInitEx()
 	
 	steam_peer.lobby_created.connect(_on_lobby_created)
+	steam_peer.lobby_chat_update.connect(_on_lobby_chat_update)
+	steam_peer.lobby_joined.connect(_on_lobby_joined)
+	
+	multiplayer.connection_failed.connect(on_connection_failed)
+	multiplayer.server_disconnected.connect(on_server_diconnected)
+	multiplayer.connected_to_server.connect(on_connection_succeeded)
 	
 	enet_peer = ENetMultiplayerPeer.new()
 
@@ -77,12 +83,18 @@ func join_lobby_by_id(id):
 	if id != -1:
 		steam_peer.connect_lobby(id)
 		multiplayer.multiplayer_peer = steam_peer
-	else: 
+	else:
+		connected_to_lobby = false
 		enet_peer.create_client("localhost", PORT)
 		multiplayer.multiplayer_peer = enet_peer
 	
 	$Camera3D.queue_free()
 	ui.toggle_network_menu(false)
+	
+	await get_tree().create_timer(1.0).timeout
+	if not connected_to_lobby:
+		print("CONNECTION FAILED")
+		quit_lobby()
 
 
 func _on_lobby_created(connected, id):
@@ -93,6 +105,44 @@ func _on_lobby_created(connected, id):
 		print("Lobby created! ID: %s" % codify_lobby_id(id))
 		ui.display_chat_message("Lobby created! ID: %s" % codify_lobby_id(id))
  
+
+func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
+	print("JOINED LOBBY")
+	# If joining was successful
+	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
+		# Set this lobby ID as your lobby ID
+		lobby_id = this_lobby_id
+	
+	# Else it failed for some reason
+	else:
+		# Get the failure reason
+		var fail_reason: String
+		
+		match response:
+			Steam.CHAT_ROOM_ENTER_RESPONSE_DOESNT_EXIST: fail_reason = "This lobby no longer exists."
+			Steam.CHAT_ROOM_ENTER_RESPONSE_NOT_ALLOWED: fail_reason = "You don't have permission to join this lobby."
+			Steam.CHAT_ROOM_ENTER_RESPONSE_FULL: fail_reason = "The lobby is now full."
+			Steam.CHAT_ROOM_ENTER_RESPONSE_ERROR: fail_reason = "Uh... something unexpected happened!"
+			Steam.CHAT_ROOM_ENTER_RESPONSE_BANNED: fail_reason = "You are banned from this lobby."
+			Steam.CHAT_ROOM_ENTER_RESPONSE_LIMITED: fail_reason = "You cannot join due to having a limited account."
+			Steam.CHAT_ROOM_ENTER_RESPONSE_CLAN_DISABLED: fail_reason = "This lobby is locked or disabled."
+			Steam.CHAT_ROOM_ENTER_RESPONSE_COMMUNITY_BAN: fail_reason = "This lobby is community locked."
+			Steam.CHAT_ROOM_ENTER_RESPONSE_MEMBER_BLOCKED_YOU: fail_reason = "A user in the lobby has blocked you from joining."
+			Steam.CHAT_ROOM_ENTER_RESPONSE_YOU_BLOCKED_MEMBER: fail_reason = "A user you have blocked is in the lobby."
+		
+		print("Failed to join this lobby: %s" % fail_reason)
+		quit_lobby()
+
+
+func on_connection_succeeded():
+	print("CONNETED TO LOBBY")
+	connected_to_lobby = true
+
+
+func on_connection_failed():
+	print("CONNECTION FAILED")
+	quit_lobby()
+
 
 func add_player(peer_id):
 	var player = PLAYER.instantiate()
@@ -161,3 +211,41 @@ func get_friends_in_lobbies(return_gameless_friends : bool = false, return_offli
 				results[steam_id] = lobby
 	
 	return results
+
+
+func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id: int, chat_state: int) -> void:
+	print("LOBBY CHAT UPDATE")
+	# Get the user who has made the lobby change
+	var changer_name: String = Steam.getFriendPersonaName(change_id)
+
+	# If a player has joined the lobby
+	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
+		Global.ui.display_chat_message("%s has joined the lobby." % changer_name)
+
+	# Else if a player has left the lobby
+	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_LEFT:
+		Global.ui.display_chat_message("%s has left the lobby." % changer_name)
+
+	# Else if a player has been kicked
+	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_KICKED:
+		Global.ui.display_chat_message("%s has been kicked from the lobby." % changer_name)
+
+	# Else if a player has been banned
+	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_BANNED:
+		Global.ui.display_chat_message("%s has been banned from the lobby." % changer_name)
+
+	# Else there was some unknown change
+	else:
+		Global.ui.display_chat_message("%s did... something." % changer_name)
+
+
+func on_server_diconnected():
+	print("SERVER DISCONNECTED")
+	quit_lobby()
+
+
+func quit_lobby():
+	multiplayer.server_disconnected.disconnect(on_server_diconnected)
+	multiplayer.multiplayer_peer.close()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().reload_current_scene()

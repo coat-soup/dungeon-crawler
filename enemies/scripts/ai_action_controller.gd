@@ -20,6 +20,7 @@ func _ready() -> void:
 	
 	action_manager.performed_action.connect(on_action_performed)
 	
+	await get_tree().process_frame
 	process_tick()
 
 

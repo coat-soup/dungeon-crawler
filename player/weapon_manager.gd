@@ -41,7 +41,7 @@ func _ready() -> void:
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
 	weapon.hitbox.area_entered.connect(on_weapon_entered_area)
 	
-	await get_tree().process_frame
+	await get_tree().create_timer(0.5).timeout
 	equip_weapon.rpc(starting_weapon_path)
 
 
