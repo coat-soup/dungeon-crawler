@@ -14,6 +14,8 @@ var desire_to_attack : float = 0.0
 
 
 func _ready() -> void:
+	if not multiplayer.is_server(): return
+	
 	body_entered.connect(on_body_entered)
 	body_exited.connect(on_body_exited)
 	collision_mask = Util.layer_mask([2])

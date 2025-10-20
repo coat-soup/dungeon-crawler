@@ -9,15 +9,16 @@ signal interacted
 var active := true
 
 
-func observe(_source: Node3D) -> String:
+func observe(_source: Node) -> String:
 	return prompt_text if active else ""
 
 
-func interact(source: Node3D):
+@rpc("any_peer", "call_local")
+func interact(source: String):
 	if not active:
 		return
 	
-	interacted.emit(source)
+	interacted.emit(get_tree().root.get_node_or_null(source))
 
 
 @rpc("any_peer", "call_local")

@@ -17,7 +17,7 @@ func _process(_delta: float) -> void:
 	if target_interactable and not target_interactable.active:
 		target_interactable = null
 	if target_interactable and Input.is_action_just_pressed("interact"):
-		target_interactable.interact(player)
+		target_interactable.interact.rpc(player.get_path())
 		
 	#Global.ui.set_interact_text("" if (not target_interactable or target_interactable.display_keycode) else target_interactable.observe(player))
 	if target_interactable: Global.ui.set_interact_text(target_interactable.observe(player), target_interactable.display_keycode)

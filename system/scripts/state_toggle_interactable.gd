@@ -7,13 +7,14 @@ signal toggled_off
 @export var state := false
 
 
-func interact(source: Node3D):
+@rpc("any_peer", "call_local")
+func interact(source: String):
 	if not active:
 		return
 	
 	state = !state
 	
-	interacted.emit(source)
+	interacted.emit(get_tree().root.get_node_or_null(source))
 	
 	if state: toggled_on.emit()
 	else: toggled_off.emit()
