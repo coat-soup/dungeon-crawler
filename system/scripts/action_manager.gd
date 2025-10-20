@@ -72,7 +72,9 @@ func on_action_triggered_end_action(action : Action):
 func on_action_ended(action : Action):
 	var id = current_actions.find(action)
 	if id != null:
+		current_actions[id].action_ended.disconnect(on_action_ended)
 		current_actions.remove_at(id)
+		print("action removed from current")
 
 
 func get_action_by_name(action_name : String) -> Action:

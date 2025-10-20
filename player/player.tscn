@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://in53wmskn8o"]
+[gd_scene load_steps=37 format=3 uid="uid://in53wmskn8o"]
 
 [ext_resource type="Script" uid="uid://cp10hnk6llvdv" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://csxbl4ax1b4pk" path="res://player/scripts/player_movement.gd" id="2_rkbax"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://b6sa48cxaul1x" path="res://system/scripts/action_sprint.gd" id="12_g4c7l"]
 [ext_resource type="PackedScene" uid="uid://om525hroc3mr" path="res://player/models/player_model.tscn" id="12_wodsf"]
 [ext_resource type="Script" uid="uid://b57gmoj05g64n" path="res://system/scripts/action_kick.gd" id="13_knn7v"]
+[ext_resource type="Script" uid="uid://e7hlalrpjn80" path="res://player/scripts/player_interaction_manager.gd" id="15_7pqkx"]
 [ext_resource type="Script" uid="uid://dxfqns3wgrg1n" path="res://player/scripts/player_input_manager.gd" id="18_e7oew"]
 [ext_resource type="Script" uid="uid://l2i2p2rer3y8" path="res://player/scripts/camera_shake.gd" id="23_s7qer"]
 
@@ -150,12 +151,16 @@ script = ExtResource("18_e7oew")
 movement = NodePath("../Movement")
 action_manager = NodePath("../ActionManager")
 
+[node name="InteractionManager" type="Node" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("15_7pqkx")
+camera = NodePath("../CameraPivot/Camera")
+
 [node name="SplatterOnHit" type="Node3D" parent="." node_paths=PackedStringArray("health")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.863035, 0)
 script = ExtResource("7_wodsf")
 health = NodePath("../Health")
 texture = ExtResource("8_32hag")
-modulate = Color(0.846926, 0.155291, 0, 1)
+modulate = Color(0.545827, 0.0850884, 0, 1)
 metadata/_custom_type_script = "uid://bcnftja1gi4hk"
 
 [node name="AudioManager" type="Node3D" parent="." node_paths=PackedStringArray("movement", "skeleton_controller", "weapon_manager")]

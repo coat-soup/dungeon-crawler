@@ -174,7 +174,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.863035, 0)
 script = ExtResource("12_yceny")
 health = NodePath("../Health")
 texture = ExtResource("13_8oecf")
-modulate = Color(0.846926, 0.155291, 0, 1)
+modulate = Color(0.545098, 0.0862745, 0, 1)
 metadata/_custom_type_script = "uid://bcnftja1gi4hk"
 
 [node name="AudioManager" type="Node3D" parent="." node_paths=PackedStringArray("skeleton_controller", "weapon_manager")]

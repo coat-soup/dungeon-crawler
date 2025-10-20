@@ -93,7 +93,7 @@ func join_lobby_by_id(id):
 	
 	await get_tree().create_timer(1.0).timeout
 	if not connected_to_lobby:
-		print("CONNECTION FAILED")
+		print("CONNECTION TIMED OUT")
 		quit_lobby()
 
 
@@ -141,6 +141,11 @@ func on_connection_succeeded():
 
 func on_connection_failed():
 	print("CONNECTION FAILED")
+	quit_lobby()
+
+
+func on_server_diconnected():
+	print("SERVER DISCONNECTED")
 	quit_lobby()
 
 
@@ -239,13 +244,10 @@ func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id:
 		Global.ui.display_chat_message("%s did... something." % changer_name)
 
 
-func on_server_diconnected():
-	print("SERVER DISCONNECTED")
-	quit_lobby()
-
-
 func quit_lobby():
-	multiplayer.server_disconnected.disconnect(on_server_diconnected)
-	multiplayer.multiplayer_peer.close()
+	if multiplayer:
+		multiplayer.server_disconnected.disconnect(on_server_diconnected)
+		multiplayer.connection_failed.disconnect(on_connection_failed)
+		multiplayer.multiplayer_peer.close()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().reload_current_scene()

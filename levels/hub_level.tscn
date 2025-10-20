@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://cuhkwocop1mx7"]
+[gd_scene load_steps=30 format=4 uid="uid://cuhkwocop1mx7"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/scripts/game_manager.gd" id="1_0nv80"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/scripts/network_manager.gd" id="2_4p34j"]
@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://bdst4tv46kcy2" path="res://world/props/scenes/brazier.tscn" id="11_emmfv"]
 [ext_resource type="PackedScene" uid="uid://cabbkpdw7um5w" path="res://world/props/scenes/stairs.tscn" id="14_1jqj6"]
 [ext_resource type="PackedScene" uid="uid://btt5dershufo2" path="res://world/props/scenes/fern.tscn" id="14_aald4"]
+[ext_resource type="Script" uid="uid://dp0lj1lpir5eu" path="res://system/scripts/debug_enemy_spawner.gd" id="16_8s55e"]
+[ext_resource type="PackedScene" uid="uid://xh7j8iie55hm" path="res://enemies/scenes/enemy_humanoid.tscn" id="17_eac86"]
+[ext_resource type="PackedScene" uid="uid://bg18hod4qfwqf" path="res://world/props/scenes/lever.tscn" id="18_uj6qf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wf1f"]
 sky_top_color = Color(0.484482, 0.54318, 0.717929, 1)
@@ -44,6 +47,10 @@ metadata/_custom_type_script = "uid://ttnv7co8ljcb"
 
 [sub_resource type="Compositor" id="Compositor_1jqj6"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_4p34j")])
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_aald4"]
+vertices = PackedVector3Array(-2.35012, 27.2073, -22.6946, -3.85012, 27.2073, -22.1946, -3.35012, 27.2073, -20.4446, -1.10012, 27.2073, -20.9446, -6.60012, 27.2073, -11.4446, -6.60012, 27.2073, -8.19459, -5.35012, 27.2073, -7.19459, -4.10012, 27.2073, -7.69459, -4.10012, 27.2073, -11.6946, -5.10012, 27.2073, -12.4446, 5.39988, 27.2073, -27.1946, 3.64988, 27.2073, -27.1946, 3.14988, 27.2073, -25.9446, -5.35012, 27.2073, -16.9446, -6.60012, 27.2073, -16.4446, -6.60012, 27.2073, -14.6946, 7.14988, 27.2073, -25.9446, 8.64988, 27.2073, -26.1946, 9.64988, 27.2073, -27.1946, 8.39988, 27.2073, -29.1946, -5.10012, 27.2073, -13.1946, -8.10012, 27.2073, -12.4446, 0.649877, 27.2073, -24.4446, -1.10012, 27.2073, -24.6946, -1.35012, 27.2073, -19.1946, 12.8999, 27.2073, -27.1946, 9.14988, 27.2073, -24.9446, 13.3999, 27.2073, -24.9446, 13.8999, 27.2073, -25.6946, 18.3999, 27.2073, -25.9446, 18.1499, 27.2073, -27.1946, 16.3999, 27.2073, -27.1946, 14.8999, 27.2073, -25.6946, 25.8999, 27.2073, -20.1946, 26.3999, 27.2073, -21.6946, 24.6499, 27.2073, -22.4446, 22.6499, 27.2073, -21.6946, 23.6499, 27.2073, -24.4446, 21.8999, 27.2073, -23.9446, 20.3999, 27.2073, -22.1946, 14.1499, 27.2073, -28.6946, 27.6499, 27.2073, -12.6946, 27.6499, 27.2073, -17.1946, 28.8999, 27.2073, -12.6946, 28.8999, 27.2073, -16.9446, -3.85012, 61.7073, -13.1946, -3.85012, 61.7073, -12.6946, -3.10012, 61.7073, -12.4446, -0.100123, 61.7073, -13.6946, 2.89988, 61.7073, -18.6946, -0.350123, 61.7073, -18.6946, 25.3999, 61.7073, -11.9446, 26.3999, 61.7073, -12.4446, 26.3999, 61.7073, -13.1946, 22.3999, 61.7073, -9.94459, 25.3999, 61.7073, -9.94459, 22.3999, 61.7073, -13.9446, 19.8999, 61.7073, -21.1946, 14.8999, 61.7073, -24.4446, 14.1499, 61.7073, -23.9446, 15.3999, 61.7073, -20.6946, 20.6499, 61.7073, -17.1946, -3.10012, 61.7073, -10.4446, -0.100123, 61.7073, -10.4446, -0.100123, 61.7073, -20.4446, 6.39988, 61.7073, -20.6946, 8.64988, 61.7073, -23.9446, 8.14988, 61.7073, -24.9446, 21.8999, 61.7073, -20.6946, 6.39988, 43.9573, -23.6946, 6.39988, 43.9573, -20.9446, 8.14988, 43.9573, -21.9446, -0.100123, 17.7073, -23.1946, -0.100123, 17.7073, -21.6946, 0.649877, 17.7073, -21.9446, 1.14988, 17.7073, -22.9446, 11.3999, 21.9573, 5.05541, 11.3999, 21.9573, 4.30541, 9.89988, 21.9573, 4.05541, 10.1499, 21.9573, -21.6946, 11.3999, 21.9573, -21.6946, 11.3999, 21.9573, -23.1946, 9.89988, 21.9573, 2.80541, 7.14988, 21.9573, 2.80541, 6.39988, 21.9573, 5.05541, -0.100123, 21.9573, -13.6946, 2.89988, 21.9573, -18.6946, 1.39988, 21.9573, -20.4446, -2.60012, 21.9573, -13.9446, 6.39988, 21.9573, -20.6946, 9.89988, 21.9573, -20.6946, 6.14988, 21.9573, -23.1946, 0.899877, 21.9573, 1.55541, 2.64988, 21.9573, 0.0554104, -0.100123, 21.9573, -4.94459, -2.60012, 21.9573, -4.69459, 6.39988, 17.7073, -23.1946, 6.39988, 17.7073, -20.9446, 8.89988, 17.7073, -22.1946, 8.64988, 17.7073, -23.1946, 10.6499, 17.7073, -22.4446, 12.1499, 17.7073, -22.4446, 12.3999, 17.7073, -22.9446, 10.3999, 17.7073, -23.1946, 12.6499, 21.9573, -21.6946, 12.8999, 21.9573, -20.6946, 15.1499, 21.9573, -20.6946, 15.3999, 21.9573, -23.1946, 22.3999, 21.9573, -13.9446, 22.3999, 21.9573, -5.19459, 23.8999, 21.9573, -5.19459, 16.6499, 21.9573, -19.9446, 21.8999, 21.9573, -19.4446, 19.6499, 21.9573, -18.1946, 24.6499, 21.9573, -5.19459, 24.6499, 21.9573, -14.6946, 20.8999, 21.9573, -16.6946, 13.3999, 17.7073, -22.1946, 15.1499, 17.7073, -21.1946, 15.1499, 17.7073, -23.1946, 14.1499, 17.7073, -23.1946, 19.1499, 17.7073, -23.1946, 19.8999, 17.7073, -22.6946, 19.8999, 17.7073, -23.1946, 23.8999, 17.7073, -19.6946, 24.8999, 17.7073, -19.4446, 25.1499, 17.7073, -19.9446, 25.1499, 17.7073, -21.4446, 24.3999, 17.7073, -22.4446, 22.8999, 17.7073, -23.1946, 21.3999, 17.7073, -22.9446, 2.64988, 17.7073, -21.1946, 4.14988, 17.7073, -19.9446, 5.14988, 17.7073, -20.1946, 5.14988, 17.7073, -22.4446, 17.1499, 17.7073, -19.6946, 18.1499, 17.7073, -19.4446, 18.6499, 17.7073, -20.1946, 16.3999, 17.7073, -20.1946, 16.3999, 17.7073, -22.4446, 19.6499, 17.7073, -20.4446, 3.39988, 43.9573, -20.6946, 4.14988, 43.9573, -19.9446, 5.14988, 43.9573, -20.1946, 5.14988, 43.9573, -22.1946, 14.3999, 43.9573, -21.6946, 15.1499, 43.9573, -21.1946, 15.1499, 43.9573, -22.1946, 10.6499, 36.7073, -20.9446, 12.1499, 36.7073, -20.9446, 11.8999, 36.7073, -21.4446, 10.6499, 36.7073, -21.4446, 1.64988, 17.7073, -18.1946, 2.89988, 17.7073, -18.9446, 1.39988, 17.7073, -20.1946, 0.899877, 17.7073, -19.9446, 10.6499, 17.7073, -5.69459, 11.1499, 17.9573, -5.69459, 11.6499, 17.7073, -6.69459, 9.64988, 17.7073, -18.4446, 9.39988, 17.7073, -19.6946, 6.89988, 17.7073, -19.6946, 3.39988, 17.7073, -17.4446, 12.8999, 17.7073, -18.4446, 0.899877, 17.7073, -13.1946, 2.64988, 17.7073, -5.94459, 0.899877, 17.7073, -5.69459, 2.89988, 17.7073, -4.44459, 10.3999, 17.7073, -3.69459, 13.1499, 17.7073, -6.69459, 9.39988, 43.9573, -17.6946, 9.39988, 43.9573, -19.6946, 6.39988, 43.9573, -19.4446, 3.39988, 43.9573, -17.4446, 0.899877, 43.9573, -13.1946, 1.14988, 43.9573, -9.44459, 10.3999, 60.4573, -19.6946, 10.3999, 59.9573, -16.4446, 12.3999, 59.9573, -16.4446, 12.3999, 60.4573, -19.6946, 14.6499, 17.7073, -19.6946, 13.3999, 17.7073, -19.6946, 13.3999, 17.7073, -18.6946, 19.1499, 17.7073, -17.1946, 19.6499, 17.7073, -13.9446, 20.8999, 17.7073, -14.4446, 19.6499, 17.7073, -12.6946, 13.6499, 17.7073, -6.69459, 14.8999, 43.9573, -19.6946, 13.3999, 43.9573, -19.6946, 13.3999, 43.9573, -17.9446, 21.3999, 43.9573, -10.1946, 21.3999, 43.9573, -13.4446, 19.6499, 43.9573, -16.6946, 19.8999, 17.7073, -19.1946, 20.6499, 17.7073, -17.6946, 21.6499, 17.7073, -18.9446, 21.3999, 17.7073, -19.6946, 2.64988, 43.9573, -18.6946, 2.64988, 43.9573, -19.4446, 2.14988, 43.9573, -19.4446, 1.39988, 43.9573, -18.6946, 1.64988, 43.9573, -18.1946, -1.10012, 17.7073, -16.4446, -1.10012, 17.7073, -14.9446, 0.399877, 17.7073, -14.9446, 1.14988, 17.7073, -15.9446, 0.149877, 17.7073, -17.9446, 22.1499, 17.7073, -17.4446, 21.3999, 17.7073, -16.1946, 21.6499, 17.7073, -15.4446, 23.8999, 17.7073, -15.4446, 22.8999, 17.7073, -17.6946, 0.399877, 43.9573, -14.9446, 1.39988, 43.9573, -16.4446, 0.149877, 43.9573, -17.4446, -2.10012, 43.9573, -15.1946, 32.6499, 24.2073, -11.9446, 36.8999, 23.9573, -12.1946, 36.8999, 23.9573, -14.4446, 29.8999, 24.2073, -14.4446, 29.8999, 24.2073, -4.44459, 32.6499, 24.2073, -4.44459, 23.8999, 43.9573, -11.6946, 24.8999, 43.9573, -11.9446, 23.1499, 43.9573, -14.1946, 22.6499, 43.9573, -14.1946, 28.6499, 17.7073, -12.4446, 28.6499, 17.7073, -14.1946, 26.3999, 17.7073, -12.9446, 23.6499, 17.7073, -12.6946, 24.8999, 17.7073, -13.4446, 29.8999, 17.7073, -14.1946, 29.8999, 17.7073, -12.4446, 32.6499, 17.7073, -12.4446, 32.6499, 17.7073, -14.1946, -2.85012, 43.9573, -12.6946, -1.85012, 43.9573, -11.9446, -1.35012, 43.9573, -11.9446, -0.350123, 43.9573, -13.4446, -2.85012, 43.9573, -13.6946, -1.10012, 17.7073, -13.6946, -1.10012, 17.7073, -12.6946, -0.350123, 17.7073, -13.4446, 25.8999, 21.9573, -12.9446, 25.8999, 21.9573, -6.44459, 27.3999, 21.9573, -5.69459, 27.3999, 21.9573, -13.6946, 21.6499, 17.7073, -11.1946, 21.3999, 17.7073, -11.9446, 20.1499, 17.7073, -11.9446, 21.3999, 17.7073, -6.19459, 20.1499, 17.7073, -3.19459, 21.3999, 17.7073, -4.94459, 23.3999, 17.7073, -6.44459, 23.3999, 17.7073, -11.1946, 14.3999, 17.7073, -6.19459, 14.3999, 17.7073, -4.19459, 27.3999, 27.2073, -11.6946, 22.8999, 27.2073, 1.30541, 23.3999, 27.2073, 2.30541, 25.3999, 27.2073, 2.30541, 27.3999, 27.2073, -1.94459, 27.1499, 27.2073, -5.44459, 26.3999, 27.2073, -11.4446, 26.3999, 27.2073, -7.19459, 27.1499, 27.2073, -6.69459, 28.8999, 27.2073, -2.44459, 32.6499, 17.7073, -6.44459, 32.6499, 17.7073, -11.1946, 29.8999, 21.9573, -11.1946, 29.8999, 21.9573, -5.19459, 32.3999, 21.9573, -5.19459, 32.3999, 21.9573, -11.1946, 22.6499, 43.9573, -10.9446, 22.6499, 43.9573, -8.44459, 24.1499, 43.9573, -9.69459, 7.14988, 61.7073, 6.30541, 7.89988, 61.7073, 6.30541, 8.14988, 61.7073, 5.80541, 7.14988, 61.7073, 2.80541, 3.64988, 61.7073, 0.80541, -0.100123, 61.7073, 2.05541, 10.1499, 61.7073, 5.80541, 10.1499, 61.7073, 2.80541, 2.39988, 61.7073, -0.44459, -0.850123, 61.7073, -0.69459, -0.100123, 61.7073, 0.80541, -0.100123, 61.7073, -4.94459, -3.10012, 61.7073, -7.19459, -4.35012, 61.7073, -6.19459, -1.10012, 17.7073, -8.69459, -0.350123, 17.7073, -7.94459, -0.350123, 17.7073, -10.4446, -1.10012, 17.7073, -10.1946, -1.35012, 43.9573, -10.1946, -0.350123, 43.9573, -9.19459, -0.350123, 43.9573, -10.4446, 13.6499, 61.7073, 5.80541, 13.8999, 61.7073, 6.55541, 14.6499, 61.7073, 6.80541, 25.3999, 61.7073, -6.69459, 22.3999, 61.7073, -5.44459, 18.8999, 61.7073, 0.55541, 15.6499, 61.7073, 2.80541, 22.1499, 61.7073, 2.30541, 21.8999, 61.7073, 0.80541, 26.1499, 61.7073, -5.94459, -6.60012, 27.2073, -3.69459, -6.60012, 27.2073, -1.94459, -5.85012, 27.2073, -1.94459, -2.10012, 27.2073, 4.55541, -1.35012, 27.2073, 5.55541, -0.350123, 27.2073, 5.55541, -1.35012, 27.2073, 2.55541, -5.60012, 27.2073, -6.19459, -8.60012, 27.2073, -6.69459, 3.89988, 27.2073, 8.05541, 4.14988, 27.2073, 9.30541, 6.14988, 27.2073, 9.30541, 16.6499, 27.2073, 9.30541, 18.6499, 27.2073, 9.30541, 18.8999, 27.2073, 8.05541, 14.6499, 27.2073, 8.05541, -5.10012, 27.2073, -1.19459, -1.35012, 27.2073, 0.80541, 7.14988, 27.2073, 7.55541, 8.14988, 27.2073, 10.8054, 9.14988, 27.2073, 9.30541, 8.39988, 27.2073, 7.55541, 26.1499, 27.2073, 4.05541, 22.1499, 27.2073, 3.80541, -3.60012, 27.2073, 1.55541, -4.10012, 27.2073, 3.55541, 12.6499, 27.2073, 9.30541, 13.6499, 27.2073, 11.0554, 13.6499, 27.2073, 8.05541, 12.8999, 27.2073, 6.80541, 8.64988, 27.2073, 6.80541, 7.64988, 43.9573, 1.80541, 9.39988, 43.9573, 1.80541, 9.39988, 43.9573, 0.30541, 0.899877, 43.9573, -7.94459, 0.899877, 43.9573, -5.44459, 3.39988, 43.9573, -0.94459, 13.3999, 43.9573, 0.55541, 13.3999, 43.9573, 1.80541, 15.1499, 43.9573, 1.80541, 17.6499, 43.9573, 0.30541, 21.3999, 43.9573, -5.94459, 21.1499, 43.9573, -7.19459, 22.6499, 43.9573, -5.69459, 24.6499, 43.9573, -5.44459, 23.6499, 43.9573, -6.69459, 23.1499, 43.9573, -6.69459, -1.85012, 43.9573, -4.94459, -0.350123, 43.9573, -4.94459, -0.850123, 43.9573, -5.94459, -1.85012, 43.9573, -5.44459, -1.10012, 17.7073, -5.94459, -1.10012, 17.7073, -4.94459, -0.600123, 17.7073, -4.94459, 12.6499, 19.4573, -4.19459, 13.1499, 19.4573, -4.19459, 13.3999, 19.4573, -4.94459, 13.3999, 19.4573, -5.44459, 12.3999, 19.4573, -5.44459, 12.6499, 21.9573, 4.30541, 22.3999, 21.9573, -4.44459, 23.8999, 21.9573, -3.69459, 15.6499, 21.9573, 2.80541, 16.1499, 21.9573, 5.05541, 20.1499, 21.9573, 2.80541, 19.1499, 21.9573, 0.80541, 12.8999, 21.9573, 2.80541, 11.6499, 18.2073, -3.44459, 11.3999, 18.4573, -3.69459, 11.3999, 17.9573, -2.94459, 7.64988, 17.7073, 1.80541, 9.39988, 17.7073, 1.80541, 9.64988, 17.7073, 0.80541, 11.3999, 17.7073, 0.80541, 10.3999, 17.7073, -2.94459, 3.64988, 17.7073, -0.44459, 2.14988, 17.7073, -3.19459, 13.1499, 17.7073, 0.80541, 13.3999, 17.7073, 1.80541, 15.1499, 17.7073, 1.80541, 11.8999, 17.7073, -2.94459, 13.1499, 17.7073, -2.94459, 18.6499, 17.7073, -0.19459, 20.3999, 43.9573, -1.94459, 20.3999, 43.9573, -1.44459, 21.3999, 43.9573, -1.44459, 23.8999, 43.9573, -3.94459, 21.8999, 43.9573, -4.19459, 23.6499, 17.7073, -3.19459, 23.6499, 17.7073, -3.94459, 22.3999, 17.7073, -4.19459, 20.8999, 17.7073, -1.69459, 22.1499, 17.7073, -0.44459, -1.10012, 17.7073, -1.94459, -0.350123, 17.7073, -0.69459, 1.14988, 17.7073, -1.94459, 0.399877, 17.7073, -3.69459, -1.10012, 17.7073, -3.69459, -0.350123, 43.9573, -3.69459, 0.899877, 43.9573, -2.44459, 0.399877, 43.9573, -3.69459, 10.3999, 59.9573, -0.94459, 10.3999, 60.4573, 1.80541, 12.3999, 60.4573, 1.80541, 12.3999, 59.9573, -0.94459, 24.3999, 17.7073, -0.19459, 24.3999, 17.7073, 0.30541, 25.1499, 17.7073, 0.30541, 25.1499, 17.7073, -0.94459, 0.899877, 17.7073, 0.80541, 2.14988, 17.7073, 0.30541, 1.14988, 17.7073, -0.19459, 0.899877, 17.7073, 0.30541, 20.1499, 17.7073, 0.80541, 20.8999, 17.7073, 1.05541, 20.6499, 17.7073, 0.30541, 20.1499, 17.7073, 0.30541, 3.89988, 17.7073, 1.05541, 1.64988, 17.7073, 2.05541, 2.64988, 17.7073, 2.80541, 5.64988, 17.7073, 2.80541, 5.64988, 17.7073, 2.05541, 17.8999, 17.7073, 1.55541, 16.8999, 17.7073, 2.30541, 16.8999, 17.7073, 2.80541, 20.1499, 17.7073, 2.80541, 19.8999, 17.7073, 2.05541, 18.8999, 17.7073, 1.55541, 16.8999, 43.9573, 2.30541, 16.8999, 43.9573, 2.80541, 17.6499, 43.9573, 2.30541, 7.89988, 43.9573, 4.80541, 8.64988, 43.9573, 4.55541, 8.64988, 43.9573, 3.80541, 6.89988, 43.9573, 3.05541, 6.89988, 43.9573, 3.80541, 13.3999, 43.9573, 4.30541, 14.1499, 43.9573, 5.55541, 15.6499, 43.9573, 4.30541, 15.3999, 43.9573, 3.05541)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 4), PackedInt32Array(7, 4, 8), PackedInt32Array(8, 4, 9), PackedInt32Array(11, 10, 12), PackedInt32Array(14, 13, 15), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(19, 16, 10), PackedInt32Array(9, 4, 20), PackedInt32Array(20, 4, 21), PackedInt32Array(20, 21, 15), PackedInt32Array(23, 22, 0), PackedInt32Array(0, 22, 3), PackedInt32Array(3, 24, 2), PackedInt32Array(2, 24, 13), PackedInt32Array(13, 24, 15), PackedInt32Array(15, 24, 20), PackedInt32Array(10, 16, 12), PackedInt32Array(12, 16, 22), PackedInt32Array(22, 16, 3), PackedInt32Array(28, 27, 25), PackedInt32Array(25, 27, 18), PackedInt32Array(18, 27, 17), PackedInt32Array(17, 27, 26), PackedInt32Array(30, 29, 31), PackedInt32Array(31, 29, 32), PackedInt32Array(34, 33, 35), PackedInt32Array(35, 33, 36), PackedInt32Array(39, 38, 36), PackedInt32Array(36, 38, 37), PackedInt32Array(36, 37, 35), PackedInt32Array(28, 25, 32), PackedInt32Array(32, 25, 40), PackedInt32Array(32, 40, 31), PackedInt32Array(38, 39, 29), PackedInt32Array(29, 39, 32), PackedInt32Array(33, 42, 36), PackedInt32Array(36, 42, 41), PackedInt32Array(43, 41, 44), PackedInt32Array(44, 41, 42), PackedInt32Array(46, 45, 47), PackedInt32Array(47, 45, 48), PackedInt32Array(48, 45, 50), PackedInt32Array(48, 50, 49), PackedInt32Array(53, 52, 51), PackedInt32Array(55, 54, 51), PackedInt32Array(51, 54, 56), PackedInt32Array(59, 58, 60), PackedInt32Array(60, 58, 57), PackedInt32Array(60, 57, 61), PackedInt32Array(62, 47, 63), PackedInt32Array(63, 47, 48), PackedInt32Array(50, 64, 49), PackedInt32Array(49, 64, 65), PackedInt32Array(65, 64, 66), PackedInt32Array(66, 64, 67), PackedInt32Array(59, 60, 66), PackedInt32Array(66, 60, 65), PackedInt32Array(51, 56, 53), PackedInt32Array(53, 56, 61), PackedInt32Array(53, 61, 68), PackedInt32Array(68, 61, 57), PackedInt32Array(69, 71, 70), PackedInt32Array(74, 73, 75), PackedInt32Array(75, 73, 72), PackedInt32Array(78, 77, 76), PackedInt32Array(81, 80, 79), PackedInt32Array(83, 82, 78), PackedInt32Array(83, 78, 84), PackedInt32Array(84, 78, 76), PackedInt32Array(86, 85, 87), PackedInt32Array(87, 85, 88), PackedInt32Array(79, 90, 89), PackedInt32Array(89, 91, 79), PackedInt32Array(79, 91, 81), PackedInt32Array(93, 92, 94), PackedInt32Array(94, 92, 95), PackedInt32Array(86, 87, 89), PackedInt32Array(89, 87, 91), PackedInt32Array(94, 95, 85), PackedInt32Array(85, 95, 88), PackedInt32Array(83, 84, 93), PackedInt32Array(93, 84, 92), PackedInt32Array(99, 98, 96), PackedInt32Array(96, 98, 97), PackedInt32Array(101, 100, 102), PackedInt32Array(102, 100, 103), PackedInt32Array(104, 80, 81), PackedInt32Array(106, 105, 104), PackedInt32Array(106, 104, 107), PackedInt32Array(107, 104, 81), PackedInt32Array(110, 109, 108), PackedInt32Array(111, 106, 107), PackedInt32Array(113, 111, 112), PackedInt32Array(112, 111, 107), PackedInt32Array(110, 108, 114), PackedInt32Array(114, 108, 115), PackedInt32Array(112, 116, 113), PackedInt32Array(108, 116, 115), PackedInt32Array(115, 116, 112), PackedInt32Array(120, 119, 117), PackedInt32Array(117, 119, 118), PackedInt32Array(123, 122, 121), PackedInt32Array(126, 125, 124), PackedInt32Array(126, 124, 127), PackedInt32Array(127, 124, 128), PackedInt32Array(128, 124, 129), PackedInt32Array(129, 124, 130), PackedInt32Array(132, 131, 133), PackedInt32Array(133, 131, 134), PackedInt32Array(136, 135, 137), PackedInt32Array(137, 135, 138), PackedInt32Array(137, 138, 140), PackedInt32Array(140, 138, 139), PackedInt32Array(142, 141, 143), PackedInt32Array(143, 141, 144), PackedInt32Array(147, 146, 145), PackedInt32Array(151, 150, 148), PackedInt32Array(148, 150, 149), PackedInt32Array(155, 154, 152), PackedInt32Array(152, 154, 153), PackedInt32Array(158, 157, 156), PackedInt32Array(160, 159, 161), PackedInt32Array(161, 159, 162), PackedInt32Array(159, 163, 162), PackedInt32Array(162, 163, 164), PackedInt32Array(164, 163, 165), PackedInt32Array(165, 163, 158), PackedInt32Array(165, 166, 164), PackedInt32Array(156, 168, 167), PackedInt32Array(167, 165, 156), PackedInt32Array(156, 165, 158), PackedInt32Array(163, 169, 158), PackedInt32Array(171, 170, 172), PackedInt32Array(172, 170, 173), PackedInt32Array(173, 170, 174), PackedInt32Array(174, 170, 175), PackedInt32Array(179, 178, 176), PackedInt32Array(176, 178, 177), PackedInt32Array(181, 180, 182), PackedInt32Array(182, 180, 183), PackedInt32Array(183, 185, 184), PackedInt32Array(183, 184, 186), PackedInt32Array(182, 183, 163), PackedInt32Array(163, 183, 186), PackedInt32Array(163, 186, 187), PackedInt32Array(163, 187, 169), PackedInt32Array(189, 188, 190), PackedInt32Array(190, 188, 193), PackedInt32Array(190, 193, 192), PackedInt32Array(190, 192, 191), PackedInt32Array(197, 196, 194), PackedInt32Array(194, 196, 195), PackedInt32Array(199, 198, 200), PackedInt32Array(200, 198, 201), PackedInt32Array(201, 198, 202), PackedInt32Array(204, 203, 205), PackedInt32Array(205, 203, 206), PackedInt32Array(206, 203, 207), PackedInt32Array(209, 208, 210), PackedInt32Array(210, 208, 212), PackedInt32Array(210, 212, 211), PackedInt32Array(214, 213, 215), PackedInt32Array(215, 213, 216), PackedInt32Array(218, 217, 219), PackedInt32Array(219, 217, 220), PackedInt32Array(222, 221, 217), PackedInt32Array(217, 221, 220), PackedInt32Array(226, 225, 223), PackedInt32Array(223, 225, 224), PackedInt32Array(229, 228, 227), PackedInt32Array(229, 227, 230), PackedInt32Array(231, 229, 230), PackedInt32Array(235, 234, 232), PackedInt32Array(232, 234, 233), PackedInt32Array(237, 236, 238), PackedInt32Array(238, 236, 240), PackedInt32Array(238, 240, 239), PackedInt32Array(243, 242, 241), PackedInt32Array(244, 247, 245), PackedInt32Array(245, 247, 246), PackedInt32Array(249, 248, 250), PackedInt32Array(250, 248, 251), PackedInt32Array(251, 253, 252), PackedInt32Array(255, 254, 248), PackedInt32Array(248, 254, 251), PackedInt32Array(250, 251, 186), PackedInt32Array(186, 251, 252), PackedInt32Array(186, 252, 256), PackedInt32Array(186, 256, 187), PackedInt32Array(252, 257, 256), PackedInt32Array(258, 41, 43), PackedInt32Array(260, 259, 261), PackedInt32Array(261, 259, 262), PackedInt32Array(262, 259, 263), PackedInt32Array(264, 258, 265), PackedInt32Array(265, 258, 266), PackedInt32Array(262, 263, 267), PackedInt32Array(267, 263, 266), PackedInt32Array(267, 266, 258), PackedInt32Array(267, 258, 43), PackedInt32Array(255, 269, 254), PackedInt32Array(254, 269, 268), PackedInt32Array(273, 272, 270), PackedInt32Array(270, 272, 271), PackedInt32Array(276, 275, 274), PackedInt32Array(278, 277, 279), PackedInt32Array(279, 277, 280), PackedInt32Array(280, 277, 281), PackedInt32Array(281, 277, 282), PackedInt32Array(283, 279, 284), PackedInt32Array(284, 279, 280), PackedInt32Array(287, 286, 285), PackedInt32Array(289, 288, 290), PackedInt32Array(290, 288, 286), PackedInt32Array(286, 288, 285), PackedInt32Array(62, 63, 289), PackedInt32Array(289, 63, 288), PackedInt32Array(287, 285, 282), PackedInt32Array(282, 285, 281), PackedInt32Array(294, 293, 291), PackedInt32Array(291, 293, 292), PackedInt32Array(295, 297, 296), PackedInt32Array(300, 299, 298), PackedInt32Array(55, 301, 54), PackedInt32Array(54, 301, 302), PackedInt32Array(306, 305, 303), PackedInt32Array(303, 305, 304), PackedInt32Array(304, 305, 298), PackedInt32Array(298, 305, 300), PackedInt32Array(301, 307, 302), PackedInt32Array(302, 307, 306), PackedInt32Array(302, 306, 303), PackedInt32Array(283, 284, 298), PackedInt32Array(298, 284, 304), PackedInt32Array(310, 309, 308), PackedInt32Array(312, 311, 313), PackedInt32Array(313, 311, 314), PackedInt32Array(6, 315, 5), PackedInt32Array(5, 315, 316), PackedInt32Array(316, 315, 308), PackedInt32Array(317, 319, 318), PackedInt32Array(321, 320, 322), PackedInt32Array(322, 320, 323), PackedInt32Array(310, 308, 324), PackedInt32Array(324, 308, 315), PackedInt32Array(324, 315, 325), PackedInt32Array(329, 328, 326), PackedInt32Array(326, 328, 319), PackedInt32Array(319, 328, 327), PackedInt32Array(330, 322, 331), PackedInt32Array(331, 322, 323), PackedInt32Array(319, 317, 326), PackedInt32Array(326, 317, 313), PackedInt32Array(326, 313, 314), PackedInt32Array(261, 330, 260), PackedInt32Array(260, 330, 331), PackedInt32Array(325, 314, 332), PackedInt32Array(332, 314, 333), PackedInt32Array(333, 314, 311), PackedInt32Array(336, 323, 334), PackedInt32Array(334, 323, 335), PackedInt32Array(335, 323, 320), PackedInt32Array(332, 324, 325), PackedInt32Array(329, 338, 328), PackedInt32Array(328, 338, 334), PackedInt32Array(334, 338, 336), PackedInt32Array(336, 338, 337), PackedInt32Array(340, 339, 341), PackedInt32Array(341, 339, 344), PackedInt32Array(341, 344, 343), PackedInt32Array(341, 343, 342), PackedInt32Array(346, 345, 347), PackedInt32Array(347, 345, 348), PackedInt32Array(348, 345, 349), PackedInt32Array(349, 345, 350), PackedInt32Array(354, 353, 351), PackedInt32Array(351, 353, 352), PackedInt32Array(358, 357, 355), PackedInt32Array(355, 357, 356), PackedInt32Array(361, 360, 359), PackedInt32Array(363, 362, 364), PackedInt32Array(364, 362, 365), PackedInt32Array(365, 362, 366), PackedInt32Array(76, 77, 367), PackedInt32Array(109, 110, 368), PackedInt32Array(368, 110, 369), PackedInt32Array(373, 372, 370), PackedInt32Array(370, 372, 371), PackedInt32Array(367, 374, 370), PackedInt32Array(370, 371, 367), PackedInt32Array(367, 371, 76), PackedInt32Array(368, 369, 373), PackedInt32Array(373, 369, 372), PackedInt32Array(377, 376, 375), PackedInt32Array(380, 379, 378), PackedInt32Array(377, 375, 381), PackedInt32Array(377, 381, 382), PackedInt32Array(382, 381, 380), PackedInt32Array(382, 380, 168), PackedInt32Array(168, 380, 378), PackedInt32Array(168, 378, 383), PackedInt32Array(168, 383, 167), PackedInt32Array(383, 384, 167), PackedInt32Array(387, 386, 385), PackedInt32Array(381, 375, 388), PackedInt32Array(389, 385, 388), PackedInt32Array(388, 385, 381), PackedInt32Array(389, 257, 385), PackedInt32Array(385, 257, 387), PackedInt32Array(387, 257, 390), PackedInt32Array(390, 257, 252), PackedInt32Array(392, 391, 393), PackedInt32Array(393, 391, 395), PackedInt32Array(393, 395, 394), PackedInt32Array(397, 396, 398), PackedInt32Array(398, 396, 399), PackedInt32Array(399, 396, 400), PackedInt32Array(405, 404, 401), PackedInt32Array(401, 404, 403), PackedInt32Array(401, 403, 402), PackedInt32Array(408, 407, 406), PackedInt32Array(412, 411, 409), PackedInt32Array(409, 411, 410), PackedInt32Array(414, 413, 415), PackedInt32Array(415, 413, 416), PackedInt32Array(420, 419, 417), PackedInt32Array(417, 419, 418), PackedInt32Array(424, 423, 421), PackedInt32Array(421, 423, 422), PackedInt32Array(429, 428, 425), PackedInt32Array(425, 428, 427), PackedInt32Array(425, 427, 426), PackedInt32Array(431, 430, 432), PackedInt32Array(432, 430, 435), PackedInt32Array(432, 435, 434), PackedInt32Array(432, 434, 433), PackedInt32Array(438, 437, 436), PackedInt32Array(440, 439, 441), PackedInt32Array(441, 439, 443), PackedInt32Array(441, 443, 442), PackedInt32Array(445, 444, 446), PackedInt32Array(446, 444, 447)]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_11ood"]
 size = Vector3(10, 0.504, 10)
@@ -153,404 +160,407 @@ transform = Transform3D(-0.145897, 0, 1.08378, 0, 1.55655, 0, -1.08378, 0, -0.14
 
 [node name="Castle" type="Node3D" parent="World"]
 
-[node name="FightRing" type="Node3D" parent="World/Castle"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="World/Castle"]
+navigation_mesh = SubResource("NavigationMesh_aald4")
+
+[node name="FightRing" type="Node3D" parent="World/Castle/NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.771, 15.6388, -8.77811)
 
-[node name="InnerRing" type="Node3D" parent="World/Castle/FightRing"]
+[node name="InnerRing" type="Node3D" parent="World/Castle/NavigationRegion3D/FightRing"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494901, 2.89706, -0.404456)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(1.44845, 0, 0.5, 0, 1, 0, -0.836264, 0, 0.866025, -11.005, -0.0317764, 6.05561)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(1.44845, 0, -0.5, 0, 1, 0, 0.836264, 0, 0.866025, -10.5549, -0.0317764, -6.92001)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(1.67253, 0, 0, 0, 1, 0, 0, 0, 1, -11.9641, -0.0469742, -0.0670557)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-1.44845, 0, -0.5, 0, 1, 0, 0.836263, 0, -0.866025, 12.0154, -0.0317764, -7.78554)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 7.43896)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-1.44845, 0, 0.5, 0, 1, 0, -0.836264, 0, -0.866025, 11.9042, -0.0317764, 7.81379)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 7.07507)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 15.3958, 0.895355, -4.05391)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(4.39083, 4.47034, 3)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D16" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D16" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 23.1081, 1.8197, -4.05391)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(4.8647, 6.31903, 3)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D14" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D14" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 18.8013, -3.28032, -0.041378)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(6.28577, 4.04636, 8.00293)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D15" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D15" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 20.2439, 3.90013, -0.041378)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(6.28577, 2.57208, 5.11755)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D13" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 17.3882, 0.895355, 3.89579)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(6.77327, 4.47034, 1.10059)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(0.836263, 0, -0.866025, 0, 1, 0, 1.44845, 0, 0.5, -5.54077, -0.0317764, -12.1409)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-0.836264, 0, -0.866025, 0, 1, 0, 1.44845, 0, -0.5, 7.43485, -0.0317764, -11.6907)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 0.581897, -0.0469742, -13.0999)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(-0.836263, 0, 0.866025, 0, 1, 0, -1.44845, 0, -0.5, 7.19142, -0.0317764, 12.5199)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(0.836264, 0, 0.866025, 0, 1, 0, -1.44845, 0, 0.5, -5.7842, -0.0317764, 12.0697)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/FightRing/InnerRing"]
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
 transform = Transform3D(2.19325e-07, 0, 1, 0, 1, 0, -1.67253, 0, 1.31134e-07, 1.06875, -0.0469742, 13.4789)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="arch2" parent="World/Castle/FightRing/InnerRing" instance=ExtResource("10_qlufj")]
+[node name="arch2" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing" instance=ExtResource("10_qlufj")]
 transform = Transform3D(-5.96046e-08, 0, 2.72326, 0, 1, 0, -1, 0, -1.62319e-07, 14.465, 2.1159, 0.469988)
 
-[node name="Cube" parent="World/Castle/FightRing/InnerRing/arch2" index="0"]
+[node name="Cube" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing/arch2" index="0"]
 transform = Transform3D(1.00897, 0, 0, 0, 1, 0, 0, 0, 2.07012, 0, 0, 1.06865)
 material_override = ExtResource("7_ftq5n")
 
-[node name="UpperRing" type="Node3D" parent="World/Castle/FightRing"]
+[node name="UpperRing" type="Node3D" parent="World/Castle/NavigationRegion3D/FightRing"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.480397, 14.2772, -0.438651)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(1.44845, 0, 0.5, 0, 1, 0, -0.836264, 0, 0.866025, -11.005, 14.0247, 6.05561)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(1.44845, 0, -0.5, 0, 1, 0, 0.836264, 0, 0.866025, -10.5549, 14.0247, -6.92001)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(1.67253, 0, 0, 0, 1, 0, 0, 0, 1, -11.9641, 14.0095, -0.0670557)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(-1.44845, 0, -0.5, 0, 1, 0, 0.836263, 0, -0.866025, 12.6557, 14.0247, -6.67658)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(-1.44845, 0, 0.5, 0, 1, 0, -0.836264, 0, -0.866025, 12.2055, 14.0247, 6.29904)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 13.6148, 14.0095, -0.553912)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(0.836263, 0, -0.866025, 0, 1, 0, 1.44845, 0, 0.5, -5.54077, 14.0247, -12.1409)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(-0.836264, 0, -0.866025, 0, 1, 0, 1.44845, 0, -0.5, 7.43485, 14.0247, -11.6907)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 0.581897, 14.0095, -13.0999)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(-0.836263, 0, 0.866025, 0, 1, 0, -1.44845, 0, -0.5, 7.19142, 14.0247, 12.5199)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(0.836264, 0, 0.866025, 0, 1, 0, -1.44845, 0, 0.5, -5.7842, 14.0247, 12.0697)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/FightRing/UpperRing"]
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/UpperRing"]
 transform = Transform3D(2.19325e-07, 0, 1, 0, 1, 0, -1.67253, 0, 1.31134e-07, 1.06875, 14.0095, 13.4789)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 35, 10)
 material = ExtResource("7_ftq5n")
 
-[node name="OuterRing" type="Node3D" parent="World/Castle/FightRing"]
+[node name="OuterRing" type="Node3D" parent="World/Castle/NavigationRegion3D/FightRing"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494901, 2.89706, -0.404456)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(1.44845, 0, 0.5, 0, 2.60122, 0, -0.836264, 0, 0.866025, -13.945, -0.023665, 7.75301)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(1.44845, 0, -0.5, 0, 2.60122, 0, 0.836264, 0, 0.866025, -13.4949, -0.023665, -8.61741)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(1.67253, 0, 0, 0, 2.60122, 0, 0, 0, 1, -15.3589, -0.0631976, -0.0670557)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(-1.44845, 0, -0.5, 0, 2.60122, 0, 0.836263, 0, -0.866025, 14.5519, -0.023665, -10.1818)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 11)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(-1.44845, 0, 0.5, 0, 2.60122, 0, -0.836264, 0, -0.866025, 14.3003, -0.023665, 9.46042)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 11.7941)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 2.60122, 0, -1.46217e-07, 0, -1, 17.0096, 5.60097, -0.553912)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 2, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(0.836263, 0, -0.866025, 0, 2.60122, 0, 1.44845, 0, 0.5, -7.23817, -0.023665, -15.0808)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D8" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(-0.836264, 0, -0.866025, 0, 2.60122, 0, 1.44845, 0, -0.5, 9.13225, -0.023665, -14.6307)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(-7.31085e-08, 0, -1, 0, 2.60122, 0, 1.67253, 0, -4.37114e-08, 0.581897, -0.0631976, -16.4947)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D10" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(-0.836263, 0, 0.866025, 0, 2.60122, 0, -1.44845, 0, -0.5, 8.88882, -0.023665, 15.4599)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D11" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(0.836264, 0, 0.866025, 0, 2.60122, 0, -1.44845, 0, 0.5, -7.4816, -0.023665, 15.0097)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/FightRing/OuterRing"]
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/OuterRing"]
 transform = Transform3D(2.19325e-07, 0, 1, 0, 2.60122, 0, -1.67253, 0, 1.31134e-07, 1.06875, -0.0631976, 16.8737)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.261, 6.355, 15.175)
 material = ExtResource("7_ftq5n")
 
-[node name="Pillars" type="Node3D" parent="World/Castle/FightRing"]
+[node name="Pillars" type="Node3D" parent="World/Castle/NavigationRegion3D/FightRing"]
 
-[node name="arch" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_qlufj")]
+[node name="arch" parent="World/Castle/NavigationRegion3D/FightRing/Pillars" instance=ExtResource("10_qlufj")]
 transform = Transform3D(1.87766, 0, 1.70306, 0, 4.21416, 0, -1.87766, 0, 1.70306, 7.42855, 23.7295, 7.45796)
 
-[node name="Cube" parent="World/Castle/FightRing/Pillars/arch" index="0"]
+[node name="Cube" parent="World/Castle/NavigationRegion3D/FightRing/Pillars/arch" index="0"]
 material_override = ExtResource("7_ftq5n")
 
-[node name="arch2" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_qlufj")]
+[node name="arch2" parent="World/Castle/NavigationRegion3D/FightRing/Pillars" instance=ExtResource("10_qlufj")]
 transform = Transform3D(1.87766, 0, -1.70306, 0, 4.21416, 0, 1.87766, 0, 1.70306, -5.97121, 23.7295, 7.45796)
 
-[node name="Cube" parent="World/Castle/FightRing/Pillars/arch2" index="0"]
+[node name="Cube" parent="World/Castle/NavigationRegion3D/FightRing/Pillars/arch2" index="0"]
 material_override = ExtResource("7_ftq5n")
 
-[node name="arch3" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_qlufj")]
+[node name="arch3" parent="World/Castle/NavigationRegion3D/FightRing/Pillars" instance=ExtResource("10_qlufj")]
 transform = Transform3D(-1.87766, 0, -1.70306, 0, 4.21416, 0, 1.87766, 0, -1.70306, -5.97121, 23.7295, -5.9418)
 
-[node name="Cube" parent="World/Castle/FightRing/Pillars/arch3" index="0"]
+[node name="Cube" parent="World/Castle/NavigationRegion3D/FightRing/Pillars/arch3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.42761, 5.96046e-08, 0, 0.813871)
 material_override = ExtResource("7_ftq5n")
 
-[node name="arch4" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_qlufj")]
+[node name="arch4" parent="World/Castle/NavigationRegion3D/FightRing/Pillars" instance=ExtResource("10_qlufj")]
 transform = Transform3D(-1.87766, 0, 1.70306, 0, 4.21416, 0, -1.87766, 0, -1.70306, 7.42855, 23.7295, -5.9418)
 
-[node name="Cube" parent="World/Castle/FightRing/Pillars/arch4" index="0"]
+[node name="Cube" parent="World/Castle/NavigationRegion3D/FightRing/Pillars/arch4" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.394859)
 material_override = ExtResource("7_ftq5n")
 
-[node name="pillar_square" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_q222i")]
+[node name="pillar_square" parent="World/Castle/NavigationRegion3D/FightRing/Pillars" instance=ExtResource("10_q222i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.628395, 1.54112, -11.5615)
 
-[node name="Cube" parent="World/Castle/FightRing/Pillars/pillar_square" index="0"]
+[node name="Cube" parent="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square" index="0"]
 transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 0, 0, 0)
 material_override = ExtResource("7_ftq5n")
 
-[node name="pillar_square2" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_q222i")]
+[node name="pillar_square2" parent="World/Castle/NavigationRegion3D/FightRing/Pillars" instance=ExtResource("10_q222i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.628782, 1.541, 11.562)
 
-[node name="Cube" parent="World/Castle/FightRing/Pillars/pillar_square2" index="0"]
+[node name="Cube" parent="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square2" index="0"]
 transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 0, 0, 0)
 material_override = ExtResource("7_ftq5n")
 
-[node name="pillar_square3" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_q222i")]
+[node name="pillar_square3" parent="World/Castle/NavigationRegion3D/FightRing/Pillars" instance=ExtResource("10_q222i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.628395, 11.0793, -11.5615)
 
-[node name="Cube" parent="World/Castle/FightRing/Pillars/pillar_square3" index="0"]
+[node name="Cube" parent="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square3" index="0"]
 transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 0, 0, 0)
 material_override = ExtResource("7_ftq5n")
 
-[node name="pillar_square4" parent="World/Castle/FightRing/Pillars" instance=ExtResource("10_q222i")]
+[node name="pillar_square4" parent="World/Castle/NavigationRegion3D/FightRing/Pillars" instance=ExtResource("10_q222i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.628782, 11.0792, 11.562)
 
-[node name="Cube" parent="World/Castle/FightRing/Pillars/pillar_square4" index="0"]
+[node name="Cube" parent="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square4" index="0"]
 transform = Transform3D(1.36501, 0, 0, 0, 1.36501, 0, 0, 0, 1.36501, 0, 0, 0)
 material_override = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/FightRing/Pillars"]
+[node name="CSGBox3D12" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/Pillars"]
 transform = Transform3D(7.54979e-08, 0, 1, -0.121263, 0.99262, 9.1551e-09, -0.99262, -0.121263, 7.49408e-08, 0.651593, 32.5142, 10.7884)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(3.89661, 23.4695, 2.67285)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="World/Castle/FightRing/Pillars"]
+[node name="CSGBox3D13" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/Pillars"]
 transform = Transform3D(-1.62276e-07, -1.06011e-08, -1, -0.121263, 0.99262, 9.1551e-09, 0.99262, 0.121263, -1.62364e-07, 0.651593, 32.0755, -10.8111)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(3.89661, 24.3534, 2.67285)
 material = ExtResource("7_ftq5n")
 
-[node name="FloorBase" type="CSGBox3D" parent="World/Castle/FightRing"]
+[node name="FloorBase" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing"]
 transform = Transform3D(2.19325e-07, 0, 1, 0, 1, 0, -1.67253, 0, 1.31134e-07, 0, 0, 0)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(14.426, 3.13713, 24.4827)
 material = ExtResource("7_ftq5n")
 
-[node name="brazier" parent="World/Castle/FightRing" instance=ExtResource("11_emmfv")]
+[node name="brazier" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("11_emmfv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.94538, 1.61576, 3.92497)
 
-[node name="brazier2" parent="World/Castle/FightRing" instance=ExtResource("11_emmfv")]
+[node name="brazier2" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("11_emmfv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.97048, 1.61576, -4.37235)
 
-[node name="rock_01" parent="World/Castle/FightRing" instance=ExtResource("6_6wf1f")]
+[node name="rock_01" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("6_6wf1f")]
 transform = Transform3D(0.0377843, 0.0263564, 0.0118995, -0.0236505, 0.0168976, 0.0376701, 0.0166407, -0.0358291, 0.0265193, 1.03678, 1.79845, 4.29332)
 
-[node name="rock_02" parent="World/Castle/FightRing" instance=ExtResource("6_6wf1f")]
+[node name="rock_02" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("6_6wf1f")]
 transform = Transform3D(0.0590758, 0, 0, 0, 0.0579958, 0, 0, 0, 0.0590758, 2.04833, 2.46597, 3.83835)
 
-[node name="rough_floor_patch" parent="World/Castle/FightRing" instance=ExtResource("8_11ood")]
+[node name="rough_floor_patch" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("8_11ood")]
 transform = Transform3D(1.48693, 0, 0, 0, 1, 0, 0, 0, 1.48693, 1.7095, 1.8276, -1.75557)
 
-[node name="Plane" parent="World/Castle/FightRing/rough_floor_patch" index="0"]
+[node name="Plane" parent="World/Castle/NavigationRegion3D/FightRing/rough_floor_patch" index="0"]
 transform = Transform3D(1.74545, 0, 0, 0, 1, 0, 0, 0, 1.74545, 0, -0.194406, 0)
 material_override = ExtResource("9_q222i")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World/Castle/FightRing/rough_floor_patch/Plane" index="0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Castle/NavigationRegion3D/FightRing/rough_floor_patch/Plane" index="0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Castle/FightRing/rough_floor_patch/Plane/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Castle/NavigationRegion3D/FightRing/rough_floor_patch/Plane/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248108, 0)
 shape = SubResource("BoxShape3D_11ood")
 
@@ -746,16 +756,25 @@ transform = Transform3D(0.258819, 0, -1.91782, 0, 1, 0, 0.965926, 0, 0.513879, 3
 [node name="stairs3" parent="." instance=ExtResource("14_1jqj6")]
 transform = Transform3D(0.489169, 0, -0.897985, 0, 1.05001, 0, 0.872189, 0, 0.503637, 28.0167, -4.52399, 24.3829)
 
-[editable path="World/Castle/FightRing/InnerRing/arch2"]
-[editable path="World/Castle/FightRing/Pillars/arch"]
-[editable path="World/Castle/FightRing/Pillars/arch2"]
-[editable path="World/Castle/FightRing/Pillars/arch3"]
-[editable path="World/Castle/FightRing/Pillars/arch4"]
-[editable path="World/Castle/FightRing/Pillars/pillar_square"]
-[editable path="World/Castle/FightRing/Pillars/pillar_square2"]
-[editable path="World/Castle/FightRing/Pillars/pillar_square3"]
-[editable path="World/Castle/FightRing/Pillars/pillar_square4"]
-[editable path="World/Castle/FightRing/rough_floor_patch"]
+[node name="DebugEnemySpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.81905, -3.80679, -3.94455)
+script = ExtResource("16_8s55e")
+enemy = ExtResource("17_eac86")
+metadata/_custom_type_script = "uid://dp0lj1lpir5eu"
+
+[node name="lever" parent="." instance=ExtResource("18_uj6qf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.697, -4.76975, -11.6989)
+
+[editable path="World/Castle/NavigationRegion3D/FightRing/InnerRing/arch2"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/arch"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/arch2"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/arch3"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/arch4"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square2"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square3"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square4"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/rough_floor_patch"]
 [editable path="World/Castle/Balcony/rough_floor_patch2"]
 [editable path="World/Castle/Balcony/pillar_square"]
 [editable path="World/Castle/Balcony/pillar_square2"]

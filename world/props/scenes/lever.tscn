@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=3 uid="uid://bg18hod4qfwqf"]
+
+[ext_resource type="PackedScene" uid="uid://06vpkhdm3ero" path="res://world/props/models/lever.glb" id="1_qppfg"]
+[ext_resource type="Texture2D" uid="uid://ddaj8nojwwjpa" path="res://world/props/textures/lever.png" id="2_4r4qo"]
+[ext_resource type="Script" uid="uid://ck3abtqewwe0w" path="res://world/props/scripts/lever.gd" id="2_60r31"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60r31"]
+diffuse_mode = 3
+albedo_texture = ExtResource("2_4r4qo")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4r4qo"]
+size = Vector3(0.325, 0.51, 0.370757)
+
+[sub_resource type="Animation" id="Animation_60r31"]
+resource_name = "lever_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.872665, 0, 0), Vector3(-0.872665, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_caocl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.872665, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1p7gp"]
+resource_name = "lever_down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.872665, 0, 0), Vector3(0.872665, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p6hpx"]
+resource_name = "lever_idle_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.872665, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4r4qo"]
+resource_name = "lever_idle_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.872665, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oj1jq"]
+_data = {
+&"RESET": SubResource("Animation_caocl"),
+&"lever_down": SubResource("Animation_1p7gp"),
+&"lever_idle_down": SubResource("Animation_4r4qo"),
+&"lever_idle_up": SubResource("Animation_p6hpx"),
+&"lever_up": SubResource("Animation_60r31")
+}
+
+[node name="lever" instance=ExtResource("1_qppfg")]
+script = ExtResource("2_60r31")
+prompt_text = "Lever"
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_60r31")
+
+[node name="Cylinder" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_60r31")
+
+[node name="Cylinder_001" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_60r31")
+
+[node name="Hitbox" type="Area3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.132156)
+shape = SubResource("BoxShape3D_4r4qo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_oj1jq")
+}
+autoplay = "lever_idle_up"

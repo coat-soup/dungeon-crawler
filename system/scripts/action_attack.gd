@@ -15,6 +15,7 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 		character.movement_manager.body.global_rotation.y = -(character.global_position - ai.targets[0].global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
 	
 	await character.get_tree().create_timer(1.0 / character.weapon_manager.weapon.speed_multiplier).timeout
+	print("attack ending naturally")
 	trigger_end_action()
 
 

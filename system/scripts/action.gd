@@ -19,7 +19,7 @@ enum ActionType {NONBLOCKING, BLOCKING} # blocking actions cant be performed if 
 @export var sustained_stamina_cost : int = 0
 var ticking := true
 var stamina_tick_speed := 16.0
-
+#var action_ended := false
 
 func can_perform_action(_character : Character) -> bool:
 	if (stamina_cost > 0 or sustained_stamina_cost > 0) and _character.stamina.cur_stamina <= 0: return false
