@@ -8,7 +8,7 @@ class_name EnemyCharacter
 func _ready() -> void:
 	health.took_damage.connect(on_took_damage)
 	health.died.connect(on_died)
-	stamina.stamina_changed.connect(on_stamina_changed)
+	weapon_manager.block_durability_changed.connect(on_stamina_changed)
 
 
 func on_took_damage(source : int, amount : int):
@@ -21,4 +21,4 @@ func on_died():
 
 
 func on_stamina_changed():
-	$Sprite3D/SubViewport/StaminaBar.value = stamina.cur_stamina
+	$Sprite3D/SubViewport/StaminaBar.value = weapon_manager.block_durability

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://cuhkwocop1mx7"]
+[gd_scene load_steps=41 format=4 uid="uid://cuhkwocop1mx7"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/scripts/game_manager.gd" id="1_0nv80"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/scripts/network_manager.gd" id="2_4p34j"]
@@ -19,6 +19,11 @@
 [ext_resource type="PackedScene" uid="uid://xh7j8iie55hm" path="res://enemies/scenes/enemy_humanoid.tscn" id="17_uj6qf"]
 [ext_resource type="PackedScene" uid="uid://bg18hod4qfwqf" path="res://world/props/scenes/lever.tscn" id="18_uj6qf"]
 [ext_resource type="PackedScene" uid="uid://dssxmsi4cf0hq" path="res://world/props/scenes/dummy.tscn" id="19_iva4b"]
+[ext_resource type="PackedScene" uid="uid://cj7p8kb5is0qr" path="res://weapons/models/longsword_model.tscn" id="20_15esb"]
+[ext_resource type="Script" uid="uid://dtr6wdyf2ykk0" path="res://system/scripts/debug_weapon_equip.gd" id="21_efs00"]
+[ext_resource type="PackedScene" uid="uid://cxk8ybyliq0yq" path="res://weapons/models/mace_model.tscn" id="21_jo4gk"]
+[ext_resource type="PackedScene" uid="uid://4vl3hnk6ruqg" path="res://weapons/models/rapier_model.tscn" id="22_efs00"]
+[ext_resource type="PackedScene" uid="uid://c0dhmtusdifw1" path="res://weapons/models/warhammer_model.tscn" id="23_s3145"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wf1f"]
 sky_top_color = Color(0.484482, 0.54318, 0.717929, 1)
@@ -127,6 +132,9 @@ shadow_mesh = SubResource("ArrayMesh_cwh3w")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_65325"]
 data = PackedVector3Array(-1, 0, 1, -1, 1, -1, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, -1, -1, 0, -1, 1, 1, -1, -1, 1, -1, -1, 0, -1, 1, 0, -1, 1, 1, -1, 1, 0, -1, 1, 1, 1, 1, 1, -1, 1, 0, -1, 1, 0, 1, 1, 1, 1, 1, 0, 1, -1, 1, 1, 1, 1, 1, 1, 0, 1, -1, 0, 1, -1, 1, 1, -1, 0, -1, 1, 0, 1, 1, 0, -1, -1, 0, -1, -1, 0, 1, 1, 0, 1, 1, 5.9999, 1, -0.5813, 5.9999, 0.5812, -1, 5.9999, 1, 1, 5.9999, 1, 0.5812, 5.9999, 0.5812, -0.5813, 5.9999, 0.5812, 1, 5.9999, 1, 1, 7, -1, 1, 5.9999, -1, 1, 5.9999, 1, 1, 7, 1, 1, 7, -1, 1, 1, 1, 0.5812, 1, -0.5813, 1, 1, -1, 1, 1, 1, 0.5812, 1, 0.5812, 0.5812, 1, -0.5813, -1, 5.9999, 1, -0.5813, 5.9999, -0.5813, -1, 5.9999, -1, -1, 5.9999, 1, -0.5813, 5.9999, 0.5812, -0.5813, 5.9999, -0.5813, 1, 5.9999, -1, 0.5812, 5.9999, 0.5812, 1, 5.9999, 1, 1, 5.9999, -1, 0.5812, 5.9999, -0.5813, 0.5812, 5.9999, 0.5812, 1, 7, -1, -1, 7, 1, -1, 7, -1, 1, 7, -1, 1, 7, 1, -1, 7, 1, -1, 5.9999, -1, -1, 7, 1, -1, 5.9999, 1, -1, 5.9999, -1, -1, 7, -1, -1, 7, 1, -1, 5.9999, 1, 1, 7, 1, 1, 5.9999, 1, -1, 5.9999, 1, -1, 7, 1, 1, 7, 1, 1, 5.9999, -1, -1, 7, -1, -1, 5.9999, -1, 1, 5.9999, -1, 1, 7, -1, -1, 7, -1, 0.5812, 1, 0.5812, 0.5812, 5.9999, -0.5813, 0.5812, 1, -0.5813, 0.5812, 1, 0.5812, 0.5812, 5.9999, 0.5812, 0.5812, 5.9999, -0.5813, -0.5813, 1, -0.5813, -0.5813, 5.9999, 0.5812, -0.5813, 1, 0.5812, -0.5813, 1, -0.5813, -0.5813, 5.9999, -0.5813, -0.5813, 5.9999, 0.5812, -0.5813, 1, 0.5812, 0.5812, 5.9999, 0.5812, 0.5812, 1, 0.5812, -0.5813, 1, 0.5812, -0.5813, 5.9999, 0.5812, 0.5812, 5.9999, 0.5812, 0.5812, 1, -0.5813, -0.5813, 5.9999, -0.5813, -0.5813, 1, -0.5813, 0.5812, 1, -0.5813, 0.5812, 5.9999, -0.5813, -0.5813, 5.9999, -0.5813, -1, 5.9999, -1, 0.5812, 5.9999, -0.5813, 1, 5.9999, -1, -1, 5.9999, -1, -0.5813, 5.9999, -0.5813, 0.5812, 5.9999, -0.5813, -1, 1, -1, -0.5813, 1, 0.5812, -1, 1, 1, -1, 1, -1, -0.5813, 1, -0.5813, -0.5813, 1, 0.5812, -1, 1, 1, 0.5812, 1, 0.5812, 1, 1, 1, -1, 1, 1, -0.5813, 1, 0.5812, 0.5812, 1, 0.5812, 1, 1, -1, -0.5813, 1, -0.5813, -1, 1, -1, 1, 1, -1, 0.5812, 1, -0.5813, -0.5813, 1, -0.5813)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s3145"]
+radius = 0.562945
 
 [node name="HubLevel" type="Node3D"]
 script = ExtResource("1_0nv80")
@@ -889,6 +897,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0051, -4.76975, -9.71799)
 script = ExtResource("17_eac86")
 enemies = Array[PackedScene]([ExtResource("17_uj6qf")])
 activation_lever = NodePath("../ArenaLever")
+wave_growth_multipler = 1.0
 metadata/_custom_type_script = "uid://m7grea7x21ug"
 
 [node name="ArenaLever" parent="." instance=ExtResource("18_uj6qf")]
@@ -899,6 +908,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.7158, -4.46552, 18.668)
 
 [node name="dummy2" parent="." instance=ExtResource("19_iva4b")]
 transform = Transform3D(0.839202, 0, -0.543819, 0, 1, 0, 0.543819, 0, 0.839202, 30.1577, -4.46552, 17.2969)
+
+[node name="WeaponRack" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1785, -5.17569, -5.8616)
+
+[node name="longsword" parent="WeaponRack" instance=ExtResource("20_15esb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40448, -0.259232, 0.00457859)
+
+[node name="Area3D" type="Area3D" parent="WeaponRack/longsword"]
+script = ExtResource("21_efs00")
+weapon_path = "res://weapons/models/longsword_model.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponRack/longsword/Area3D"]
+shape = SubResource("SphereShape3D_s3145")
+
+[node name="mace" parent="WeaponRack" instance=ExtResource("21_jo4gk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.461807, -0.258766, -0.0205545)
+
+[node name="Area3D" type="Area3D" parent="WeaponRack/mace"]
+script = ExtResource("21_efs00")
+weapon_path = "res://weapons/models/mace_model.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponRack/mace/Area3D"]
+shape = SubResource("SphereShape3D_s3145")
+
+[node name="rapier" parent="WeaponRack" instance=ExtResource("22_efs00")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.448221, -0.296452, -0.0360041)
+
+[node name="Area3D" type="Area3D" parent="WeaponRack/rapier"]
+script = ExtResource("21_efs00")
+weapon_path = "res://weapons/models/rapier_model.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponRack/rapier/Area3D"]
+shape = SubResource("SphereShape3D_s3145")
+
+[node name="warhammer" parent="WeaponRack" instance=ExtResource("23_s3145")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39211, -0.19101, -0.0311251)
+
+[node name="Area3D" type="Area3D" parent="WeaponRack/warhammer"]
+script = ExtResource("21_efs00")
+weapon_path = "res://weapons/models/warhammer_model.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponRack/warhammer/Area3D"]
+shape = SubResource("SphereShape3D_s3145")
 
 [editable path="World/Castle/NavigationRegion3D/FightRing/InnerRing/arch2"]
 [editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/arch"]

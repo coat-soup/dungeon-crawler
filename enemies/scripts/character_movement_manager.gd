@@ -91,6 +91,7 @@ func dash_input():
 func get_speed() -> float:
 	var relative_input = (Vector3(input_direction.x, 0, input_direction.z) * body.transform.basis).normalized()
 	var s = speed if not sprinting else sprint_speed
+	if body.weapon_manager.attack_state == WeaponManager.AttackState.STUNNED: s = speed * 0.4
 	return s if relative_input.z < 0 else s * 0.6
 
 

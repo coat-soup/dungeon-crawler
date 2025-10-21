@@ -26,11 +26,13 @@ func can_perform_action(_character : Character) -> bool:
 	return true if action_type == ActionType.NONBLOCKING else not _character.action_manager.is_performing_blocking_action()
 
 
+## WARNING: STAMINA DRAIN COMMENTED OUT
 func perform_action(_character : Character, _args : Array = []):
 	character = _character
-	if stamina_cost > 0 and character.is_multiplayer_authority(): character.stamina.drain_stamina.rpc(stamina_cost)
+	#if stamina_cost > 0 and character.is_multiplayer_authority(): character.stamina.drain_stamina.rpc(stamina_cost)
 	if sustained_stamina_cost > 0 and character.is_multiplayer_authority():
-		stamina_tick()
+		pass
+		#stamina_tick()
 		character.stamina.stamina_depleted.connect(trigger_end_action)
 	
 	action_started.emit()

@@ -19,6 +19,7 @@ script = ExtResource("2_mvefq")
 hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
 speed_multiplier = 1.5
 damage = 20
+overhead_damage = 30
 hitbox = NodePath("Hitbox")
 block_area = NodePath("BlockArea")
 

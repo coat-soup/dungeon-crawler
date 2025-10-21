@@ -138,6 +138,7 @@ body = NodePath("..")
 
 [node name="Stamina" type="Node" parent="."]
 script = ExtResource("3_kuufe")
+max_stamina = 1e+12
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("character_model")]
 script = ExtResource("5_3agdk")
@@ -164,6 +165,8 @@ shape = SubResource("SphereShape3D_st66r")
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("12_6x60x")
+profficiency = 0.5
+agression_level = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AIActionController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09491, 0)
@@ -191,8 +194,9 @@ stream = ExtResource("20_3p7iu")
 volume_db = -1.0
 max_distance = 25.0
 
-[node name="enemy_humanoid_model" parent="." node_paths=PackedStringArray("weapon_manager") instance=ExtResource("19_st66r")]
+[node name="enemy_humanoid_model" parent="." node_paths=PackedStringArray("movement_manager", "weapon_manager") instance=ExtResource("19_st66r")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+movement_manager = NodePath("../Movement")
 weapon_manager = NodePath("../WeaponManager")
 
 [node name="CollisionBottom" type="CollisionShape3D" parent="."]

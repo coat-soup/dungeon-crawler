@@ -41,7 +41,7 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_multiplayer_authority(): return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		var sens_mul = 1.0 if weapon_manager.attack_state == weapon_manager.AttackState.IDLE else 0.2
+		var sens_mul = 1.0 if weapon_manager.attack_state == weapon_manager.AttackState.IDLE or weapon_manager.attack_state == weapon_manager.AttackState.STUNNED else 0.2
 		body.rotate_y(-event.relative.x * sensetivity * sens_mul * Settings.get_setting("look_sensetivity"))
 		camera_pivot.rotate_x(-event.relative.y * sensetivity * sens_mul * Settings.get_setting("look_sensetivity"))
 		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))

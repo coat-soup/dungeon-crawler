@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://db1lqpw1tim4q"]
+[gd_scene load_steps=12 format=3 uid="uid://db1lqpw1tim4q"]
 
 [ext_resource type="Script" uid="uid://cv83h2tcngfv3" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
 [ext_resource type="Texture2D" uid="uid://cqmkcefkf8vqf" path="res://ui/textures/hit_marker.png" id="2_1u8fv"]
+[ext_resource type="Texture2D" uid="uid://btxooo6w545wq" path="res://ui/textures/cross.png" id="2_xbkoe"]
+[ext_resource type="Texture2D" uid="uid://druj4q3knf2j2" path="res://ui/textures/shield_solid.png" id="3_5eaw5"]
 [ext_resource type="Script" uid="uid://ol2oio1vwx3t" path="res://ui/scripts/options_menu_manager.gd" id="4_3i8ig"]
+[ext_resource type="Texture2D" uid="uid://ho1w61jqh1k4" path="res://ui/textures/shield_outline.png" id="4_xbkoe"]
 [ext_resource type="Script" uid="uid://d2ag8w6ck2est" path="res://ui/scripts/settings_panel_manager.gd" id="5_ky4nr"]
 [ext_resource type="PackedScene" uid="uid://kd4fvkpy7af2" path="res://ui/scenes/lobby_entry.tscn" id="10_yfaaw"]
 
@@ -139,6 +142,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Crosshair" type="TextureRect" parent="HUD/CrosshairHolder"]
+visible = false
 modulate = Color(1, 1, 1, 0.392157)
 texture_filter = 1
 layout_mode = 0
@@ -149,6 +153,7 @@ offset_bottom = 16.0
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(16, 16)
 mouse_filter = 2
+texture = ExtResource("2_xbkoe")
 
 [node name="Hitmarker" type="TextureRect" parent="HUD/CrosshairHolder"]
 visible = false
@@ -164,6 +169,31 @@ scale = Vector2(3, 3)
 pivot_offset = Vector2(16, 16)
 mouse_filter = 2
 texture = ExtResource("2_1u8fv")
+
+[node name="BlockDurabilityBar" type="TextureProgressBar" parent="HUD/CrosshairHolder"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = 194.0
+offset_right = 59.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.03999, 1)
+fill_mode = 3
+nine_patch_stretch = true
+texture_under = ExtResource("3_5eaw5")
+texture_over = ExtResource("4_xbkoe")
+texture_progress = ExtResource("3_5eaw5")
+tint_under = Color(0.458405, 0.458405, 0.458405, 1)
+tint_over = Color(0.695503, 0.695503, 0.695503, 1)
+tint_progress = Color(0.931289, 0.872475, 0, 1)
 
 [node name="MissionPanel" type="VBoxContainer" parent="HUD"]
 visible = false
@@ -309,6 +339,7 @@ offset_bottom = 363.745
 text = "REFRESH LOBBIES"
 
 [node name="OptionsPanel" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

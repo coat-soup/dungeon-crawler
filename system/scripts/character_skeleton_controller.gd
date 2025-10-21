@@ -7,6 +7,8 @@ signal block_window_toggled(bool)
 @onready var skeleton: Skeleton3D = $Armature_001/Skeleton3D
 @onready var animation_tree: AnimationTree = $AnimationTree
 
+@export var movement_manager : CharacterMovementManager
+
 @onready var weapon_rotator: Node3D = $Armature_001/Skeleton3D/TorsoIK/WeaponRotator
 @onready var weapon_rotator_ik: LookAtModifier3D = $Armature_001/Skeleton3D/WeaponRotatorIK
 
@@ -55,3 +57,16 @@ func on_started_kick():
 func start_damage_window(): damage_window_toggled.emit(true)
 func stop_damage_window(): damage_window_toggled.emit(false)
 func start_block_window(): block_window_toggled.emit(true)
+
+
+func _physics_process(delta: float) -> void:
+	var velocity = movement_manager.velocity_sync.length()
+	animation_tree.set("parameters/walk_velocity/blend_position", velocity/movement_manager.speed)
+	
+	if held_item:
+		if len(held_item.hand_positions) > 0: hand_ik_r.target = held_item.hand_positions[0]
+		if len(held_item.hand_positions) > 1: hand_ik_r.target = held_item.hand_positions[1]
+	
+	var swing_speed = 1.0 if weapon_manager.attack_state == weapon_manager.AttackState.IDLE else (weapon.speed_multiplier * (weapon.stab_speed_mult if weapon_manager.attack_state == weapon_manager.AttackState.LUNGE else 1.0))
+	if weapon_manager.weapon_bouncing: swing_speed = -0.3
+	animation_tree.set("parameters/swing_sword_timescale/scale", swing_speed)

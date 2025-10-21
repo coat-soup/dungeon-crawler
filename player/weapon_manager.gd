@@ -8,6 +8,8 @@ signal weapon_hit_blocker
 signal blocked_damage
 signal did_damage
 signal started_kick
+signal got_stunned
+signal block_durability_changed
 
 @export var weapon : Weapon
 var attack_input_buffer_time : float = 0.3
@@ -16,7 +18,7 @@ var attack_input_buffer : AttackState = -1
 
 @export var character_model: CharacterSkeletonController
 
-enum AttackState {IDLE, SWING, ALTSWING, LUNGE, OVERHEAD, KICK}
+enum AttackState {IDLE, SWING, ALTSWING, LUNGE, OVERHEAD, KICK, STUNNED}
 
 var attack_state : AttackState
 
@@ -31,6 +33,10 @@ var can_damage : bool
 var damaged_objects : Array[Health]
 @onready var character : Character = $".."
 @export var starting_weapon_path : String = "res://weapons/models/longsword_model.tscn"
+
+@export var block_durability : float = 100.0
+@export var block_durabilty_drain_multipler : float = 1.0
+@export var block_durability_recharge_rate : float = 10.0
 
 
 func _ready() -> void:
@@ -48,6 +54,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#print("buffer: ", attack_input_buffer)
 	if not is_multiplayer_authority(): return
+	
+	if block_durability < 100.0 and not blocking and attack_state != AttackState.STUNNED:
+		block_durability = min(100.0, block_durability + block_durability_recharge_rate * delta)
+		block_durability_changed.emit()
 	
 	#Global.ui.display_chat_message("blocking damage: " + str(blocking_damage))
 	
@@ -95,6 +105,10 @@ func toggle_blocking(value : bool):
 func toggle_damage_window(value : bool):
 	can_damage = value
 	if not can_damage: damaged_objects.clear()
+	else:
+		# do initial damage overlap
+		for body in weapon.hitbox.get_overlapping_bodies():
+			on_weapon_hit(body)
 
 
 func toggle_block_window(value : bool):
@@ -126,7 +140,7 @@ func on_weapon_hit(body : Node3D):
 		damaged_objects.append(health)
 		#AudioManager.spawn_sound_at_point(preload("res://sfx/sword_slice.wav"), body.global_position)
 		if is_multiplayer_authority():
-			health.try_take_blockable_damage.rpc(weapon.damage, int(character.name))
+			health.try_take_blockable_damage.rpc(weapon.damage if attack_state != AttackState.OVERHEAD else weapon.overhead_damage, int(character.name))
 			print("weapon doing damage")
 	elif is_multiplayer_authority():
 		handle_bonk.rpc()
@@ -171,6 +185,13 @@ func handle_bonk():
 func did_block_damage(amount : int):
 	character.stamina.drain_stamina(amount * weapon.block_stamina_drain_damage_mul)
 	blocked_damage.emit()
+	
+	if is_multiplayer_authority():
+		block_durability -= amount * block_durabilty_drain_multipler
+		block_durability_changed.emit()
+		if block_durability <= 0:
+			block_durability = 0.0
+			stun.rpc(1.0)
 
 
 @rpc("any_peer", "call_local")
@@ -197,6 +218,7 @@ func kick():
 			var c = cast.get_collider(0) as Character
 			if c:
 				c.movement_manager.apply_impulse.rpc(-character.global_basis.z * 10, 0.2)
+				if c.weapon_manager.blocking: c.weapon_manager.stun.rpc(1.0)
 				print("HIT CHARACTER!!!!!!!!!!!!!!")
 		else:
 			print("cast not colliding")
@@ -210,6 +232,23 @@ func did_did_damage():
 func buffer_attack(attack_type : AttackState):
 	attack_input_buffer = attack_type
 	attack_input_buffer_timer = attack_input_buffer_time
+
+
+@rpc("any_peer", "call_local")
+func stun(duration : float):
+	if attack_state == AttackState.STUNNED: return
+	
+	got_stunned.emit()
+	
+	attack_input_buffer = -1
+	attack_state = AttackState.STUNNED
+	
+	if is_multiplayer_authority():
+		for action in character.action_manager.current_actions:
+			character.action_manager.try_stop_action_by_name(action.action_name)
+	
+	await get_tree().create_timer(duration).timeout
+	attack_state = AttackState.IDLE
 
 
 @rpc("any_peer", "call_local")

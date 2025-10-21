@@ -20,6 +20,7 @@ class_name UIManager
 
 @onready var health_bar: ProgressBar = $HUD/HealthBar
 @onready var stamina_bar: ProgressBar = $HUD/StaminaBar
+@onready var block_durability_bar: TextureProgressBar = $HUD/CrosshairHolder/BlockDurabilityBar
 
 @onready var hitmarker: TextureRect = $HUD/CrosshairHolder/Hitmarker
 
@@ -83,6 +84,7 @@ func set_interact_text(text: String = "", prefix_key := false):
 	interact_text.text = (("["+prefix+"] ") if prefix_key else "") + text
 
 
+@rpc("any_peer", "call_local")
 func display_prompt(prompt: String, time := 2.0):
 	interact_text.text = prompt
 	prompt_time_remaining = time
@@ -189,3 +191,8 @@ func toggle_options_menu(value : bool):
 	hud.visible = !value
 	if Global.local_player: Global.local_player.input_manager.active = !value
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if (value or network_panel.visible) else Input.MOUSE_MODE_CAPTURED
+
+
+func update_block_durability(value : float):
+	block_durability_bar.value = value
+	block_durability_bar.visible = value < block_durability_bar.max_value

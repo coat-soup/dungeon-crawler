@@ -10,6 +10,8 @@ var current_actions : Array[Action]
 
 
 func try_perform_action_by_name(action_name : String, args : Array = []) -> bool:
+	if character.weapon_manager.attack_state == WeaponManager.AttackState.STUNNED: return false
+	
 	for i in range(len(current_actions)):
 		if current_actions[i].action_name == action_name:
 			return false

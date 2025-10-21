@@ -22,6 +22,8 @@ func _ready() -> void:
 		weapon_manager.blocked_damage.connect(on_weapon_blocked)
 		weapon_manager.did_damage.connect(on_weapon_connected)
 		weapon_manager.weapon_bounced.connect(on_weapon_connected)
+		weapon_manager.got_stunned.connect(on_player_stunned)
+		weapon_manager.block_durability_changed.connect(on_block_durability_changed)
 
 
 func on_player_damaged(_source, _damage):
@@ -36,5 +38,13 @@ func on_weapon_connected():
 func on_weapon_blocked():
 	camera.shake(0.5)
 
+
 func on_stamina_changed():
 	Global.ui.update_stamina_bar(stamina.cur_stamina/stamina.max_stamina)
+
+func on_player_stunned():
+	camera.shake(0.7)
+
+
+func on_block_durability_changed():
+	Global.ui.update_block_durability(weapon_manager.block_durability)

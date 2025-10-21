@@ -12,22 +12,6 @@ texture_filter = 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_4r4qo"]
 size = Vector3(0.325, 0.51, 0.370757)
 
-[sub_resource type="Animation" id="Animation_60r31"]
-resource_name = "lever_up"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cylinder:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.872665, 0, 0), Vector3(-0.872665, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_caocl"]
 length = 0.001
 tracks/0/type = "value"
@@ -59,6 +43,21 @@ tracks/0/keys = {
 "values": [Vector3(-0.872665, 0, 0), Vector3(0.872665, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_4r4qo"]
+resource_name = "lever_idle_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.872665, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_p6hpx"]
 resource_name = "lever_idle_up"
 tracks/0/type = "value"
@@ -74,8 +73,9 @@ tracks/0/keys = {
 "values": [Vector3(-0.872665, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_4r4qo"]
-resource_name = "lever_idle_down"
+[sub_resource type="Animation" id="Animation_60r31"]
+resource_name = "lever_up"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -83,10 +83,10 @@ tracks/0/path = NodePath("Cylinder:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0.872665, 0, 0)]
+"values": [Vector3(0.872665, 0, 0), Vector3(-0.872665, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oj1jq"]
@@ -106,7 +106,7 @@ prompt_text = "Lever"
 surface_material_override/0 = SubResource("StandardMaterial3D_60r31")
 
 [node name="Cylinder" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.642787, 0.766045, 0, -0.766045, 0.642787, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_60r31")
 
 [node name="Cylinder_001" parent="." index="2"]

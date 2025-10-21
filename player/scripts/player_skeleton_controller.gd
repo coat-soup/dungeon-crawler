@@ -3,7 +3,6 @@ class_name PlayerSkeletonController
 
 @export var cam_holder : Node3D
 var cam : Node3D
-@export var movement_manager : PlayerMovement
 
 @onready var camera_rt: RemoteTransform3D = $Armature_001/Skeleton3D/TorsoIK/NeckRotator/HeadRotator/CameraRT
 
@@ -40,18 +39,8 @@ func switch_mat():
 
 
 func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
 	torso_ik.rotation = -cam_holder.rotation / 2
 	neck_rotator.rotation = -cam_holder.rotation / 2
 	
 	weapon_rotator.rotation.x = clamp(-cam_holder.rotation.x / 2, deg_to_rad(-30), deg_to_rad(30))
-	
-	var velocity = movement_manager.velocity_sync.length()
-	animation_tree.set("parameters/walk_velocity/blend_position", velocity/movement_manager.speed)
-	
-	if held_item:
-		if len(held_item.hand_positions) > 0: hand_ik_r.target = held_item.hand_positions[0]
-		if len(held_item.hand_positions) > 1: hand_ik_r.target = held_item.hand_positions[1]
-	
-	var swing_speed = 1.0 if weapon_manager.attack_state == weapon_manager.AttackState.IDLE else weapon.speed_multiplier
-	if weapon_manager.weapon_bouncing: swing_speed = -0.3
-	animation_tree.set("parameters/swing_sword_timescale/scale", swing_speed)

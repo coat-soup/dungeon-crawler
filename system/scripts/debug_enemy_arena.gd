@@ -4,7 +4,7 @@ class_name DebugEnemyArena
 @export var enemies : Array[PackedScene]
 @export var activation_lever : StateToggleInteractable
 
-var wave_growth_multipler : float = 2.0
+@export var wave_growth_multipler : float = 2.0
 var wave_amount : int = 1
 var cur_enemies : int = 0
 var spawned_enemies : Array[EnemyCharacter]

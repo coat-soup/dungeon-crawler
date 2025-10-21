@@ -13,6 +13,7 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 	if ai and ai.is_multiplayer_authority():
 		character.movement_manager.set_nav_destination(ai.targets[0].global_position + (character.global_position - ai.targets[0].global_position).normalized() * 1.5)
 		character.movement_manager.body.global_rotation.y = -(character.global_position - ai.targets[0].global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
+		if ai.targets[0].global_position.distance_to(ai.global_position) > 2.0: character.movement_manager.apply_impulse((ai.targets[0].global_position - character.global_position).normalized() * 5.0, 0.1)
 	
 	await character.get_tree().create_timer(1.0 / character.weapon_manager.weapon.speed_multiplier).timeout
 	print("attack ending naturally")
@@ -40,15 +41,17 @@ func end_action():
 	
 	if not did_chain:
 		character.weapon_manager.attack_state = WeaponManager.AttackState.IDLE
-		character.weapon_manager.toggle_damage_window(false) # animation may not call if interrupted
+		character.weapon_manager.toggle_damage_window(false) # do manually because animation track may not call if interrupted
 
 
 func get_ai_action_weight(ai : AIActionController) -> float:
 	if ai.character.stamina.cur_stamina <= 0: return 0
+	var w := 0.0
 	for t in ai.targets:
-		if t.global_position.distance_to(ai.global_position) <= 4.0: return ai.desire_to_attack - 0.7 + (0.7 * ai.character.stamina.get_ratio())
+		if t.weapon_manager.attack_state == WeaponManager.AttackState.STUNNED: w += 1.0
+		if t.global_position.distance_to(ai.global_position) <= 3.0: w += ai.desire_to_attack - 0.7 + (0.7 * ai.character.stamina.get_ratio())
 	
-	return 0.0
+	return w
 
 
 static func get_ai_call_args(ai : AIActionController) -> Array:
