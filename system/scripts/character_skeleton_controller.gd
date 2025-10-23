@@ -67,6 +67,6 @@ func _physics_process(delta: float) -> void:
 		if len(held_item.hand_positions) > 0: hand_ik_r.target = held_item.hand_positions[0]
 		if len(held_item.hand_positions) > 1: hand_ik_r.target = held_item.hand_positions[1]
 	
-	var swing_speed = 1.0 if weapon_manager.attack_state == weapon_manager.AttackState.IDLE else (weapon.speed_multiplier * (weapon.stab_speed_mult if weapon_manager.attack_state == weapon_manager.AttackState.LUNGE else 1.0))
+	var swing_speed = 1.0 if weapon_manager.attack_state == weapon_manager.AttackState.IDLE else (weapon.speed_multiplier * (weapon.lunge_speed_mult if weapon_manager.attack_state == weapon_manager.AttackState.LUNGE else 1.0))
 	if weapon_manager.weapon_bouncing: swing_speed = -0.3
 	animation_tree.set("parameters/swing_sword_timescale/scale", swing_speed)

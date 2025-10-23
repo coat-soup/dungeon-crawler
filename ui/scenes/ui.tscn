@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://db1lqpw1tim4q"]
+[gd_scene load_steps=15 format=3 uid="uid://db1lqpw1tim4q"]
 
 [ext_resource type="Script" uid="uid://cv83h2tcngfv3" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
 [ext_resource type="Texture2D" uid="uid://cqmkcefkf8vqf" path="res://ui/textures/hit_marker.png" id="2_1u8fv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://ol2oio1vwx3t" path="res://ui/scripts/options_menu_manager.gd" id="4_3i8ig"]
 [ext_resource type="Texture2D" uid="uid://ho1w61jqh1k4" path="res://ui/textures/shield_outline.png" id="4_xbkoe"]
 [ext_resource type="Script" uid="uid://d2ag8w6ck2est" path="res://ui/scripts/settings_panel_manager.gd" id="5_ky4nr"]
+[ext_resource type="Shader" uid="uid://dke27w30r5k8p" path="res://vfx/shaders/ui_blur.gdshader" id="8_fef28"]
 [ext_resource type="PackedScene" uid="uid://kd4fvkpy7af2" path="res://ui/scenes/lobby_entry.tscn" id="10_yfaaw"]
 
 [sub_resource type="Animation" id="Animation_68x3x"]
@@ -44,6 +45,14 @@ _data = {
 &"RESET": SubResource("Animation_68x3x"),
 &"chat_fade": SubResource("Animation_4x3be")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fef28"]
+shader = ExtResource("8_fef28")
+shader_parameter/tint = Color(0.787759, 0.787759, 0.787759, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6mhv"]
+shader = ExtResource("8_fef28")
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [node name="UI" type="Control" groups=["ui"]]
 layout_mode = 3
@@ -234,6 +243,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" type="ColorRect" parent="NetworkPanel"]
+material = SubResource("ShaderMaterial_fef28")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -339,7 +349,6 @@ offset_bottom = 363.745
 text = "REFRESH LOBBIES"
 
 [node name="OptionsPanel" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -349,6 +358,7 @@ grow_vertical = 2
 script = ExtResource("4_3i8ig")
 
 [node name="Background" type="ColorRect" parent="OptionsPanel"]
+material = SubResource("ShaderMaterial_f6mhv")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
