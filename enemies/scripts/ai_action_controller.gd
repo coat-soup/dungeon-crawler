@@ -79,7 +79,7 @@ func on_action_performed(action : Action):
 		desire_to_attack -= 0.3 / agression_level
 
 
-func on_hit_by_weapon(source_id : int, amount : int):
+func on_hit_by_weapon(amount : int, source_id : int):
 	var character : Character = Util.get_character_from_id(str(source_id), self) as Character
 	if character:
 		improve_react_to_attack(character.weapon_manager.attack_state)

@@ -18,6 +18,7 @@ func _ready() -> void:
 		camera.current = true
 		(camera.get_child(0) as AudioListener3D).current = true
 		health.took_damage.connect(on_player_damaged)
+		health.healed.connect(on_player_healed)
 		stamina.stamina_changed.connect(on_stamina_changed)
 		weapon_manager.blocked_damage.connect(on_weapon_blocked)
 		weapon_manager.did_damage.connect(on_weapon_connected)
@@ -26,9 +27,13 @@ func _ready() -> void:
 		weapon_manager.block_durability_changed.connect(on_block_durability_changed)
 
 
-func on_player_damaged(_source, _damage):
+func on_player_damaged(_damage, _source):
 	Global.ui.update_health_bar(health.cur_health)
 	camera.shake(0.7)
+
+
+func on_player_healed(_amount, _source):
+	Global.ui.update_health_bar(health.cur_health)
 
 
 func on_weapon_connected():

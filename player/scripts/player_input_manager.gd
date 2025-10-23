@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 
 
 func attack_or_buffer(attack_type : WeaponManager.AttackState):
-	if action_manager.is_performing_blocking_action():
+	if action_manager.is_performing_blocking_action() or action_manager.character.weapon_manager.weapon_bouncing:
 		# buffer
 		if attack_type == WeaponManager.AttackState.SWING and action_manager.character.weapon_manager.attack_state == WeaponManager.AttackState.SWING:
 			attack_type = WeaponManager.AttackState.ALTSWING

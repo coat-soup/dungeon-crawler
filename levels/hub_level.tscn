@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://cuhkwocop1mx7"]
+[gd_scene load_steps=42 format=4 uid="uid://cuhkwocop1mx7"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/scripts/game_manager.gd" id="1_0nv80"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/scripts/network_manager.gd" id="2_4p34j"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://m7grea7x21ug" path="res://system/scripts/debug_enemy_arena.gd" id="17_eac86"]
 [ext_resource type="PackedScene" uid="uid://xh7j8iie55hm" path="res://enemies/scenes/enemy_humanoid.tscn" id="17_uj6qf"]
 [ext_resource type="PackedScene" uid="uid://bg18hod4qfwqf" path="res://world/props/scenes/lever.tscn" id="18_uj6qf"]
+[ext_resource type="Script" uid="uid://c08hbgtaoobo3" path="res://system/debug/debug_heal_lever.gd" id="19_efs00"]
 [ext_resource type="PackedScene" uid="uid://dssxmsi4cf0hq" path="res://world/props/scenes/dummy.tscn" id="19_iva4b"]
 [ext_resource type="PackedScene" uid="uid://cj7p8kb5is0qr" path="res://weapons/models/longsword_model.tscn" id="20_15esb"]
 [ext_resource type="Script" uid="uid://dtr6wdyf2ykk0" path="res://system/scripts/debug_weapon_equip.gd" id="21_efs00"]
@@ -892,16 +893,30 @@ spawn_path = NodePath("../NetworkManager")
 _spawnable_scenes = PackedStringArray("uid://xh7j8iie55hm")
 spawn_path = NodePath("../NetworkManager")
 
-[node name="DebugEnemyArena" type="Node3D" parent="." node_paths=PackedStringArray("activation_lever")]
+[node name="DebugEnemyArena" type="Node3D" parent="." node_paths=PackedStringArray("activation_lever", "profficiency_lever")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0051, -4.76975, -9.71799)
 script = ExtResource("17_eac86")
 enemies = Array[PackedScene]([ExtResource("17_uj6qf")])
 activation_lever = NodePath("../ArenaLever")
+profficiency_lever = NodePath("../ArenaDiffLever")
 wave_growth_multipler = 1.0
 metadata/_custom_type_script = "uid://m7grea7x21ug"
 
 [node name="ArenaLever" parent="." instance=ExtResource("18_uj6qf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.697, -4.76975, -11.6989)
+prompt_text = "Toggle Arena"
+
+[node name="ArenaDiffLever" parent="." instance=ExtResource("18_uj6qf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.697, -4.76975, -11.6989)
+state = 1
+num_states = 3
+prompt_text = "Enemy Profficiency (0.5)"
+
+[node name="HealLever" parent="." instance=ExtResource("18_uj6qf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.697, -4.76975, -11.6989)
+script = ExtResource("19_efs00")
+num_states = 1
+prompt_text = "Heal"
 
 [node name="dummy" parent="." instance=ExtResource("19_iva4b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.7158, -4.46552, 18.668)

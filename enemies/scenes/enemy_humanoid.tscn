@@ -122,10 +122,11 @@ properties/2/replication_mode = 1
 [sub_resource type="ViewportTexture" id="ViewportTexture_kuufe"]
 viewport_path = NodePath("Sprite3D/SubViewport")
 
-[node name="EnemyHumanoid" type="CharacterBody3D" node_paths=PackedStringArray("action_manager", "weapon_manager", "health", "movement_manager", "stamina") groups=["character"]]
+[node name="EnemyHumanoid" type="CharacterBody3D" node_paths=PackedStringArray("ai_action_controller", "action_manager", "weapon_manager", "health", "movement_manager", "stamina") groups=["character"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_kuufe")
+ai_action_controller = NodePath("AIActionController")
 action_manager = NodePath("ActionManager")
 weapon_manager = NodePath("WeaponManager")
 health = NodePath("Health")

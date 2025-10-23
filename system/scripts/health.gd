@@ -1,7 +1,7 @@
 extends Node
 class_name Health
 
-signal took_damage
+signal took_damage()
 signal healed
 signal died
 
@@ -23,7 +23,7 @@ func take_damage(amount: float, source_id : int = -1):
 	#print(get_owner().name, " taking ", str(amount), " damage from source ", source_id)
 	
 	cur_health -= min(amount, cur_health)
-	took_damage.emit(source_id, amount)
+	took_damage.emit(amount, source_id)
 	
 	var character : Character = Util.get_character_from_id(str(source_id), self) as Character
 	if character as Player and character.is_multiplayer_authority():
@@ -41,7 +41,7 @@ func take_damage(amount: float, source_id : int = -1):
 func heal(amount: float, source_id : int = -1):
 	
 	cur_health = min(max_health, cur_health + amount)
-	healed.emit(source_id)
+	healed.emit(amount, source_id)
 
 
 @rpc("any_peer", "call_local")

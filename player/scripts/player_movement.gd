@@ -27,6 +27,7 @@ var normalised_swing_position : float
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	body.weapon_manager.started_attack.connect(on_started_attack)
+	body.weapon_manager.weapon_bounced.connect(on_weapon_bounced)
 
 
 func _input(event: InputEvent) -> void:
@@ -85,3 +86,6 @@ func bob_calc(time : float) -> float:
 
 func on_started_attack():
 	normalised_swing_position = 1
+
+func on_weapon_bounced():
+	normalised_swing_position = min(normalised_swing_position, 0.0)

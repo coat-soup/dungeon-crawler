@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bg18hod4qfwqf"]
+[gd_scene load_steps=13 format=3 uid="uid://bg18hod4qfwqf"]
 
 [ext_resource type="PackedScene" uid="uid://06vpkhdm3ero" path="res://world/props/models/lever.glb" id="1_qppfg"]
 [ext_resource type="Texture2D" uid="uid://ddaj8nojwwjpa" path="res://world/props/textures/lever.png" id="2_4r4qo"]
@@ -25,6 +25,39 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-0.872665, 0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cylinder:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-0.872665, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cylinder:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cylinder:rotation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_1p7gp"]
@@ -89,13 +122,50 @@ tracks/0/keys = {
 "values": [Vector3(0.872665, 0, 0), Vector3(-0.872665, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_oj1jq"]
+resource_name = "pull_return"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-0.872665, -0.25, 0, 0.233333, 0.327249, 0.881056, -0.25, 0, 0.0666667, -0.103489, -0.872665, -0.0666667, -0.0177143, 0.25, 0),
+"times": PackedFloat32Array(0, 0.466667, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cylinder:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cylinder:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oj1jq"]
 _data = {
 &"RESET": SubResource("Animation_caocl"),
 &"lever_down": SubResource("Animation_1p7gp"),
 &"lever_idle_down": SubResource("Animation_4r4qo"),
 &"lever_idle_up": SubResource("Animation_p6hpx"),
-&"lever_up": SubResource("Animation_60r31")
+&"lever_up": SubResource("Animation_60r31"),
+&"pull_return": SubResource("Animation_oj1jq")
 }
 
 [node name="lever" instance=ExtResource("1_qppfg")]

@@ -3,6 +3,7 @@ class_name EnemyCharacter
 
 
 @onready var progress_bar: ProgressBar = $Sprite3D/SubViewport/HealthBar
+@export var ai_action_controller: AIActionController
 
 
 func _ready() -> void:
@@ -11,7 +12,7 @@ func _ready() -> void:
 	weapon_manager.block_durability_changed.connect(on_stamina_changed)
 
 
-func on_took_damage(source : int, amount : int):
+func on_took_damage(amount : int, source : int):
 	$Sprite3D/SubViewport/HealthBar.value = health.cur_health
 
 

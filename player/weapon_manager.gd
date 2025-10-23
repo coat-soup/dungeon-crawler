@@ -67,23 +67,11 @@ func _process(delta: float) -> void:
 			attack_input_buffer = -1
 
 
-func try_start_attack(attack_type : AttackState):
-	if not is_multiplayer_authority() or not can_attack: return
-	if attack_state == AttackState.IDLE:
-		#print("starting attack from idle ", attack_type)
-		start_attack.rpc(attack_type)
-	else:
-		if attack_state == AttackState.SWING and attack_type == AttackState.SWING: attack_type = AttackState.ALTSWING
-		attack_input_buffer = attack_type
-		attack_input_buffer_timer = attack_input_buffer_time
-
-
 @rpc("any_peer", "call_local")
 func start_attack(attack_type : AttackState):
 	#print("prevstate for attack %d ->" % attack_state)
 	attack_state = attack_type
 	started_attack.emit()
-	#print("starting attack ", attack_state)
 
 
 @rpc("any_peer", "call_local")
@@ -113,22 +101,6 @@ func toggle_damage_window(value : bool):
 
 func toggle_block_window(value : bool):
 	blocking_damage = value
-
-
-func on_anim_finished(anim_name : String):
-	return
-	if not is_multiplayer_authority(): return
-	#print("anim finished. conditions for buffer: %d != -1 (%s) and %d != %d (%s)" % [attack_input_buffer, attack_input_buffer != -1, attack_input_buffer, attack_state, attack_input_buffer != attack_state])
-	if attack_input_buffer != -1 and attack_input_buffer != attack_state:
-		#print("buffering ", attack_input_buffer)
-		start_attack.rpc(attack_input_buffer)
-		attack_input_buffer = -1
-	else:
-		#print("setting to idle")
-		can_attack = false
-		set_attack_state.rpc(AttackState.IDLE)
-		await get_tree().create_timer(idle_pentalty_timer).timeout
-		can_attack = true
 
 
 func on_weapon_hit(body : Node3D):

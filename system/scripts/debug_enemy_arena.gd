@@ -3,6 +3,7 @@ class_name DebugEnemyArena
 
 @export var enemies : Array[PackedScene]
 @export var activation_lever : StateToggleInteractable
+@export var profficiency_lever : StateToggleInteractable
 
 @export var wave_growth_multipler : float = 2.0
 var wave_amount : int = 1
@@ -11,10 +12,11 @@ var spawned_enemies : Array[EnemyCharacter]
 
 
 func _ready() -> void:
-	activation_lever.interacted.connect(on_lever_interacted)
+	activation_lever.interacted.connect(on_activation_lever_interacted)
+	profficiency_lever.interacted.connect(on_profficiency_lever_interacted)
 
 
-func on_lever_interacted(_source : Node):
+func on_activation_lever_interacted(_source : Node):
 	if not multiplayer.is_server(): return
 	if activation_lever.state:
 		do_wave()
@@ -23,6 +25,15 @@ func on_lever_interacted(_source : Node):
 			enemy.queue_free()
 		spawned_enemies.clear()
 		wave_amount = 1
+
+
+func on_profficiency_lever_interacted(_source : Node):
+	if not multiplayer.is_server(): return
+	profficiency_lever.prompt_text = "Enemy Profficiency (%.1f)" % get_enemy_profficiency_from_lever()
+
+
+func get_enemy_profficiency_from_lever() -> float:
+	return profficiency_lever.state * (1.0 /(profficiency_lever.num_states - 1))
 
 
 func on_enemy_died(enemy : EnemyCharacter):
@@ -43,11 +54,12 @@ func do_wave():
 
 
 func spawn():
-	var e = enemies.pick_random().instantiate()
+	var e : EnemyCharacter = enemies.pick_random().instantiate() as EnemyCharacter
 	e.name = str(multiplayer.get_unique_id())
 	Global.network_manager.add_child(e, true)
 	
-	spawned_enemies.append(e as EnemyCharacter)
+	spawned_enemies.append(e)
+	e.ai_action_controller.profficiency = get_enemy_profficiency_from_lever()
 	
 	var p = Util.random_point_in_circle(5.0)
 	e.global_position = global_position + Vector3(p.x, 0, p.y)

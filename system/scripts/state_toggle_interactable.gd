@@ -1,10 +1,10 @@
 extends Interactable
 class_name StateToggleInteractable
 
-signal toggled_on
-signal toggled_off
+signal state_changed(int)
 
-@export var state := false
+@export var state : int = 0
+@export var num_states : int = 2
 
 
 @rpc("any_peer", "call_local")
@@ -12,9 +12,7 @@ func interact(source: String):
 	if not active:
 		return
 	
-	state = !state
+	state = posmod(state + 1, num_states)
 	
 	interacted.emit(get_tree().root.get_node_or_null(source))
-	
-	if state: toggled_on.emit()
-	else: toggled_off.emit()
+	state_changed.emit(state)

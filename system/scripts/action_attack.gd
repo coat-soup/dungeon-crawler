@@ -16,8 +16,8 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 		if ai.targets[0].global_position.distance_to(ai.global_position) > 2.0: character.movement_manager.apply_impulse((ai.targets[0].global_position - character.global_position).normalized() * 5.0, 0.1)
 	
 	await character.get_tree().create_timer(1.0 / character.weapon_manager.weapon.speed_multiplier).timeout
-	print("attack ending naturally")
-	trigger_end_action()
+	
+	if character.action_manager.current_actions.has(self): trigger_end_action()
 
 
 func on_weapon_bounced():
@@ -25,7 +25,7 @@ func on_weapon_bounced():
 		trigger_end_action()
 
 
-func on_took_damage(_source, _amount):
+func on_took_damage(_amount, _source):
 	if character.is_multiplayer_authority():
 		trigger_end_action()
 

@@ -13,7 +13,7 @@ func _ready() -> void:
 	health.died.connect(on_died)
 
 
-func on_damaged(source_id, damage : float):
+func on_damaged(damage : float, source_id: int):
 	var dir : Vector3 = (Util.random_point_in_sphere(1.0, 1.0) * Vector3(1.0,0,1.0)).normalized()
 	var character = Util.get_character_from_id(str(source_id), self)
 	if character: dir = (global_position - character.global_position).normalized()
