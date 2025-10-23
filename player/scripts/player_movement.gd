@@ -49,7 +49,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if weapon_manager.attack_state == WeaponManager.AttackState.STUNNED:
 			sens_mul = slow_sens_mul
 		else:
-			sens_mul = lerp(slow_sens_mul, 1.0, swing_slow_sens_curve.sample(1 - normalised_swing_position))
+			sens_mul = lerp(min(1.0, slow_sens_mul * weapon_manager.weapon.speed_multiplier), 1.0, swing_slow_sens_curve.sample(1 - normalised_swing_position))
 		body.rotate_y(-event.relative.x * sensetivity * sens_mul * Settings.get_setting("look_sensetivity"))
 		camera_pivot.rotate_x(-event.relative.y * sensetivity * sens_mul * Settings.get_setting("look_sensetivity"))
 		camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, deg_to_rad(-90), deg_to_rad(90))

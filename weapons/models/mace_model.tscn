@@ -1,7 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxk8ybyliq0yq"]
+[gd_scene load_steps=8 format=3 uid="uid://cxk8ybyliq0yq"]
 
 [ext_resource type="PackedScene" uid="uid://b56o06u83al10" path="res://weapons/models/mace.glb" id="1_8qj4r"]
 [ext_resource type="Script" uid="uid://cgleucta3iiqc" path="res://weapons/scripts/weapon.gd" id="2_mvefq"]
+[ext_resource type="Texture2D" uid="uid://dwmu0t0vpptuk" path="res://weapons/textures/mace.png" id="3_c2u6l"]
+[ext_resource type="Texture2D" uid="uid://bm31ommo7noxr" path="res://weapons/textures/mace_n.png" id="4_6kohk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0x4u0"]
+diffuse_mode = 3
+albedo_texture = ExtResource("3_c2u6l")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_texture = ExtResource("4_6kohk")
+texture_filter = 0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mvefq"]
 radius = 0.213671
@@ -10,26 +21,37 @@ radius = 0.213671
 height = 0.441986
 radius = 0.0488281
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_flkb3"]
-height = 0.837524
-radius = 0.199219
-
-[node name="mace" node_paths=PackedStringArray("hand_positions", "hitbox", "block_area") instance=ExtResource("1_8qj4r")]
+[node name="mace" node_paths=PackedStringArray("hand_positions", "hitbox") instance=ExtResource("1_8qj4r")]
 script = ExtResource("2_mvefq")
 hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
 speed_multiplier = 1.5
 damage = 20
 overhead_damage = 30
 hitbox = NodePath("Hitbox")
-block_area = NodePath("BlockArea")
 
-[node name="Marker3D" type="Marker3D" parent="." index="10"]
+[node name="Cylinder" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0x4u0")
+
+[node name="Cylinder_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0x4u0")
+
+[node name="Cylinder_002" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0x4u0")
+
+[node name="Cube_004" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0x4u0")
+
+[node name="Cylinder_003" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0x4u0")
+
+[node name="Marker3D" type="Marker3D" parent="." index="5"]
 transform = Transform3D(-0.212946, -0.926488, 0.31028, -0.0152441, 0.320676, 0.947066, -0.976945, 0.196944, -0.0824101, 0.0558604, 0.0267626, -0.0244543)
 
-[node name="Marker3D2" type="Marker3D" parent="." index="11"]
+[node name="Marker3D2" type="Marker3D" parent="." index="6"]
 transform = Transform3D(-0.212946, -0.926488, 0.31028, -0.0152441, 0.320676, 0.947066, -0.976945, 0.196944, -0.0824101, 0.079287, -0.16266, 0.0173375)
 
-[node name="Hitbox" type="Area3D" parent="." index="12"]
+[node name="Hitbox" type="Area3D" parent="." index="7"]
+collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
@@ -39,10 +61,3 @@ shape = SubResource("SphereShape3D_mvefq")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hitbox" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.318375, 0)
 shape = SubResource("CylinderShape3D_mvefq")
-
-[node name="BlockArea" type="Area3D" parent="." index="13"]
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461305, 0.46368, 0)
-shape = SubResource("CylinderShape3D_flkb3")

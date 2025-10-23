@@ -203,11 +203,12 @@ func did_did_damage():
 
 func buffer_attack(attack_type : AttackState):
 	attack_input_buffer = attack_type
-	attack_input_buffer_timer = attack_input_buffer_time
+	attack_input_buffer_timer = 0.8 * weapon.speed_multiplier
 
 
 @rpc("any_peer", "call_local")
 func stun(duration : float):
+	Global.ui.display_chat_message(character.name + " stunned!")
 	if attack_state == AttackState.STUNNED: return
 	
 	got_stunned.emit()
@@ -216,7 +217,9 @@ func stun(duration : float):
 	attack_state = AttackState.STUNNED
 	
 	if is_multiplayer_authority():
+		character.action_manager.try_stop_action_by_name("block")
 		for action in character.action_manager.current_actions:
+			Global.ui.display_chat_message("Stopping action " + action.action_name)
 			character.action_manager.try_stop_action_by_name(action.action_name)
 	
 	await get_tree().create_timer(duration).timeout

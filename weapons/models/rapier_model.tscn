@@ -1,15 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://4vl3hnk6ruqg"]
+[gd_scene load_steps=7 format=3 uid="uid://4vl3hnk6ruqg"]
 
 [ext_resource type="PackedScene" uid="uid://cmpn5yesi4qfp" path="res://weapons/models/rapier.glb" id="1_6b7qb"]
 [ext_resource type="Script" uid="uid://cgleucta3iiqc" path="res://weapons/scripts/weapon.gd" id="2_56n53"]
+[ext_resource type="Texture2D" uid="uid://c5y6ladxe0f5m" path="res://weapons/textures/rapier.png" id="3_81o0g"]
+[ext_resource type="Texture2D" uid="uid://djltj7iqoys1i" path="res://weapons/textures/rapier_n.png" id="4_3asrs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2owps"]
+diffuse_mode = 3
+albedo_texture = ExtResource("3_81o0g")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_texture = ExtResource("4_3asrs")
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_56n53"]
 size = Vector3(0.11, 0.878565, 0.04)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_s0dy4"]
-size = Vector3(0.289, 0.880544, 0.085)
-
 [node name="rapier" node_paths=PackedStringArray("hand_positions", "hitbox", "block_area") instance=ExtResource("1_6b7qb")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("2_56n53")
 hand_positions = [NodePath("Marker3D")]
 speed_multiplier = 2.0
@@ -17,21 +26,36 @@ damage = 18
 overhead_damage = 25
 swing_stamina_drain = 5.0
 hitbox = NodePath("Hitbox")
-block_area = NodePath("BlockArea")
+block_area = NodePath("")
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2owps")
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2owps")
+
+[node name="Cylinder" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2owps")
+
+[node name="Circle" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2owps")
+
+[node name="Circle_001" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2owps")
+
+[node name="Cube_002" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2owps")
+
+[node name="Cube_003" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2owps")
 
 [node name="Marker3D" type="Marker3D" parent="." index="8"]
-transform = Transform3D(-0.179606, -0.973934, 0.138542, -0.039734, 0.1479, 0.988204, -0.982936, 0.171982, -0.065262, 0.0660651, -0.0685303, -0.0210091)
+transform = Transform3D(0.179606, 0.973934, -0.138542, -0.039734, 0.1479, 0.988204, 0.982936, -0.171982, 0.065262, -0.066, -0.069, 0.021)
 
 [node name="Hitbox" type="Area3D" parent="." index="9"]
+collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.442366, 0)
 shape = SubResource("BoxShape3D_56n53")
-
-[node name="BlockArea" type="Area3D" parent="." index="10"]
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockArea" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00461305, 0.443355, 0)
-shape = SubResource("BoxShape3D_s0dy4")

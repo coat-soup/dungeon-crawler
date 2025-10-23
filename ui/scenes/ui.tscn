@@ -387,6 +387,11 @@ custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2
 text = "RETURN TO GAME"
 
+[node name="RespawnButton" type="Button" parent="OptionsPanel/ButtonHolder"]
+custom_minimum_size = Vector2(0, 47.745)
+layout_mode = 2
+text = "RESPAWN"
+
 [node name="LeaveButton" type="Button" parent="OptionsPanel/ButtonHolder"]
 custom_minimum_size = Vector2(0, 47.745)
 layout_mode = 2

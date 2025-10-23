@@ -39,6 +39,7 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if not active or not is_multiplayer_authority(): return
 	if block_reset and Input.is_action_pressed("secondary"):
+		action_manager.character.weapon_manager.attack_input_buffer = -1
 		action_manager.try_perform_action_by_name("block")
 
 

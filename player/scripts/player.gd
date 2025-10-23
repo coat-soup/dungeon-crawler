@@ -15,6 +15,8 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		Global.local_player = self
 		
+		global_position = Global.network_manager.spawn_marker.global_position
+		
 		camera.current = true
 		(camera.get_child(0) as AudioListener3D).current = true
 		health.took_damage.connect(on_player_damaged)
@@ -25,6 +27,8 @@ func _ready() -> void:
 		weapon_manager.weapon_bounced.connect(on_weapon_connected)
 		weapon_manager.got_stunned.connect(on_player_stunned)
 		weapon_manager.block_durability_changed.connect(on_block_durability_changed)
+		
+		health.died.connect(on_died)
 
 
 func on_player_damaged(_damage, _source):
@@ -53,3 +57,9 @@ func on_player_stunned():
 
 func on_block_durability_changed():
 	Global.ui.update_block_durability(weapon_manager.block_durability)
+
+
+func on_died():
+	if not is_multiplayer_authority(): return
+	global_position = Global.network_manager.spawn_marker.global_position
+	health.heal.rpc(999)

@@ -16,7 +16,7 @@ var LOCAL_DEBUG := true
 
 const ALPHABET := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-@export var spawn_position := Vector3.ZERO
+@export var spawn_marker := Marker3D
 
 const APP_ID = 2932440
 var connected_to_lobby := false
@@ -154,7 +154,7 @@ func add_player(peer_id):
 	player.name = str(peer_id)
 	print("playername: " + player.name)
 	add_child(player, true)
-	player.position = spawn_position
+	player.position = spawn_marker.global_position
 
 
 func remove_player(peer_id):

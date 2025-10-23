@@ -140,15 +140,15 @@ radius = 0.562945
 [node name="HubLevel" type="Node3D"]
 script = ExtResource("1_0nv80")
 
-[node name="NetworkManager" type="Node" parent="."]
+[node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("spawn_marker")]
 script = ExtResource("2_4p34j")
-spawn_position = Vector3(11.0702, -4.28044, -9.99249)
+spawn_marker = NodePath("Marker3D")
 
 [node name="Camera3D" type="Camera3D" parent="NetworkManager"]
 transform = Transform3D(0.513272, -0.118789, 0.849965, 0, 0.990375, 0.138412, -0.858226, -0.0710432, 0.508332, 55.1084, 21.1227, 43.968)
 
 [node name="Marker3D" type="Marker3D" parent="NetworkManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0702, -4.28044, -9.99249)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5697, -5.33705, -8.58194)
 
 [node name="UI" parent="." node_paths=PackedStringArray("network_manager") instance=ExtResource("3_1jqj6")]
 network_manager = NodePath("../NetworkManager")

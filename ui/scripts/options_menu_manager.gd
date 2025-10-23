@@ -4,6 +4,7 @@ class_name OptionsMenuManager
 @onready var ui: UIManager = $".."
 
 @onready var return_button: Button = $ButtonHolder/ReturnButton
+@onready var respawn_button: Button = $ButtonHolder/RespawnButton
 @onready var leave_button: Button = $ButtonHolder/LeaveButton
 @onready var quit_button: Button = $ButtonHolder/QuitButton
 @onready var settings_button: Button = $ButtonHolder/SettingsButton
@@ -14,6 +15,7 @@ class_name OptionsMenuManager
 
 func _ready() -> void:
 	return_button.pressed.connect(on_return_button_pressed)
+	respawn_button.pressed.connect(on_respawn_button_pressed)
 	leave_button.pressed.connect(on_leave_button_pressed)
 	quit_button.pressed.connect(on_quit_button_pressed)
 	settings_button.pressed.connect(on_settings_button_pressed)
@@ -24,6 +26,11 @@ func _ready() -> void:
 
 
 func on_return_button_pressed():
+	ui.toggle_options_menu(false)
+
+
+func on_respawn_button_pressed():
+	Global.local_player.health.die.rpc()
 	ui.toggle_options_menu(false)
 
 
