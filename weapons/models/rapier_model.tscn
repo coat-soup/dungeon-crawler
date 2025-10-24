@@ -17,7 +17,7 @@ texture_filter = 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_56n53"]
 size = Vector3(0.11, 0.878565, 0.04)
 
-[node name="rapier" node_paths=PackedStringArray("hand_positions", "hitbox", "block_area") instance=ExtResource("1_6b7qb")]
+[node name="rapier" node_paths=PackedStringArray("hand_positions", "hitbox") instance=ExtResource("1_6b7qb")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("2_56n53")
 hand_positions = [NodePath("Marker3D")]
@@ -26,7 +26,6 @@ damage = 18
 overhead_damage = 25
 swing_stamina_drain = 5.0
 hitbox = NodePath("Hitbox")
-block_area = NodePath("")
 
 [node name="Cube" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_2owps")
