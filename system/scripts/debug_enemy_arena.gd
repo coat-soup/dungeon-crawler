@@ -4,6 +4,7 @@ class_name DebugEnemyArena
 @export var enemies : Array[PackedScene]
 @export var activation_lever : StateToggleInteractable
 @export var profficiency_lever : StateToggleInteractable
+@export var rat_lever : StateToggleInteractable
 
 @export var wave_growth_multipler : float = 2.0
 var wave_amount : int = 1
@@ -14,6 +15,7 @@ var spawned_enemies : Array[EnemyCharacter]
 func _ready() -> void:
 	activation_lever.interacted.connect(on_activation_lever_interacted)
 	profficiency_lever.interacted.connect(on_profficiency_lever_interacted)
+	rat_lever.interacted.connect(on_rat_lever_interacted)
 
 
 func on_activation_lever_interacted(_source : Node):
@@ -28,8 +30,11 @@ func on_activation_lever_interacted(_source : Node):
 
 
 func on_profficiency_lever_interacted(_source : Node):
-	if not multiplayer.is_server(): return
 	profficiency_lever.prompt_text = "Enemy Profficiency (%.1f)" % get_enemy_profficiency_from_lever()
+
+
+func on_rat_lever_interacted(_source : Node):
+	rat_lever.prompt_text = "Enemy Type (" + ["Humanoid", "Rat"][rat_lever.state] + ")"
 
 
 func get_enemy_profficiency_from_lever() -> float:
@@ -54,7 +59,7 @@ func do_wave():
 
 
 func spawn():
-	var e : EnemyCharacter = enemies.pick_random().instantiate() as EnemyCharacter
+	var e : EnemyCharacter = enemies[rat_lever.state].instantiate() as EnemyCharacter
 	e.name = str(multiplayer.get_unique_id())
 	Global.network_manager.add_child(e, true)
 	

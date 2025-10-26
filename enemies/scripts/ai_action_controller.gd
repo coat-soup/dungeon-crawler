@@ -61,14 +61,14 @@ func check_action_weights():
 
 func on_body_entered(body : Node3D):
 	if not is_multiplayer_authority(): return
-	var char = body as Character
+	var char = body as Player
 	if char and char != character:
 		targets.append(char)
 
 
 func on_body_exited(body : Node3D):
 	if not is_multiplayer_authority(): return
-	var char = body as Character
+	var char = body as Player
 	if char and char != character:
 		var id = targets.find(char)
 		if id != -1: targets.remove_at(id)

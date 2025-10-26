@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name Weapon
 
 @export var hand_positions : Array[Node3D]

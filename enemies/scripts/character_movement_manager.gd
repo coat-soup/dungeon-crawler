@@ -89,16 +89,16 @@ func dash_input():
 
 
 func get_speed() -> float:
-	var relative_input = (Vector3(input_direction.x, 0, input_direction.z) * body.transform.basis).normalized()
+	var relative_input = (Vector3(input_direction.x, 0, input_direction.z) * body.global_basis).normalized()
 	var s = speed if not sprinting else sprint_speed
 	if body.weapon_manager.attack_state == WeaponManager.AttackState.STUNNED: s = speed * 0.4
-	return s if relative_input.z < 0 else s * 0.6
+	return s if relative_input.z < 0.1 else s * 0.6
 
 
 @rpc("any_peer", "call_local")
-func apply_impulse(impulse : Vector3, duration : float):
+func apply_impulse(impulse : Vector3, duration : float, local = false):
 	if not is_multiplayer_authority(): return
-	applied_impulse = impulse
+	applied_impulse = impulse if not local else (impulse * body.global_basis)
 	impulse_timer = duration
 
 

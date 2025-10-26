@@ -34,6 +34,7 @@ point_count = 3
 
 [sub_resource type="Resource" id="Resource_bjvpn"]
 script = ExtResource("9_x7c3f")
+distance_threshhold = 3.0
 action_name = "attack"
 action_type = 1
 cancellable = false

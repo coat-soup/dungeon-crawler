@@ -32,6 +32,6 @@ func end_action():
 func get_ai_action_weight(ai : AIActionController) -> float:
 	for t in ai.targets:
 		if t.global_position.distance_to(ai.global_position) <= distance:
-			return 1 - ((ai.desire_to_attack) + (ai.character.stamina.get_ratio())) / 2 #(0.7 - ai.character.stamina.get_ratio())
+			return 1 - (ai.desire_to_attack)
 	
 	return 0.0

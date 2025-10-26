@@ -27,7 +27,8 @@ func end_action():
 
 
 func get_ai_action_weight(ai : AIActionController) -> float:
+	if ai.character.weapon_manager.attack_state != WeaponManager.AttackState.IDLE: return 0.0 
 	for t in ai.targets:
-		return ((ai.desire_to_attack) + (ai.character.stamina.get_ratio())) / 2
+		return (ai.desire_to_attack)
 	
 	return 0.0

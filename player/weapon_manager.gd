@@ -40,15 +40,17 @@ var damaged_objects : Array[Health]
 
 
 func _ready() -> void:
-	weapon = character_model.weapon
+	if not weapon or not weapon.is_bespoke:
+		weapon = character_model.weapon
 	weapon.manager = self
 	character_model.damage_window_toggled.connect(toggle_damage_window)
 	character_model.block_window_toggled.connect(toggle_block_window)
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
 	weapon.hitbox.area_entered.connect(on_weapon_entered_area)
 	
-	await get_tree().create_timer(0.5).timeout
-	equip_weapon.rpc(starting_weapon_path)
+	if not weapon.is_bespoke:
+		await get_tree().create_timer(0.5).timeout
+		equip_weapon.rpc(starting_weapon_path)
 
 
 func _process(delta: float) -> void:

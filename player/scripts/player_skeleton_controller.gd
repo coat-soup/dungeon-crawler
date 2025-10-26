@@ -1,4 +1,4 @@
-extends CharacterSkeletonController
+extends HumanoidSkeletonController
 class_name PlayerSkeletonController
 
 @export var cam_holder : Node3D

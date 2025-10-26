@@ -1,2 +1,2 @@
-extends CharacterSkeletonController
+extends HumanoidSkeletonController
 class_name EnemySkeletonController

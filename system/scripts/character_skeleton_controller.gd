@@ -3,69 +3,31 @@ class_name CharacterSkeletonController
 
 signal damage_window_toggled(bool)
 signal block_window_toggled(bool)
+signal leap_started
 
-@onready var skeleton: Skeleton3D = $Armature_001/Skeleton3D
+@export var skeleton: Skeleton3D
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 @export var movement_manager : CharacterMovementManager
-
-@onready var weapon_rotator: Node3D = $Armature_001/Skeleton3D/TorsoIK/WeaponRotator
-@onready var weapon_rotator_ik: LookAtModifier3D = $Armature_001/Skeleton3D/WeaponRotatorIK
-
-@onready var torso_ik: LookAtModifier3D = $Armature_001/Skeleton3D/TorsoIK
-@onready var neck_rotator: Node3D = $Armature_001/Skeleton3D/TorsoIK/NeckRotator
-@onready var head_rotator: Node3D = $Armature_001/Skeleton3D/TorsoIK/NeckRotator/HeadRotator
-
-@onready var hand_ik_r: SkeletonIK3D = $Armature_001/Skeleton3D/HandIK_R
-@onready var hand_ik_l: SkeletonIK3D = $Armature_001/Skeleton3D/HandIK_L
-
-var held_item
-@onready var weapon_rt: RemoteTransform3D = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT
-@onready var weapon_holder: Node3D = $Armature_001/Skeleton3D/WeaponAttach/WeaponRT/WeaponHolder
 
 @export var weapon : Weapon
 @export var weapon_manager : WeaponManager
 
 
 func _ready() -> void:
-	weapon_rt.remote_path = weapon.get_path()
-	
-	hand_ik_r.start()
-	hand_ik_l.start()
-	
 	animation_tree.advance_expression_base_node = weapon_manager.get_path()
-	weapon_manager.started_kick.connect(on_started_kick)
-	$Armature_001/Skeleton3D/TorsoIK/TorsoCollisionRT.remote_path = get_parent().get_node("CollisionTop").get_path()
-
-
-func handle_weapon_equip(_weapon : Weapon):
-	weapon = _weapon
-	var left_needed = len(weapon.hand_positions) > 1
-	hand_ik_r.target_node = weapon.hand_positions[0].get_path()
-	if left_needed:
-		hand_ik_l.start()
-		hand_ik_l.target_node = weapon.hand_positions[1].get_path()
-	else: hand_ik_l.stop()
-	animation_tree.set("parameters/left_arm_item_blend/blend_amount", 0.0 if left_needed else 1.0)
-
-
-func on_started_kick():
-	animation_tree.set("parameters/kick_one_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	weapon_manager.started_attack.connect(on_started_attack)
 
 
 func start_damage_window(): damage_window_toggled.emit(true)
 func stop_damage_window(): damage_window_toggled.emit(false)
 func start_block_window(): block_window_toggled.emit(true)
-
+func start_leap(): leap_started.emit()
 
 func _physics_process(delta: float) -> void:
-	var velocity = movement_manager.velocity_sync.length()
-	animation_tree.set("parameters/walk_velocity/blend_position", velocity/movement_manager.speed)
-	
-	if held_item:
-		if len(held_item.hand_positions) > 0: hand_ik_r.target = held_item.hand_positions[0]
-		if len(held_item.hand_positions) > 1: hand_ik_r.target = held_item.hand_positions[1]
-	
-	var swing_speed = 1.0 if weapon_manager.attack_state == weapon_manager.AttackState.IDLE else (weapon.speed_multiplier * (weapon.lunge_speed_mult if weapon_manager.attack_state == weapon_manager.AttackState.LUNGE else 1.0))
-	if weapon_manager.weapon_bouncing: swing_speed = -0.3
-	animation_tree.set("parameters/swing_sword_timescale/scale", swing_speed)
+	var velocity = movement_manager.velocity_sync * movement_manager.body.global_basis
+	animation_tree.set("parameters/walk_blendspace/blend_position", Vector2(velocity.x, velocity.z) / movement_manager.speed)
+
+
+func on_started_attack():
+	animation_tree.set("parameters/attack_one_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

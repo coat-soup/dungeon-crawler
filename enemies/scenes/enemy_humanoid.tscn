@@ -28,6 +28,7 @@
 
 [sub_resource type="Resource" id="Resource_bjvpn"]
 script = ExtResource("9_jnmqq")
+distance_threshhold = 3.0
 action_name = "attack"
 action_type = 1
 cancellable = false
@@ -48,7 +49,7 @@ metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 script = ExtResource("10_n0bl4")
 distance = 2.0
 move_speed = 2.0
-action_name = ""
+action_name = "engage"
 action_type = 0
 cancellable = true
 stamina_cost = 0
@@ -253,3 +254,11 @@ grow_horizontal = 2
 grow_vertical = 2
 value = 100.0
 show_percentage = false
+
+[node name="ActionsList" type="Label" parent="Sprite3D/SubViewport"]
+offset_left = 100.45
+offset_top = 154.81
+offset_right = 177.36
+offset_bottom = 177.81
+theme_override_font_sizes/font_size = 10
+text = "GAGEGAw"

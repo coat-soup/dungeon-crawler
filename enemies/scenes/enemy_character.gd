@@ -23,3 +23,12 @@ func on_died():
 
 func on_stamina_changed():
 	$Sprite3D/SubViewport/StaminaBar.value = weapon_manager.block_durability
+
+
+func _process(delta: float) -> void:
+	var actions_debug = ""
+	var i = 0
+	for action in ai_action_controller.action_manager.current_actions:
+		actions_debug += str(i) + ": " + action.action_name + "\n"
+		i += 1
+	$Sprite3D/SubViewport/ActionsList.text = actions_debug
