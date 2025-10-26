@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://8dlndv72ysbq"]
+
+[ext_resource type="PackedScene" uid="uid://dx1n6uyohibys" path="res://enemies/models/rat.glb" id="1_dnwk3"]
+[ext_resource type="Texture2D" uid="uid://cwh2pcyvc60xt" path="res://enemies/textures/rat.png" id="2_b2doe"]
+[ext_resource type="Texture2D" uid="uid://c3op6n4mdnbyh" path="res://enemies/textures/rat_n.png" id="3_osipn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brodp"]
+diffuse_mode = 3
+albedo_texture = ExtResource("2_b2doe")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_texture = ExtResource("3_osipn")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkoxg"]
+cull_mode = 2
+diffuse_mode = 3
+albedo_texture = ExtResource("2_b2doe")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_texture = ExtResource("3_osipn")
+texture_filter = 0
+
+[node name="rat" instance=ExtResource("1_dnwk3")]
+
+[node name="Cube" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
+
+[node name="Cube_001" parent="Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
+
+[node name="Cube_002" parent="Armature/Skeleton3D" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
+
+[node name="Cube_003" parent="Armature/Skeleton3D" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
+
+[node name="Cube_004" parent="Armature/Skeleton3D" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
+
+[node name="Cylinder" parent="Armature/Skeleton3D" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
+
+[node name="Plane" parent="Armature/Skeleton3D" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vkoxg")

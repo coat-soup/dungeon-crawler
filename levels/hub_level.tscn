@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://cuhkwocop1mx7"]
+[gd_scene load_steps=43 format=4 uid="uid://cuhkwocop1mx7"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/scripts/game_manager.gd" id="1_0nv80"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/scripts/network_manager.gd" id="2_4p34j"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bdst4tv46kcy2" path="res://world/props/scenes/brazier.tscn" id="11_emmfv"]
 [ext_resource type="PackedScene" uid="uid://cabbkpdw7um5w" path="res://world/props/scenes/stairs.tscn" id="14_1jqj6"]
 [ext_resource type="PackedScene" uid="uid://btt5dershufo2" path="res://world/props/scenes/fern.tscn" id="14_aald4"]
+[ext_resource type="PackedScene" uid="uid://8dlndv72ysbq" path="res://enemies/models/rat_model.tscn" id="15_s3145"]
 [ext_resource type="Script" uid="uid://m7grea7x21ug" path="res://system/scripts/debug_enemy_arena.gd" id="17_eac86"]
 [ext_resource type="PackedScene" uid="uid://xh7j8iie55hm" path="res://enemies/scenes/enemy_humanoid.tscn" id="17_uj6qf"]
 [ext_resource type="PackedScene" uid="uid://bg18hod4qfwqf" path="res://world/props/scenes/lever.tscn" id="18_uj6qf"]
@@ -659,6 +660,9 @@ material_override = ExtResource("9_q222i")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Castle/NavigationRegion3D/FightRing/rough_floor_patch/Plane/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248108, 0)
 shape = SubResource("BoxShape3D_11ood")
+
+[node name="rat" parent="World/Castle/NavigationRegion3D/FightRing/rough_floor_patch" instance=ExtResource("15_s3145")]
+transform = Transform3D(0.672527, 0, 0, 0, 1, 0, 0, 0, 0.672527, -0.0513785, -0.190514, -1.09874)
 
 [node name="fern4" parent="World/Castle" instance=ExtResource("14_aald4")]
 transform = Transform3D(-0.358726, 0, 0.933443, 0, 1, 0, -0.933443, 0, -0.358726, 12.7125, 17.3041, -3.15964)
