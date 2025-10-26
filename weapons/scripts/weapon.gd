@@ -10,6 +10,8 @@ class_name Weapon
 @export var block_stamina_drain_damage_mul : float = 0.5
 @export var block_sustain_stamina_drain : float = 3.0
 
+@export var is_bespoke : bool = false
+
 @export var hitbox: Area3D
 @export var block_area : Area3D
 

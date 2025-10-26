@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://bdst4tv46kcy2" path="res://world/props/scenes/brazier.tscn" id="11_emmfv"]
 [ext_resource type="PackedScene" uid="uid://cabbkpdw7um5w" path="res://world/props/scenes/stairs.tscn" id="14_1jqj6"]
 [ext_resource type="PackedScene" uid="uid://btt5dershufo2" path="res://world/props/scenes/fern.tscn" id="14_aald4"]
-[ext_resource type="PackedScene" uid="uid://8dlndv72ysbq" path="res://enemies/models/rat_model.tscn" id="15_s3145"]
 [ext_resource type="Script" uid="uid://m7grea7x21ug" path="res://system/scripts/debug_enemy_arena.gd" id="17_eac86"]
 [ext_resource type="PackedScene" uid="uid://xh7j8iie55hm" path="res://enemies/scenes/enemy_humanoid.tscn" id="17_uj6qf"]
 [ext_resource type="PackedScene" uid="uid://bg18hod4qfwqf" path="res://world/props/scenes/lever.tscn" id="18_uj6qf"]
@@ -26,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cxk8ybyliq0yq" path="res://weapons/models/mace_model.tscn" id="21_jo4gk"]
 [ext_resource type="PackedScene" uid="uid://4vl3hnk6ruqg" path="res://weapons/models/rapier_model.tscn" id="22_efs00"]
 [ext_resource type="PackedScene" uid="uid://c0dhmtusdifw1" path="res://weapons/models/warhammer_model.tscn" id="23_s3145"]
+[ext_resource type="PackedScene" uid="uid://cojvglro8fr60" path="res://enemies/scenes/enemy_rat.tscn" id="26_s3145"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wf1f"]
 sky_top_color = Color(0.484482, 0.54318, 0.717929, 1)
@@ -661,9 +661,6 @@ material_override = ExtResource("9_q222i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248108, 0)
 shape = SubResource("BoxShape3D_11ood")
 
-[node name="rat" parent="World/Castle/NavigationRegion3D/FightRing/rough_floor_patch" instance=ExtResource("15_s3145")]
-transform = Transform3D(0.672527, 0, 0, 0, 1, 0, 0, 0, 0.672527, -0.0513785, -0.190514, -1.09874)
-
 [node name="fern4" parent="World/Castle" instance=ExtResource("14_aald4")]
 transform = Transform3D(-0.358726, 0, 0.933443, 0, 1, 0, -0.933443, 0, -0.358726, 12.7125, 17.3041, -3.15964)
 
@@ -970,6 +967,9 @@ weapon_path = "res://weapons/models/warhammer_model.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponRack/warhammer/Area3D"]
 shape = SubResource("SphereShape3D_s3145")
+
+[node name="EnemyRat" parent="." instance=ExtResource("26_s3145")]
+transform = Transform3D(0.809868, 0, -0.586613, 0, 1, 0, 0.586613, 0, 0.809868, 8.83179, -6.39752, -9.91719)
 
 [editable path="World/Castle/NavigationRegion3D/FightRing/InnerRing/arch2"]
 [editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/arch"]
