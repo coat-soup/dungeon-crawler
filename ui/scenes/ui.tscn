@@ -349,6 +349,7 @@ offset_bottom = 363.745
 text = "REFRESH LOBBIES"
 
 [node name="OptionsPanel" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -368,7 +369,6 @@ grow_vertical = 2
 color = Color(0.18, 0.18, 0.18, 0.501961)
 
 [node name="ButtonHolder" type="VBoxContainer" parent="OptionsPanel"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -422,6 +422,7 @@ text = "Dungeon Crawler - vx.x.xn"
 scroll_active = false
 
 [node name="SettingsPanel" type="Control" parent="OptionsPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

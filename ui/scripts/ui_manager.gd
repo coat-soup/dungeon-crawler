@@ -51,6 +51,8 @@ func _ready():
 	hud.visible = true
 	network_panel.visible = true
 	options_panel.visible = false
+	
+	interact_text.text = ""
 
 
 func _input(event):

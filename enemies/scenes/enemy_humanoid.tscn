@@ -216,6 +216,7 @@ replication_config = SubResource("SceneReplicationConfig_g1dw6")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.16514, 0)
+layers = 2
 billboard = 1
 texture = SubResource("ViewportTexture_kuufe")
 

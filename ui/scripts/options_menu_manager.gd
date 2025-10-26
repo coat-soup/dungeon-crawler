@@ -20,6 +20,7 @@ func _ready() -> void:
 	quit_button.pressed.connect(on_quit_button_pressed)
 	settings_button.pressed.connect(on_settings_button_pressed)
 	
+	toggle_settings_menu(false)
 	visibility_changed.connect(on_visibility_changed)
 	
 	game_info_label.text = "%s - version %s" % [ProjectSettings.get_setting("application/config/name"), ProjectSettings.get_setting("application/config/version")]

@@ -91,7 +91,7 @@ func join_lobby_by_id(id):
 	$Camera3D.queue_free()
 	ui.toggle_network_menu(false)
 	
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(10.0).timeout
 	if not connected_to_lobby:
 		print("CONNECTION TIMED OUT")
 		quit_lobby()

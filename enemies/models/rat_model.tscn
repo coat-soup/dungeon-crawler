@@ -91,37 +91,37 @@ script = ExtResource("2_osipn")
 skeleton = NodePath("Armature/Skeleton3D")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(9.80459e-12, -0.000202545, -0.000121527)
+bones/0/position = Vector3(1.60813e-11, -0.00377788, -0.00226673)
 bones/0/rotation = Quaternion(0.591971, -0.34582, -0.311016, 0.658215)
 bones/1/rotation = Quaternion(0.0522748, 0.464293, -0.0274656, 0.883711)
-bones/2/rotation = Quaternion(0.00012849, 0.999966, -0.00825842, -4.32596e-05)
+bones/2/rotation = Quaternion(0.00173062, 0.999956, -0.00924125, -0.000492338)
 bones/3/rotation = Quaternion(0.11869, 6.21299e-07, 5.68456e-08, 0.992931)
-bones/4/rotation = Quaternion(0.754014, 0.241367, -0.474374, 0.384934)
+bones/4/rotation = Quaternion(0.752619, 0.246544, -0.4778, 0.380116)
 bones/4/scale = Vector3(0.999976, 1.00001, 1.00001)
-bones/5/rotation = Quaternion(0.381198, -0.600815, 0.393338, 0.582233)
+bones/5/rotation = Quaternion(0.385158, -0.597024, 0.399201, 0.57953)
 bones/5/scale = Vector3(1, 1.00002, 0.999985)
-bones/6/rotation = Quaternion(0.191782, -0.482118, 0.108653, 0.847925)
+bones/6/rotation = Quaternion(0.19846, -0.48087, 0.109164, 0.84703)
 bones/6/scale = Vector3(0.999989, 1, 1.00001)
 bones/7/rotation = Quaternion(0.595887, 0.0230868, -0.0171412, 0.802554)
-bones/8/rotation = Quaternion(0.754748, -0.241404, 0.473898, 0.384059)
+bones/8/rotation = Quaternion(0.753367, -0.246555, 0.477329, 0.379218)
 bones/8/scale = Vector3(1.00002, 0.999986, 0.999992)
-bones/9/rotation = Quaternion(0.380769, 0.601635, -0.394437, 0.580922)
+bones/9/rotation = Quaternion(0.384711, 0.597833, -0.400315, 0.578223)
 bones/9/scale = Vector3(1, 0.999993, 1.00001)
-bones/10/rotation = Quaternion(0.190851, 0.482265, -0.108392, 0.848085)
+bones/10/rotation = Quaternion(0.197527, 0.481021, -0.108902, 0.847197)
 bones/10/scale = Vector3(0.999979, 1, 1.00002)
 bones/11/rotation = Quaternion(0.595887, -0.0230847, 0.0171392, 0.802554)
 bones/12/rotation = Quaternion(-0.49949, -0.390541, 0.724969, -0.269087)
-bones/13/rotation = Quaternion(0.306986, -0.585383, 0.254249, 0.706006)
+bones/13/rotation = Quaternion(0.312047, -0.581978, 0.240017, 0.711562)
 bones/13/scale = Vector3(1.00001, 1.00001, 0.999982)
-bones/14/rotation = Quaternion(0.174657, -0.561114, 0.122537, 0.799769)
+bones/14/rotation = Quaternion(0.20992, -0.555134, 0.147276, 0.791246)
 bones/14/scale = Vector3(0.999998, 0.999995, 1.00001)
-bones/15/rotation = Quaternion(0.67911, 2.60439e-06, -2.51648e-06, 0.734037)
-bones/16/rotation = Quaternion(0.885153, 0.00331008, -0.465241, 0.00665329)
-bones/20/rotation = Quaternion(0.306993, 0.585378, -0.254263, 0.706002)
+bones/15/rotation = Quaternion(0.661834, 2.76804e-06, -2.80863e-06, 0.74965)
+bones/16/rotation = Quaternion(0.880432, -0.0135549, -0.473949, -0.00529759)
+bones/20/rotation = Quaternion(0.312054, 0.581974, -0.24003, 0.711558)
 bones/20/scale = Vector3(1, 1, 0.999994)
-bones/21/rotation = Quaternion(0.174656, 0.561111, -0.122535, 0.799771)
+bones/21/rotation = Quaternion(0.209919, 0.555131, -0.147275, 0.791248)
 bones/21/scale = Vector3(0.999986, 0.999997, 1.00002)
-bones/22/rotation = Quaternion(0.679109, -2.32361e-06, 2.05377e-06, 0.734037)
+bones/22/rotation = Quaternion(0.661834, -2.26889e-06, 1.70401e-06, 0.74965)
 bones/23/position = Vector3(0.192356, -0.475432, 0.583613)
 bones/23/rotation = Quaternion(0.456684, 0.539852, -0.539852, -0.456684)
 bones/24/position = Vector3(-0.192356, -0.475432, 0.583613)
@@ -132,24 +132,31 @@ bones/26/position = Vector3(-0.207759, -0.469648, -0.118842)
 bones/26/rotation = Quaternion(0.351907, 0.61332, -0.61332, -0.351907)
 
 [node name="Cube" parent="Armature/Skeleton3D" index="0"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
 
 [node name="Cube_001" parent="Armature/Skeleton3D" index="1"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
 
 [node name="Cube_002" parent="Armature/Skeleton3D" index="2"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
 
 [node name="Cube_003" parent="Armature/Skeleton3D" index="3"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
 
 [node name="Cube_004" parent="Armature/Skeleton3D" index="4"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
 
 [node name="Cylinder" parent="Armature/Skeleton3D" index="5"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_brodp")
 
 [node name="Plane" parent="Armature/Skeleton3D" index="6"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_vkoxg")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
