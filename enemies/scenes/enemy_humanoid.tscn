@@ -149,6 +149,7 @@ character_model = NodePath("../enemy_humanoid_model")
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("weapon_manager")]
 script = ExtResource("6_st5e0")
 weapon_manager = NodePath("../WeaponManager")
+max_health = null
 metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]

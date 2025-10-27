@@ -59,3 +59,10 @@ func _physics_process(delta: float) -> void:
 	var swing_speed = 1.0 if weapon_manager.attack_state == weapon_manager.AttackState.IDLE else (weapon.speed_multiplier * (weapon.lunge_speed_mult if weapon_manager.attack_state == weapon_manager.AttackState.LUNGE else 1.0))
 	if weapon_manager.weapon_bouncing: swing_speed = -0.3
 	animation_tree.set("parameters/swing_sword_timescale/scale", swing_speed)
+
+
+func on_stunned():
+	super.on_stunned()
+	hand_ik_l.influence = 0
+	await get_tree().create_timer(1.0).timeout
+	hand_ik_l.influence = 1

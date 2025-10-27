@@ -134,8 +134,8 @@ character_model = NodePath("../rat")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("weapon_manager")]
 script = ExtResource("5_ccmh4")
-weapon_manager = NodePath("../WeaponManager")
 max_health = 55.0
+weapon_manager = NodePath("../WeaponManager")
 metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]

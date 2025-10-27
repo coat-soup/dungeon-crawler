@@ -11,16 +11,21 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 		var min_react_time : float = 0.4 * max_react_time * lerp(1.0, 0.5, ai.profficiency)
 		await character.get_tree().create_timer(randf_range(min_react_time, max_react_time)).timeout
 	
-	character.weapon_manager.blocking = true
+	character.weapon_manager.got_stunned.connect(on_stunned)
+	character.weapon_manager.attack_state = WeaponManager.AttackState.BLOCKING
+
+
+func on_stunned():
+	trigger_end_action()
 
 
 func end_action():
 	super.end_action()
-	character.weapon_manager.blocking = false
+	character.weapon_manager.attack_state = WeaponManager.AttackState.IDLE
 
 
 func get_ai_action_weight(ai : AIActionController) -> float:
 	for t in ai.targets:
-		if t.weapon_manager.attack_state != 0: return 2.0 * (ai.character.stamina.cur_stamina/ai.character.stamina.max_stamina)
+		if t.weapon_manager.attack_state in [1, 2, 3, 4]: return 2.0 * (ai.character.stamina.cur_stamina/ai.character.stamina.max_stamina)
 	
 	return 0.0

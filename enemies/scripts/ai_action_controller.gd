@@ -96,7 +96,6 @@ func improve_react_to_attack(attack : WeaponManager.AttackState):
 	if total > 1:
 		for i in range(3):
 			block_reaction_bonuses[i] *= 1/total
-	print("normalised bonuses to ", block_reaction_bonuses)
 
 
 func get_block_reaction_bonus(attack: WeaponManager.AttackState) -> float:

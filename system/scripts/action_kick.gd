@@ -23,6 +23,6 @@ func end_action():
 
 func get_ai_action_weight(ai : AIActionController) -> float:
 	for t in ai.targets:
-		if t.weapon_manager.blocking and t.global_position.distance_to(ai.global_position) < 4.0: return ai.desire_to_attack - 0.5 + (0.5 * ai.character.stamina.get_ratio())
+		if t.weapon_manager.attack_state == WeaponManager.AttackState.BLOCKING and t.global_position.distance_to(ai.global_position) < 4.0: return ai.desire_to_attack - 0.5 + (0.5 * ai.character.stamina.get_ratio())
 	
 	return 0.0

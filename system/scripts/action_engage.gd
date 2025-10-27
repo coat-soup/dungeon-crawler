@@ -6,6 +6,9 @@ var ai_action_controller : AIActionController
 @export var distance : float = 2.0
 @export var move_speed = 2.0
 
+var flank_tick = 30
+var flank_rotation = 0
+
 
 func perform_action(_character : Character, args : Array = []): # args = [WeaponManager.ActionState]
 	super.perform_action(_character, args)
@@ -16,8 +19,16 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 
 
 func tick():
+	flank_tick -= 1
+	if flank_tick <= 0:
+		flank_tick = 30
+		flank_rotation = deg_to_rad(randf_range(-30, 30)) if randf() < 0.6 else 0
+	
 	if len(ai_action_controller.targets) > 0 and character.weapon_manager.attack_state == 0:
-		ai_movement.set_nav_destination(ai_action_controller.targets[0].global_position + (character.global_position - ai_action_controller.targets[0].global_position).normalized() * distance)
+		
+		ai_movement.set_nav_destination(ai_action_controller.targets[0].global_position +
+			(character.global_position - ai_action_controller.targets[0].global_position).normalized().rotated(Vector3.UP, flank_rotation) * distance)
+		
 		ai_movement.body.global_rotation.y = -(character.global_position - ai_action_controller.targets[0].global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
 
 

@@ -17,12 +17,13 @@ signal leap_started
 func _ready() -> void:
 	animation_tree.advance_expression_base_node = weapon_manager.get_path()
 	weapon_manager.started_attack.connect(on_started_attack)
-
+	weapon_manager.got_stunned.connect(on_stunned)
 
 func start_damage_window(): damage_window_toggled.emit(true)
 func stop_damage_window(): damage_window_toggled.emit(false)
 func start_block_window(): block_window_toggled.emit(true)
 func start_leap(): leap_started.emit()
+
 
 func _physics_process(delta: float) -> void:
 	var velocity = movement_manager.velocity_sync * movement_manager.body.global_basis
@@ -31,3 +32,6 @@ func _physics_process(delta: float) -> void:
 
 func on_started_attack():
 	animation_tree.set("parameters/attack_one_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+func on_stunned():
+	animation_tree.set("parameters/stun_oneshot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

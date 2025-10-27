@@ -18,7 +18,7 @@ var attack_input_buffer : AttackState = -1
 
 @export var character_model: CharacterSkeletonController
 
-enum AttackState {IDLE, SWING, ALTSWING, LUNGE, OVERHEAD, KICK, STUNNED}
+enum AttackState {IDLE, SWING, ALTSWING, LUNGE, OVERHEAD, KICK, STUNNED, BLOCKING}
 
 var attack_state : AttackState
 
@@ -26,7 +26,6 @@ var weapon_bouncing : bool
 
 var idle_pentalty_timer : float = 0.3
 var can_attack : bool = true
-var blocking : bool
 var block_damage_delay : float = 0.3
 var blocking_damage : bool
 var can_damage : bool
@@ -46,7 +45,6 @@ func _ready() -> void:
 	character_model.damage_window_toggled.connect(toggle_damage_window)
 	character_model.block_window_toggled.connect(toggle_block_window)
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
-	weapon.hitbox.area_entered.connect(on_weapon_entered_area)
 	
 	if not weapon.is_bespoke:
 		await get_tree().create_timer(0.5).timeout
@@ -57,7 +55,7 @@ func _process(delta: float) -> void:
 	#print("buffer: ", attack_input_buffer)
 	if not is_multiplayer_authority(): return
 	
-	if block_durability < 100.0 and not blocking and attack_state != AttackState.STUNNED:
+	if block_durability < 100.0 and attack_state != AttackState.BLOCKING and attack_state != AttackState.STUNNED:
 		block_durability = min(100.0, block_durability + block_durability_recharge_rate * delta)
 		block_durability_changed.emit()
 	
@@ -84,9 +82,8 @@ func set_attack_state(attack_type : AttackState):
 
 @rpc("any_peer", "call_local")
 func toggle_blocking(value : bool):
-	blocking = value
 	block_state_changed.emit(value)
-	if not blocking: blocking_damage = false
+	if attack_state != AttackState.BLOCKING: blocking_damage = false
 	else:
 		await get_tree().create_timer(block_damage_delay).timeout
 		blocking_damage = true
@@ -118,15 +115,6 @@ func on_weapon_hit(body : Node3D):
 			print("weapon doing damage")
 	elif is_multiplayer_authority():
 		handle_bonk.rpc()
-
-
-func on_weapon_entered_area(area : Area3D):
-	return
-	if not is_multiplayer_authority(): return
-	var other_weapon : Weapon = area.get_parent() as Weapon
-	if can_damage and other_weapon and other_weapon.manager.blocking and area == other_weapon.block_area:
-		handle_block_bounce.rpc()
-		print("weapon blocked by weapon")
 
 
 @rpc("any_peer", "call_local")
@@ -192,7 +180,7 @@ func kick():
 			var c = cast.get_collider(0) as Character
 			if c:
 				c.movement_manager.apply_impulse.rpc(-character.global_basis.z * 10, 0.2)
-				if c.weapon_manager.blocking: c.weapon_manager.stun.rpc(1.0)
+				if c.weapon_manager.attack_state == AttackState.BLOCKING: c.weapon_manager.stun.rpc(1.0)
 				print("HIT CHARACTER!!!!!!!!!!!!!!")
 		else:
 			print("cast not colliding")
@@ -236,6 +224,5 @@ func equip_weapon(weapon_path : String):
 	character_model.weapon_holder.add_child(weapon)
 	character_model.handle_weapon_equip(weapon)
 	weapon.hitbox.body_entered.connect(on_weapon_hit)
-	weapon.hitbox.area_entered.connect(on_weapon_entered_area)
 	character.action_manager.get_action_by_name("attack").stamina_cost = weapon.swing_stamina_drain
 	character.action_manager.get_action_by_name("block").sustained_stamina_cost = weapon.block_sustain_stamina_drain
