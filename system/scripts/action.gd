@@ -17,16 +17,19 @@ enum ActionType {NONBLOCKING, BLOCKING} # blocking actions cant be performed if 
 @export var cancellable : bool = true
 @export var stamina_cost : int = 0
 @export var sustained_stamina_cost : int = 0
+@export var cooldown : float = 0.0
+var on_cooldown := false
 var ticking := true
 var stamina_tick_speed := 16.0
 #var action_ended := false
 
 func can_perform_action(_character : Character) -> bool:
+	if on_cooldown: return false
 	if (stamina_cost > 0 or sustained_stamina_cost > 0) and _character.stamina.cur_stamina <= 0: return false
 	return true if action_type == ActionType.NONBLOCKING else not _character.action_manager.is_performing_blocking_action()
 
 
-## WARNING: STAMINA DRAIN COMMENTED OUT
+## ATTENTION: STAMINA DRAIN COMMENTED OUT
 func perform_action(_character : Character, _args : Array = []):
 	character = _character
 	#if stamina_cost > 0 and character.is_multiplayer_authority(): character.stamina.drain_stamina.rpc(stamina_cost)

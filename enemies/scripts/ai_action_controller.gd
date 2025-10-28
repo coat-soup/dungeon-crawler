@@ -6,6 +6,7 @@ class_name AIActionController
 @onready var action_manager: ActionManager = $"../ActionManager"
 
 var targets : Array[Character]
+var active_target : Character
 var action_weights = {}
 var tick_speed = 5.0
 
@@ -35,6 +36,8 @@ func _ready() -> void:
 func process_tick():
 	desire_to_attack = min(1, desire_to_attack + (0.1 * agression_level) / tick_speed)
 	
+	find_active_target()
+	
 	check_action_weights()
 	await get_tree().create_timer(1.0/tick_speed).timeout
 	process_tick()
@@ -48,7 +51,7 @@ func check_action_weights():
 	var best_blocking_action_weight = -1
 	for i in range(len(action_manager.action_set)):
 		if action_manager.action_set[i].action_type == Action.ActionType.BLOCKING:
-			if action_weights[action_manager.action_set[i].action_name] > best_blocking_action_weight:
+			if not action_manager.action_set[i].on_cooldown and action_weights[action_manager.action_set[i].action_name] > best_blocking_action_weight:
 				best_blocking_action_id = i
 				best_blocking_action_weight = action_weights[action_manager.action_set[i].action_name]
 	
@@ -72,6 +75,7 @@ func on_body_exited(body : Node3D):
 	if char and char != character:
 		var id = targets.find(char)
 		if id != -1: targets.remove_at(id)
+		if active_target == char: active_target = null
 
 
 func on_action_performed(action : Action):
@@ -110,3 +114,16 @@ func attack_type_to_id(attack: WeaponManager.AttackState) -> int:
 		WeaponManager.AttackState.LUNGE: return 2
 		WeaponManager.AttackState.OVERHEAD: return 1
 		_: return -1
+
+
+func find_active_target():
+	var t_dist = 0 if not active_target else active_target.global_position.distance_to(character.global_position)
+	if active_target and t_dist < 10: return
+	
+	var best_dist = 1000000
+	
+	for target in targets:
+		var d = target.global_position.distance_to(character.global_position)
+		if d < best_dist and (not active_target or best_dist <= t_dist/2):
+			best_dist = d
+			active_target = target

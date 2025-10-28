@@ -27,6 +27,7 @@ hand_positions = [NodePath("Marker3D"), NodePath("Marker3D2")]
 speed_multiplier = 1.5
 damage = 20
 overhead_damage = 30
+block_durability_drain_mul = 1.5
 hitbox = NodePath("Hitbox")
 
 [node name="Cylinder" parent="." index="0"]

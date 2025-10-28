@@ -53,6 +53,11 @@ func perform_action(action_id : int, args : Array = []):
 	if is_multiplayer_authority(): c_action.triggered_end_action.connect(on_action_triggered_end_action.bind(c_action))
 	
 	performed_action.emit(c_action)
+	
+	if action_set[action_id].cooldown > 0:
+		action_set[action_id].on_cooldown = true
+		await get_tree().create_timer(action_set[action_id].cooldown).timeout
+		action_set[action_id].on_cooldown = false
 
 
 @rpc("any_peer", "call_local")

@@ -11,11 +11,11 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 	character.health.took_damage.connect(on_took_damage)
 	
 	var ai = character.get_node_or_null("AIActionController") as AIActionController
-	if ai and ai.is_multiplayer_authority():
-		character.movement_manager.body.global_rotation.y = -(character.global_position - ai.targets[0].global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
-		if ai.targets[0].global_position.distance_to(ai.global_position) > 2.0:
-			character.movement_manager.set_nav_destination(ai.targets[0].global_position + (character.global_position - ai.targets[0].global_position).normalized() * 1.5)
-			character.movement_manager.apply_impulse((ai.targets[0].global_position - character.global_position).normalized() * 5.0, 0.1)
+	if ai and ai.active_target and ai.is_multiplayer_authority():
+		character.movement_manager.body.global_rotation.y = -(character.global_position - ai.active_target.global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
+		if ai.active_target.global_position.distance_to(ai.global_position) > 2.0:
+			character.movement_manager.set_nav_destination(ai.active_target.global_position + (character.global_position - ai.active_target.global_position).normalized() * 1.5)
+			character.movement_manager.apply_impulse((ai.active_target.global_position - character.global_position).normalized() * 5.0, 0.1)
 	
 	await character.get_tree().create_timer(1.0 / character.weapon_manager.weapon.speed_multiplier).timeout
 	
@@ -49,9 +49,9 @@ func end_action():
 func get_ai_action_weight(ai : AIActionController) -> float:
 	if ai.character.stamina.cur_stamina <= 0: return 0
 	var w := 0.0
-	for t in ai.targets:
-		if t.weapon_manager.attack_state == WeaponManager.AttackState.STUNNED: w += 1.0
-		if t.global_position.distance_to(ai.global_position) <= distance_threshhold: w += ai.desire_to_attack - 0.7 + (0.7 * ai.character.stamina.get_ratio())
+	if ai.active_target:
+		if ai.active_target.weapon_manager.attack_state == WeaponManager.AttackState.STUNNED: w += 1.0
+		if ai.active_target.global_position.distance_to(ai.global_position) <= distance_threshhold: w += ai.desire_to_attack - 0.7 + (0.7 * ai.character.stamina.get_ratio())
 	
 	return w
 

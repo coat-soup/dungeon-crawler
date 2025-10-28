@@ -9,6 +9,7 @@ class_name Weapon
 @export var swing_stamina_drain : float = 8.0
 @export var block_stamina_drain_damage_mul : float = 0.5
 @export var block_sustain_stamina_drain : float = 3.0
+@export var block_durability_drain_mul : float = 1.0
 
 @export var is_bespoke : bool = false
 

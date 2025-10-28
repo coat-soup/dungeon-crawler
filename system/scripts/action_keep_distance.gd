@@ -24,15 +24,15 @@ func tick():
 		flank_tick = 10
 		flank_rotation = deg_to_rad(randf_range(-15, 15)) if randf() > 0.5 else 0
 	
-	if len(ai_action_controller.targets) <= 0: return
-	var dir := character.global_position - ai_action_controller.targets[0].global_position
+	if ai_action_controller.active_target: return
+	var dir := character.global_position - ai_action_controller.active_target.global_position
 	
 	# lookat target
-	ai_movement.body.global_rotation.y = -(character.global_position - ai_action_controller.targets[0].global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
+	ai_movement.body.global_rotation.y = -(character.global_position - ai_action_controller.active_target.global_position).signed_angle_to(-Vector3.FORWARD, Vector3.UP)
 	
-	if len(ai_action_controller.targets) > 0 and character.weapon_manager.attack_state == 0:
+	if character.weapon_manager.attack_state == 0:
 		var t_dist = max(dir.length(), distance)
-		var target_destination = ai_action_controller.targets[0].global_position + dir.normalized().rotated(Vector3.UP, flank_rotation) * t_dist
+		var target_destination = ai_action_controller.active_target.global_position + dir.normalized().rotated(Vector3.UP, flank_rotation) * t_dist
 		ai_movement.set_nav_destination(target_destination)
 
 
@@ -42,8 +42,7 @@ func end_action():
 
 
 func get_ai_action_weight(ai : AIActionController) -> float:
-	for t in ai.targets:
-		if t.global_position.distance_to(ai.global_position) <= distance:
+	if ai.active_target and ai.active_target.global_position.distance_to(ai.global_position) <= distance:
 			return 1 - (ai.desire_to_attack)
 	
 	return 0.0

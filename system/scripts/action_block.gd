@@ -6,8 +6,8 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 	super.perform_action(_character, args)
 	
 	var ai = character.get_node_or_null("AIActionController") as AIActionController
-	if ai and ai.is_multiplayer_authority():
-		var max_react_time : float = 0.8 * (1 - ai.get_block_reaction_bonus(ai.targets[0].weapon_manager.attack_state))
+	if ai and ai.active_target and ai.is_multiplayer_authority():
+		var max_react_time : float = 0.8 * (1 - ai.get_block_reaction_bonus(ai.active_target.weapon_manager.attack_state))
 		var min_react_time : float = 0.4 * max_react_time * lerp(1.0, 0.5, ai.profficiency)
 		await character.get_tree().create_timer(randf_range(min_react_time, max_react_time)).timeout
 	

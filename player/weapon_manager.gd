@@ -112,7 +112,6 @@ func on_weapon_hit(body : Node3D):
 		#AudioManager.spawn_sound_at_point(preload("res://sfx/sword_slice.wav"), body.global_position)
 		if is_multiplayer_authority():
 			health.try_take_blockable_damage.rpc(weapon.damage if attack_state != AttackState.OVERHEAD else weapon.overhead_damage, int(character.name))
-			print("weapon doing damage")
 	elif is_multiplayer_authority():
 		handle_bonk.rpc()
 
@@ -149,7 +148,7 @@ func did_block_damage(amount : int):
 	blocked_damage.emit()
 	
 	if is_multiplayer_authority():
-		block_durability -= amount * block_durabilty_drain_multipler
+		block_durability -= amount * block_durabilty_drain_multipler * weapon.block_durability_drain_mul
 		block_durability_changed.emit()
 		if block_durability <= 0:
 			block_durability = 0.0
@@ -172,18 +171,11 @@ func kick():
 		cast.collision_mask = Util.layer_mask([2])
 		await get_tree().create_timer(0.3).timeout
 		
-		for i in cast.get_collision_count():
-			print("CAST HIT ", cast.get_collider(i))
-		
 		if cast.is_colliding():
-			print("KICK CAST COLLIDING")
 			var c = cast.get_collider(0) as Character
 			if c:
 				c.movement_manager.apply_impulse.rpc(-character.global_basis.z * 10, 0.2)
 				if c.weapon_manager.attack_state == AttackState.BLOCKING: c.weapon_manager.stun.rpc(1.0)
-				print("HIT CHARACTER!!!!!!!!!!!!!!")
-		else:
-			print("cast not colliding")
 
 
 @rpc("any_peer", "call_local")

@@ -34,6 +34,7 @@ action_type = 1
 cancellable = false
 stamina_cost = 10
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://ctjalyaequqcp"
 
 [sub_resource type="Resource" id="Resource_s7qer"]
@@ -43,6 +44,7 @@ action_type = 1
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 8
+cooldown = 0.0
 metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 
 [sub_resource type="Resource" id="Resource_3agdk"]
@@ -54,6 +56,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://c3j4mokeedbn2"
 
 [sub_resource type="Resource" id="Resource_6x60x"]
@@ -65,6 +68,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://x3x62q3np3qf"
 
 [sub_resource type="Resource" id="Resource_ly86r"]
@@ -74,6 +78,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 20
 sustained_stamina_cost = 0
+cooldown = 2.0
 metadata/_custom_type_script = "uid://bjtmtlxcwwpmd"
 
 [sub_resource type="Resource" id="Resource_n0bl4"]
@@ -83,6 +88,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://b6sa48cxaul1x"
 
 [sub_resource type="Resource" id="Resource_st5e0"]
@@ -92,6 +98,7 @@ action_type = 1
 cancellable = false
 stamina_cost = 10
 sustained_stamina_cost = 0
+cooldown = 1.0
 metadata/_custom_type_script = "uid://b57gmoj05g64n"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_st66r"]

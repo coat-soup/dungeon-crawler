@@ -25,6 +25,7 @@ speed_multiplier = 2.0
 damage = 18
 overhead_damage = 25
 swing_stamina_drain = 5.0
+block_durability_drain_mul = 2.0
 hitbox = NodePath("Hitbox")
 
 [node name="Cube" parent="." index="0"]

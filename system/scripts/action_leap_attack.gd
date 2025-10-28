@@ -20,7 +20,7 @@ func on_leap_started():
 	if leap_vel != Vector3.ZERO and character.is_multiplayer_authority():
 		var ai = character.get_node_or_null("AIActionController") as AIActionController
 		if ai:
-			character.movement_manager.apply_impulse(leap_vel.rotated(Vector3.UP, -(character.global_position - ai.targets[0].global_position).signed_angle_to(Vector3.FORWARD, Vector3.UP)), 0.2)
+			character.movement_manager.apply_impulse(leap_vel.rotated(Vector3.UP, -(character.global_position - ai.active_target.global_position).signed_angle_to(Vector3.FORWARD, Vector3.UP)), 0.2)
 		else:
 			character.movement_manager.apply_impulse(leap_vel, leap_duration, true)
 
@@ -44,8 +44,8 @@ func end_action():
 func get_ai_action_weight(ai : AIActionController) -> float:
 	if ai.character.stamina.cur_stamina <= 0: return 0
 	var w := 0.0
-	for t in ai.targets:
-		if t.weapon_manager.attack_state == WeaponManager.AttackState.STUNNED: w += 1.0
-		if t.global_position.distance_to(ai.global_position) <= distance_threshhold: w += ai.desire_to_attack - 0.7 + (0.7 * ai.character.stamina.get_ratio())
+	if ai.active_target:
+		if ai.active_target.weapon_manager.attack_state == WeaponManager.AttackState.STUNNED: w += 1.0
+		if ai.active_target.global_position.distance_to(ai.global_position) <= distance_threshhold: w += ai.desire_to_attack - 0.7 + (0.7 * ai.character.stamina.get_ratio())
 	
 	return w

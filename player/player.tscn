@@ -40,6 +40,7 @@ action_type = 1
 cancellable = false
 stamina_cost = 10
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://ctjalyaequqcp"
 
 [sub_resource type="Resource" id="Resource_s7qer"]
@@ -49,6 +50,7 @@ action_type = 1
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 8
+cooldown = 0.0
 metadata/_custom_type_script = "uid://blrk4vd3srjdi"
 
 [sub_resource type="Resource" id="Resource_g4c7l"]
@@ -58,6 +60,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 20
 sustained_stamina_cost = 0
+cooldown = 1.5
 metadata/_custom_type_script = "uid://bjtmtlxcwwpmd"
 
 [sub_resource type="Resource" id="Resource_knn7v"]
@@ -67,6 +70,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://b6sa48cxaul1x"
 
 [sub_resource type="Resource" id="Resource_7pqkx"]
@@ -76,6 +80,7 @@ action_type = 1
 cancellable = false
 stamina_cost = 10
 sustained_stamina_cost = 0
+cooldown = 1.0
 metadata/_custom_type_script = "uid://b57gmoj05g64n"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wodsf"]

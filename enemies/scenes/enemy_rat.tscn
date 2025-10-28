@@ -89,7 +89,7 @@ stream_3/stream = ExtResource("22_886en")
 stream_4/stream = ExtResource("23_4j3m2")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oul6g"]
-radius = 0.452405
+radius = 0.535372
 height = 1.46801
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_g1dw6"]
@@ -134,8 +134,8 @@ character_model = NodePath("../rat")
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("weapon_manager")]
 script = ExtResource("5_ccmh4")
-max_health = 55.0
 weapon_manager = NodePath("../WeaponManager")
+max_health = 55.0
 metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]
@@ -180,7 +180,7 @@ movement_manager = NodePath("../Movement")
 weapon_manager = NodePath("../WeaponManager")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.419823, -0.177284)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.528307, -0.177284)
 shape = SubResource("CapsuleShape3D_oul6g")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
