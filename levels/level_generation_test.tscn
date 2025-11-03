@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3u4v65ocu7yu"]
+
+[ext_resource type="Script" uid="uid://tmqkq1ow017l" path="res://system/generation/level_generator.gd" id="1_sewoy"]
+[ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="2_gvowd"]
+[ext_resource type="Script" uid="uid://d1hb4jnb5cfla" path="res://system/generation/debug_generation_visualiser.gd" id="3_7fmsn"]
+
+[sub_resource type="Resource" id="Resource_7fmsn"]
+script = ExtResource("2_gvowd")
+room_name = "Generic Room"
+dimensions = Vector3i(1, 1, 1)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[sub_resource type="Resource" id="Resource_b4wqs"]
+script = ExtResource("2_gvowd")
+room_name = "Generic Room"
+dimensions = Vector3i(1, 1, 2)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[sub_resource type="Resource" id="Resource_byu11"]
+script = ExtResource("2_gvowd")
+room_name = "Generic Room"
+dimensions = Vector3i(3, 1, 4)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[sub_resource type="Resource" id="Resource_dwgnx"]
+script = ExtResource("2_gvowd")
+room_name = "Generic Room"
+dimensions = Vector3i(2, 1, 2)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[sub_resource type="Environment" id="Environment_sewoy"]
+background_mode = 1
+background_color = Color(0.779291, 0.779291, 0.779291, 1)
+
+[node name="LevelGenerationTest" type="Node3D"]
+script = ExtResource("1_sewoy")
+room_list = Array[ExtResource("2_gvowd")]([SubResource("Resource_7fmsn"), SubResource("Resource_b4wqs"), SubResource("Resource_byu11"), SubResource("Resource_dwgnx")])
+num_rooms = 25
+debug_wait = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 46.506, 0)
+environment = SubResource("Environment_sewoy")
+projection = 1
+size = 200.0
+
+[node name="DebugGenerationVisualiser" type="Node" parent="." node_paths=PackedStringArray("generator", "camera")]
+script = ExtResource("3_7fmsn")
+generator = NodePath("..")
+camera = NodePath("../Camera3D")
+metadata/_custom_type_script = "uid://d1hb4jnb5cfla"
