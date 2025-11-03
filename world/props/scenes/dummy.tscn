@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bo386x2n2r7jx" path="res://world/props/models/dummy_model.tscn" id="1_18cw7"]
 [ext_resource type="Script" uid="uid://cwpppx5icjrf7" path="res://world/props/scripts/target_dummy.gd" id="1_ym1ly"]
-[ext_resource type="Script" uid="uid://cj5ml78376k0s" path="res://system/scripts/health.gd" id="2_oqah8"]
+[ext_resource type="Script" uid="uid://cj5ml78376k0s" path="res://system/general/health.gd" id="2_oqah8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oqah8"]
 size = Vector3(0.67, 1.46, 0.52)

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dx1n6uyohibys" path="res://enemies/models/rat.glb" id="1_dnwk3"]
 [ext_resource type="Texture2D" uid="uid://cwh2pcyvc60xt" path="res://enemies/textures/rat.png" id="2_b2doe"]
-[ext_resource type="Script" uid="uid://dag0sx5tdlq1e" path="res://system/scripts/character_skeleton_controller.gd" id="2_osipn"]
+[ext_resource type="Script" uid="uid://dag0sx5tdlq1e" path="res://system/general/character_skeleton_controller.gd" id="2_osipn"]
 [ext_resource type="Texture2D" uid="uid://c3op6n4mdnbyh" path="res://enemies/textures/rat_n.png" id="3_osipn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brodp"]

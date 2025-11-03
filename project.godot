@@ -18,9 +18,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://system/scripts/global.gd"
-AudioManager="*res://system/scripts/audio_manager.gd"
-Settings="*res://system/scripts/settings.gd"
+Global="*res://system/globals/global.gd"
+AudioManager="*res://system/globals/audio_manager.gd"
+Settings="*res://system/globals/settings.gd"
 
 [debug_draw_3d]
 

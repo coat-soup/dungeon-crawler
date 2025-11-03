@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://djtth4fko4q6a"]
 
-[ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/scripts/network_manager.gd" id="1_6mrcl"]
-[ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/scripts/game_manager.gd" id="1_h2qx6"]
+[ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/general/network_manager.gd" id="1_6mrcl"]
+[ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/globals/game_manager.gd" id="1_h2qx6"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/scenes/ui.tscn" id="2_h2qx6"]
 [ext_resource type="Script" uid="uid://ttnv7co8ljcb" path="res://vfx/scripts/compositor_effect_downsample.gd" id="5_nbxk2"]
 [ext_resource type="Script" uid="uid://cr5uvwprp1agk" path="res://vfx/scripts/compositor_effect_posterise.gd" id="5_pxkha"]

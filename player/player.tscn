@@ -7,22 +7,22 @@
 [ext_resource type="Script" uid="uid://bqbukncxkv1fd" path="res://player/scripts/player_sound_manager.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://cecsid1iml5j8" path="res://player/weapon_manager.gd" id="5_yllr7"]
 [ext_resource type="AudioStream" uid="uid://cpbl0hysjsp1t" path="res://sfx/footsteps/footsteps-001.wav" id="6_8t03j"]
-[ext_resource type="Script" uid="uid://wl6u80irlrwi" path="res://system/scripts/health_blockable.gd" id="6_32hag"]
+[ext_resource type="Script" uid="uid://wl6u80irlrwi" path="res://system/general/health_blockable.gd" id="6_32hag"]
 [ext_resource type="AudioStream" uid="uid://i2v43f48ivts" path="res://sfx/footsteps/footsteps-002.wav" id="7_2ieo8"]
-[ext_resource type="Script" uid="uid://cqfvtidss3haf" path="res://system/scripts/action_manager.gd" id="7_tqiix"]
+[ext_resource type="Script" uid="uid://cqfvtidss3haf" path="res://system/actions/action_manager.gd" id="7_tqiix"]
 [ext_resource type="Script" uid="uid://bcnftja1gi4hk" path="res://vfx/scripts/splatter_on_hit.gd" id="7_wodsf"]
 [ext_resource type="Texture2D" uid="uid://b0viems8r1p13" path="res://vfx/textures/smoke_medium.png" id="8_32hag"]
-[ext_resource type="Script" uid="uid://b2ibvmfs8hbrl" path="res://system/scripts/action.gd" id="8_65viv"]
+[ext_resource type="Script" uid="uid://b2ibvmfs8hbrl" path="res://system/actions/action.gd" id="8_65viv"]
 [ext_resource type="AudioStream" uid="uid://dxtrxm7rb6wi1" path="res://sfx/footsteps/footsteps-003.wav" id="8_ebec5"]
-[ext_resource type="Script" uid="uid://ctjalyaequqcp" path="res://system/scripts/action_attack.gd" id="9_x7c3f"]
+[ext_resource type="Script" uid="uid://ctjalyaequqcp" path="res://system/actions/action_attack.gd" id="9_x7c3f"]
 [ext_resource type="AudioStream" uid="uid://bgupddqt4qcyb" path="res://sfx/footsteps/footsteps-004.wav" id="9_yllr7"]
 [ext_resource type="AudioStream" uid="uid://db7x6fc4ukeu4" path="res://sfx/footsteps/footsteps-005.wav" id="10_kb6p2"]
-[ext_resource type="Script" uid="uid://blrk4vd3srjdi" path="res://system/scripts/action_block.gd" id="10_x7c3f"]
+[ext_resource type="Script" uid="uid://blrk4vd3srjdi" path="res://system/actions/action_block.gd" id="10_x7c3f"]
 [ext_resource type="AudioStream" uid="uid://b00ubnovfat3x" path="res://sfx/footsteps/jump-land.wav" id="11_2ieo8"]
-[ext_resource type="Script" uid="uid://bjtmtlxcwwpmd" path="res://system/scripts/action_dash.gd" id="11_bjvpn"]
-[ext_resource type="Script" uid="uid://b6sa48cxaul1x" path="res://system/scripts/action_sprint.gd" id="12_g4c7l"]
+[ext_resource type="Script" uid="uid://bjtmtlxcwwpmd" path="res://system/actions/action_dash.gd" id="11_bjvpn"]
+[ext_resource type="Script" uid="uid://b6sa48cxaul1x" path="res://system/actions/action_sprint.gd" id="12_g4c7l"]
 [ext_resource type="PackedScene" uid="uid://om525hroc3mr" path="res://player/models/player_model.tscn" id="12_wodsf"]
-[ext_resource type="Script" uid="uid://b57gmoj05g64n" path="res://system/scripts/action_kick.gd" id="13_knn7v"]
+[ext_resource type="Script" uid="uid://b57gmoj05g64n" path="res://system/actions/action_kick.gd" id="13_knn7v"]
 [ext_resource type="Script" uid="uid://e7hlalrpjn80" path="res://player/scripts/player_interaction_manager.gd" id="15_7pqkx"]
 [ext_resource type="Script" uid="uid://dxfqns3wgrg1n" path="res://player/scripts/player_input_manager.gd" id="18_e7oew"]
 [ext_resource type="Script" uid="uid://l2i2p2rer3y8" path="res://player/scripts/camera_shake.gd" id="23_s7qer"]
@@ -152,7 +152,6 @@ character_model = NodePath("../player_model")
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("weapon_manager")]
 script = ExtResource("6_32hag")
 weapon_manager = NodePath("../WeaponManager")
-max_health = null
 metadata/_custom_type_script = "uid://cj5ml78376k0s"
 
 [node name="ActionManager" type="Node" parent="."]

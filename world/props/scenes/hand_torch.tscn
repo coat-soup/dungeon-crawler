@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cp4lwnh2jkhm5" path="res://world/props/textures/torch.png" id="2_rtwms"]
 [ext_resource type="Texture2D" uid="uid://bcbds0tv3to71" path="res://world/props/textures/torch_n.png" id="3_svevo"]
 [ext_resource type="AudioStream" uid="uid://ctihvcxl1nwl6" path="res://sfx/fire.wav" id="4_svevo"]
-[ext_resource type="Script" uid="uid://dvwskny5ynpdm" path="res://system/scripts/maintain_rotation.gd" id="5_nvlr2"]
+[ext_resource type="Script" uid="uid://dvwskny5ynpdm" path="res://system/general/maintain_rotation.gd" id="5_nvlr2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxbkb"]
 albedo_texture = ExtResource("2_rtwms")
