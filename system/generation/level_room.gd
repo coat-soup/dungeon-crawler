@@ -1,3 +1,4 @@
+extends RefCounted
 class_name LevelRoom
 
 var data_id : int

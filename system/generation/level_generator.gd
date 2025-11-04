@@ -39,7 +39,7 @@ func generate():
 	
 	
 	for i in range(overlap_fix_iterations):
-		var did_overlap
+		var did_overlap = false
 		for r in range(len(spawned_rooms)):
 			var overlaps = get_overlapped_rooms(r)
 			if not overlaps.is_empty(): 
@@ -50,6 +50,19 @@ func generate():
 				spawned_rooms[r].position += Vector3i(push_dir.ceil())
 		if not did_overlap: break
 		
+		if debug_wait: await get_tree().create_timer(0.2).timeout
+	
+	for i in range(condense_iterations):
+		var did_condense = false
+		for r in range(len(spawned_rooms)):
+			var p_pos = spawned_rooms[r].position
+			var push_dir = (Vector3(dungeon_size/2, 0, dungeon_size/2) - Vector3(spawned_rooms[r].position) * Vector3(1,0,1)).normalized()
+			print(Vector3i(push_dir.ceil()))
+			spawned_rooms[r].position += Vector3i(push_dir.ceil()) # push
+			if not get_overlapped_rooms(r).is_empty(): spawned_rooms[r].position = p_pos # undo if overlapping
+			else: did_condense = true
+		if not did_condense: break
+			
 		if debug_wait: await get_tree().create_timer(0.2).timeout
 
 

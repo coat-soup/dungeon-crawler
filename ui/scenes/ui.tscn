@@ -349,7 +349,6 @@ offset_bottom = 363.745
 text = "REFRESH LOBBIES"
 
 [node name="OptionsPanel" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -584,3 +583,26 @@ offset_bottom = -485.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "CANCEL"
+
+[node name="ControlHints" type="Label" parent="OptionsPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -74.5
+offset_top = -520.0
+offset_right = 74.5
+offset_bottom = -315.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "CONTROLS:
+LMB: Swing
+RMB: Block
+Thumb1: Stab
+Thumb2: Overhead
+F: Kick
+Space: Jump/Dash
+Shift: Sprint
+E: Interact"
