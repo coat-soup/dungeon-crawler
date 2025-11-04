@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=3 format=3 uid="uid://dknlmw58gpoy8"]
+
+[ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_qg44v"]
+[ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_yvltj"]
+
+[resource]
+script = ExtResource("2_yvltj")
+name = "start"
+grammars = Array[ExtResource("1_qg44v")]([])
+metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

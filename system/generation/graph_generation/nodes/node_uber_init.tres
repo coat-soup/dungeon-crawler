@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=4 format=3 uid="uid://c27fn5rbyaot0"]
+
+[ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_choab"]
+[ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_etdtt"]
+
+[sub_resource type="Resource" id="Resource_choab"]
+script = ExtResource("1_choab")
+weight = 1.0
+nodes = Array[String](["in:", "start:2", "branch:2,3", "end:2", "out:"])
+metadata/_custom_type_script = "uid://ufntgkyvgkqt"
+
+[resource]
+script = ExtResource("2_etdtt")
+name = "uber_init"
+grammars = Array[ExtResource("1_choab")]([SubResource("Resource_choab")])
+metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

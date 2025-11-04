@@ -57,7 +57,6 @@ func generate():
 		for r in range(len(spawned_rooms)):
 			var p_pos = spawned_rooms[r].position
 			var push_dir = (Vector3(dungeon_size/2, 0, dungeon_size/2) - Vector3(spawned_rooms[r].position) * Vector3(1,0,1)).normalized()
-			print(Vector3i(push_dir.ceil()))
 			spawned_rooms[r].position += Vector3i(push_dir.ceil()) # push
 			if not get_overlapped_rooms(r).is_empty(): spawned_rooms[r].position = p_pos # undo if overlapping
 			else: did_condense = true
@@ -78,10 +77,10 @@ func get_overlapped_rooms(room_id) -> Array[int]:
 	for i in range(len(spawned_rooms)):
 		if i == room_id : continue
 		var b = spawned_rooms[i]
-		if(a.position.x >= b.position.x + b.size.x): continue
-		if(a.position.x + a.size.x <= b.position.x): continue
-		if(a.position.z + a.size.z <= b.position.z): continue
-		if(a.position.z >= b.position.z + b.size.z): continue
+		if a.position.x >= b.position.x + b.size.x: continue
+		if a.position.x + a.size.x <= b.position.x: continue
+		if a.position.z + a.size.z <= b.position.z: continue
+		if a.position.z >= b.position.z + b.size.z: continue
 		overlapped.append(i)
 	
 	return overlapped

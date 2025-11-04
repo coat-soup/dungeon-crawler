@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=4 format=3 uid="uid://cy1letw8bkgu8"]
+
+[ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_wq35i"]
+[ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_jqch4"]
+
+[sub_resource type="Resource" id="Resource_wq35i"]
+script = ExtResource("1_wq35i")
+weight = 1.0
+nodes = Array[String](["in:", "room:0,2", "out:"])
+metadata/_custom_type_script = "uid://ufntgkyvgkqt"
+
+[resource]
+script = ExtResource("2_jqch4")
+name = "branch"
+grammars = Array[ExtResource("1_wq35i")]([SubResource("Resource_wq35i")])
+metadata/_custom_type_script = "uid://dstuqqqmhx4ch"
