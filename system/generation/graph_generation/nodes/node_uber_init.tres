@@ -6,7 +6,8 @@
 [sub_resource type="Resource" id="Resource_choab"]
 script = ExtResource("1_choab")
 weight = 1.0
-nodes = Array[String](["in:", "start:2", "branch:2,3", "end:2", "out:"])
+nodes = "start,branch,end"
+connections = "-1,0,0,1,1,2,2,-2"
 metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 
 [resource]

@@ -1,0 +1,69 @@
+[gd_scene load_steps=17 format=3 uid="uid://c3u4v65ocu7yu"]
+
+[ext_resource type="Script" uid="uid://tmqkq1ow017l" path="res://system/generation/level_generator.gd" id="1_sewoy"]
+[ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="2_gvowd"]
+[ext_resource type="Script" uid="uid://d1hb4jnb5cfla" path="res://system/generation/debug_generation_visualiser.gd" id="3_7fmsn"]
+[ext_resource type="Script" uid="uid://dc7b7j1qa8wx7" path="res://system/generation/graph_generation/level_graph_generator.gd" id="4_b4wqs"]
+[ext_resource type="Resource" uid="uid://c27fn5rbyaot0" path="res://system/generation/graph_generation/nodes/node_uber_init.tres" id="5_bmkcx"]
+[ext_resource type="Script" uid="uid://day82rj35g3lc" path="res://system/generation/graph_generation/level_graph_visualiser.gd" id="5_byu11"]
+[ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="6_jel5w"]
+[ext_resource type="Resource" uid="uid://dknlmw58gpoy8" path="res://system/generation/graph_generation/nodes/node_start.tres" id="7_bmkcx"]
+[ext_resource type="Resource" uid="uid://fijotjeojc6d" path="res://system/generation/graph_generation/nodes/node_end.tres" id="8_ay2dg"]
+[ext_resource type="Resource" uid="uid://1drpj5vbo71g" path="res://system/generation/graph_generation/nodes/node_room.tres" id="9_ps7gs"]
+[ext_resource type="Resource" uid="uid://cy1letw8bkgu8" path="res://system/generation/graph_generation/nodes/node_branch.tres" id="10_swumy"]
+
+[sub_resource type="Resource" id="Resource_7fmsn"]
+script = ExtResource("2_gvowd")
+room_name = "Generic Room"
+dimensions = Vector3i(1, 1, 1)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[sub_resource type="Resource" id="Resource_b4wqs"]
+script = ExtResource("2_gvowd")
+room_name = "Generic Room"
+dimensions = Vector3i(1, 1, 2)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[sub_resource type="Resource" id="Resource_byu11"]
+script = ExtResource("2_gvowd")
+room_name = "Generic Room"
+dimensions = Vector3i(3, 1, 4)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[sub_resource type="Resource" id="Resource_dwgnx"]
+script = ExtResource("2_gvowd")
+room_name = "Generic Room"
+dimensions = Vector3i(2, 1, 2)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[sub_resource type="Environment" id="Environment_sewoy"]
+background_mode = 1
+background_color = Color(0.779291, 0.779291, 0.779291, 1)
+
+[node name="LevelGenerationTest" type="Node3D"]
+script = ExtResource("1_sewoy")
+room_list = Array[ExtResource("2_gvowd")]([SubResource("Resource_7fmsn"), SubResource("Resource_b4wqs"), SubResource("Resource_byu11"), SubResource("Resource_dwgnx")])
+num_rooms = 25
+debug_wait = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 148.42, 0)
+environment = SubResource("Environment_sewoy")
+projection = 1
+size = 200.0
+
+[node name="DebugGenerationVisualiser" type="Node" parent="." node_paths=PackedStringArray("generator", "camera")]
+script = ExtResource("3_7fmsn")
+generator = NodePath("..")
+camera = NodePath("../Camera3D")
+metadata/_custom_type_script = "uid://d1hb4jnb5cfla"
+
+[node name="LevelGraphGenerator" type="Node" parent="."]
+script = ExtResource("4_b4wqs")
+initial_node = ExtResource("5_bmkcx")
+spawnable_nodes = Array[ExtResource("6_jel5w")]([ExtResource("7_bmkcx"), ExtResource("8_ay2dg"), ExtResource("9_ps7gs"), ExtResource("10_swumy")])
+metadata/_custom_type_script = "uid://dc7b7j1qa8wx7"
+
+[node name="LevelGraphVisualiser" type="Node" parent="LevelGraphGenerator"]
+script = ExtResource("5_byu11")
+metadata/_custom_type_script = "uid://day82rj35g3lc"

@@ -6,6 +6,7 @@ class_name LevelGraphGenerator
 var spawned_nodes : Array[LevelGraphNode]
 
 func _ready():
+	await get_tree().process_frame
 	generate()
 
 
@@ -25,8 +26,9 @@ func generate():
 	
 	for i in range(len(spawned_nodes)):
 		var connection_ids = []
-		for connected_node in spawned_nodes[i].connected_nodes:
-			connection_ids.append(spawned_nodes.find(connected_node))
+		for connection in spawned_nodes[i].connections:
+			if spawned_nodes[i] == connection.input:
+				connection_ids.append(spawned_nodes.find(connection.output))
 		print(i, ". ", spawned_nodes[i].name + "->" + str(connection_ids))
 
 
@@ -34,70 +36,59 @@ func replace_node_with_grammar(node : LevelGraphNode, grammar : LevelGraphGramma
 	var nodes : Array[LevelGraphNode] = []
 	
 	# spawn all internal grammar nodes
-	nodes.append(null) # input
-	for n in parse_nodes_from_grammar(grammar).slice(1,-1):
+	for n in parse_nodes_from_grammar(grammar):
+		if n == null:
+			push_error("Level graph node [", node.name, "] failed to parse nodes from grammar")
+			continue
 		n = n.duplicate()
 		nodes.append(n)
-	nodes.append(null) # output
 	print("parsed nodes from ", node, ": ", nodes)
 	
-	# imagine:
-	# A    C      e           A     e      C          A - e - C
-	#  \  /      / \           \  /   \   /            \/   \/
-	#   OG   +  IN OUT    ->    IN     OUT      ->     /\   /\
-	#  /  \      \ /           /  \   /   \           B - f - D
-	# B    D      f           B     f      D          
-	
-	
-	# connect all internal grammar nodes
-	for i in range(1, len(nodes)-1):
-		var connections = grammar.nodes[i].split(":")[1].split(",")
-		for c in connections:
-			if nodes[c.to_int()] != null:
-				nodes[i].connected_nodes.append(nodes[c.to_int()])
-	
-	# connect all input to all connections[0] (other_start->og_node) (A,B -> e,f)
-	for n in spawned_nodes:
-		if n.connected_nodes.has(node): # is node connected to og
-			for c in grammar.nodes[0].split(":")[1].split(","): # all connections from input
-				n.connected_nodes.append(nodes[c.to_int()])
-	# connect all output to all connections[-1] (og_node<-other_end) (C,D -> e,f)
-	for n in spawned_nodes:
-		if n.connected_nodes.has(node): # is node connected to og
-			for c in grammar.nodes[-1].split(":")[1].split(","): # all connections from output
-				n.connected_nodes.append(nodes[c.to_int()])
-	# connect all connections[0] from all input (other_start<-og_node) (e,f -> A,B)
-	for n in nodes: # for each internal node
-		for c in grammar.nodes[0].split(":")[1].split(","): 
-			if c.to_int() == 0: # does internal node connect to input
-				n.connected_nodes.append(nodes[c.to_int()])
-	# connect all connections[-1] from all output (og_node->other_end) (e,f -> C,D)
-	for n in nodes: # for each internal node
-		for c in grammar.nodes[-1].split(":")[1].split(","): 
-			if c.to_int() == len(grammar.nodes) - 1: # does internal node connect to input
-				n.connected_nodes.append(nodes[c.to_int()])
-	
-	
-	nodes = nodes.slice(1,-1) # remove null placeholder in/out nodes
+	var connections = parse_connections_from_grammar(grammar)
+	for i in range(0, len(connections)-1, 2):
+		print("setting up connection ", connections[i], "->", connections[i+1])
+		
+		if connections[i] == -1:
+			for c in node.connections: if c.output==node:
+				var connection = LevelGraphConnection.new(c.input, nodes[connections[i+1]])
+				c.input.connections.remove_at(c.input.connections.find(c))
+				c.input.connections.append(connection)
+				nodes[connections[i+1]].connections.append(connection)
+			
+		elif connections[i+1] == -2:
+			for c in node.connections: if c.input==node:
+				var connection = LevelGraphConnection.new(nodes[connections[i]], c.output)
+				nodes[connections[i]].connections.append(connection)
+				c.output.connections.remove_at(c.output.connections.find(c))
+				c.output.connections.append(connection)
+			
+		else:
+			var connection = LevelGraphConnection.new(nodes[connections[i]], nodes[connections[i+1]])
+			nodes[connections[i]].connections.append(connection)
+			nodes[connections[i+1]].connections.append(connection)
 	
 	spawned_nodes.remove_at(spawned_nodes.find(node))
 	spawned_nodes.append_array(nodes)
-	print("nodes ", spawned_nodes)
 
 
 
 func parse_nodes_from_grammar(grammar : LevelGraphGrammar) -> Array[LevelGraphNode]:
 	var nodes : Array[LevelGraphNode] = []
 	
-	for i in range(len(grammar.nodes)):
-		if i == 0 or i == len(grammar.nodes) - 1:
-			nodes.append(null)
-			continue
+	for node_name in grammar.nodes.split(","):
 		var found_node = false
 		for spawnable_node in spawnable_nodes:
-			if grammar.nodes[i].split(":")[0] == spawnable_node.name:
+			if node_name == spawnable_node.name:
 				nodes.append(spawnable_node)
 				found_node = true
-		if not found_node: push_error("Level graph node ", grammar.nodes[i], " not found in spawnables")
+		if not found_node:
+			nodes.append(null)
+			push_error("Level graph node [", node_name, "] not found in spawnables")
 	
 	return nodes
+
+func parse_connections_from_grammar(grammar : LevelGraphGrammar) -> Array[int]:
+	var connections : Array[int] = []
+	for connection in grammar.connections.split(","):
+		connections.append(connection.to_int())
+	return connections
