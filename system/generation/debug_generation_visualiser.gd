@@ -5,6 +5,7 @@ class_name DebugGenerationVisualiser
 @export var camera : Node3D
 
 var origin_offset : float
+@export var enabled := true
 
 
 func _ready() -> void:
@@ -13,6 +14,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if not enabled: return
 	if true:
 		DebugDraw3D.scoped_config().set_thickness(0.2).set_center_brightness(0.6)
 		var t = Transform3D.IDENTITY * generator.transform * generator.cell_size * generator.dungeon_size

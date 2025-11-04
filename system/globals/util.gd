@@ -77,6 +77,9 @@ static func random_point_in_sphere(radius : float, min_radius : float = 0.0, r :
 static func random_point_in_circle(radius : float, min_radius : float = 0.0, r : RandomNumberGenerator = RandomNumberGenerator.new()) -> Vector2:
 	return (Vector2.UP * r.randf_range(min_radius, radius)).rotated(r.randf_range(0, 2*PI))
 
+static func random_point_in_circle_3d(radius : float, min_radius : float = 0.0, r : RandomNumberGenerator = RandomNumberGenerator.new()) -> Vector3:
+	var p_c : Vector2 = random_point_in_circle(radius, min_radius, r)
+	return Vector3(p_c.x, 0, p_c.y)
 
 static func get_files_in_folder(folder_path: String, file_extension: String) -> Array[String]:
 	var files: Array[String] = []

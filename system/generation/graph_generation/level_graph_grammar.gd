@@ -7,3 +7,7 @@ class_name LevelGraphGrammar
 
 
 # -1 is input, -2 is output
+
+
+func _to_string() -> String:
+	return "{%s | %s}" % [nodes, connections]
