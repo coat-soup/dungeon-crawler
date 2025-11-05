@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3u4v65ocu7yu"]
+[gd_scene load_steps=19 format=3 uid="uid://c3u4v65ocu7yu"]
 
 [ext_resource type="Script" uid="uid://tmqkq1ow017l" path="res://system/generation/level_generator.gd" id="1_sewoy"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="2_gvowd"]
@@ -11,6 +11,8 @@
 [ext_resource type="Resource" uid="uid://fijotjeojc6d" path="res://system/generation/graph_generation/nodes/node_end.tres" id="8_ay2dg"]
 [ext_resource type="Resource" uid="uid://1drpj5vbo71g" path="res://system/generation/graph_generation/nodes/node_room.tres" id="9_ps7gs"]
 [ext_resource type="Resource" uid="uid://cy1letw8bkgu8" path="res://system/generation/graph_generation/nodes/node_branch.tres" id="10_swumy"]
+[ext_resource type="Resource" uid="uid://b8tuixko4f8hk" path="res://system/generation/graph_generation/nodes/node_encounter.tres" id="11_ps7gs"]
+[ext_resource type="Resource" uid="uid://dp3x7kf1i8vd0" path="res://system/generation/graph_generation/nodes/node_lock_key.tres" id="12_swumy"]
 
 [sub_resource type="Resource" id="Resource_7fmsn"]
 script = ExtResource("2_gvowd")
@@ -62,7 +64,7 @@ metadata/_custom_type_script = "uid://d1hb4jnb5cfla"
 [node name="LevelGraphGenerator" type="Node" parent="."]
 script = ExtResource("4_b4wqs")
 initial_node = ExtResource("5_bmkcx")
-spawnable_nodes = Array[ExtResource("6_jel5w")]([ExtResource("7_bmkcx"), ExtResource("8_ay2dg"), ExtResource("9_ps7gs"), ExtResource("10_swumy")])
+spawnable_nodes = Array[ExtResource("6_jel5w")]([ExtResource("7_bmkcx"), ExtResource("8_ay2dg"), ExtResource("9_ps7gs"), ExtResource("10_swumy"), ExtResource("11_ps7gs"), ExtResource("12_swumy")])
 debug_wait = true
 metadata/_custom_type_script = "uid://dc7b7j1qa8wx7"
 

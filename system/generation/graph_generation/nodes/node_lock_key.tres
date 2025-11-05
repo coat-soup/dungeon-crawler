@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=3 format=3 uid="uid://dp3x7kf1i8vd0"]
+
+[ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_s6h7r"]
+[ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_k2mg8"]
+
+[resource]
+script = ExtResource("2_k2mg8")
+name = "lock_key"
+grammars = Array[ExtResource("1_s6h7r")]([])
+metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

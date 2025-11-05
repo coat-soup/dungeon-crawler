@@ -28,9 +28,9 @@ func _process(delta: float) -> void:
 		for c in graph_connections:
 			if c.input == node or c.output == node:
 				var multiplier = 1 if c.output == node else -1
-				pull_dir += multiplier * (c.input.world_pos - c.output.world_pos).normalized() / pow(c.input.world_pos.distance_to(c.output.world_pos), 2)
+				pull_dir += multiplier * (c.input.world_pos - c.output.world_pos).normalized() * pow(c.input.world_pos.distance_to(c.output.world_pos), 1)
 		
-		node.world_pos += delta * (push_dir * 1000 + pull_dir * 800)
+		node.world_pos += delta * (push_dir * 5000 + pull_dir * 1)
 
 
 func generate():
@@ -62,6 +62,7 @@ func clear_graph():
 func replace_node_with_grammar(node : LevelGraphNode, grammar : LevelGraphGrammar):
 	var nodes : Array[LevelGraphNode] = []
 	var new_connections : Array[LevelGraphConnection] = []
+	var connections_to_remove : Array[LevelGraphConnection]
 	
 	print("replacing [", node.name, "] with grammar ", grammar)
 	
@@ -71,8 +72,8 @@ func replace_node_with_grammar(node : LevelGraphNode, grammar : LevelGraphGramma
 			push_error("Level graph node [", node.name, "] failed to parse nodes from grammar")
 			continue
 		n = n.duplicate(true)
-		n.name += str(randi() & 1000)
-		n.world_pos = Util.random_point_in_circle_3d(30)
+		#n.name += str(randi() & 1000)
+		n.world_pos = node.world_pos + Util.random_point_in_circle_3d(10)
 		nodes.append(n)
 	print("parsed nodes from ", node, ": ", nodes)
 	
@@ -83,21 +84,22 @@ func replace_node_with_grammar(node : LevelGraphNode, grammar : LevelGraphGramma
 		if connections[i] == -1:
 			for c in graph_connections: if c.output==node:
 				new_connections.append(LevelGraphConnection.new(c.input, nodes[connections[i+1]]))
-				c.output = null
+				connections_to_remove.append(c)
 				print("added connection from ext ", c.input, " to ", nodes[connections[i+1]])
 			
 		elif connections[i+1] == -2:
 			for c in graph_connections: if c.input==node:
 				new_connections.append(LevelGraphConnection.new(nodes[connections[i]], c.output))
-				c.input = null
+				connections_to_remove.append(c)
 				print("added connection from ", nodes[connections[i]], " to ext ", c.output)
 			
 		else:
 			new_connections.append(LevelGraphConnection.new(nodes[connections[i]], nodes[connections[i+1]]))
 			print("added connection from ", nodes[connections[i]], " to ", nodes[connections[i+1]])
 	
-	for i in range(len(graph_connections)-1, -1, -1): if graph_connections[i].input == null or graph_connections[i].output == null:
-		graph_connections.remove_at(i)
+	for c in connections_to_remove:
+		var id = graph_connections.find(c)
+		if id != -1: graph_connections.remove_at(id)
 	
 	spawned_nodes.remove_at(spawned_nodes.find(node))
 	spawned_nodes.append_array(nodes)
