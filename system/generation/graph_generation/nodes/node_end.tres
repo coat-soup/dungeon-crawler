@@ -1,10 +1,18 @@
-[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=3 format=3 uid="uid://fijotjeojc6d"]
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=5 format=3 uid="uid://fijotjeojc6d"]
 
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_adqg6"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_k2oea"]
+[ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_k2oea"]
+
+[sub_resource type="Resource" id="Resource_r0bku"]
+script = ExtResource("3_k2oea")
+room_name = "Ending Room"
+dimensions = Vector3i(3, 1, 3)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
 
 [resource]
 script = ExtResource("2_k2oea")
 name = "end"
 grammars = Array[ExtResource("1_adqg6")]([])
+terminal_rooms = Array[ExtResource("3_k2oea")]([SubResource("Resource_r0bku")])
 metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

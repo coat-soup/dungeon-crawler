@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=9 format=3 uid="uid://cy1letw8bkgu8"]
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=7 format=3 uid="uid://cy1letw8bkgu8"]
 
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_wq35i"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_jqch4"]
@@ -7,20 +7,6 @@
 script = ExtResource("1_wq35i")
 weight = 1.0
 nodes = "room"
-connections = "-1,0,0,-2"
-metadata/_custom_type_script = "uid://ufntgkyvgkqt"
-
-[sub_resource type="Resource" id="Resource_djycg"]
-script = ExtResource("1_wq35i")
-weight = 1.0
-nodes = "lock_key"
-connections = "-1,0,0,-2"
-metadata/_custom_type_script = "uid://ufntgkyvgkqt"
-
-[sub_resource type="Resource" id="Resource_rdel6"]
-script = ExtResource("1_wq35i")
-weight = 1.0
-nodes = "encounter"
 connections = "-1,0,0,-2"
 metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 
@@ -48,5 +34,5 @@ metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 [resource]
 script = ExtResource("2_jqch4")
 name = "branch"
-grammars = Array[ExtResource("1_wq35i")]([SubResource("Resource_wq35i"), SubResource("Resource_djycg"), SubResource("Resource_rdel6"), SubResource("Resource_jqch4"), SubResource("Resource_5rr04"), SubResource("Resource_sdrud")])
+grammars = Array[ExtResource("1_wq35i")]([SubResource("Resource_wq35i"), SubResource("Resource_jqch4"), SubResource("Resource_5rr04"), SubResource("Resource_sdrud")])
 metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

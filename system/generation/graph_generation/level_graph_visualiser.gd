@@ -4,6 +4,11 @@ class_name LevelGraphVisualiser
 @export var generator : LevelGraphGenerator
 @export var enabled := true
 
+
+func _ready() -> void:
+	generator.finished_generation.connect(on_generation_finished)
+
+
 func _process(delta: float) -> void:
 	if not enabled: return
 	DebugDraw3D.scoped_config().set_thickness(0.6).set_center_brightness(0.6)
@@ -14,10 +19,17 @@ func _process(delta: float) -> void:
 		DebugDraw3D.draw_arrow(connection.input.world_pos, connection.output.world_pos, Color.BLACK, 2, true)
 
 
-func get_node_color(node_name : String) -> Color:
+static func get_node_color(node_name : String) -> Color:
 	match node_name:
 		"start", "end": return Color.CHARTREUSE
 		"branch" : return Color.BURLYWOOD
-		"encounter" : return Color.ORANGE
-		"lock_key" : return Color.WEB_PURPLE
+		"combat" : return Color.ORANGE
+		"utility" : return Color.LIGHT_CORAL
+		"sewers_keep_passage" : return Color.MEDIUM_SEA_GREEN
+		"lock_key", "lock", "key", "puzzle" : return Color.WEB_PURPLE
 		_: return Color.CADET_BLUE
+
+
+func on_generation_finished():
+	await get_tree().create_timer(3.0).timeout
+	enabled = false

@@ -1,7 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://c3u4v65ocu7yu"]
 
 [ext_resource type="Script" uid="uid://tmqkq1ow017l" path="res://system/generation/level_generator.gd" id="1_sewoy"]
-[ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="2_gvowd"]
 [ext_resource type="Script" uid="uid://d1hb4jnb5cfla" path="res://system/generation/debug_generation_visualiser.gd" id="3_7fmsn"]
 [ext_resource type="Script" uid="uid://dc7b7j1qa8wx7" path="res://system/generation/graph_generation/level_graph_generator.gd" id="4_b4wqs"]
 [ext_resource type="Resource" uid="uid://c27fn5rbyaot0" path="res://system/generation/graph_generation/nodes/node_uber_init.tres" id="5_bmkcx"]
@@ -11,42 +10,24 @@
 [ext_resource type="Resource" uid="uid://fijotjeojc6d" path="res://system/generation/graph_generation/nodes/node_end.tres" id="8_ay2dg"]
 [ext_resource type="Resource" uid="uid://1drpj5vbo71g" path="res://system/generation/graph_generation/nodes/node_room.tres" id="9_ps7gs"]
 [ext_resource type="Resource" uid="uid://cy1letw8bkgu8" path="res://system/generation/graph_generation/nodes/node_branch.tres" id="10_swumy"]
-[ext_resource type="Resource" uid="uid://b8tuixko4f8hk" path="res://system/generation/graph_generation/nodes/node_encounter.tres" id="11_ps7gs"]
+[ext_resource type="Resource" uid="uid://3vvohnpbl6wy" path="res://system/generation/graph_generation/nodes/node_lock.tres" id="12_3g4io"]
 [ext_resource type="Resource" uid="uid://dp3x7kf1i8vd0" path="res://system/generation/graph_generation/nodes/node_lock_key.tres" id="12_swumy"]
-
-[sub_resource type="Resource" id="Resource_7fmsn"]
-script = ExtResource("2_gvowd")
-room_name = "Generic Room"
-dimensions = Vector3i(1, 1, 1)
-metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
-
-[sub_resource type="Resource" id="Resource_b4wqs"]
-script = ExtResource("2_gvowd")
-room_name = "Generic Room"
-dimensions = Vector3i(1, 1, 2)
-metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
-
-[sub_resource type="Resource" id="Resource_byu11"]
-script = ExtResource("2_gvowd")
-room_name = "Generic Room"
-dimensions = Vector3i(3, 1, 4)
-metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
-
-[sub_resource type="Resource" id="Resource_dwgnx"]
-script = ExtResource("2_gvowd")
-room_name = "Generic Room"
-dimensions = Vector3i(2, 1, 2)
-metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+[ext_resource type="Resource" uid="uid://cytbwcat6xr4l" path="res://system/generation/graph_generation/nodes/node_key.tres" id="13_ir63v"]
+[ext_resource type="Resource" uid="uid://dwpsvbkokhouv" path="res://system/generation/graph_generation/nodes/node_puzzle.tres" id="14_tv0bk"]
+[ext_resource type="Resource" uid="uid://dtfpspmujsdhl" path="res://system/generation/graph_generation/nodes/node_utility.tres" id="15_d4oe4"]
+[ext_resource type="Resource" uid="uid://bmpc85ai7rbgt" path="res://system/generation/graph_generation/nodes/node_combat.tres" id="16_hsyqu"]
+[ext_resource type="Resource" uid="uid://ce3s0k6mvjyq5" path="res://system/generation/graph_generation/nodes/node_sewers_keep_passage.tres" id="17_ir63v"]
 
 [sub_resource type="Environment" id="Environment_sewoy"]
 background_mode = 1
 background_color = Color(0.779291, 0.779291, 0.779291, 1)
 
-[node name="LevelGenerationTest" type="Node3D"]
+[node name="LevelGenerationTest" type="Node3D" node_paths=PackedStringArray("graph_generator")]
 script = ExtResource("1_sewoy")
-room_list = Array[ExtResource("2_gvowd")]([SubResource("Resource_7fmsn"), SubResource("Resource_b4wqs"), SubResource("Resource_byu11"), SubResource("Resource_dwgnx")])
 num_rooms = 25
 debug_wait = true
+condense_iterations = 30
+graph_generator = NodePath("LevelGraphGenerator")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 148.42, 0)
@@ -58,14 +39,13 @@ size = 200.0
 script = ExtResource("3_7fmsn")
 generator = NodePath("..")
 camera = NodePath("../Camera3D")
-enabled = false
 metadata/_custom_type_script = "uid://d1hb4jnb5cfla"
 
 [node name="LevelGraphGenerator" type="Node" parent="."]
 script = ExtResource("4_b4wqs")
+target_rooms = 80
 initial_node = ExtResource("5_bmkcx")
-spawnable_nodes = Array[ExtResource("6_jel5w")]([ExtResource("7_bmkcx"), ExtResource("8_ay2dg"), ExtResource("9_ps7gs"), ExtResource("10_swumy"), ExtResource("11_ps7gs"), ExtResource("12_swumy")])
-debug_wait = true
+spawnable_nodes = Array[ExtResource("6_jel5w")]([ExtResource("7_bmkcx"), ExtResource("8_ay2dg"), ExtResource("9_ps7gs"), ExtResource("10_swumy"), ExtResource("12_swumy"), ExtResource("12_3g4io"), ExtResource("13_ir63v"), ExtResource("14_tv0bk"), ExtResource("15_d4oe4"), ExtResource("16_hsyqu"), ExtResource("17_ir63v")])
 metadata/_custom_type_script = "uid://dc7b7j1qa8wx7"
 
 [node name="LevelGraphVisualiser" type="Node" parent="." node_paths=PackedStringArray("generator")]

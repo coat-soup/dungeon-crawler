@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=6 format=3 uid="uid://dwpsvbkokhouv"]
+
+[ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_ctxws"]
+[ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_8h615"]
+[ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_8h615"]
+
+[sub_resource type="Resource" id="Resource_2ecwm"]
+script = ExtResource("3_8h615")
+room_name = "Puzzle Room"
+dimensions = Vector3i(2, 1, 2)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[sub_resource type="Resource" id="Resource_8h615"]
+script = ExtResource("3_8h615")
+room_name = "Puzzle Room"
+dimensions = Vector3i(2, 1, 3)
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+
+[resource]
+script = ExtResource("2_8h615")
+name = "puzzle"
+grammars = Array[ExtResource("1_ctxws")]([])
+terminal_rooms = Array[ExtResource("3_8h615")]([SubResource("Resource_2ecwm"), SubResource("Resource_8h615")])
+metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

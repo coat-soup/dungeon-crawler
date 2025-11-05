@@ -20,17 +20,28 @@ func _process(delta: float) -> void:
 		var t = Transform3D.IDENTITY * generator.transform * generator.cell_size * generator.dungeon_size
 		DebugDraw3D.draw_grid_xf(t, Vector2i(generator.dungeon_size, generator.dungeon_size), Color.DARK_CYAN, false)
 	
-	DebugDraw3D.scoped_config().set_thickness(0.8).set_center_brightness(0.6)
-	
 	for i in range(len(generator.spawned_rooms)):
-		var overlapping = len(generator.get_overlapped_rooms(i)) > 0
-		DebugDraw3D.draw_box(generator.cell_size * generator.spawned_rooms[i].position,
-							Quaternion.IDENTITY,
-							generator.cell_size * generator.spawned_rooms[i].size,
-							Color.DARK_ORCHID if not overlapping else Color.FIREBRICK)
-
+		if true:
+			DebugDraw3D.scoped_config().set_thickness(0.8).set_center_brightness(0.6)
+			var overlapping = len(generator.get_overlapped_rooms(i)) > 0
+			DebugDraw3D.draw_box(generator.cell_size * generator.spawned_rooms[i].position,
+								Quaternion.IDENTITY,
+								generator.cell_size * generator.spawned_rooms[i].size,
+								LevelGraphVisualiser.get_node_color(generator.spawned_rooms[i].graph_node.name) if not overlapping else Color.FIREBRICK)
+		
+		DebugDraw3D.draw_text(generator.spawned_rooms[i].get_center() * generator.cell_size + Vector3.UP * 10, generator.spawned_rooms[i].graph_node.name, 500, Color.BLACK)
+		
 		var overlaps = generator.get_overlapped_rooms(i)
 		var push_dir = Vector3.ZERO
 		for overlap in overlaps:
 			push_dir += (generator.spawned_rooms[i].get_center() - generator.spawned_rooms[overlap].get_center()).normalized()
 		DebugDraw3D.draw_arrow(generator.spawned_rooms[i].get_center() * generator.cell_size, (generator.spawned_rooms[i].get_center() + push_dir) * generator.cell_size)
+		
+		if true:
+			DebugDraw3D.scoped_config().set_thickness(0.3)
+			for room in generator.spawned_rooms:
+				for connection in generator.graph_generator.graph_connections:
+					if connection.is_equal_to(LevelGraphConnection.new(generator.spawned_rooms[i].graph_node, room.graph_node)):
+						DebugDraw3D.draw_arrow(generator.spawned_rooms[i].get_center() * generator.cell_size, room.get_center() * generator.cell_size, Color.WEB_GRAY, 0.5, true)
+		
+		#DebugDraw3D.draw_arrow(generator.spawned_rooms[i].get_center() * generator.cell_size, (generator.spawned_rooms[i].get_center() + generator.spawned_rooms[i].push_dir_viz) * generator.cell_size)

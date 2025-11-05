@@ -1,12 +1,19 @@
 extends Node
 class_name LevelGraphGenerator
 
+signal finished_generation
+
+@export var target_rooms : int = 20
+
 @export var initial_node : LevelGraphNode
 @export var spawnable_nodes : Array[LevelGraphNode]
+
 var spawned_nodes : Array[LevelGraphNode]
 var graph_connections : Array[LevelGraphConnection]
 
+
 @export var debug_wait := false
+@export var debug_print := false
 
 
 func _ready():
@@ -40,18 +47,21 @@ func generate():
 	
 	var finished_grammars := false
 	while not finished_grammars:
-		print_graph()
+		if debug_print: print_graph()
 		finished_grammars = true
 		for i in range(len(spawned_nodes) - 1, -1, -1):
 			if not spawned_nodes[i].grammars.is_empty():
-				replace_node_with_grammar(spawned_nodes[i], spawned_nodes[i].grammars.pick_random())
+				replace_node_with_grammar(spawned_nodes[i], select_grammar_from_node(spawned_nodes[i]))
 				finished_grammars = false
-				print_graph()
-				if debug_wait: await get_tree().create_timer(3.0).timeout
+				if debug_print: print_graph()
+				if debug_wait: await get_tree().create_timer(2.0).timeout
 	
 	
-	print("\nfinished generation, spawned nodes: ", spawned_nodes)
-	print_graph()
+	if debug_print: print("\nfinished generation, spawned nodes: ", spawned_nodes)
+	if debug_print: print_graph()
+	
+	await get_tree().create_timer(3.0).timeout # await graph stabilisation
+	finished_generation.emit()
 
 
 func clear_graph():
@@ -64,7 +74,7 @@ func replace_node_with_grammar(node : LevelGraphNode, grammar : LevelGraphGramma
 	var new_connections : Array[LevelGraphConnection] = []
 	var connections_to_remove : Array[LevelGraphConnection]
 	
-	print("replacing [", node.name, "] with grammar ", grammar)
+	if debug_print: print("replacing [", node.name, "] with grammar ", grammar)
 	
 	# spawn all internal grammar nodes
 	for n in parse_nodes_from_grammar(grammar):
@@ -75,27 +85,27 @@ func replace_node_with_grammar(node : LevelGraphNode, grammar : LevelGraphGramma
 		#n.name += str(randi() & 1000)
 		n.world_pos = node.world_pos + Util.random_point_in_circle_3d(10)
 		nodes.append(n)
-	print("parsed nodes from ", node, ": ", nodes)
+	if debug_print: print("parsed nodes from ", node, ": ", nodes)
 	
 	var connections = parse_connections_from_grammar(grammar)
 	for i in range(0, len(connections), 2):
-		print("setting up connection ", connections[i], "->", connections[i+1])
+		if debug_print: print("setting up connection ", connections[i], "->", connections[i+1])
 		
 		if connections[i] == -1:
 			for c in graph_connections: if c.output==node:
 				new_connections.append(LevelGraphConnection.new(c.input, nodes[connections[i+1]]))
 				connections_to_remove.append(c)
-				print("added connection from ext ", c.input, " to ", nodes[connections[i+1]])
+				if debug_print: print("added connection from ext ", c.input, " to ", nodes[connections[i+1]])
 			
 		elif connections[i+1] == -2:
 			for c in graph_connections: if c.input==node:
 				new_connections.append(LevelGraphConnection.new(nodes[connections[i]], c.output))
 				connections_to_remove.append(c)
-				print("added connection from ", nodes[connections[i]], " to ext ", c.output)
+				if debug_print: print("added connection from ", nodes[connections[i]], " to ext ", c.output)
 			
 		else:
 			new_connections.append(LevelGraphConnection.new(nodes[connections[i]], nodes[connections[i+1]]))
-			print("added connection from ", nodes[connections[i]], " to ", nodes[connections[i+1]])
+			if debug_print: print("added connection from ", nodes[connections[i]], " to ", nodes[connections[i+1]])
 	
 	for c in connections_to_remove:
 		var id = graph_connections.find(c)
@@ -122,11 +132,23 @@ func parse_nodes_from_grammar(grammar : LevelGraphGrammar) -> Array[LevelGraphNo
 	
 	return nodes
 
+
 func parse_connections_from_grammar(grammar : LevelGraphGrammar) -> Array[int]:
 	var connections : Array[int] = []
 	for connection in grammar.connections.split(","):
 		connections.append(connection.to_int())
 	return connections
+
+
+func select_grammar_from_node(node : LevelGraphNode) -> LevelGraphGrammar:
+	var weights : Array[float] = []
+	
+	for i in range(len(node.grammars)):
+		weights.append(node.grammars[i].weight)
+		if node.grammars[i].nodes.split(",").has("branch"):
+			weights[i] *= get_propensity_to_branch()
+	
+	return node.grammars[Util.weighted_random(node.grammars, weights)]
 
 
 func print_graph():
@@ -141,3 +163,7 @@ func print_graph():
 	print("CONNECTIONS")
 	for c in graph_connections:
 		print(spawned_nodes.find(c.input), "->", spawned_nodes.find(c.output))
+
+
+func get_propensity_to_branch() -> float:
+	return 10.0 * (1.0 - (len(spawned_nodes) / 20.0))

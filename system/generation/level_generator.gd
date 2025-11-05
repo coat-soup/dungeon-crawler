@@ -2,7 +2,6 @@
 extends Node3D
 class_name LevelGenerator
 
-@export var room_list : Array[LevelRoomData]
 @export var dungeon_size : int = 20
 @export var cell_size : float = 5.0
 @export var occupied_spaces : Array[Array]
@@ -12,27 +11,29 @@ var spawned_rooms : Array[LevelRoom]
 @export var debug_wait := false
 
 @export var overlap_fix_iterations : int = 20
-@export var condense_iterations : int = 30
+@export var condense_iterations : int = 300
+
+@export var graph_generator : LevelGraphGenerator
 
 
 func _ready():
+	graph_generator.finished_generation.connect(generate)
 	generate()
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("jump"): generate()
-
-
 func generate():
+	print("GENERATING")
 	clear_dungeon()
 	
-	for i in range(num_rooms):
+	for node in graph_generator.spawned_nodes:
 		var room = LevelRoom.new()
 		spawned_rooms.append(room)
 		
-		room.data_id = randi_range(0, len(room_list) - 1)
-		room.size = room_list[room.data_id].dimensions
-		room.position = Vector3i(randi_range(0, dungeon_size - room.size.x), 0, randi_range(0, dungeon_size - room.size.x))
+		var room_data : LevelRoomData = node.terminal_rooms.pick_random()
+		
+		room.graph_node = node
+		room.size = room_data.dimensions
+		room.position = Vector3i(node.world_pos / cell_size)
 		room.rotation = 0
 		
 		if debug_wait: await get_tree().create_timer(0.05).timeout
@@ -55,11 +56,16 @@ func generate():
 	for i in range(condense_iterations):
 		var did_condense = false
 		for r in range(len(spawned_rooms)):
-			var p_pos = spawned_rooms[r].position
-			var push_dir = (Vector3(dungeon_size/2, 0, dungeon_size/2) - Vector3(spawned_rooms[r].position) * Vector3(1,0,1)).normalized()
-			spawned_rooms[r].position += Vector3i(push_dir.ceil()) # push
-			if not get_overlapped_rooms(r).is_empty(): spawned_rooms[r].position = p_pos # undo if overlapping
-			else: did_condense = true
+			#var push_dir : Vector3 = Vector3.ZERO
+			for room in spawned_rooms:
+				for connection in graph_generator.graph_connections:
+					if connection.is_equal_to(LevelGraphConnection.new(spawned_rooms[r].graph_node, room.graph_node)) or connection.is_equal_to(LevelGraphConnection.new(room.graph_node, spawned_rooms[r].graph_node)):
+						var push_dir = (room.get_center() - spawned_rooms[r].get_center()) / 5.0 #.normalized()
+						spawned_rooms[r].push_dir_viz = push_dir
+						var p_pos = spawned_rooms[r].position
+						spawned_rooms[r].position += Vector3i(push_dir.ceil()) # push
+						if not get_overlapped_rooms(r).is_empty(): spawned_rooms[r].position = p_pos # undo if overlapping
+						else: did_condense = true
 		if not did_condense: break
 			
 		if debug_wait: await get_tree().create_timer(0.2).timeout
