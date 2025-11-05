@@ -7,7 +7,6 @@ class_name DebugGenerationVisualiser
 var origin_offset : float
 @export var enabled := true
 
-
 func _ready() -> void:
 	var origin_offset = (generator.dungeon_size * generator.cell_size) / 2
 	camera.global_position += Vector3(origin_offset, 0, origin_offset)
@@ -15,10 +14,19 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if not enabled: return
+	
+	for node in generator.astar.open_list:
+		DebugDraw3D.draw_box(node.position * generator.cell_size, Quaternion.IDENTITY, Vector3.ONE * generator.cell_size / 2, Color.BEIGE)
+	for node in generator.astar.closed_list:
+		DebugDraw3D.draw_box(node.position * generator.cell_size, Quaternion.IDENTITY, Vector3.ONE * generator.cell_size / 2, Color.AQUA)
+	DebugDraw3D.draw_box(generator.astar.start * generator.cell_size, Quaternion.IDENTITY, Vector3.ONE * generator.cell_size / 2, Color.CHARTREUSE)
+	DebugDraw3D.draw_box(generator.astar.end * generator.cell_size, Quaternion.IDENTITY, Vector3.ONE * generator.cell_size / 2, Color.CHARTREUSE)
+	
 	if true:
 		DebugDraw3D.scoped_config().set_thickness(0.2).set_center_brightness(0.6)
-		var t = Transform3D.IDENTITY * generator.transform * generator.cell_size * generator.dungeon_size
-		DebugDraw3D.draw_grid_xf(t, Vector2i(generator.dungeon_size, generator.dungeon_size), Color.DARK_CYAN, false)
+		var t = Transform3D.IDENTITY * generator.transform * generator.cell_size * generator.dungeon_size * 2
+		t = t.translated(-Vector3(1, 0, 1) * generator.dungeon_size * generator.cell_size)
+		DebugDraw3D.draw_grid_xf(t, Vector2i(generator.dungeon_size * 2, generator.dungeon_size * 2), Color.DARK_CYAN, false)
 	
 	for i in range(len(generator.spawned_rooms)):
 		if true:
@@ -45,3 +53,6 @@ func _process(delta: float) -> void:
 						DebugDraw3D.draw_arrow(generator.spawned_rooms[i].get_center() * generator.cell_size, room.get_center() * generator.cell_size, Color.WEB_GRAY, 0.5, true)
 		
 		#DebugDraw3D.draw_arrow(generator.spawned_rooms[i].get_center() * generator.cell_size, (generator.spawned_rooms[i].get_center() + generator.spawned_rooms[i].push_dir_viz) * generator.cell_size)
+	
+	for p in generator.hallways:
+		DebugDraw3D.draw_box(p * generator.cell_size, Quaternion.IDENTITY, Vector3.ONE * generator.cell_size / 2, Color.DIM_GRAY)

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=4 format=3 uid="uid://c27fn5rbyaot0"]
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=5 format=3 uid="uid://c27fn5rbyaot0"]
 
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_choab"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_etdtt"]
+[ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_etdtt"]
 
 [sub_resource type="Resource" id="Resource_choab"]
 script = ExtResource("1_choab")
@@ -14,4 +15,5 @@ metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 script = ExtResource("2_etdtt")
 name = "uber_init"
 grammars = Array[ExtResource("1_choab")]([SubResource("Resource_choab")])
+terminal_rooms = Array[ExtResource("3_etdtt")]([])
 metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

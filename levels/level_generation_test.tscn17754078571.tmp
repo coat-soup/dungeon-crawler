@@ -27,11 +27,9 @@ script = ExtResource("1_sewoy")
 dungeon_size = 20
 num_rooms = 25
 debug_wait = true
+hallways = null
 condense_iterations = 30
 graph_generator = NodePath("LevelGraphGenerator")
-
-[node name="LevelHolder" type="Node3D" parent="."]
-visible = false
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 344.598, 0)
@@ -39,16 +37,11 @@ environment = SubResource("Environment_sewoy")
 projection = 1
 size = 200.0
 
-[node name="Camera3D2" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -3.05176e-05, 91.564, 89.8642)
-environment = SubResource("Environment_sewoy")
-current = true
-size = 200.0
-
 [node name="DebugGenerationVisualiser" type="Node" parent="." node_paths=PackedStringArray("generator", "camera")]
 script = ExtResource("3_7fmsn")
 generator = NodePath("..")
 camera = NodePath("../Camera3D")
+enabled = null
 metadata/_custom_type_script = "uid://d1hb4jnb5cfla"
 
 [node name="LevelGraphGenerator" type="Node" parent="."]

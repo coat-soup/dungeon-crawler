@@ -3,16 +3,11 @@
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_j04ya"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_qmvir"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_qmvir"]
-
-[sub_resource type="Resource" id="Resource_av2vl"]
-script = ExtResource("3_qmvir")
-room_name = "Sewers Entrance"
-dimensions = Vector3i(1, 2, 1)
-metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+[ext_resource type="Resource" uid="uid://0e5a151ee67b" path="res://world/rooms/room_data/room_generic_small.tres" id="4_av2vl"]
 
 [resource]
 script = ExtResource("2_qmvir")
 name = "sewers_keep_passage"
 grammars = Array[ExtResource("1_j04ya")]([])
-terminal_rooms = Array[ExtResource("3_qmvir")]([SubResource("Resource_av2vl")])
+terminal_rooms = Array[ExtResource("3_qmvir")]([ExtResource("4_av2vl")])
 metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

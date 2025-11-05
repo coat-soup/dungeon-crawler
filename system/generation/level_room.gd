@@ -8,5 +8,7 @@ var size : Vector3i
 var graph_node : LevelGraphNode
 var push_dir_viz : Vector3
 
+var room_data : LevelRoomData
+
 func get_center() -> Vector3:
 	return Vector3(position) + size/2.0

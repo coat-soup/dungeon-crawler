@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://b0wmvlc481vr4"]
+
+[ext_resource type="Script" uid="uid://bboyq3btxjcad" path="res://system/generation/level_room_prefab.gd" id="1_sjlh5"]
+[ext_resource type="Material" uid="uid://khh6k54woa1a" path="res://world/materials/stone_wall_mat.tres" id="2_fq02h"]
+[ext_resource type="Script" uid="uid://ntkhnwdxsq5b" path="res://system/generation/level_room_prefab_entrance.gd" id="2_na08x"]
+
+[sub_resource type="Resource" id="Resource_na08x"]
+script = ExtResource("2_na08x")
+position = Vector3i(0, 0, -1)
+closed = NodePath("Wall0-1")
+open = NodePath("")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_gdft1"]
+script = ExtResource("2_na08x")
+position = Vector3i(1, 0, -1)
+closed = NodePath("Wall1-1")
+open = NodePath("")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_e0lt4"]
+script = ExtResource("2_na08x")
+position = Vector3i(-1, 0, 0)
+closed = NodePath("Wall-10")
+open = NodePath("")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_mg4u6"]
+script = ExtResource("2_na08x")
+position = Vector3i(2, 0, 0)
+closed = NodePath("Wall20")
+open = NodePath("")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_gxpq5"]
+script = ExtResource("2_na08x")
+position = Vector3i(-1, 0, 1)
+closed = NodePath("Wall-11")
+open = NodePath("")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_tfwyd"]
+script = ExtResource("2_na08x")
+position = Vector3i(2, 0, 1)
+closed = NodePath("Wall21")
+open = NodePath("")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_m7app"]
+script = ExtResource("2_na08x")
+position = Vector3i(0, 0, 2)
+closed = NodePath("Wall02")
+open = NodePath("")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_fqgq0"]
+script = ExtResource("2_na08x")
+position = Vector3i(1, 0, 2)
+closed = NodePath("Wall12")
+open = NodePath("")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[node name="GenericRoomSmall" type="Node3D"]
+script = ExtResource("1_sjlh5")
+entrances = Array[ExtResource("2_na08x")]([SubResource("Resource_na08x"), SubResource("Resource_gdft1"), SubResource("Resource_e0lt4"), SubResource("Resource_mg4u6"), SubResource("Resource_gxpq5"), SubResource("Resource_tfwyd"), SubResource("Resource_m7app"), SubResource("Resource_fqgq0")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material_override = ExtResource("2_fq02h")
+size = Vector3(10, 0.5, 10)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_override = ExtResource("2_fq02h")
+size = Vector3(10, 0.5, 10)
+
+[node name="Wall0-1" type="CSGBox3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, -2.5, 2.5, -5)
+material_override = ExtResource("2_fq02h")
+size = Vector3(5, 0.5, 5)
+
+[node name="Wall1-1" type="CSGBox3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 2.5, 2.5, -5)
+material_override = ExtResource("2_fq02h")
+size = Vector3(5, 0.5, 5)
+
+[node name="Wall-10" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -5, 2.5, -2.5)
+material_override = ExtResource("2_fq02h")
+size = Vector3(5, 0.5, 5)
+
+[node name="Wall20" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 5, 2.5, -2.5)
+material_override = ExtResource("2_fq02h")
+size = Vector3(5, 0.5, 5)
+
+[node name="Wall-11" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -5, 2.5, 2.5)
+material_override = ExtResource("2_fq02h")
+size = Vector3(5, 0.5, 5)
+
+[node name="Wall21" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 5, 2.5, 2.5)
+material_override = ExtResource("2_fq02h")
+size = Vector3(5, 0.5, 5)
+
+[node name="Wall02" type="CSGBox3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, -2.5, 2.5, 5)
+material_override = ExtResource("2_fq02h")
+size = Vector3(5, 0.5, 5)
+
+[node name="Wall12" type="CSGBox3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 2.5, 2.5, 5)
+material_override = ExtResource("2_fq02h")
+size = Vector3(5, 0.5, 5)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelRoomData" load_steps=3 format=3 uid="uid://0e5a151ee67b"]
+
+[ext_resource type="PackedScene" uid="uid://b0wmvlc481vr4" path="res://world/rooms/prefabs/generic_room_small.tscn" id="1_gntbn"]
+[ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="2_ulx83"]
+
+[resource]
+script = ExtResource("2_ulx83")
+room_name = "GenericSmallRoom"
+dimensions = Vector3i(2, 1, 2)
+prefab = ExtResource("1_gntbn")
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"

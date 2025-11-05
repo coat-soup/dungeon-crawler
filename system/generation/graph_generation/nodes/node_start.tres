@@ -3,16 +3,11 @@
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_qg44v"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_yvltj"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_yvltj"]
-
-[sub_resource type="Resource" id="Resource_jhmcd"]
-script = ExtResource("3_yvltj")
-room_name = "Starting Room"
-dimensions = Vector3i(3, 1, 3)
-metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
+[ext_resource type="Resource" uid="uid://0e5a151ee67b" path="res://world/rooms/room_data/room_generic_small.tres" id="4_jhmcd"]
 
 [resource]
 script = ExtResource("2_yvltj")
 name = "start"
 grammars = Array[ExtResource("1_qg44v")]([])
-terminal_rooms = Array[ExtResource("3_yvltj")]([SubResource("Resource_jhmcd")])
+terminal_rooms = Array[ExtResource("3_yvltj")]([ExtResource("4_jhmcd")])
 metadata/_custom_type_script = "uid://dstuqqqmhx4ch"
