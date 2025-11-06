@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 class_name LevelGenerator
 
@@ -10,7 +9,9 @@ var spawned_rooms : Array[LevelRoom]
 var spawned_prefabs : Array[LevelRoomPrefab]
 
 @export var debug_wait := false
-@export var hallways : Array[Vector3i]
+var hallways : Array[LevelRoom]
+var spawned_hallway_prefabs : Array[LevelRoomPrefab]
+@export var hallway_room : LevelRoomData
 
 @export var overlap_fix_iterations : int = 20
 @export var condense_iterations : int = 300
@@ -22,7 +23,6 @@ var astar : LevelAstar
 func _ready():
 	astar = LevelAstar.new(self)
 	graph_generator.finished_generation.connect(generate)
-	generate()
 
 
 func generate():
@@ -77,6 +77,7 @@ func generate():
 	
 	place_room_prefabs()
 	generate_hallways()
+	open_connections()
 
 
 func clear_dungeon():
@@ -120,14 +121,42 @@ func generate_hallways():
 				if c.is_equal_to(LevelGraphConnection.new(spawned_rooms[a].graph_node, spawned_rooms[b].graph_node)):
 					var start_entrance = get_closest_room_entrance_position(spawned_rooms[b].position, a)
 					var target_entrance = get_closest_room_entrance_position(spawned_rooms[a].position, b)
-					var path = await astar.get_path_between_points(start_entrance, target_entrance)
+					var path = astar.get_path_between_points(start_entrance, target_entrance)
 					print("hallway path: ", path)
-					for p in path:
-						hallways.append(p)
-						print("adding ", p, " to hallways")
+					for p in range(len(path)):
+						var hallway : LevelRoom = LevelRoom.new()
+						hallway.size = hallway_room.dimensions
+						hallway.position = path[p]
+						
+						var prefab : LevelRoomPrefab = hallway_room.prefab.instantiate()
+						spawned_hallway_prefabs.append(prefab)
+						$LevelHolder.add_child(prefab)
+						prefab.position = hallway.position * cell_size + hallway.size * cell_size * Vector3(1,0,1) / 2
+						
+						if p < len(path) - 1: # connect to next hallway
+							hallway.open_entrances.append(prefab.get_entrance(path[p+1] - path[p]))
+						if p > 0: # connect to previous hallway
+							hallway.open_entrances.append(prefab.get_entrance(path[p-1] - path[p]))
+						if p == 0: #connect to start
+							hallway.open_entrances.append(prefab.get_entrance_to_room(spawned_rooms[a], path[p]))
+							spawned_rooms[a].open_entrances.append(spawned_prefabs[a].get_entrance(path[p] - spawned_rooms[a].position))
+						if p == len(path) - 1: # connect to end
+							hallway.open_entrances.append(prefab.get_entrance_to_room(spawned_rooms[b], path[p]))
+							spawned_rooms[b].open_entrances.append(spawned_prefabs[b].get_entrance(path[p] - spawned_rooms[b].position))
+							print("connecting to end: made entrance: ", spawned_rooms[b].open_entrances[-1])
+						
+						hallways.append(hallway)
 					# await get_tree().create_timer(0.5).timeout
+					
 					astar.closed_list.clear()
 					astar.open_list.clear()
+	
+	var overlapping_hallways = 0
+	for i in range(len(hallways)):
+		for j in range(len(hallways)):
+			if i == j: continue
+			if hallways[i].position == hallways[j].position: overlapping_hallways += 1
+	print("overlapping hallways: ", overlapping_hallways)
 
 
 func get_closest_room_entrance_position(start: Vector3i, room_id : int) -> Vector3i:
@@ -140,8 +169,23 @@ func get_closest_room_entrance_position(start: Vector3i, room_id : int) -> Vecto
 
 
 func place_room_prefabs():
+	for prefab in spawned_prefabs:
+		prefab.queue_free()
+	spawned_prefabs.clear()
+	
 	for room in spawned_rooms:
 		var prefab : LevelRoomPrefab = room.room_data.prefab.instantiate() as LevelRoomPrefab
 		spawned_prefabs.append(prefab)
 		$LevelHolder.add_child(prefab)
-		prefab.position = room.position * cell_size
+		prefab.position = room.position * cell_size + room.size * cell_size * Vector3(1,0,1) / 2
+
+
+func open_connections():
+	print("spawned: ", len(spawned_rooms), " prefs: ", len(spawned_prefabs))
+	for i in range(len(spawned_rooms)):
+		for e in spawned_rooms[i].open_entrances:
+			spawned_prefabs[i].toggle_entrance(e, true)
+	
+	for i in range(len(hallways)):
+		for e in hallways[i].open_entrances:
+			spawned_hallway_prefabs[i].toggle_entrance(e, true)

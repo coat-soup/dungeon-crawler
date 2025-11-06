@@ -46,8 +46,8 @@ func get_path_between_points(a : Vector3i, b : Vector3i, max_closed_length : int
 		for offset in [
 						Vector3i(1, 0, 0),   # +X (right)
 						Vector3i(-1, 0, 0),  # -X (left)
-						Vector3i(0, 1, 0),   # +Y (up)
-						Vector3i(0, -1, 0),  # -Y (down)
+						#Vector3i(0, 1, 0),   # +Y (up)
+						#Vector3i(0, -1, 0),  # -Y (down)
 						Vector3i(0, 0, 1),   # +Z (forward)
 						Vector3i(0, 0, -1)   # -Z (backward)
 					]:
@@ -75,6 +75,8 @@ func is_position_occupied(pos : Vector3i):
 		and room.position.y <= pos.y and room.position.y+room.size.y > pos.y
 		and room.position.z <= pos.z and room.position.z+room.size.z > pos.z):
 			return true
+	for hallway in generator.hallways:
+		if hallway.position == pos: return true
 	
 	return false
 

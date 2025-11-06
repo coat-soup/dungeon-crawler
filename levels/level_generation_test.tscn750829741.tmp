@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3u4v65ocu7yu"]
+[gd_scene load_steps=22 format=3 uid="uid://c3u4v65ocu7yu"]
 
 [ext_resource type="Script" uid="uid://tmqkq1ow017l" path="res://system/generation/level_generator.gd" id="1_sewoy"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="2_ir63v"]
 [ext_resource type="PackedScene" uid="uid://bvguq1apskiyw" path="res://world/rooms/prefabs/hallway_room.tscn" id="2_tv0bk"]
 [ext_resource type="Script" uid="uid://d1hb4jnb5cfla" path="res://system/generation/debug_generation_visualiser.gd" id="3_7fmsn"]
 [ext_resource type="Script" uid="uid://dc7b7j1qa8wx7" path="res://system/generation/graph_generation/level_graph_generator.gd" id="4_b4wqs"]
-[ext_resource type="Script" uid="uid://b5mdrjubj0lg5" path="res://addons/debug_draw_3d/examples_dd3d/demo_camera_movement.gd" id="4_d4oe4"]
 [ext_resource type="Resource" uid="uid://c27fn5rbyaot0" path="res://system/generation/graph_generation/nodes/node_uber_init.tres" id="5_bmkcx"]
 [ext_resource type="Script" uid="uid://day82rj35g3lc" path="res://system/generation/graph_generation/level_graph_visualiser.gd" id="5_byu11"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="6_jel5w"]
@@ -42,6 +41,7 @@ condense_iterations = 30
 graph_generator = NodePath("LevelGraphGenerator")
 
 [node name="LevelHolder" type="Node3D" parent="."]
+visible = false
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 344.598, 0)
@@ -54,12 +54,12 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 environment = SubResource("Environment_sewoy")
 current = true
 size = 200.0
-script = ExtResource("4_d4oe4")
 
 [node name="DebugGenerationVisualiser" type="Node" parent="." node_paths=PackedStringArray("generator", "camera")]
 script = ExtResource("3_7fmsn")
 generator = NodePath("..")
 camera = NodePath("../Camera3D")
+enabled = null
 metadata/_custom_type_script = "uid://d1hb4jnb5cfla"
 
 [node name="LevelGraphGenerator" type="Node" parent="."]

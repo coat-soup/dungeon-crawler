@@ -50,9 +50,9 @@ func _process(delta: float) -> void:
 			for room in generator.spawned_rooms:
 				for connection in generator.graph_generator.graph_connections:
 					if connection.is_equal_to(LevelGraphConnection.new(generator.spawned_rooms[i].graph_node, room.graph_node)):
-						DebugDraw3D.draw_arrow(generator.spawned_rooms[i].get_center() * generator.cell_size, room.get_center() * generator.cell_size, Color.WEB_GRAY, 0.5, true)
+						DebugDraw3D.draw_arrow(generator.spawned_rooms[i].get_center() * generator.cell_size + Vector3.UP * 5, room.get_center() * generator.cell_size + Vector3.UP * 5, Color.WEB_GRAY, 0.5, true)
 		
 		#DebugDraw3D.draw_arrow(generator.spawned_rooms[i].get_center() * generator.cell_size, (generator.spawned_rooms[i].get_center() + generator.spawned_rooms[i].push_dir_viz) * generator.cell_size)
 	
-	for p in generator.hallways:
-		DebugDraw3D.draw_box(p * generator.cell_size, Quaternion.IDENTITY, Vector3.ONE * generator.cell_size / 2, Color.DIM_GRAY)
+	for hallway in generator.hallways:
+		DebugDraw3D.draw_box(hallway.position * generator.cell_size, Quaternion.IDENTITY, Vector3.ONE * generator.cell_size / 2, Color.DIM_GRAY)
