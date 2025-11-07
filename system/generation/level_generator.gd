@@ -9,7 +9,7 @@ var spawned_rooms : Array[LevelRoom]
 var spawned_prefabs : Array[LevelRoomPrefab]
 
 @export var debug_wait := false
-var hallways : Array[LevelRoom]
+var hallways : Array[LevelRoomHallway]
 var spawned_hallway_prefabs : Array[LevelRoomPrefab]
 @export var hallway_room : LevelRoomData
 
@@ -45,15 +45,14 @@ func generate():
 	
 	
 	for i in range(overlap_fix_iterations):
-		var did_overlap = LevelNodeSeparator.overlap_fix_step(spawned_rooms, 1)
+		var did_overlap = LevelNodeSeparator.overlap_fix_step(spawned_rooms, 3)
 		if not did_overlap: break
 		
 		if debug_wait: await get_tree().create_timer(0.2).timeout
 	
 	var converted_connections = LevelNodeSeparator.connections_to_ids(graph_generator.spawned_nodes, graph_generator.graph_connections)
-	print("converted connections: ", converted_connections)
 	for i in range(condense_iterations):
-		var did_condense = LevelNodeSeparator.condense_step(spawned_rooms, converted_connections, 1)
+		var did_condense = LevelNodeSeparator.condense_step(spawned_rooms, converted_connections, 3)
 		if not did_condense: break
 			
 		if debug_wait: await get_tree().create_timer(0.2).timeout
@@ -74,18 +73,25 @@ func clear_dungeon():
 func generate_hallways():
 	print("generating hallways")
 	
+	for prefab in spawned_hallway_prefabs:
+		prefab.queue_free()
+	spawned_hallway_prefabs.clear()
+	
 	for a in range(len(spawned_rooms)):
 		for b in range(len(spawned_rooms)):
 			for c in graph_generator.graph_connections:
 				if c.is_equal_to(LevelGraphConnection.new(spawned_rooms[a].graph_node, spawned_rooms[b].graph_node)):
 					var start_entrance = get_closest_room_entrance_position(spawned_rooms[b].position, a)
 					var target_entrance = get_closest_room_entrance_position(spawned_rooms[a].position, b)
-					var path = astar.get_path_between_points(start_entrance, target_entrance)
+					var path = astar.get_path_between_points(start_entrance, target_entrance, 2000, spawned_rooms[a], spawned_rooms[b])
 					print("hallway path: ", path)
 					for p in range(len(path)):
-						var hallway : LevelRoom = LevelRoom.new()
+						var hallway : LevelRoomHallway = LevelRoomHallway.new()
 						hallway.size = hallway_room.dimensions
 						hallway.position = path[p]
+						
+						hallway.inputs.append(spawned_rooms[a])
+						hallway.outputs.append(spawned_rooms[b])
 						
 						var prefab : LevelRoomPrefab = hallway_room.prefab.instantiate()
 						spawned_hallway_prefabs.append(prefab)
@@ -104,6 +110,10 @@ func generate_hallways():
 							spawned_rooms[b].open_entrances.append(spawned_prefabs[b].get_entrance(path[p] - spawned_rooms[b].position))
 							print("connecting to end: made entrance: ", spawned_rooms[b].open_entrances[-1])
 						
+						for h in range(len(hallways)): if hallways[h].position == path[p] and is_instance_valid(spawned_hallway_prefabs[h]):
+							print("joining hallways")
+							hallways[h].open_entrances.append(spawned_hallway_prefabs[h].get_entrance(hallways[h].position - path[p-1]))
+							prefab.queue_free()
 						hallways.append(hallway)
 					# await get_tree().create_timer(0.5).timeout
 					

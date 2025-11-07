@@ -7,7 +7,7 @@ class_name LevelGraphVisualiser
 
 func _ready() -> void:
 	pass
-	#generator.finished_generation.connect(on_generation_finished)
+	generator.finished_generation.connect(on_generation_finished)
 
 
 func _process(delta: float) -> void:

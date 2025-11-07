@@ -72,7 +72,11 @@ func generate():
 	if debug_print: print("\nfinished generation, spawned nodes: ", spawned_nodes)
 	if debug_print: print_graph()
 	
-	await get_tree().create_timer(3.0).timeout # await graph stabilisation
+	await get_tree().create_timer(5.0).timeout # await graph stabilisation
+	
+	var offset = spawned_nodes[0].world_pos
+	for node in spawned_nodes:
+		node.world_pos -= offset
 	finished_generation.emit()
 
 
@@ -95,7 +99,7 @@ func replace_node_with_grammar(node : LevelGraphNode, grammar : LevelGraphGramma
 			continue
 		n = n.duplicate(true)
 		#n.name += str(randi() & 1000)
-		n.world_pos = node.world_pos + Util.random_point_in_circle_3d(10)
+		n.world_pos = node.world_pos + Util.random_point_in_circle_3d(20)
 		nodes.append(n)
 	if debug_print: print("parsed nodes from ", node, ": ", nodes)
 	

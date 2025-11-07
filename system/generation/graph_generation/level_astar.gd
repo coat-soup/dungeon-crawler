@@ -6,6 +6,9 @@ var generator : LevelGenerator
 var open_list : Array[AStarNode] = []
 var closed_list : Array[AStarNode] = []
 
+var start_room : LevelRoom
+var end_room : LevelRoom
+
 var start : Vector3i
 var end : Vector3i
 
@@ -13,11 +16,14 @@ func _init(gen : LevelGenerator) -> void:
 	generator = gen
 
 
-func get_path_between_points(a : Vector3i, b : Vector3i, max_closed_length : int = 2000) -> Array[Vector3i]:
+func get_path_between_points(a : Vector3i, b : Vector3i, max_closed_length : int = 2000, a_room = null, b_room = null) -> Array[Vector3i]:
 	start = a
 	end = b
 	open_list = []
 	closed_list = []
+	
+	start_room = a_room
+	end_room = b_room
 	
 	open_list.append(AStarNode.new(null, start))
 	
@@ -52,8 +58,8 @@ func get_path_between_points(a : Vector3i, b : Vector3i, max_closed_length : int
 						Vector3i(0, 0, -1)   # -Z (backward)
 					]:
 			var node_pos = cur_node.position + offset
-			if is_position_occupied(node_pos): continue
-			children.append(AStarNode.new(cur_node, node_pos))
+			if not is_position_occupied(node_pos):
+				children.append(AStarNode.new(cur_node, node_pos))
 		
 		for child in children:
 			for c in closed_list: if c.position == child.position: continue # skip closed list
@@ -76,7 +82,8 @@ func is_position_occupied(pos : Vector3i):
 		and room.position.z <= pos.z and room.position.z+room.size.z > pos.z):
 			return true
 	for hallway in generator.hallways:
-		if hallway.position == pos: return true
+		if hallway.position == pos:
+			if not hallway.inputs.has(start_room) and not hallway.outputs.has(end_room): return false
 	
 	return false
 
@@ -84,4 +91,9 @@ func is_position_occupied(pos : Vector3i):
 func get_heuristic(node : AStarNode, goal : Vector3i) -> float:
 	var h = node.position.distance_to(goal)
 	if node.position.y != node.parent.position.y: h += 10
+	
+	# try join same hallways
+	for hallway in generator.hallways: if hallway.position == node.position:
+		if hallway.inputs.has(start_room) or hallway.outputs.has(end_room): h -= 5
+	
 	return h

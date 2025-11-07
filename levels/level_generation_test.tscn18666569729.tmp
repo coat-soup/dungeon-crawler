@@ -66,7 +66,6 @@ metadata/_custom_type_script = "uid://d1hb4jnb5cfla"
 script = ExtResource("4_b4wqs")
 initial_node = ExtResource("5_bmkcx")
 spawnable_nodes = Array[ExtResource("6_jel5w")]([ExtResource("7_bmkcx"), ExtResource("8_ay2dg"), ExtResource("9_ps7gs"), ExtResource("10_swumy"), ExtResource("12_swumy"), ExtResource("12_3g4io"), ExtResource("13_ir63v"), ExtResource("14_tv0bk"), ExtResource("15_d4oe4"), ExtResource("16_hsyqu"), ExtResource("17_ir63v")])
-debug_wait = true
 metadata/_custom_type_script = "uid://dc7b7j1qa8wx7"
 
 [node name="LevelGraphVisualiser" type="Node" parent="." node_paths=PackedStringArray("generator")]

@@ -11,6 +11,10 @@ enum ConditionType {CONNECTION_LIMIT}
 
 
 func evaluate(node : LevelGraphNode, connections : Array[LevelGraphConnection]) -> bool:
+	if evaluated_nodes & (1 << 0):print("evaluating self")
+	if evaluated_nodes & (1 << 1): print("evaluating input")
+	if evaluated_nodes & (1 << 2): print("evaluating output")
+		
 	if evaluated_nodes & (1 << 0) and not evaluate_individual(node, connections): return false
 	for connection in connections:
 		if connection.output == node and evaluated_nodes & (1 << 1) and not evaluate_individual(connection.output, connections): return false # is input
@@ -26,7 +30,7 @@ func evaluate_individual(node : LevelGraphNode, connections : Array[LevelGraphCo
 	return true
 
 
-func evaluate_connection_limit(node : LevelGraphNode, connections : Array[LevelGraphConnection], ) -> bool:
+func evaluate_connection_limit(node : LevelGraphNode, connections : Array[LevelGraphConnection]) -> bool:
 	var n_connections : int = 0
 	for connection in connections:
 		if connection.input == node or connection.output == node: n_connections += 1
