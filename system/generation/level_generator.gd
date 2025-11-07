@@ -38,7 +38,7 @@ func generate():
 		
 		room.graph_node = node
 		room.size = room_data.dimensions
-		room.position = node.position
+		room.position = Vector3i(node.world_pos / 10)
 		room.rotation = 0
 		
 		if debug_wait: await get_tree().create_timer(0.05).timeout
@@ -58,7 +58,6 @@ func generate():
 			
 		if debug_wait: await get_tree().create_timer(0.2).timeout
 	
-	return
 	place_room_prefabs()
 	generate_hallways()
 	open_connections()

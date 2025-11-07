@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GraphGrammarCondition" load_steps=2 format=3 uid="uid://ciewfr10kbwey"]
+
+[ext_resource type="Script" uid="uid://bai7learrhxks" path="res://system/generation/graph_generation/graph_grammar_condition.gd" id="1_s6b1i"]
+
+[resource]
+script = ExtResource("1_s6b1i")
+type = 0
+args = "3"
+evaluated_nodes = 7
+metadata/_custom_type_script = "uid://bai7learrhxks"

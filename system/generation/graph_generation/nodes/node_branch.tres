@@ -1,14 +1,17 @@
-[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=8 format=3 uid="uid://cy1letw8bkgu8"]
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=11 format=3 uid="uid://cy1letw8bkgu8"]
 
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_wq35i"]
+[ext_resource type="Script" uid="uid://bai7learrhxks" path="res://system/generation/graph_generation/graph_grammar_condition.gd" id="2_5rr04"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_jqch4"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_jqch4"]
+[ext_resource type="Resource" uid="uid://ciewfr10kbwey" path="res://system/generation/graph_generation/nodes/condition_limit_3_connections.tres" id="3_sdrud"]
 
 [sub_resource type="Resource" id="Resource_wq35i"]
 script = ExtResource("1_wq35i")
 weight = 1.0
 nodes = "room"
 connections = "-1,0,0,-2"
+conditions = Array[ExtResource("2_5rr04")]([])
 metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 
 [sub_resource type="Resource" id="Resource_jqch4"]
@@ -16,13 +19,22 @@ script = ExtResource("1_wq35i")
 weight = 1.0
 nodes = "branch,branch"
 connections = "-1,0,0,-2,0,1"
+conditions = Array[ExtResource("2_5rr04")]([ExtResource("3_sdrud")])
 metadata/_custom_type_script = "uid://ufntgkyvgkqt"
+
+[sub_resource type="Resource" id="Resource_djycg"]
+script = ExtResource("2_5rr04")
+type = 0
+args = "2"
+evaluated_nodes = 1
+metadata/_custom_type_script = "uid://bai7learrhxks"
 
 [sub_resource type="Resource" id="Resource_5rr04"]
 script = ExtResource("1_wq35i")
 weight = 1.0
 nodes = "branch,branch"
 connections = "-1,0,-1,1,0,-2,1,-2"
+conditions = Array[ExtResource("2_5rr04")]([ExtResource("3_sdrud"), SubResource("Resource_djycg")])
 metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 
 [sub_resource type="Resource" id="Resource_sdrud"]
@@ -30,6 +42,7 @@ script = ExtResource("1_wq35i")
 weight = 1.0
 nodes = "branch,branch"
 connections = "-1,0,0,1,1,-2"
+conditions = Array[ExtResource("2_5rr04")]([ExtResource("3_sdrud")])
 metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 
 [resource]

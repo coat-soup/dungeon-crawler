@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 				var multiplier = 1 if c.output == node else -1
 				pull_dir += multiplier * (c.input.world_pos - c.output.world_pos).normalized() * pow(c.input.world_pos.distance_to(c.output.world_pos), 1)
 		
-		node.world_pos += delta * (push_dir * 5000 + pull_dir * 1)
+		node.world_pos += delta * (push_dir * 5000 + pull_dir * 1) * 5.0
 
 
 func do_move_steps():
@@ -64,7 +64,7 @@ func generate():
 			if not spawned_nodes[i].grammars.is_empty():
 				replace_node_with_grammar(spawned_nodes[i], select_grammar_from_node(spawned_nodes[i]))
 				finished_grammars = false
-				do_move_steps()
+				#do_move_steps()
 				if debug_print: print_graph()
 				if debug_wait: await get_tree().create_timer(0.5).timeout
 	
@@ -157,6 +157,7 @@ func select_grammar_from_node(node : LevelGraphNode) -> LevelGraphGrammar:
 	
 	for i in range(len(node.grammars)):
 		weights.append(node.grammars[i].weight)
+		if not node.grammars[i].are_conditions_valid(node, graph_connections): weights[-1] = 0
 		if node.grammars[i].nodes.split(",").has("branch"):
 			weights[i] *= get_propensity_to_branch()
 	
