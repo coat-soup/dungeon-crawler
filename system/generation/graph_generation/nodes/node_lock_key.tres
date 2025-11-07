@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=7 format=3 uid="uid://dp3x7kf1i8vd0"]
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=8 format=3 uid="uid://dp3x7kf1i8vd0"]
 
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_s6h7r"]
+[ext_resource type="Script" uid="uid://bai7learrhxks" path="res://system/generation/graph_generation/graph_grammar_condition.gd" id="2_jai3t"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_k2mg8"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_k2mg8"]
 
@@ -9,6 +10,7 @@ script = ExtResource("1_s6h7r")
 weight = 1.0
 nodes = "puzzle"
 connections = "-1,0,0,-2"
+conditions = Array[ExtResource("2_jai3t")]([])
 metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 
 [sub_resource type="Resource" id="Resource_k2mg8"]
@@ -16,6 +18,7 @@ script = ExtResource("1_s6h7r")
 weight = 1.0
 nodes = "lock,key"
 connections = "-1,0,0,1,0,-2"
+conditions = Array[ExtResource("2_jai3t")]([])
 metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 
 [sub_resource type="Resource" id="Resource_jai3t"]
@@ -23,6 +26,7 @@ script = ExtResource("1_s6h7r")
 weight = 1.0
 nodes = "lock,branch,key"
 connections = "-1,0,0,1,1,2,1,-2"
+conditions = Array[ExtResource("2_jai3t")]([])
 metadata/_custom_type_script = "uid://ufntgkyvgkqt"
 
 [resource]

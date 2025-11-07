@@ -86,17 +86,25 @@ func generate_hallways():
 					var path = astar.get_path_between_points(start_entrance, target_entrance, 2000, spawned_rooms[a], spawned_rooms[b])
 					print("hallway path: ", path)
 					for p in range(len(path)):
-						var hallway : LevelRoomHallway = LevelRoomHallway.new()
-						hallway.size = hallway_room.dimensions
-						hallway.position = path[p]
+						var hallway : LevelRoomHallway = null
+						var prefab : LevelRoomPrefab
+						for h in range(len(hallways)): if hallways[h].position == path[p]:
+							hallway = hallways[h]
+							prefab = spawned_hallway_prefabs[h]
+						
+						if not hallway:
+							hallway = LevelRoomHallway.new()
+							hallway.size = hallway_room.dimensions
+							hallway.position = path[p]
+							hallways.append(hallway)
+							
+							prefab = hallway_room.prefab.instantiate()
+							$LevelHolder.add_child(prefab)
+							prefab.position = hallway.position * cell_size + hallway.size * cell_size * Vector3(1,0,1) / 2
+							spawned_hallway_prefabs.append(prefab)
 						
 						hallway.inputs.append(spawned_rooms[a])
 						hallway.outputs.append(spawned_rooms[b])
-						
-						var prefab : LevelRoomPrefab = hallway_room.prefab.instantiate()
-						spawned_hallway_prefabs.append(prefab)
-						$LevelHolder.add_child(prefab)
-						prefab.position = hallway.position * cell_size + hallway.size * cell_size * Vector3(1,0,1) / 2
 						
 						if p < len(path) - 1: # connect to next hallway
 							hallway.open_entrances.append(prefab.get_entrance(path[p+1] - path[p]))
@@ -110,11 +118,16 @@ func generate_hallways():
 							spawned_rooms[b].open_entrances.append(spawned_prefabs[b].get_entrance(path[p] - spawned_rooms[b].position))
 							print("connecting to end: made entrance: ", spawned_rooms[b].open_entrances[-1])
 						
-						for h in range(len(hallways)): if hallways[h].position == path[p] and is_instance_valid(spawned_hallway_prefabs[h]):
-							print("joining hallways")
-							hallways[h].open_entrances.append(spawned_hallway_prefabs[h].get_entrance(hallways[h].position - path[p-1]))
-							prefab.queue_free()
-						hallways.append(hallway)
+						for h in range(len(hallways)):
+							break
+							if hallways[h].position == path[p] and is_instance_valid(spawned_hallway_prefabs[h]):
+								print("joining hallways")
+								if p == 0: continue
+								hallways[h].open_entrances.append(spawned_hallway_prefabs[h].get_entrance(hallways[h].position - path[p-1]))
+								if p < len(path) - 1:
+									hallways[h].open_entrances.append(spawned_hallway_prefabs[h].get_entrance(hallways[h].position - path[p+1]))
+								prefab.queue_free()
+							
 					# await get_tree().create_timer(0.5).timeout
 					
 					astar.closed_list.clear()

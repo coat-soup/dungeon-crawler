@@ -89,8 +89,12 @@ func is_position_occupied(pos : Vector3i):
 
 
 func get_heuristic(node : AStarNode, goal : Vector3i) -> float:
-	var h = node.position.distance_to(goal)
+	var h = abs(goal.x - node.position.x) + abs(goal.y - node.position.y) + abs(goal.z - node.position.z)
 	if node.position.y != node.parent.position.y: h += 10
+	
+	#if node.parent and node.parent.parent and (
+		#node.position.x == node.parent.parent.position.x or node.position.y == node.parent.parent.position.y or node.position.z == node.parent.parent.position.z):
+			#h -= 100
 	
 	# try join same hallways
 	for hallway in generator.hallways: if hallway.position == node.position:

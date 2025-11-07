@@ -43,6 +43,7 @@ size = Vector3(5, 0.5, 5)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+visible = false
 material_override = ExtResource("3_tfghp")
 size = Vector3(5, 0.5, 5)
 

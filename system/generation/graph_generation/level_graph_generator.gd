@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 				var multiplier = 1 if c.output == node else -1
 				pull_dir += multiplier * (c.input.world_pos - c.output.world_pos).normalized() * pow(c.input.world_pos.distance_to(c.output.world_pos), 1)
 		
-		node.world_pos += delta * (push_dir * 5000 + pull_dir * 1) * 5.0
+		node.world_pos += delta * (push_dir * 5000 + pull_dir * 1.3) * 5.0
 
 
 func do_move_steps():
@@ -66,7 +66,7 @@ func generate():
 				finished_grammars = false
 				#do_move_steps()
 				if debug_print: print_graph()
-				if debug_wait: await get_tree().create_timer(0.5).timeout
+				if debug_wait: await get_tree().create_timer(1.5).timeout
 	
 	
 	if debug_print: print("\nfinished generation, spawned nodes: ", spawned_nodes)
@@ -158,14 +158,17 @@ func parse_connections_from_grammar(grammar : LevelGraphGrammar) -> Array[int]:
 
 func select_grammar_from_node(node : LevelGraphNode) -> LevelGraphGrammar:
 	var weights : Array[float] = []
-	
+	var valid_grammars : Array[LevelGraphGrammar]
 	for i in range(len(node.grammars)):
+		if not node.grammars[i].are_conditions_valid(node, graph_connections):
+			continue
+		valid_grammars.append(node.grammars[i])
 		weights.append(node.grammars[i].weight)
-		if not node.grammars[i].are_conditions_valid(node, graph_connections): weights[-1] = 0
 		if node.grammars[i].nodes.split(",").has("branch"):
-			weights[i] *= get_propensity_to_branch()
+			weights[-1] *= get_propensity_to_branch()
 	
-	return node.grammars[Util.weighted_random(node.grammars, weights)]
+	var grammar = valid_grammars[Util.weighted_random(valid_grammars, weights)]
+	return grammar
 
 
 func print_graph():
