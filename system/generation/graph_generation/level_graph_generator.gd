@@ -40,6 +40,17 @@ func _process(delta: float) -> void:
 		node.world_pos += delta * (push_dir * 5000 + pull_dir * 1)
 
 
+func do_move_steps():
+	#return
+	for i in range(10):
+		LevelNodeSeparator.overlap_fix_step(spawned_nodes, 1, Vector3i.ONE)
+		var connections = LevelNodeSeparator.connections_to_ids(spawned_nodes, graph_connections)
+		print("precondense: ", spawned_nodes)
+		LevelNodeSeparator.condense_step(spawned_nodes, connections, 1, Vector3i.ONE)
+		print("postcondense: ", spawned_nodes)
+		#await get_tree().create_timer(0.1).timeout
+
+
 func generate():
 	clear_graph()
 	
@@ -53,8 +64,9 @@ func generate():
 			if not spawned_nodes[i].grammars.is_empty():
 				replace_node_with_grammar(spawned_nodes[i], select_grammar_from_node(spawned_nodes[i]))
 				finished_grammars = false
+				do_move_steps()
 				if debug_print: print_graph()
-				if debug_wait: await get_tree().create_timer(2.0).timeout
+				if debug_wait: await get_tree().create_timer(0.5).timeout
 	
 	
 	if debug_print: print("\nfinished generation, spawned nodes: ", spawned_nodes)

@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 	for i in range(len(generator.spawned_rooms)):
 		if true:
 			DebugDraw3D.scoped_config().set_thickness(0.8).set_center_brightness(0.6)
-			var overlapping = len(generator.get_overlapped_rooms(i)) > 0
+			var overlapping = len(LevelNodeSeparator.get_overlapping_nodes(i, generator.spawned_rooms, 1)) > 0
 			DebugDraw3D.draw_box(generator.cell_size * generator.spawned_rooms[i].position,
 								Quaternion.IDENTITY,
 								generator.cell_size * generator.spawned_rooms[i].size,
@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		
 		DebugDraw3D.draw_text(generator.spawned_rooms[i].get_center() * generator.cell_size + Vector3.UP * 10, generator.spawned_rooms[i].graph_node.name, 500, Color.BLACK)
 		
-		var overlaps = generator.get_overlapped_rooms(i)
+		var overlaps = LevelNodeSeparator.get_overlapping_nodes(i, generator.spawned_rooms)
 		var push_dir = Vector3.ZERO
 		for overlap in overlaps:
 			push_dir += (generator.spawned_rooms[i].get_center() - generator.spawned_rooms[overlap].get_center()).normalized()

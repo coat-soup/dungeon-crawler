@@ -6,7 +6,8 @@ class_name LevelGraphNode
 
 @export var terminal_rooms : Array[LevelRoomData]
 
+var position : Vector3i
 var world_pos : Vector3
 
 func _to_string() -> String:
-	return name
+	return name + " " + str(position)

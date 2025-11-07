@@ -38,43 +38,27 @@ func generate():
 		
 		room.graph_node = node
 		room.size = room_data.dimensions
-		room.position = Vector3i(node.world_pos / cell_size)
+		room.position = node.position
 		room.rotation = 0
 		
 		if debug_wait: await get_tree().create_timer(0.05).timeout
 	
 	
 	for i in range(overlap_fix_iterations):
-		var did_overlap = false
-		for r in range(len(spawned_rooms)):
-			var overlaps = get_overlapped_rooms(r)
-			if not overlaps.is_empty(): 
-				did_overlap = true
-				var push_dir = Vector3.ZERO
-				for overlap in overlaps:
-					push_dir += (spawned_rooms[r].get_center() - spawned_rooms[overlap].get_center()).normalized()
-				spawned_rooms[r].position += Vector3i(push_dir.ceil())
+		var did_overlap = LevelNodeSeparator.overlap_fix_step(spawned_rooms, 1)
 		if not did_overlap: break
 		
 		if debug_wait: await get_tree().create_timer(0.2).timeout
 	
+	var converted_connections = LevelNodeSeparator.connections_to_ids(graph_generator.spawned_nodes, graph_generator.graph_connections)
+	print("converted connections: ", converted_connections)
 	for i in range(condense_iterations):
-		var did_condense = false
-		for r in range(len(spawned_rooms)):
-			#var push_dir : Vector3 = Vector3.ZERO
-			for room in spawned_rooms:
-				for connection in graph_generator.graph_connections:
-					if connection.is_equal_to(LevelGraphConnection.new(spawned_rooms[r].graph_node, room.graph_node)) or connection.is_equal_to(LevelGraphConnection.new(room.graph_node, spawned_rooms[r].graph_node)):
-						var push_dir = (room.get_center() - spawned_rooms[r].get_center()) / 5.0 #.normalized()
-						spawned_rooms[r].push_dir_viz = push_dir
-						var p_pos = spawned_rooms[r].position
-						spawned_rooms[r].position += Vector3i(push_dir.ceil()) # push
-						if not get_overlapped_rooms(r).is_empty(): spawned_rooms[r].position = p_pos # undo if overlapping
-						else: did_condense = true
+		var did_condense = LevelNodeSeparator.condense_step(spawned_rooms, converted_connections, 1)
 		if not did_condense: break
 			
 		if debug_wait: await get_tree().create_timer(0.2).timeout
 	
+	return
 	place_room_prefabs()
 	generate_hallways()
 	open_connections()
@@ -86,30 +70,6 @@ func clear_dungeon():
 		prefab.queue_free()
 	spawned_prefabs.clear()
 	hallways.clear()
-
-
-func get_overlapped_rooms(room_id : int, gap : int = 1) -> Array[int]:
-	var overlapped : Array[int] = []
-	
-	var a = spawned_rooms[room_id]
-	var a_min = a.position
-	var a_max = a.position + a.size
-	
-	for i in range(len(spawned_rooms)):
-		if i == room_id : continue
-		var b = spawned_rooms[i]
-		var b_min = b.position - Vector3i.ONE * gap
-		var b_max = b.position + b.size + Vector3i.ONE * gap
-		
-		if a_min.x >= b_max.x: continue
-		if a_max.x <= b_min.x: continue
-		if a_min.y >= b_max.y: continue
-		if a_max.y <= b_min.y: continue
-		if a_min.z >= b_max.z: continue
-		if a_max.z <= b_min.z: continue
-		overlapped.append(i)
-	
-	return overlapped
 
 
 func generate_hallways():
