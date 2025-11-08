@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://cuhkwocop1mx7"]
+[gd_scene load_steps=47 format=4 uid="uid://cuhkwocop1mx7"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/globals/game_manager.gd" id="1_0nv80"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/general/network_manager.gd" id="2_4p34j"]
@@ -26,6 +26,10 @@
 [ext_resource type="PackedScene" uid="uid://4vl3hnk6ruqg" path="res://weapons/models/rapier_model.tscn" id="22_efs00"]
 [ext_resource type="PackedScene" uid="uid://c0dhmtusdifw1" path="res://weapons/models/warhammer_model.tscn" id="23_s3145"]
 [ext_resource type="PackedScene" uid="uid://cojvglro8fr60" path="res://enemies/scenes/enemy_rat.tscn" id="26_s3145"]
+[ext_resource type="PackedScene" uid="uid://d82npnl5j7j4" path="res://world/props/scenes/vines.tscn" id="27_4dltx"]
+[ext_resource type="PackedScene" uid="uid://7cvt4g1jdr5g" path="res://world/props/scenes/vines2.tscn" id="28_mgelp"]
+[ext_resource type="PackedScene" uid="uid://b3u4kwod12161" path="res://world/props/scenes/table_short.tscn" id="29_iutl3"]
+[ext_resource type="PackedScene" uid="uid://88p1rhf1rv65" path="res://world/props/scenes/table_long.tscn" id="30_q3ugp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wf1f"]
 sky_top_color = Color(0.484482, 0.54318, 0.717929, 1)
@@ -206,6 +210,9 @@ transform = Transform3D(-0.0782479, 0, 0.581255, 0, 0.834813, 0, -0.581255, 0, -
 [node name="rock_10" parent="World/RockIsland" instance=ExtResource("6_ftq5n")]
 transform = Transform3D(-0.145897, 0, 1.08378, 0, 1.55655, 0, -1.08378, 0, -0.145897, -26.6246, 18.1155, 1.95536)
 
+[node name="table_long" parent="World/RockIsland" instance=ExtResource("30_q3ugp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.8348, 16.0002, 34.2701)
+
 [node name="Castle" type="Node3D" parent="World"]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="World/Castle"]
@@ -260,10 +267,10 @@ size = Vector3(4.39083, 4.47034, 3)
 material = ExtResource("7_ftq5n")
 
 [node name="CSGBox3D16" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
-transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 23.1081, 1.8197, -4.05391)
+transform = Transform3D(-1.67253, 0, 8.74228e-08, 0, 1, 0, -1.46217e-07, 0, -1, 23.1081, -1.45992, -4.05391)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
-size = Vector3(4.8647, 6.31903, 3)
+size = Vector3(4.8647, 12.8783, 3)
 material = ExtResource("7_ftq5n")
 
 [node name="CSGBox3D14" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
@@ -292,6 +299,13 @@ transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 
 material_override = ExtResource("7_ftq5n")
 use_collision = true
 size = Vector3(2.31236, 2.49019, 1.53265)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
+transform = Transform3D(-7.31085e-08, 0, -1, 0, 1, 0, 1.67253, 0, -4.37114e-08, 21.9168, 3.67059, -0.338884)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(2.66399, 1.10863, 2.19162)
 material = ExtResource("7_ftq5n")
 
 [node name="CSGBox3D18" type="CSGBox3D" parent="World/Castle/NavigationRegion3D/FightRing/InnerRing"]
@@ -661,6 +675,30 @@ material_override = ExtResource("9_q222i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248108, 0)
 shape = SubResource("BoxShape3D_11ood")
 
+[node name="Vines" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("27_4dltx")]
+transform = Transform3D(0.509687, 0, 0.86036, 0, 1, 0, -0.86036, 0, 0.509687, -9.804, 4.80132, -5.66837)
+
+[node name="Vines2" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("28_mgelp")]
+transform = Transform3D(0.960362, 0, -0.278756, 0, 1, 0, 0.278756, 0, 0.960362, -0.190293, 8.5009, -10.7181)
+
+[node name="Vines3" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("28_mgelp")]
+transform = Transform3D(1.91586, 0, 0, 0, 1.91586, 0, 0, 0, 1.91586, 0.583552, 19.7933, -9.65022)
+
+[node name="Vines7" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("28_mgelp")]
+transform = Transform3D(1.91586, 0, 0, 0, 1.91586, 0, 0, 0, 1.91586, -0.293284, 18.9283, 8.99466)
+
+[node name="Vines5" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("28_mgelp")]
+transform = Transform3D(1.35866, 0, -1.35076, 0, 1.91586, 0, 1.35076, 0, 1.35866, 3.75922, 22.9038, -7.5431)
+
+[node name="Vines4" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("27_4dltx")]
+transform = Transform3D(-2.19923, 0, 0.0233767, 0, 2.19936, 0, -0.0233767, 0, -2.19923, 0.627083, 23.4816, 9.00384)
+
+[node name="Vines6" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("27_4dltx")]
+transform = Transform3D(1.83297, 0, 1.21547, 0, 2.19936, 0, -1.21547, 0, 1.83297, -0.825773, 23.4816, -8.41235)
+
+[node name="table_short2" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("29_iutl3")]
+transform = Transform3D(0.993089, 0, 0.117364, 0, 1, 0, -0.117364, 0, 0.993089, 3.15878, 1.63728, -10.5165)
+
 [node name="fern4" parent="World/Castle" instance=ExtResource("14_aald4")]
 transform = Transform3D(-0.358726, 0, 0.933443, 0, 1, 0, -0.933443, 0, -0.358726, 12.7125, 17.3041, -3.15964)
 
@@ -674,7 +712,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4479, 16.1811, -3.40017)
 transform = Transform3D(0.630668, 0, -0.227353, 0, 0.450861, 0, 0.227353, 0, 0.630668, -5.76387, 3.70049, 13.7869)
 
 [node name="Plane" parent="World/Castle/Balcony/rough_floor_patch2" index="0"]
-transform = Transform3D(2.2349, 0, 0, 0, 1, 0, 0, 0, 3.77602, 3.45437, -1.49817, 5.43148)
+transform = Transform3D(2.2349, 0, 0, 0, 1, 0, 0, 0, 3.42101, 3.38188, -1.49817, 5.77695)
 material_override = ExtResource("9_q222i")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="World/Castle/Balcony/rough_floor_patch2/Plane" index="0"]
@@ -823,11 +861,18 @@ use_collision = true
 size = Vector3(3.81056, 4.87109, 12.5525)
 material = ExtResource("7_ftq5n")
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/Balcony"]
-transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, 1.04636, 1.32541, -6.46709)
+[node name="CSGBox3D27" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.34728, 1.22719, 0.358531, 0.845245, 2.2446, -3.09512e-08, -0.517443, 0.471318, -0.933518, 1.79491, -4.04693, 19.4014)
 material_override = ExtResource("7_ftq5n")
 use_collision = true
-size = Vector3(0.707828, 0.704712, 5)
+size = Vector3(3.81056, 4.31696, 7.29435)
+material = ExtResource("7_ftq5n")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="World/Castle/Balcony"]
+transform = Transform3D(-1.61554, 0, -0.258819, 0, 2.60122, 0, 0.432882, 0, -0.965926, 1.04636, 0.236038, -6.46709)
+material_override = ExtResource("7_ftq5n")
+use_collision = true
+size = Vector3(0.707828, 1.5423, 5)
 material = ExtResource("7_ftq5n")
 
 [node name="stairs" parent="World/Castle/Balcony" instance=ExtResource("14_1jqj6")]
@@ -885,6 +930,15 @@ transform = Transform3D(0.142974, 0, 0.989726, 0, 1, 0, -0.989726, 0, 0.142974, 
 
 [node name="fern3" parent="World/Castle/Balcony" instance=ExtResource("14_aald4")]
 transform = Transform3D(0.0901023, 0, 0.623724, 0, 0.630198, 0, -0.623724, 0, 0.0901023, -6.10983, 3.03677, 26.9201)
+
+[node name="Vines8" parent="World/Castle/Balcony" instance=ExtResource("27_4dltx")]
+transform = Transform3D(0.247692, 0, -0.968839, 0, 1, 0, 0.968839, 0, 0.247692, 4.90808, 6.07022, 2.50435)
+
+[node name="Vines" parent="World/Castle/Balcony" instance=ExtResource("28_mgelp")]
+transform = Transform3D(-0.312186, 0, 0.950021, 0, 1, 0, -0.950021, 0, -0.312186, 4.85105, 3.73179, 2.15675)
+
+[node name="table_short" parent="World/Castle/Balcony" instance=ExtResource("29_iutl3")]
+transform = Transform3D(0.99992, 0, -0.0126358, 0, 1, 0, 0.0126358, 0, 0.99992, -1.2064, 1.08535, -7.65174)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://in53wmskn8o")

@@ -39,17 +39,19 @@ entrances = Array[ExtResource("2_cqhc3")]([SubResource("Resource_dv6ip"), SubRes
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 material_override = ExtResource("3_tfghp")
+use_collision = true
 size = Vector3(5, 0.5, 5)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-visible = false
 material_override = ExtResource("3_tfghp")
+use_collision = true
 size = Vector3(5, 0.5, 5)
 
 [node name="Wall0-1" type="CSGBox3D" parent="."]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 2.5, -2.5)
 material_override = ExtResource("3_tfghp")
+use_collision = true
 size = Vector3(5, 0.5, 5)
 
 [node name="wall_torch" parent="Wall0-1" instance=ExtResource("4_cqhc3")]
@@ -58,6 +60,7 @@ transform = Transform3D(-5.73206e-15, -1, -4.37114e-08, 1.31134e-07, -4.37114e-0
 [node name="Wall-10" type="CSGBox3D" parent="."]
 transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82138e-15, 8.74228e-08, -1, -2.5, 2.5, 0)
 material_override = ExtResource("3_tfghp")
+use_collision = true
 size = Vector3(5, 0.5, 5)
 
 [node name="wall_torch" parent="Wall-10" instance=ExtResource("4_cqhc3")]
@@ -66,6 +69,7 @@ transform = Transform3D(-5.73206e-15, -1, -4.37114e-08, 1.31134e-07, -4.37114e-0
 [node name="Wall10" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 1.74846e-07, -1, -4.37114e-08, 0, 7.64275e-15, -1.74846e-07, 1, 2.5, 2.5, 0)
 material_override = ExtResource("3_tfghp")
+use_collision = true
 size = Vector3(5, 0.5, 5)
 
 [node name="wall_torch" parent="Wall10" instance=ExtResource("4_cqhc3")]
@@ -74,6 +78,7 @@ transform = Transform3D(-5.73206e-15, -1, -4.37114e-08, 1.31134e-07, -4.37114e-0
 [node name="Wall01" type="CSGBox3D" parent="."]
 transform = Transform3D(1.91068e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 2.5, 2.5)
 material_override = ExtResource("3_tfghp")
+use_collision = true
 size = Vector3(5, 0.5, 5)
 
 [node name="wall_torch" parent="Wall01" instance=ExtResource("4_cqhc3")]

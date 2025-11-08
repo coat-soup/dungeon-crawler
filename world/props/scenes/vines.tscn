@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://d82npnl5j7j4"]
+
+[ext_resource type="Texture2D" uid="uid://ckdcwsriihp2l" path="res://world/props/textures/vines.png" id="1_x6rmu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_2nds1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7gpr"]
+transparency = 2
+alpha_scissor_threshold = 0.983
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_color = Color(0.783523, 0.783523, 0.783523, 1)
+albedo_texture = ExtResource("1_x6rmu")
+texture_filter = 0
+
+[node name="Vines" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+mesh = SubResource("QuadMesh_2nds1")
+surface_material_override/0 = SubResource("StandardMaterial3D_s7gpr")
