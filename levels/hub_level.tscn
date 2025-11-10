@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://cuhkwocop1mx7"]
+[gd_scene load_steps=49 format=4 uid="uid://cuhkwocop1mx7"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/globals/game_manager.gd" id="1_0nv80"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/general/network_manager.gd" id="2_4p34j"]
@@ -30,6 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://7cvt4g1jdr5g" path="res://world/props/scenes/vines2.tscn" id="28_mgelp"]
 [ext_resource type="PackedScene" uid="uid://b3u4kwod12161" path="res://world/props/scenes/table_short.tscn" id="29_iutl3"]
 [ext_resource type="PackedScene" uid="uid://88p1rhf1rv65" path="res://world/props/scenes/table_long.tscn" id="30_q3ugp"]
+[ext_resource type="PackedScene" uid="uid://dhchkshq24jj4" path="res://world/props/scenes/barrel.tscn" id="31_gs1kk"]
+[ext_resource type="PackedScene" uid="uid://bs3whcbkp11s7" path="res://world/props/scenes/barrel_broken.tscn" id="32_2tyfi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wf1f"]
 sky_top_color = Color(0.484482, 0.54318, 0.717929, 1)
@@ -698,6 +700,24 @@ transform = Transform3D(1.83297, 0, 1.21547, 0, 2.19936, 0, -1.21547, 0, 1.83297
 
 [node name="table_short2" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("29_iutl3")]
 transform = Transform3D(0.993089, 0, 0.117364, 0, 1, 0, -0.117364, 0, 0.993089, 3.15878, 1.63728, -10.5165)
+
+[node name="barrel" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("31_gs1kk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941375, 1.63709, 2.78875)
+
+[node name="barrel2" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("31_gs1kk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.91326, 1.63709, -10.3087)
+
+[node name="barrel3" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("31_gs1kk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2641, 1.63709, 9.54906)
+
+[node name="barrel4" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("31_gs1kk")]
+transform = Transform3D(-0.480729, 0, 0.876869, 0, 1, 0, -0.876869, 0, -0.480729, 7.06313, 1.63709, 9.04158)
+
+[node name="barrel5" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("31_gs1kk")]
+transform = Transform3D(-0.353165, 0, 0.935561, 0, 1, 0, -0.935561, 0, -0.353165, 6.66731, 2.82149, 9.29149)
+
+[node name="barrel_broken" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("32_2tyfi")]
+transform = Transform3D(0.98273, -0.134254, -0.127351, 0.148262, 0.159442, 0.976011, -0.110728, -0.978036, 0.176593, 8.10005, 1.65994, 7.96063)
 
 [node name="fern4" parent="World/Castle" instance=ExtResource("14_aald4")]
 transform = Transform3D(-0.358726, 0, 0.933443, 0, 1, 0, -0.933443, 0, -0.358726, 12.7125, 17.3041, -3.15964)

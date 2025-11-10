@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhchkshq24jj4"]
+
+[ext_resource type="PackedScene" uid="uid://dilwugli0c1ga" path="res://world/props/models/barrel.glb" id="1_s146m"]
+[ext_resource type="Texture2D" uid="uid://il377qegt1m0" path="res://world/props/textures/barrel.png" id="2_jey25"]
+[ext_resource type="Texture2D" uid="uid://douhqqyqymldj" path="res://world/props/textures/barrel_n.png" id="3_cotd4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5whg4"]
+diffuse_mode = 3
+albedo_texture = ExtResource("2_jey25")
+metallic_specular = 0.0
+roughness = 0.0
+normal_enabled = true
+normal_texture = ExtResource("3_cotd4")
+texture_filter = 0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s146m"]
+height = 1.19098
+radius = 0.477051
+
+[node name="barrel" instance=ExtResource("1_s146m")]
+
+[node name="Cylinder_001" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5whg4")
+
+[node name="Cylinder_002" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5whg4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.595491, 0)
+shape = SubResource("CylinderShape3D_s146m")
