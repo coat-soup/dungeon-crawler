@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelRoomData" load_steps=3 format=3 uid="uid://bgfmxuchv8emj"]
+
+[ext_resource type="PackedScene" uid="uid://bnkcuqp7p78hv" path="res://world/rooms/prefabs/generic_room_central_pillar.tscn" id="1_8yiph"]
+[ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="2_ipmqf"]
+
+[resource]
+script = ExtResource("2_ipmqf")
+room_name = "GenericRoomCentralPillar"
+dimensions = Vector3i(5, 3, 5)
+prefab = ExtResource("1_8yiph")
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"

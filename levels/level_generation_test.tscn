@@ -60,6 +60,7 @@ script = ExtResource("4_d4oe4")
 script = ExtResource("3_7fmsn")
 generator = NodePath("..")
 camera = NodePath("../Camera3D")
+enabled = false
 metadata/_custom_type_script = "uid://d1hb4jnb5cfla"
 
 [node name="LevelGraphGenerator" type="Node" parent="."]
@@ -71,4 +72,5 @@ metadata/_custom_type_script = "uid://dc7b7j1qa8wx7"
 [node name="LevelGraphVisualiser" type="Node" parent="." node_paths=PackedStringArray("generator")]
 script = ExtResource("5_byu11")
 generator = NodePath("../LevelGraphGenerator")
+enabled = false
 metadata/_custom_type_script = "uid://day82rj35g3lc"

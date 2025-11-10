@@ -165,9 +165,9 @@ func place_room_prefabs():
 func open_connections():
 	print("spawned: ", len(spawned_rooms), " prefs: ", len(spawned_prefabs))
 	for i in range(len(spawned_rooms)):
-		for e in spawned_rooms[i].open_entrances:
-			spawned_prefabs[i].toggle_entrance(e, true)
+		for e in range(len(spawned_prefabs[i].entrances)):
+			spawned_prefabs[i].toggle_entrance(e, spawned_rooms[i].open_entrances.has(e))
 	
 	for i in range(len(hallways)):
-		for e in hallways[i].open_entrances:
-			spawned_hallway_prefabs[i].toggle_entrance(e, true)
+		for e in range(len(spawned_hallway_prefabs[i].entrances)):
+			spawned_hallway_prefabs[i].toggle_entrance(e, hallways[i].open_entrances.has(e))

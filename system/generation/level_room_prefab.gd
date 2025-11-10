@@ -6,9 +6,9 @@ class_name LevelRoomPrefab
 
 func toggle_entrance(id: int, state: bool):
 	if state:
-		get_node(entrances[id].closed).queue_free()
+		if entrances[id].closed: get_node(entrances[id].closed).queue_free()
 	else:
-		get_node(entrances[id].open).queue_free()
+		if entrances[id].open: get_node(entrances[id].open).queue_free()
 
 
 func get_entrance(offset : Vector3i) -> int:

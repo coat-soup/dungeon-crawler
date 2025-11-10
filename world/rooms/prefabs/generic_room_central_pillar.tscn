@@ -1,0 +1,489 @@
+[gd_scene load_steps=18 format=3 uid="uid://bnkcuqp7p78hv"]
+
+[ext_resource type="Script" uid="uid://bboyq3btxjcad" path="res://system/generation/level_room_prefab.gd" id="1_nhdch"]
+[ext_resource type="Script" uid="uid://ntkhnwdxsq5b" path="res://system/generation/level_room_prefab_entrance.gd" id="2_oeqjq"]
+[ext_resource type="Material" uid="uid://khh6k54woa1a" path="res://world/materials/stone_wall_mat.tres" id="3_43m26"]
+[ext_resource type="PackedScene" uid="uid://dkvlyhno4cx23" path="res://world/props/scenes/pillar_square.tscn" id="4_nhdch"]
+[ext_resource type="PackedScene" uid="uid://ct6xxcocgimjv" path="res://world/props/scenes/wall_torch.tscn" id="4_tvv4i"]
+[ext_resource type="PackedScene" uid="uid://brhb85u6e8n26" path="res://world/props/models/arch.glb" id="5_oeqjq"]
+[ext_resource type="PackedScene" uid="uid://bdst4tv46kcy2" path="res://world/props/scenes/brazier.tscn" id="6_43m26"]
+[ext_resource type="PackedScene" uid="uid://dhchkshq24jj4" path="res://world/props/scenes/barrel.tscn" id="7_tvv4i"]
+[ext_resource type="PackedScene" uid="uid://88p1rhf1rv65" path="res://world/props/scenes/table_long.tscn" id="8_mppi1"]
+[ext_resource type="PackedScene" uid="uid://0l7rx2b47rju" path="res://world/props/scenes/candle_cluster.tscn" id="9_wol62"]
+[ext_resource type="PackedScene" uid="uid://d3u5msk2b8ry1" path="res://world/props/scenes/candle.tscn" id="11_4orvk"]
+[ext_resource type="PackedScene" uid="uid://7cvt4g1jdr5g" path="res://world/props/scenes/vines2.tscn" id="12_8vgxh"]
+[ext_resource type="PackedScene" uid="uid://d82npnl5j7j4" path="res://world/props/scenes/vines.tscn" id="13_8uo4m"]
+
+[sub_resource type="Resource" id="Resource_43m26"]
+script = ExtResource("2_oeqjq")
+position = Vector3i(2, 0, -1)
+closed = NodePath("EntranceUp/Wall")
+open = NodePath("EntranceUp/arch")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_tvv4i"]
+script = ExtResource("2_oeqjq")
+position = Vector3i(-1, 0, 2)
+closed = NodePath("EntranceLeft/Wall")
+open = NodePath("EntranceLeft/arch")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_mppi1"]
+script = ExtResource("2_oeqjq")
+position = Vector3i(5, 0, 2)
+closed = NodePath("EntranceRight/Wall")
+open = NodePath("EntranceRight/arch")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="Resource" id="Resource_wol62"]
+script = ExtResource("2_oeqjq")
+position = Vector3i(2, 0, 5)
+closed = NodePath("EntranceDown/Wall")
+open = NodePath("EntranceDown/arch")
+metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[node name="GenericRoomCentralPillar" type="Node3D"]
+script = ExtResource("1_nhdch")
+entrances = Array[ExtResource("2_oeqjq")]([SubResource("Resource_43m26"), SubResource("Resource_tvv4i"), SubResource("Resource_mppi1"), SubResource("Resource_wol62")])
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(25, 0.5, 25)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(25, 0.5, 25)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.69399, 0)
+use_collision = true
+radius = 4.0
+height = 15.0
+sides = 16
+material = ExtResource("3_43m26")
+
+[node name="EntranceUp" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13)
+
+[node name="Wall" type="CSGBox3D" parent="EntranceUp"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 5)
+
+[node name="pillar_square" parent="EntranceUp" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
+
+[node name="Cube" parent="EntranceUp/pillar_square" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square2" parent="EntranceUp" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
+
+[node name="Cube" parent="EntranceUp/pillar_square2" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square3" parent="EntranceUp" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.05903, 7.15051, 1.06071)
+
+[node name="Cube" parent="EntranceUp/pillar_square3" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square4" parent="EntranceUp" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
+
+[node name="Cube" parent="EntranceUp/pillar_square4" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch" parent="EntranceUp" instance=ExtResource("5_oeqjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 6.16126, 0.855812)
+
+[node name="Cube" parent="EntranceUp/arch" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="EntranceLeft" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13, 0, 5.68248e-07)
+
+[node name="Wall" type="CSGBox3D" parent="EntranceLeft"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 5)
+
+[node name="pillar_square" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
+
+[node name="Cube" parent="EntranceLeft/pillar_square" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square2" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
+
+[node name="Cube" parent="EntranceLeft/pillar_square2" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square3" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.05903, 7.15051, 1.06071)
+
+[node name="Cube" parent="EntranceLeft/pillar_square3" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square4" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
+
+[node name="Cube" parent="EntranceLeft/pillar_square4" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch" parent="EntranceLeft" instance=ExtResource("5_oeqjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 6.16126, 0.855812)
+
+[node name="Cube" parent="EntranceLeft/arch" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="EntranceRight" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0, -5.68248e-07)
+
+[node name="Wall" type="CSGBox3D" parent="EntranceRight"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 5)
+
+[node name="pillar_square" parent="EntranceRight" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
+
+[node name="Cube" parent="EntranceRight/pillar_square" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square2" parent="EntranceRight" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
+
+[node name="Cube" parent="EntranceRight/pillar_square2" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square3" parent="EntranceRight" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.05903, 7.15051, 1.06071)
+
+[node name="Cube" parent="EntranceRight/pillar_square3" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square4" parent="EntranceRight" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
+
+[node name="Cube" parent="EntranceRight/pillar_square4" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch" parent="EntranceRight" instance=ExtResource("5_oeqjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 6.16126, 0.855812)
+
+[node name="Cube" parent="EntranceRight/arch" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="EntranceDown" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 13)
+
+[node name="Wall" type="CSGBox3D" parent="EntranceDown"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 5)
+
+[node name="pillar_square" parent="EntranceDown" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
+
+[node name="Cube" parent="EntranceDown/pillar_square" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square2" parent="EntranceDown" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
+
+[node name="Cube" parent="EntranceDown/pillar_square2" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square3" parent="EntranceDown" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.05903, 7.15051, 1.06071)
+
+[node name="Cube" parent="EntranceDown/pillar_square3" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square4" parent="EntranceDown" instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
+
+[node name="Cube" parent="EntranceDown/pillar_square4" index="0"]
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch" parent="EntranceDown" instance=ExtResource("5_oeqjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 6.16126, 0.855812)
+
+[node name="Cube" parent="EntranceDown/arch" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="Wall" type="CSGBox3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 11, -12.7372)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(8, 0.5, 25)
+
+[node name="Wall2" type="CSGBox3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 9.53674e-07, -7.5)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 10)
+
+[node name="Wall3" type="CSGBox3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 7.5)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 10)
+
+[node name="Wall4" type="CSGBox3D" parent="."]
+transform = Transform3D(-5.73206e-15, 1.31134e-07, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, 1.31134e-07, 0, 11, 12.2628)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(8, 0.5, 25)
+
+[node name="Wall2" type="CSGBox3D" parent="Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 9.53674e-07, -7.5)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 10)
+
+[node name="Wall3" type="CSGBox3D" parent="Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 7.5)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 10)
+
+[node name="Wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82138e-15, 8.74228e-08, -1, -12.5, 11, 0)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(8, 0.5, 25)
+
+[node name="Wall2" type="CSGBox3D" parent="Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 9.53674e-07, -7.5)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 10)
+
+[node name="Wall3" type="CSGBox3D" parent="Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 7.5)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 10)
+
+[node name="Wall3" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 1.74846e-07, -1, -4.37114e-08, 0, 7.64275e-15, -1.74846e-07, 1, 12.5, 11, 0)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(8, 0.5, 25)
+
+[node name="Wall2" type="CSGBox3D" parent="Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 9.53674e-07, -7.5)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 10)
+
+[node name="Wall3" type="CSGBox3D" parent="Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 7.5)
+material_override = ExtResource("3_43m26")
+use_collision = true
+size = Vector3(7, 0.5, 10)
+
+[node name="brazier3" parent="." instance=ExtResource("6_43m26")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.637264, 0.229782, 4.95368)
+
+[node name="pillar_square3" parent="." instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.46758, -0.562225, 3.3581)
+
+[node name="Cube" parent="pillar_square3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square6" parent="." instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.46758, -0.562225, -2.77393)
+
+[node name="Cube" parent="pillar_square6" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square4" parent="." instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.46758, 7.19478, 3.3581)
+
+[node name="Cube" parent="pillar_square4" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch" parent="." instance=ExtResource("5_oeqjq")]
+transform = Transform3D(1.12608, 0, 0, 0, 0.468594, 0, 0, 0, 1, -7.54136, 7.7922, 3.49543)
+
+[node name="Cube" parent="arch" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square5" parent="." instance=ExtResource("4_nhdch")]
+transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.46758, 7.19478, -2.77968)
+
+[node name="Cube" parent="pillar_square5" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch2" parent="." instance=ExtResource("5_oeqjq")]
+transform = Transform3D(1.12608, 0, 0, 0, 0.468594, 0, 0, 0, 1, -7.54136, 7.7922, -2.64235)
+
+[node name="Cube" parent="arch2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square7" parent="." instance=ExtResource("4_nhdch")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1.10931, 0, 8.74228e-08, 0, -1, 3.48586, -0.562225, -3.36178)
+
+[node name="Cube" parent="pillar_square7" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square8" parent="." instance=ExtResource("4_nhdch")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1.10931, 0, 8.74228e-08, 0, -1, 3.48586, -0.562225, 2.77026)
+
+[node name="Cube" parent="pillar_square8" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square9" parent="." instance=ExtResource("4_nhdch")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1.10931, 0, 8.74228e-08, 0, -1, 3.48586, 7.19478, -3.36178)
+
+[node name="Cube" parent="pillar_square9" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch3" parent="." instance=ExtResource("5_oeqjq")]
+transform = Transform3D(-1.12608, 0, -8.74228e-08, 0, 0.468594, 0, 9.84448e-08, 0, -1, 7.55963, 7.7922, -3.4991)
+
+[node name="Cube" parent="arch3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="pillar_square10" parent="." instance=ExtResource("4_nhdch")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1.10931, 0, 8.74228e-08, 0, -1, 3.48586, 7.19478, 2.776)
+
+[node name="Cube" parent="pillar_square10" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch4" parent="." instance=ExtResource("5_oeqjq")]
+transform = Transform3D(-1.12608, 0, -8.74228e-08, 0, 0.468594, 0, 9.84448e-08, 0, -1, 7.55963, 7.7922, 2.63868)
+
+[node name="Cube" parent="arch4" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch7" parent="." instance=ExtResource("5_oeqjq")]
+transform = Transform3D(-0.726381, 0, -8.74228e-08, 0, 0.468594, 0, 6.35022e-08, 0, -1, 0, 7.7922, -3.4991)
+
+[node name="Cube" parent="arch7" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch6" parent="." instance=ExtResource("5_oeqjq")]
+transform = Transform3D(-0.726381, 0, -8.74228e-08, 0, 0.468594, 0, 6.35022e-08, 0, -1, 0, 7.7922, 2.63868)
+
+[node name="Cube" parent="arch6" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch8" parent="." instance=ExtResource("5_oeqjq")]
+transform = Transform3D(9.05348e-08, 0, -1, 0, 0.468594, 0, 0.690398, 0, 1.31134e-07, -3.58419, 7.7922, 0.00497486)
+
+[node name="Cube" parent="arch8" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="arch9" parent="." instance=ExtResource("5_oeqjq")]
+transform = Transform3D(9.05348e-08, 0, -1, 0, 0.468594, 0, 0.690398, 0, 1.31134e-07, 2.71684, 7.7922, 0.00497458)
+
+[node name="Cube" parent="arch9" index="0"]
+transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
+surface_material_override/0 = ExtResource("3_43m26")
+
+[node name="barrel" parent="." instance=ExtResource("7_tvv4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2498, 0.25, -5.88857)
+
+[node name="barrel2" parent="." instance=ExtResource("7_tvv4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.574, 0.25, -6.89645)
+
+[node name="table_long" parent="." instance=ExtResource("8_mppi1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0716994, 0.250191, -5.2079)
+
+[node name="barrel3" parent="." instance=ExtResource("7_tvv4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7662, 0.25, 4.30411)
+
+[node name="barrel4" parent="." instance=ExtResource("7_tvv4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.779349, 0.25, 4.61415)
+
+[node name="barrel5" parent="." instance=ExtResource("7_tvv4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74194, 0.25, 4.24868)
+
+[node name="barrel6" parent="." instance=ExtResource("7_tvv4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36762, 1.44098, 4.49124)
+
+[node name="candle_cluster" parent="." instance=ExtResource("9_wol62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5648, 1.24516, -4.61346)
+
+[node name="wall_torch" parent="." instance=ExtResource("4_tvv4i")]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, -7.68347, 3.17871, -12.3122)
+
+[node name="candle" parent="." instance=ExtResource("11_4orvk")]
+transform = Transform3D(-0.512792, 0, 0.858513, 0, 1, 0, -0.858513, 0, -0.512792, -2.40596, 1.24654, -4.75423)
+
+[node name="Vines" parent="." instance=ExtResource("12_8vgxh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1309, 6.9914, -4.09064)
+
+[node name="Vines2" parent="." instance=ExtResource("13_8uo4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82076, 6.99073, -4.08518)
+
+[node name="Vines3" parent="." instance=ExtResource("12_8vgxh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08887, 4.77801, -4.09479)
+
+[editable path="EntranceUp/pillar_square"]
+[editable path="EntranceUp/pillar_square2"]
+[editable path="EntranceUp/pillar_square3"]
+[editable path="EntranceUp/pillar_square4"]
+[editable path="EntranceUp/arch"]
+[editable path="EntranceLeft/pillar_square"]
+[editable path="EntranceLeft/pillar_square2"]
+[editable path="EntranceLeft/pillar_square3"]
+[editable path="EntranceLeft/pillar_square4"]
+[editable path="EntranceLeft/arch"]
+[editable path="EntranceRight/pillar_square"]
+[editable path="EntranceRight/pillar_square2"]
+[editable path="EntranceRight/pillar_square3"]
+[editable path="EntranceRight/pillar_square4"]
+[editable path="EntranceRight/arch"]
+[editable path="EntranceDown/pillar_square"]
+[editable path="EntranceDown/pillar_square2"]
+[editable path="EntranceDown/pillar_square3"]
+[editable path="EntranceDown/pillar_square4"]
+[editable path="EntranceDown/arch"]
+[editable path="pillar_square3"]
+[editable path="pillar_square6"]
+[editable path="pillar_square4"]
+[editable path="arch"]
+[editable path="pillar_square5"]
+[editable path="arch2"]
+[editable path="pillar_square7"]
+[editable path="pillar_square8"]
+[editable path="pillar_square9"]
+[editable path="arch3"]
+[editable path="pillar_square10"]
+[editable path="arch4"]
+[editable path="arch7"]
+[editable path="arch6"]
+[editable path="arch8"]
+[editable path="arch9"]

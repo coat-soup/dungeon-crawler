@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=5 format=3 uid="uid://dtfpspmujsdhl"]
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=6 format=3 uid="uid://dtfpspmujsdhl"]
 
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_yvbgg"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_ul7cr"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_ul7cr"]
 [ext_resource type="Resource" uid="uid://0e5a151ee67b" path="res://world/rooms/room_data/room_generic_small.tres" id="4_2gtpl"]
+[ext_resource type="Resource" uid="uid://bgfmxuchv8emj" path="res://world/rooms/room_data/room_generic_central_pillar.tres" id="5_1gco4"]
 
 [resource]
 script = ExtResource("2_ul7cr")
 name = "utility"
 grammars = Array[ExtResource("1_yvbgg")]([])
-terminal_rooms = Array[ExtResource("3_ul7cr")]([ExtResource("4_2gtpl")])
+terminal_rooms = Array[ExtResource("3_ul7cr")]([ExtResource("4_2gtpl"), ExtResource("5_1gco4")])
 metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

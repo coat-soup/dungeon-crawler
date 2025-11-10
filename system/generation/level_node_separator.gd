@@ -8,7 +8,7 @@ static func overlap_fix_step(nodes : Array[Variant], gap : int, fixed_size : Vec
 			did_overlap = true
 			var push_dir = Vector3.ZERO
 			for overlap in overlaps:
-				push_dir += (get_node_center(nodes[i], fixed_size) - get_node_center(nodes[overlap], fixed_size)).normalized()
+				push_dir += ((get_node_center(nodes[i], fixed_size) - get_node_center(nodes[overlap], fixed_size)) * Vector3(1,0,1)).normalized()
 			nodes[i].position += Vector3i(push_dir.ceil())
 	return did_overlap
 
