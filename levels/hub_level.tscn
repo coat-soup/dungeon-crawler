@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://cuhkwocop1mx7"]
+[gd_scene load_steps=51 format=4 uid="uid://cuhkwocop1mx7"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/globals/game_manager.gd" id="1_0nv80"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/general/network_manager.gd" id="2_4p34j"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://c08hbgtaoobo3" path="res://system/debug/debug_heal_lever.gd" id="19_efs00"]
 [ext_resource type="PackedScene" uid="uid://dssxmsi4cf0hq" path="res://world/props/scenes/dummy.tscn" id="19_iva4b"]
 [ext_resource type="PackedScene" uid="uid://cj7p8kb5is0qr" path="res://weapons/models/longsword_model.tscn" id="20_15esb"]
+[ext_resource type="PackedScene" uid="uid://d3u5msk2b8ry1" path="res://world/props/scenes/candle.tscn" id="21_2rf7u"]
 [ext_resource type="Script" uid="uid://dtr6wdyf2ykk0" path="res://system/debug/debug_weapon_equip.gd" id="21_efs00"]
 [ext_resource type="PackedScene" uid="uid://cxk8ybyliq0yq" path="res://weapons/models/mace_model.tscn" id="21_jo4gk"]
 [ext_resource type="PackedScene" uid="uid://4vl3hnk6ruqg" path="res://weapons/models/rapier_model.tscn" id="22_efs00"]
@@ -32,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://88p1rhf1rv65" path="res://world/props/scenes/table_long.tscn" id="30_q3ugp"]
 [ext_resource type="PackedScene" uid="uid://dhchkshq24jj4" path="res://world/props/scenes/barrel.tscn" id="31_gs1kk"]
 [ext_resource type="PackedScene" uid="uid://bs3whcbkp11s7" path="res://world/props/scenes/barrel_broken.tscn" id="32_2tyfi"]
+[ext_resource type="PackedScene" uid="uid://0l7rx2b47rju" path="res://world/props/scenes/candle_cluster.tscn" id="34_i2wsj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wf1f"]
 sky_top_color = Color(0.484482, 0.54318, 0.717929, 1)
@@ -661,6 +663,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.97048, 1.61576, -4.37235)
 [node name="rock_01" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("6_6wf1f")]
 transform = Transform3D(0.0377843, 0.0263564, 0.0118995, -0.0236505, 0.0168976, 0.0376701, 0.0166407, -0.0358291, 0.0265193, 1.03678, 1.79845, 4.29332)
 
+[node name="rock_03" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("6_6wf1f")]
+transform = Transform3D(0.0196277, -0.00118717, 0.00984281, -0.00436869, -0.00819189, 0.00179639, 0.0093627, -0.00133365, -0.019796, -9.40406, 1.66541, -5.04241)
+
+[node name="rock_04" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("6_6wf1f")]
+transform = Transform3D(0.0293644, -0.00177609, 0.0147255, -0.00653587, -0.0122557, 0.00268753, 0.0140073, -0.00199523, -0.0296162, -9.62014, 1.66541, -4.40056)
+
 [node name="rock_02" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("6_6wf1f")]
 transform = Transform3D(0.0590758, 0, 0, 0, 0.0579958, 0, 0, 0, 0.0590758, 2.04833, 2.46597, 3.83835)
 
@@ -701,8 +709,17 @@ transform = Transform3D(1.83297, 0, 1.21547, 0, 2.19936, 0, -1.21547, 0, 1.83297
 [node name="table_short2" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("29_iutl3")]
 transform = Transform3D(0.993089, 0, 0.117364, 0, 1, 0, -0.117364, 0, 0.993089, 3.15878, 1.63728, -10.5165)
 
+[node name="candle2" parent="World/Castle/NavigationRegion3D/FightRing/table_short2" instance=ExtResource("34_i2wsj")]
+transform = Transform3D(0.993089, 0, -0.117364, 0, 1, 0, 0.117364, 0, 0.993089, 0.762663, 1.00027, -0.332754)
+
+[node name="candle" parent="World/Castle/NavigationRegion3D/FightRing/table_short2" instance=ExtResource("21_2rf7u")]
+transform = Transform3D(0.993089, 0, -0.117364, 0, 1, 0, 0.117364, 0, 0.993089, -0.584608, 1.00365, -0.0554829)
+
 [node name="barrel" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("31_gs1kk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941375, 1.63709, 2.78875)
+
+[node name="candle" parent="World/Castle/NavigationRegion3D/FightRing/barrel" instance=ExtResource("21_2rf7u")]
+transform = Transform3D(-0.563987, 0, 0.825783, 0, 1, 0, -0.825783, 0, -0.563987, 0.160171, 1.14922, 0.217502)
 
 [node name="barrel2" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("31_gs1kk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.91326, 1.63709, -10.3087)
@@ -719,11 +736,26 @@ transform = Transform3D(-0.353165, 0, 0.935561, 0, 1, 0, -0.935561, 0, -0.353165
 [node name="barrel_broken" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("32_2tyfi")]
 transform = Transform3D(0.98273, -0.134254, -0.127351, 0.148262, 0.159442, 0.976011, -0.110728, -0.978036, 0.176593, 8.10005, 1.65994, 7.96063)
 
+[node name="candle_cluster" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("34_i2wsj")]
+transform = Transform3D(-0.315517, 0, -0.94892, 0, 1, 0, 0.94892, 0, -0.315517, -0.565056, 2.89464, 10.4692)
+
 [node name="fern4" parent="World/Castle" instance=ExtResource("14_aald4")]
 transform = Transform3D(-0.358726, 0, 0.933443, 0, 1, 0, -0.933443, 0, -0.358726, 12.7125, 17.3041, -3.15964)
 
 [node name="fern5" parent="World/Castle" instance=ExtResource("14_aald4")]
 transform = Transform3D(-0.24488, 0, 0.637202, 0, 0.682636, 0, -0.637202, 0, -0.24488, 9.67369, 17.3408, -18.4743)
+
+[node name="fern6" parent="World/Castle" instance=ExtResource("14_aald4")]
+transform = Transform3D(-0.842053, 0, 0.23888, 0, 0.87528, 0, -0.23888, 0, -0.842053, 9.0856, 17.3408, -19.2685)
+
+[node name="fern7" parent="World/Castle" instance=ExtResource("14_aald4")]
+transform = Transform3D(-0.483251, 0, 0.800051, 0, 0.934672, 0, -0.800051, 0, -0.483251, 2.00521, 17.3408, -14.2757)
+
+[node name="fern8" parent="World/Castle" instance=ExtResource("14_aald4")]
+transform = Transform3D(-0.327312, 0, 0.541884, 0, 0.633065, 0, -0.541884, 0, -0.327312, 0.828822, 17.2227, -12.6168)
+
+[node name="fern9" parent="World/Castle" instance=ExtResource("14_aald4")]
+transform = Transform3D(-0.618508, 0, -0.134981, 0, 0.633065, 0, 0.134981, 0, -0.618508, 1.12695, 17.5278, -13.5953)
 
 [node name="Balcony" type="Node3D" parent="World/Castle"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.4479, 16.1811, -3.40017)
@@ -960,6 +992,24 @@ transform = Transform3D(-0.312186, 0, 0.950021, 0, 1, 0, -0.950021, 0, -0.312186
 [node name="table_short" parent="World/Castle/Balcony" instance=ExtResource("29_iutl3")]
 transform = Transform3D(0.99992, 0, -0.0126358, 0, 1, 0, 0.0126358, 0, 0.99992, -1.2064, 1.08535, -7.65174)
 
+[node name="candle_cluster2" parent="World/Castle/Balcony/table_short" instance=ExtResource("34_i2wsj")]
+transform = Transform3D(0.99992, 0, 0.0126358, 0, 1, 0, -0.0126358, 0, 0.99992, 0.727093, 1.0019, -0.395557)
+
+[node name="candle" parent="World/Castle/Balcony" instance=ExtResource("21_2rf7u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56732, 1.08969, -2.52417)
+
+[node name="barrel" parent="World/Castle/Balcony" instance=ExtResource("31_gs1kk")]
+transform = Transform3D(-0.999995, 0, 0.00312418, 0, 1, 0, -0.00312418, 0, -0.999995, 6.48663, 5.07027, 18.0528)
+
+[node name="barrel2" parent="World/Castle/Balcony" instance=ExtResource("31_gs1kk")]
+transform = Transform3D(-0.236838, 0, 0.971549, 0, 1, 0, -0.971549, 0, -0.236838, 6.1421, 5.07027, 19.0076)
+
+[node name="barrel3" parent="World/Castle/Balcony" instance=ExtResource("31_gs1kk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.02887, 3.02678, 10.8594)
+
+[node name="barrel_broken" parent="World/Castle/Balcony" instance=ExtResource("32_2tyfi")]
+transform = Transform3D(0.506852, -0.261564, 0.821392, 0.0542563, 0.960645, 0.272428, -0.860324, -0.0935151, 0.501096, -6.91242, 2.84699, 10.5761)
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://in53wmskn8o")
 spawn_path = NodePath("../NetworkManager")
@@ -1053,6 +1103,9 @@ weapon_path = "res://weapons/models/warhammer_model.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponRack/warhammer/Area3D"]
 shape = SubResource("SphereShape3D_s3145")
+
+[node name="table_long" parent="." instance=ExtResource("30_q3ugp")]
+transform = Transform3D(-0.26458, 0, 0.964364, 0, 1, 0, -0.964364, 0, -0.26458, 37.5578, -4.46533, 12.0666)
 
 [editable path="World/Castle/NavigationRegion3D/FightRing/InnerRing/arch2"]
 [editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/arch"]

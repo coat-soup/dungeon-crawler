@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://d3u5msk2b8ry1"]
+
+[ext_resource type="PackedScene" uid="uid://bppt60jndwaug" path="res://world/props/models/candle.glb" id="1_vuejq"]
+[ext_resource type="Texture2D" uid="uid://8b4dwystxm34" path="res://world/props/models/candle_candle.png" id="2_ims5m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_124ll"]
+diffuse_mode = 3
+albedo_texture = ExtResource("2_ims5m")
+metallic_specular = 0.0
+roughness = 0.0
+texture_filter = 0
+
+[sub_resource type="Gradient" id="Gradient_vuejq"]
+offsets = PackedFloat32Array(0, 0.666667)
+colors = PackedColorArray(0.824601, 0.690302, 7.70092e-07, 1, 0.989671, 0.111635, 3.85046e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ims5m"]
+gradient = SubResource("Gradient_vuejq")
+
+[sub_resource type="Curve" id="Curve_124ll"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.484634, 0.648014), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_btdsc"]
+curve = SubResource("Curve_124ll")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p6hrp"]
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 0.999998
+linear_accel_max = 0.999998
+scale_min = 0.05
+scale_max = 0.07
+scale_curve = SubResource("CurveTexture_btdsc")
+color_ramp = SubResource("GradientTexture1D_ims5m")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrytd"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_btdsc"]
+material = SubResource("StandardMaterial3D_yrytd")
+
+[node name="candle" instance=ExtResource("1_vuejq")]
+
+[node name="Cube" parent="." index="0"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_124ll")
+
+[node name="Plane" parent="." index="1"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_124ll")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.162172, 0)
+amount = 3
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_p6hrp")
+draw_pass_1 = SubResource("QuadMesh_btdsc")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.284261, -0.0369586)
+light_color = Color(0.853129, 0.51791, 0.188832, 1)
+shadow_enabled = true
+omni_range = 1.93015

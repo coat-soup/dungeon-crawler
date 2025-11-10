@@ -17,14 +17,14 @@ texture_filter = 0
 offsets = PackedFloat32Array(0, 0.666667)
 colors = PackedColorArray(0.824601, 0.690302, 7.70092e-07, 1, 0.989671, 0.111635, 3.85046e-07, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_187lx"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uxw6d"]
 gradient = SubResource("Gradient_6w7pi")
 
 [sub_resource type="Curve" id="Curve_japbv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.282609, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.120879), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_huwf1"]
+[sub_resource type="CurveTexture" id="CurveTexture_wvsx8"]
 curve = SubResource("Curve_japbv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n80je"]
@@ -39,10 +39,10 @@ linear_accel_min = 0.999998
 linear_accel_max = 0.999998
 scale_min = 0.1
 scale_max = 0.2
-scale_curve = SubResource("CurveTexture_huwf1")
-color_ramp = SubResource("GradientTexture1D_187lx")
+scale_curve = SubResource("CurveTexture_wvsx8")
+color_ramp = SubResource("GradientTexture1D_uxw6d")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrytd"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drk4w"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -54,7 +54,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_8ep65"]
-material = SubResource("StandardMaterial3D_yrytd")
+material = SubResource("StandardMaterial3D_drk4w")
 
 [node name="wall_torch" instance=ExtResource("1_uxw6d")]
 
