@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bnkcuqp7p78hv"]
+[gd_scene load_steps=19 format=3 uid="uid://bnkcuqp7p78hv"]
 
 [ext_resource type="Script" uid="uid://bboyq3btxjcad" path="res://system/generation/level_room_prefab.gd" id="1_nhdch"]
 [ext_resource type="Script" uid="uid://ntkhnwdxsq5b" path="res://system/generation/level_room_prefab_entrance.gd" id="2_oeqjq"]
@@ -13,31 +13,32 @@
 [ext_resource type="PackedScene" uid="uid://d3u5msk2b8ry1" path="res://world/props/scenes/candle.tscn" id="11_4orvk"]
 [ext_resource type="PackedScene" uid="uid://7cvt4g1jdr5g" path="res://world/props/scenes/vines2.tscn" id="12_8vgxh"]
 [ext_resource type="PackedScene" uid="uid://d82npnl5j7j4" path="res://world/props/scenes/vines.tscn" id="13_8uo4m"]
+[ext_resource type="Script" uid="uid://kdixd6vxiddp" path="res://system/debug/level_room_grid_viz.gd" id="14_8uo4m"]
 
 [sub_resource type="Resource" id="Resource_43m26"]
 script = ExtResource("2_oeqjq")
-position = Vector3i(2, 0, -1)
+position = Vector3i(1, 0, -1)
 closed = NodePath("EntranceUp/Wall")
 open = NodePath("EntranceUp/arch")
 metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
 
 [sub_resource type="Resource" id="Resource_tvv4i"]
 script = ExtResource("2_oeqjq")
-position = Vector3i(-1, 0, 2)
+position = Vector3i(-1, 0, 1)
 closed = NodePath("EntranceLeft/Wall")
 open = NodePath("EntranceLeft/arch")
 metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
 
 [sub_resource type="Resource" id="Resource_mppi1"]
 script = ExtResource("2_oeqjq")
-position = Vector3i(5, 0, 2)
+position = Vector3i(3, 0, 1)
 closed = NodePath("EntranceRight/Wall")
 open = NodePath("EntranceRight/arch")
 metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
 
 [sub_resource type="Resource" id="Resource_wol62"]
 script = ExtResource("2_oeqjq")
-position = Vector3i(2, 0, 5)
+position = Vector3i(1, 0, 3)
 closed = NodePath("EntranceDown/Wall")
 open = NodePath("EntranceDown/arch")
 metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
@@ -46,19 +47,25 @@ metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
 script = ExtResource("1_nhdch")
 entrances = Array[ExtResource("2_oeqjq")]([SubResource("Resource_43m26"), SubResource("Resource_tvv4i"), SubResource("Resource_mppi1"), SubResource("Resource_wol62")])
 
+[node name="LevelRoomGridViz" type="Node" parent="."]
+script = ExtResource("14_8uo4m")
+dimensions = Vector3i(3, 2, 3)
+metadata/_custom_type_script = "uid://kdixd6vxiddp"
+
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0.00561251, 0, 0.00997718)
 material_override = ExtResource("3_43m26")
 use_collision = true
 size = Vector3(25, 0.5, 25)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0.00561251, 15, 0.00997718)
 material_override = ExtResource("3_43m26")
 use_collision = true
 size = Vector3(25, 0.5, 25)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.69399, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0.00561251, 7.69399, 0.00997718)
 use_collision = true
 radius = 4.0
 height = 15.0
@@ -66,7 +73,7 @@ sides = 16
 material = ExtResource("3_43m26")
 
 [node name="EntranceUp" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13)
+transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0.00561251, 0, -15.59)
 
 [node name="Wall" type="CSGBox3D" parent="EntranceUp"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
@@ -99,14 +106,14 @@ transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="EntranceUp" instance=ExtResource("5_oeqjq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 6.16126, 0.855812)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 7.28393, 1.26853)
 
 [node name="Cube" parent="EntranceUp/arch" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="EntranceLeft" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13, 0, 5.68248e-07)
+transform = Transform3D(-5.24537e-08, 0, 0.8, 0, 1, 0, -1.2, 0, -3.49691e-08, -15.5944, 0, 0.00997787)
 
 [node name="Wall" type="CSGBox3D" parent="EntranceLeft"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
@@ -115,78 +122,78 @@ use_collision = true
 size = Vector3(7, 0.5, 5)
 
 [node name="pillar_square" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -1.42109e-14, 0, 1.34077, -3.05903, 0.150508, 1.81332)
 
 [node name="Cube" parent="EntranceLeft/pillar_square" index="0"]
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square2" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -1.42109e-14, 0, 1.34077, 3.059, 0.151, 1.81371)
 
 [node name="Cube" parent="EntranceLeft/pillar_square2" index="0"]
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square3" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.05903, 7.15051, 1.06071)
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1.10931, 0, -1.42109e-14, 0, 1.34077, -3.05903, 7.15051, 1.81332)
 
 [node name="Cube" parent="EntranceLeft/pillar_square3" index="0"]
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square4" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
+transform = Transform3D(1, 0, 3.55271e-15, 0, 1.10931, 0, -1.42109e-14, 0, 1.34077, 3.059, 7.151, 1.81371)
 
 [node name="Cube" parent="EntranceLeft/pillar_square4" index="0"]
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="EntranceLeft" instance=ExtResource("5_oeqjq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 6.16126, 0.855812)
+transform = Transform3D(1, 0, -1.77636e-15, 0, 1, 0, -2.13163e-14, 0, 0.783424, -0.0171971, 7.28393, 2.09196)
 
 [node name="Cube" parent="EntranceLeft/arch" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="EntranceRight" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0, -5.68248e-07)
+transform = Transform3D(-3.49691e-08, 0, -1.2, 0, 1, 0, 0.8, 0, -5.24537e-08, 15.6056, 0, 0.0099765)
 
 [node name="Wall" type="CSGBox3D" parent="EntranceRight"]
-transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37118e-08, -1, -4.37114e-08, 2.50526e-07, 3.5, 0.262781)
 material_override = ExtResource("3_43m26")
 use_collision = true
-size = Vector3(7, 0.5, 5)
+size = Vector3(7, 0.5, 9)
 
 [node name="pillar_square" parent="EntranceRight" instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
+transform = Transform3D(1.5016, 0, -7.10543e-15, 0, 1, 0, 3.55271e-15, 0, 1, -4.59172, 0.150508, 1.06071)
 
 [node name="Cube" parent="EntranceRight/pillar_square" index="0"]
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square2" parent="EntranceRight" instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
+transform = Transform3D(1.5016, 0, -7.10543e-15, 0, 1, 0, 3.55271e-15, 0, 1, 4.59513, 0.151, 1.061)
 
 [node name="Cube" parent="EntranceRight/pillar_square2" index="0"]
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square3" parent="EntranceRight" instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.05903, 7.15051, 1.06071)
+transform = Transform3D(1.5016, 0, -7.10543e-15, 0, 1.10931, 0, 3.55271e-15, 0, 1, -4.59172, 7.15051, 1.06071)
 
 [node name="Cube" parent="EntranceRight/pillar_square3" index="0"]
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square4" parent="EntranceRight" instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
+transform = Transform3D(1.5016, 0, -7.10543e-15, 0, 1.10931, 0, 3.55271e-15, 0, 1, 4.59513, 7.151, 1.061)
 
 [node name="Cube" parent="EntranceRight/pillar_square4" index="0"]
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="EntranceRight" instance=ExtResource("5_oeqjq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 6.16126, 0.855812)
+transform = Transform3D(1.5016, 0, -1.06581e-14, 0, 1, 0, 7.10543e-15, 0, 0.584309, -0.0240919, 7.28393, 1.26853)
 
 [node name="Cube" parent="EntranceRight/arch" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="EntranceDown" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 13)
+transform = Transform3D(-1.2, 0, 1.04907e-07, 0, 1, 0, -1.04907e-07, 0, -1.2, 0.00561251, 0, 15.61)
 
 [node name="Wall" type="CSGBox3D" parent="EntranceDown"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
@@ -219,50 +226,50 @@ transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="EntranceDown" instance=ExtResource("5_oeqjq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 6.16126, 0.855812)
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 7.10543e-15, 0, 0.584309, -0.0171971, 7.28393, 1.26853)
 
 [node name="Cube" parent="EntranceDown/arch" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="Wall" type="CSGBox3D" parent="."]
-transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 11, -12.7372)
+transform = Transform3D(1.91069e-15, -5.24537e-08, 0.8, -1, -5.24537e-08, 0, 4.37114e-08, -1.2, -3.49691e-08, 0.00561261, 11, -15.2747)
 material_override = ExtResource("3_43m26")
 use_collision = true
-size = Vector3(8, 0.5, 25)
+size = Vector3(8, 0.5, 37)
 
 [node name="Wall2" type="CSGBox3D" parent="Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 9.53674e-07, -7.5)
+transform = Transform3D(1, -3.55271e-15, 4.87044e-21, -3.55271e-15, 1, 3.55271e-15, 0, -3.33955e-13, 1, 7.5, 0, -10.5)
 material_override = ExtResource("3_43m26")
 use_collision = true
-size = Vector3(7, 0.5, 10)
+size = Vector3(7, 0.5, 16)
 
 [node name="Wall3" type="CSGBox3D" parent="Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 7.5)
+transform = Transform3D(1, -3.55271e-15, 7.83505e-21, -3.55271e-15, 1, 3.55271e-15, 0, -5.32907e-13, 1, 7.5, 0, 10.5)
 material_override = ExtResource("3_43m26")
 use_collision = true
-size = Vector3(7, 0.5, 10)
+size = Vector3(7, 0.5, 16)
 
 [node name="Wall4" type="CSGBox3D" parent="."]
-transform = Transform3D(-5.73206e-15, 1.31134e-07, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, 1.31134e-07, 0, 11, 12.2628)
+transform = Transform3D(-5.73206e-15, 1.57361e-07, -0.8, -1, -5.24537e-08, 0, -4.37114e-08, 1.2, 1.04907e-07, 0.00561261, 11, 14.7253)
 material_override = ExtResource("3_43m26")
 use_collision = true
-size = Vector3(8, 0.5, 25)
+size = Vector3(8, 0.5, 37)
 
 [node name="Wall2" type="CSGBox3D" parent="Wall4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 9.53674e-07, -7.5)
+transform = Transform3D(1, -3.55271e-15, 0, -3.55271e-15, 1, 0, -8.47033e-22, 2.84217e-14, 1, 7.5, 9.53674e-07, -11.5)
 material_override = ExtResource("3_43m26")
 use_collision = true
-size = Vector3(7, 0.5, 10)
+size = Vector3(7, 0.5, 14)
 
 [node name="Wall3" type="CSGBox3D" parent="Wall4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 7.5)
+transform = Transform3D(1, -3.55271e-15, 0, -3.55271e-15, 1, 0, -8.47033e-22, 2.84217e-14, 1, 7.5, -9.53674e-07, 12)
 material_override = ExtResource("3_43m26")
 use_collision = true
-size = Vector3(7, 0.5, 10)
+size = Vector3(7, 0.5, 13)
 
 [node name="Wall2" type="CSGBox3D" parent="."]
-transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82138e-15, 8.74228e-08, -1, -12.5, 11, 0)
+transform = Transform3D(4.37114e-08, -1.2, -1.04907e-07, -1, -5.24537e-08, 0, -3.82138e-15, 1.04907e-07, -1.2, -14.9944, 11, 0.00997718)
 material_override = ExtResource("3_43m26")
 use_collision = true
 size = Vector3(8, 0.5, 25)
@@ -280,7 +287,7 @@ use_collision = true
 size = Vector3(7, 0.5, 10)
 
 [node name="Wall3" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, 1.74846e-07, -1, -4.37114e-08, 0, 7.64275e-15, -1.74846e-07, 1, 12.5, 11, 0)
+transform = Transform3D(-4.37114e-08, 1.2, 2.09815e-07, -1, -5.24537e-08, 0, 7.64275e-15, -2.09815e-07, 1.2, 15.0056, 11, 0.00997718)
 material_override = ExtResource("3_43m26")
 use_collision = true
 size = Vector3(8, 0.5, 25)
@@ -298,158 +305,158 @@ use_collision = true
 size = Vector3(7, 0.5, 10)
 
 [node name="brazier3" parent="." instance=ExtResource("6_43m26")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.637264, 0.229782, 4.95368)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.637264, 0.229782, 5.97786)
 
 [node name="pillar_square3" parent="." instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.46758, -0.562225, 3.3581)
+transform = Transform3D(1.2, 0, 0, 0, 0.984387, 0, 0, 0, 1.2, -4.15548, 0.235433, 4.0397)
 
 [node name="Cube" parent="pillar_square3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square6" parent="." instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.46758, -0.562225, -2.77393)
+transform = Transform3D(1.2, 0, 0, 0, 0.984387, 0, 0, 0, 1.2, -4.15548, 0.235433, -3.31874)
 
 [node name="Cube" parent="pillar_square6" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square4" parent="." instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.46758, 7.19478, 3.3581)
+transform = Transform3D(1.2, 0, 0, 0, 1.10931, 0, 0, 0, 1.2, -4.15548, 7.19478, 4.0397)
 
 [node name="Cube" parent="pillar_square4" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="." instance=ExtResource("5_oeqjq")]
-transform = Transform3D(1.12608, 0, 0, 0, 0.468594, 0, 0, 0, 1, -7.54136, 7.7922, 3.49543)
+transform = Transform3D(1.3513, 0, 0, 0, 0.468594, 0, 0, 0, 1.2, -9.04402, 7.7922, 4.20449)
 
 [node name="Cube" parent="arch" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square5" parent="." instance=ExtResource("4_nhdch")]
-transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.46758, 7.19478, -2.77968)
+transform = Transform3D(1.2, 0, 0, 0, 1.10931, 0, 0, 0, 1.2, -4.15548, 7.19478, -3.32564)
 
 [node name="Cube" parent="pillar_square5" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch2" parent="." instance=ExtResource("5_oeqjq")]
-transform = Transform3D(1.12608, 0, 0, 0, 0.468594, 0, 0, 0, 1, -7.54136, 7.7922, -2.64235)
+transform = Transform3D(1.3513, 0, 0, 0, 0.468594, 0, 0, 0, 1.2, -9.04402, 7.7922, -3.16084)
 
 [node name="Cube" parent="arch2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square7" parent="." instance=ExtResource("4_nhdch")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1.10931, 0, 8.74228e-08, 0, -1, 3.48586, -0.562225, -3.36178)
+transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 0.984387, 0, 1.04907e-07, 0, -1.2, 4.18864, 0.235433, -4.02416)
 
 [node name="Cube" parent="pillar_square7" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square8" parent="." instance=ExtResource("4_nhdch")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1.10931, 0, 8.74228e-08, 0, -1, 3.48586, -0.562225, 2.77026)
+transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 0.984387, 0, 1.04907e-07, 0, -1.2, 4.18864, 0.235433, 3.33429)
 
 [node name="Cube" parent="pillar_square8" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square9" parent="." instance=ExtResource("4_nhdch")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1.10931, 0, 8.74228e-08, 0, -1, 3.48586, 7.19478, -3.36178)
+transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1.10931, 0, 1.04907e-07, 0, -1.2, 4.18864, 7.19478, -4.02416)
 
 [node name="Cube" parent="pillar_square9" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch3" parent="." instance=ExtResource("5_oeqjq")]
-transform = Transform3D(-1.12608, 0, -8.74228e-08, 0, 0.468594, 0, 9.84448e-08, 0, -1, 7.55963, 7.7922, -3.4991)
+transform = Transform3D(-1.3513, 0, -1.04907e-07, 0, 0.468594, 0, 1.18134e-07, 0, -1.2, 9.07717, 7.7922, -4.18894)
 
 [node name="Cube" parent="arch3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square10" parent="." instance=ExtResource("4_nhdch")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1.10931, 0, 8.74228e-08, 0, -1, 3.48586, 7.19478, 2.776)
+transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1.10931, 0, 1.04907e-07, 0, -1.2, 4.18864, 7.19478, 3.34118)
 
 [node name="Cube" parent="pillar_square10" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch4" parent="." instance=ExtResource("5_oeqjq")]
-transform = Transform3D(-1.12608, 0, -8.74228e-08, 0, 0.468594, 0, 9.84448e-08, 0, -1, 7.55963, 7.7922, 2.63868)
+transform = Transform3D(-1.3513, 0, -1.04907e-07, 0, 0.468594, 0, 1.18134e-07, 0, -1.2, 9.07717, 7.7922, 3.17639)
 
 [node name="Cube" parent="arch4" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch7" parent="." instance=ExtResource("5_oeqjq")]
-transform = Transform3D(-0.726381, 0, -8.74228e-08, 0, 0.468594, 0, 6.35022e-08, 0, -1, 0, 7.7922, -3.4991)
+transform = Transform3D(-0.871657, 0, -1.04907e-07, 0, 0.468594, 0, 7.62026e-08, 0, -1.2, 0.00561251, 7.7922, -4.18894)
 
 [node name="Cube" parent="arch7" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch6" parent="." instance=ExtResource("5_oeqjq")]
-transform = Transform3D(-0.726381, 0, -8.74228e-08, 0, 0.468594, 0, 6.35022e-08, 0, -1, 0, 7.7922, 2.63868)
+transform = Transform3D(-0.871657, 0, -1.04907e-07, 0, 0.468594, 0, 7.62026e-08, 0, -1.2, 0.00561251, 7.7922, 3.17639)
 
 [node name="Cube" parent="arch6" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch8" parent="." instance=ExtResource("5_oeqjq")]
-transform = Transform3D(9.05348e-08, 0, -1, 0, 0.468594, 0, 0.690398, 0, 1.31134e-07, -3.58419, 7.7922, 0.00497486)
+transform = Transform3D(1.08642e-07, 0, -0.8, 0, 0.468594, 0, 0.828478, 0, 1.04907e-07, -4.29542, 7.7922, 0.015947)
 
 [node name="Cube" parent="arch8" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch9" parent="." instance=ExtResource("5_oeqjq")]
-transform = Transform3D(9.05348e-08, 0, -1, 0, 0.468594, 0, 0.690398, 0, 1.31134e-07, 2.71684, 7.7922, 0.00497458)
+transform = Transform3D(1.08642e-07, 0, -0.8, 0, 0.468594, 0, 0.828478, 0, 1.04907e-07, 3.26582, 7.7922, 0.0159467)
 
 [node name="Cube" parent="arch9" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="barrel" parent="." instance=ExtResource("7_tvv4i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2498, 0.25, -5.88857)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5516, 0.25, -7.27853)
 
 [node name="barrel2" parent="." instance=ExtResource("7_tvv4i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.574, 0.25, -6.89645)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8758, 0.25, -8.28641)
 
 [node name="table_long" parent="." instance=ExtResource("8_mppi1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0716994, 0.250191, -5.2079)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0716994, 0.250191, -6.11789)
 
 [node name="barrel3" parent="." instance=ExtResource("7_tvv4i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7662, 0.25, 4.30411)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7662, 0.25, 5.38881)
 
 [node name="barrel4" parent="." instance=ExtResource("7_tvv4i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.779349, 0.25, 4.61415)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.779349, 0.25, 5.69885)
 
 [node name="barrel5" parent="." instance=ExtResource("7_tvv4i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74194, 0.25, 4.24868)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74194, 0.25, 5.33338)
 
 [node name="barrel6" parent="." instance=ExtResource("7_tvv4i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36762, 1.44098, 4.49124)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.36762, 1.44098, 5.57594)
 
 [node name="candle_cluster" parent="." instance=ExtResource("9_wol62")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5648, 1.24516, -4.61346)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5648, 1.24516, -5.52345)
 
 [node name="wall_torch" parent="." instance=ExtResource("4_tvv4i")]
-transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, -7.68347, 3.17871, -12.3122)
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, -7.68347, 3.17871, -14.7956)
 
 [node name="candle" parent="." instance=ExtResource("11_4orvk")]
-transform = Transform3D(-0.512792, 0, 0.858513, 0, 1, 0, -0.858513, 0, -0.512792, -2.40596, 1.24654, -4.75423)
+transform = Transform3D(-0.512792, 0, 0.858513, 0, 1, 0, -0.858513, 0, -0.512792, -2.40596, 1.24654, -5.66422)
 
 [node name="Vines" parent="." instance=ExtResource("12_8vgxh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1309, 6.9914, -4.09064)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5095, 6.9914, -4.8759)
 
 [node name="Vines2" parent="." instance=ExtResource("13_8uo4m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82076, 6.99073, -4.08518)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.17351, 6.99073, -4.9107)
 
 [node name="Vines3" parent="." instance=ExtResource("12_8vgxh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08887, 4.77801, -4.09479)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.44162, 4.77801, -4.92031)
 
 [editable path="EntranceUp/pillar_square"]
 [editable path="EntranceUp/pillar_square2"]

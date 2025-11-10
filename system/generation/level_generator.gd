@@ -2,7 +2,7 @@ extends Node3D
 class_name LevelGenerator
 
 @export var dungeon_size : int = 200
-@export var cell_size : float = 5.0
+const cell_size : float = 10.0
 @export var occupied_spaces : Array[Array]
 @export var num_rooms : int = 15
 var spawned_rooms : Array[LevelRoom]
@@ -45,14 +45,14 @@ func generate():
 	
 	
 	for i in range(overlap_fix_iterations):
-		var did_overlap = LevelNodeSeparator.overlap_fix_step(spawned_rooms, 3)
+		var did_overlap = LevelNodeSeparator.overlap_fix_step(spawned_rooms, 2)
 		if not did_overlap: break
 		
 		if debug_wait: await get_tree().create_timer(0.2).timeout
 	
 	var converted_connections = LevelNodeSeparator.connections_to_ids(graph_generator.spawned_nodes, graph_generator.graph_connections)
 	for i in range(condense_iterations):
-		var did_condense = LevelNodeSeparator.condense_step(spawned_rooms, converted_connections, 3)
+		var did_condense = LevelNodeSeparator.condense_step(spawned_rooms, converted_connections, 2)
 		if not did_condense: break
 			
 		if debug_wait: await get_tree().create_timer(0.2).timeout

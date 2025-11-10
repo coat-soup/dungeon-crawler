@@ -1,12 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://c55h38p1k50xe"]
+[gd_scene load_steps=6 format=3 uid="uid://c55h38p1k50xe"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/globals/game_manager.gd" id="1_ac244"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/general/network_manager.gd" id="2_mbc0d"]
 [ext_resource type="PackedScene" uid="uid://db1lqpw1tim4q" path="res://ui/scenes/ui.tscn" id="3_n5bdw"]
 [ext_resource type="PackedScene" uid="uid://c3u4v65ocu7yu" path="res://levels/level_generation_test.tscn" id="3_pp0t1"]
 
+[sub_resource type="Environment" id="Environment_rww0c"]
+background_mode = 2
+ambient_light_source = 2
+ambient_light_color = Color(0.211975, 0.226078, 0.265919, 1)
+tonemap_mode = 2
+glow_enabled = true
+
 [node name="PlayableLevelGen" type="Node3D"]
 script = ExtResource("1_ac244")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rww0c")
 
 [node name="NetworkManager" type="Node" parent="." node_paths=PackedStringArray("spawn_marker")]
 script = ExtResource("2_mbc0d")
@@ -16,7 +26,7 @@ spawn_marker = NodePath("Marker3D")
 transform = Transform3D(0.513272, -0.118789, 0.849965, 0, 0.990375, 0.138412, -0.858226, -0.0710432, 0.508332, 55.1084, 21.1227, 43.968)
 
 [node name="Marker3D" type="Marker3D" parent="NetworkManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5697, -5.33705, -8.58194)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.2562, 0)
 
 [node name="LevelGenerationTest" parent="." instance=ExtResource("3_pp0t1")]
 

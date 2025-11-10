@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_ipmqf")
 room_name = "GenericRoomCentralPillar"
-dimensions = Vector3i(5, 3, 5)
+dimensions = Vector3i(3, 2, 3)
 prefab = ExtResource("1_8yiph")
 metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
