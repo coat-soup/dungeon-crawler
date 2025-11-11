@@ -50,6 +50,7 @@ entrances = Array[ExtResource("2_oeqjq")]([SubResource("Resource_43m26"), SubRes
 [node name="LevelRoomGridViz" type="Node" parent="."]
 script = ExtResource("14_8uo4m")
 dimensions = Vector3i(3, 2, 3)
+enabled = null
 metadata/_custom_type_script = "uid://kdixd6vxiddp"
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
@@ -84,26 +85,14 @@ size = Vector3(7, 0.5, 5)
 [node name="pillar_square" parent="EntranceUp" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
 
-[node name="Cube" parent="EntranceUp/pillar_square" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
-
 [node name="pillar_square2" parent="EntranceUp" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
-
-[node name="Cube" parent="EntranceUp/pillar_square2" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square3" parent="EntranceUp" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.05903, 7.15051, 1.06071)
 
-[node name="Cube" parent="EntranceUp/pillar_square3" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
-
 [node name="pillar_square4" parent="EntranceUp" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
-
-[node name="Cube" parent="EntranceUp/pillar_square4" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="EntranceUp" instance=ExtResource("5_oeqjq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 7.28393, 1.26853)
@@ -124,26 +113,14 @@ size = Vector3(7, 0.5, 5)
 [node name="pillar_square" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -1.42109e-14, 0, 1.34077, -3.05903, 0.150508, 1.81332)
 
-[node name="Cube" parent="EntranceLeft/pillar_square" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
-
 [node name="pillar_square2" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 3.55271e-15, 0, 1, 0, -1.42109e-14, 0, 1.34077, 3.059, 0.151, 1.81371)
-
-[node name="Cube" parent="EntranceLeft/pillar_square2" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square3" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 3.55271e-15, 0, 1.10931, 0, -1.42109e-14, 0, 1.34077, -3.05903, 7.15051, 1.81332)
 
-[node name="Cube" parent="EntranceLeft/pillar_square3" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
-
 [node name="pillar_square4" parent="EntranceLeft" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 3.55271e-15, 0, 1.10931, 0, -1.42109e-14, 0, 1.34077, 3.059, 7.151, 1.81371)
-
-[node name="Cube" parent="EntranceLeft/pillar_square4" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="EntranceLeft" instance=ExtResource("5_oeqjq")]
 transform = Transform3D(1, 0, -1.77636e-15, 0, 1, 0, -2.13163e-14, 0, 0.783424, -0.0171971, 7.28393, 2.09196)
@@ -164,26 +141,14 @@ size = Vector3(7, 0.5, 9)
 [node name="pillar_square" parent="EntranceRight" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1.5016, 0, -7.10543e-15, 0, 1, 0, 3.55271e-15, 0, 1, -4.59172, 0.150508, 1.06071)
 
-[node name="Cube" parent="EntranceRight/pillar_square" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
-
 [node name="pillar_square2" parent="EntranceRight" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1.5016, 0, -7.10543e-15, 0, 1, 0, 3.55271e-15, 0, 1, 4.59513, 0.151, 1.061)
-
-[node name="Cube" parent="EntranceRight/pillar_square2" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square3" parent="EntranceRight" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1.5016, 0, -7.10543e-15, 0, 1.10931, 0, 3.55271e-15, 0, 1, -4.59172, 7.15051, 1.06071)
 
-[node name="Cube" parent="EntranceRight/pillar_square3" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
-
 [node name="pillar_square4" parent="EntranceRight" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1.5016, 0, -7.10543e-15, 0, 1.10931, 0, 3.55271e-15, 0, 1, 4.59513, 7.151, 1.061)
-
-[node name="Cube" parent="EntranceRight/pillar_square4" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="EntranceRight" instance=ExtResource("5_oeqjq")]
 transform = Transform3D(1.5016, 0, -1.06581e-14, 0, 1, 0, 7.10543e-15, 0, 0.584309, -0.0240919, 7.28393, 1.26853)
@@ -204,26 +169,14 @@ size = Vector3(7, 0.5, 5)
 [node name="pillar_square" parent="EntranceDown" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
 
-[node name="Cube" parent="EntranceDown/pillar_square" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
-
 [node name="pillar_square2" parent="EntranceDown" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
-
-[node name="Cube" parent="EntranceDown/pillar_square2" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square3" parent="EntranceDown" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, -3.05903, 7.15051, 1.06071)
 
-[node name="Cube" parent="EntranceDown/pillar_square3" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
-
 [node name="pillar_square4" parent="EntranceDown" instance=ExtResource("4_nhdch")]
 transform = Transform3D(1, 0, 0, 0, 1.10931, 0, 0, 0, 1, 3.059, 7.151, 1.061)
-
-[node name="Cube" parent="EntranceDown/pillar_square4" index="0"]
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="EntranceDown" instance=ExtResource("5_oeqjq")]
 transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 7.10543e-15, 0, 0.584309, -0.0171971, 7.28393, 1.26853)
@@ -312,21 +265,18 @@ transform = Transform3D(1.2, 0, 0, 0, 0.984387, 0, 0, 0, 1.2, -4.15548, 0.235433
 
 [node name="Cube" parent="pillar_square3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square6" parent="." instance=ExtResource("4_nhdch")]
 transform = Transform3D(1.2, 0, 0, 0, 0.984387, 0, 0, 0, 1.2, -4.15548, 0.235433, -3.31874)
 
 [node name="Cube" parent="pillar_square6" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square4" parent="." instance=ExtResource("4_nhdch")]
 transform = Transform3D(1.2, 0, 0, 0, 1.10931, 0, 0, 0, 1.2, -4.15548, 7.19478, 4.0397)
 
 [node name="Cube" parent="pillar_square4" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch" parent="." instance=ExtResource("5_oeqjq")]
 transform = Transform3D(1.3513, 0, 0, 0, 0.468594, 0, 0, 0, 1.2, -9.04402, 7.7922, 4.20449)
@@ -340,7 +290,6 @@ transform = Transform3D(1.2, 0, 0, 0, 1.10931, 0, 0, 0, 1.2, -4.15548, 7.19478, 
 
 [node name="Cube" parent="pillar_square5" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch2" parent="." instance=ExtResource("5_oeqjq")]
 transform = Transform3D(1.3513, 0, 0, 0, 0.468594, 0, 0, 0, 1.2, -9.04402, 7.7922, -3.16084)
@@ -354,21 +303,18 @@ transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 0.984387, 0, 1.04907e-07, 0, -
 
 [node name="Cube" parent="pillar_square7" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square8" parent="." instance=ExtResource("4_nhdch")]
 transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 0.984387, 0, 1.04907e-07, 0, -1.2, 4.18864, 0.235433, 3.33429)
 
 [node name="Cube" parent="pillar_square8" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="pillar_square9" parent="." instance=ExtResource("4_nhdch")]
 transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1.10931, 0, 1.04907e-07, 0, -1.2, 4.18864, 7.19478, -4.02416)
 
 [node name="Cube" parent="pillar_square9" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch3" parent="." instance=ExtResource("5_oeqjq")]
 transform = Transform3D(-1.3513, 0, -1.04907e-07, 0, 0.468594, 0, 1.18134e-07, 0, -1.2, 9.07717, 7.7922, -4.18894)
@@ -382,7 +328,6 @@ transform = Transform3D(-1.2, 0, -1.04907e-07, 0, 1.10931, 0, 1.04907e-07, 0, -1
 
 [node name="Cube" parent="pillar_square10" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
-surface_material_override/0 = ExtResource("3_43m26")
 
 [node name="arch4" parent="." instance=ExtResource("5_oeqjq")]
 transform = Transform3D(-1.3513, 0, -1.04907e-07, 0, 0.468594, 0, 1.18134e-07, 0, -1.2, 9.07717, 7.7922, 3.17639)

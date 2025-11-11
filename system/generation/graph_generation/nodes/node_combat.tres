@@ -1,14 +1,15 @@
-[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=6 format=3 uid="uid://bmpc85ai7rbgt"]
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=7 format=3 uid="uid://bmpc85ai7rbgt"]
 
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_p0xu2"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_uaasn"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_uaasn"]
 [ext_resource type="Resource" uid="uid://0e5a151ee67b" path="res://world/rooms/room_data/room_generic_small.tres" id="4_ks2q6"]
 [ext_resource type="Resource" uid="uid://bgfmxuchv8emj" path="res://world/rooms/room_data/room_generic_central_pillar.tres" id="5_dh2ii"]
+[ext_resource type="Resource" uid="uid://bmgufpf1dqmaa" path="res://world/rooms/room_data/room_generic_arena.tres" id="6_yda4b"]
 
 [resource]
 script = ExtResource("2_uaasn")
 name = "combat"
 grammars = Array[ExtResource("1_p0xu2")]([])
-terminal_rooms = Array[ExtResource("3_uaasn")]([ExtResource("4_ks2q6"), ExtResource("5_dh2ii")])
+terminal_rooms = Array[ExtResource("3_uaasn")]([ExtResource("4_ks2q6"), ExtResource("5_dh2ii"), ExtResource("6_yda4b")])
 metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

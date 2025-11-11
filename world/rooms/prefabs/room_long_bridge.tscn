@@ -182,20 +182,20 @@ surface_material_override/0 = ExtResource("4_8oj8v")
 [node name="pillar_square" parent="." instance=ExtResource("6_4qduk")]
 transform = Transform3D(1.8569, 0, 0, 0, 1.8569, 0, 0, 0, 1.8569, -9.61689, -9.03687, -11.159)
 
+[node name="Cube" parent="pillar_square" index="0"]
+surface_material_override/0 = ExtResource("4_8oj8v")
+
 [node name="brazier" parent="pillar_square" instance=ExtResource("8_ydlmi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.00017, 0)
-
-[node name="Cube" parent="pillar_square" index="1"]
-surface_material_override/0 = ExtResource("4_8oj8v")
 
 [node name="pillar_square2" parent="." instance=ExtResource("6_4qduk")]
 transform = Transform3D(1.8569, 0, 0, 0, 1.8569, 0, 0, 0, 1.8569, 8.81762, -11.1697, 9.89102)
 
+[node name="Cube" parent="pillar_square2" index="0"]
+surface_material_override/0 = ExtResource("4_8oj8v")
+
 [node name="brazier" parent="pillar_square2" instance=ExtResource("8_ydlmi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.00017, 0)
-
-[node name="Cube" parent="pillar_square2" index="1"]
-surface_material_override/0 = ExtResource("4_8oj8v")
 
 [node name="pillar_square3" parent="." instance=ExtResource("6_4qduk")]
 transform = Transform3D(2.46366, 0, 0, 0, 1.8569, 0, 0, 0, 2.46366, -12.672, -8.37855, 8.91686)

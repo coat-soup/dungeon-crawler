@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1hm6ldo3d14k"]
+
+[ext_resource type="PackedScene" uid="uid://phibfr3i0d1b" path="res://world/props/models/small_effigy.glb" id="1_6fukq"]
+[ext_resource type="Material" uid="uid://beii8641e0o8o" path="res://world/materials/rock_mat.tres" id="2_xn02o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6fukq"]
+size = Vector3(0.505, 1.22543, 0.45)
+
+[node name="small_effigy" instance=ExtResource("1_6fukq")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_xn02o")
+
+[node name="Cube_001" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_xn02o")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62154, 0)
+shape = SubResource("BoxShape3D_6fukq")

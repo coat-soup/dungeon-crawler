@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=5 format=3 uid="uid://dwpsvbkokhouv"]
+[gd_resource type="Resource" script_class="LevelGraphNode" load_steps=6 format=3 uid="uid://dwpsvbkokhouv"]
 
 [ext_resource type="Script" uid="uid://ufntgkyvgkqt" path="res://system/generation/graph_generation/level_graph_grammar.gd" id="1_ctxws"]
 [ext_resource type="Script" uid="uid://dstuqqqmhx4ch" path="res://system/generation/graph_generation/level_graph_node.gd" id="2_8h615"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="3_8h615"]
 [ext_resource type="Resource" uid="uid://0e5a151ee67b" path="res://world/rooms/room_data/room_generic_small.tres" id="4_2ecwm"]
+[ext_resource type="Resource" uid="uid://bmgufpf1dqmaa" path="res://world/rooms/room_data/room_generic_arena.tres" id="5_qu2so"]
 
 [resource]
 script = ExtResource("2_8h615")
 name = "puzzle"
 grammars = Array[ExtResource("1_ctxws")]([])
-terminal_rooms = Array[ExtResource("3_8h615")]([ExtResource("4_2ecwm")])
+terminal_rooms = Array[ExtResource("3_8h615")]([ExtResource("4_2ecwm"), ExtResource("5_qu2so")])
 metadata/_custom_type_script = "uid://dstuqqqmhx4ch"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://cuhkwocop1mx7"]
+[gd_scene load_steps=52 format=4 uid="uid://cuhkwocop1mx7"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/globals/game_manager.gd" id="1_0nv80"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/general/network_manager.gd" id="2_4p34j"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://dhchkshq24jj4" path="res://world/props/scenes/barrel.tscn" id="31_gs1kk"]
 [ext_resource type="PackedScene" uid="uid://bs3whcbkp11s7" path="res://world/props/scenes/barrel_broken.tscn" id="32_2tyfi"]
 [ext_resource type="PackedScene" uid="uid://0l7rx2b47rju" path="res://world/props/scenes/candle_cluster.tscn" id="34_i2wsj"]
+[ext_resource type="PackedScene" uid="uid://c1hm6ldo3d14k" path="res://world/props/scenes/small_effigy.tscn" id="35_ola42"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wf1f"]
 sky_top_color = Color(0.484482, 0.54318, 0.717929, 1)
@@ -1106,6 +1107,9 @@ shape = SubResource("SphereShape3D_s3145")
 
 [node name="table_long" parent="." instance=ExtResource("30_q3ugp")]
 transform = Transform3D(-0.26458, 0, 0.964364, 0, 1, 0, -0.964364, 0, -0.26458, 37.5578, -4.46533, 12.0666)
+
+[node name="small_effigy" parent="." instance=ExtResource("35_ola42")]
+transform = Transform3D(0.597569, 0, 0, 0, 0.597569, 0, 0, 0, 0.597569, 36.5778, -0.0279372, 4.26031)
 
 [editable path="World/Castle/NavigationRegion3D/FightRing/InnerRing/arch2"]
 [editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/arch"]
