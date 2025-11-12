@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3u4v65ocu7yu"]
+[gd_scene load_steps=26 format=3 uid="uid://c3u4v65ocu7yu"]
 
 [ext_resource type="Script" uid="uid://tmqkq1ow017l" path="res://system/generation/level_generator.gd" id="1_sewoy"]
 [ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="2_ir63v"]
@@ -20,6 +20,9 @@
 [ext_resource type="Resource" uid="uid://dtfpspmujsdhl" path="res://system/generation/graph_generation/nodes/node_utility.tres" id="15_d4oe4"]
 [ext_resource type="Resource" uid="uid://bmpc85ai7rbgt" path="res://system/generation/graph_generation/nodes/node_combat.tres" id="16_hsyqu"]
 [ext_resource type="Resource" uid="uid://ce3s0k6mvjyq5" path="res://system/generation/graph_generation/nodes/node_sewers_keep_passage.tres" id="17_ir63v"]
+[ext_resource type="Script" uid="uid://0mymofwvexfu" path="res://system/generation/level_enemy_spawner.gd" id="21_1xj3n"]
+[ext_resource type="PackedScene" uid="uid://xh7j8iie55hm" path="res://enemies/scenes/enemy_humanoid.tscn" id="22_aqyo4"]
+[ext_resource type="PackedScene" uid="uid://cojvglro8fr60" path="res://enemies/scenes/enemy_rat.tscn" id="23_80poh"]
 
 [sub_resource type="Resource" id="Resource_tv0bk"]
 script = ExtResource("2_ir63v")
@@ -74,3 +77,8 @@ script = ExtResource("5_byu11")
 generator = NodePath("../LevelGraphGenerator")
 enabled = false
 metadata/_custom_type_script = "uid://day82rj35g3lc"
+
+[node name="LevelEnemySpawner" type="Node" parent="."]
+script = ExtResource("21_1xj3n")
+enemies = Array[PackedScene]([ExtResource("22_aqyo4"), ExtResource("23_80poh")])
+metadata/_custom_type_script = "uid://0mymofwvexfu"

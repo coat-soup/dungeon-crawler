@@ -18,6 +18,8 @@ signal bob_bottom
 
 
 var debug_mode = false
+var og_col
+var og_mask
 
 var interact_object
 var player_input_dir : Vector2
@@ -35,11 +37,13 @@ func _input(event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_SEMICOLON):
 		debug_mode = !debug_mode
 		if debug_mode:
+			og_mask = body.collision_mask
+			og_col = body.collision_layer
 			body.collision_mask = 0
 			body.collision_layer = 0
 		else:
-			body.collision_mask = Util.layer_mask([1])
-			body.collision_layer = Util.layer_mask([1])
+			body.collision_mask = og_mask
+			body.collision_layer = og_col
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -89,3 +93,6 @@ func on_started_attack():
 
 func on_weapon_bounced():
 	normalised_swing_position = min(normalised_swing_position, 0.0)
+
+func get_speed() -> float:
+	return super.get_speed() * (5.0 if debug_mode and sprinting else 1.0)

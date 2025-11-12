@@ -19,7 +19,7 @@ func perform_action(_character : Character, args : Array = []): # args = [Weapon
 func on_leap_started():
 	if leap_vel != Vector3.ZERO and character.is_multiplayer_authority():
 		var ai = character.get_node_or_null("AIActionController") as AIActionController
-		if ai:
+		if ai and ai.active_target:
 			character.movement_manager.apply_impulse(leap_vel.rotated(Vector3.UP, -(character.global_position - ai.active_target.global_position).signed_angle_to(Vector3.FORWARD, Vector3.UP)), 0.2)
 		else:
 			character.movement_manager.apply_impulse(leap_vel, leap_duration, true)

@@ -2,6 +2,8 @@ extends Node3D
 class_name LevelRoomPrefab
 
 @export var entrances : Array[LevelRoomPrefabEntrance]
+@export var num_enemies : int = 2
+
 
 
 func toggle_entrance(id: int, state: bool):
@@ -26,3 +28,8 @@ func get_entrance_to_room(room : LevelRoom, this_pos: Vector3i) -> int:
 				if e != -1: return e
 	
 	return -1
+
+
+func get_random_spawn_point() -> Vector3:
+	if not get_node("SpawnPoints") or $SpawnPoints.get_child_count() == 0: return global_position
+	return $SpawnPoints.get_child(randi() % $SpawnPoints.get_child_count()).global_position

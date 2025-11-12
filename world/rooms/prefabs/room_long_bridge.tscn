@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvsnk8nifuxm2"]
+[gd_scene load_steps=14 format=3 uid="uid://cvsnk8nifuxm2"]
 
 [ext_resource type="Script" uid="uid://bboyq3btxjcad" path="res://system/generation/level_room_prefab.gd" id="1_8m7sy"]
 [ext_resource type="Script" uid="uid://ntkhnwdxsq5b" path="res://system/generation/level_room_prefab_entrance.gd" id="2_r41rg"]
@@ -12,16 +12,20 @@
 [sub_resource type="Resource" id="Resource_clo8p"]
 script = ExtResource("2_r41rg")
 position = Vector3i(-1, 0, 1)
-closed = NodePath("EntranceLeft/Wall")
+closed = NodePath("NavigationRegion3D/EntranceLeft/Wall")
 open = NodePath("")
 metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
 
 [sub_resource type="Resource" id="Resource_nh8nr"]
 script = ExtResource("2_r41rg")
 position = Vector3i(5, 0, 1)
-closed = NodePath("EntranceRight/Wall")
+closed = NodePath("NavigationRegion3D/EntranceRight/Wall")
 open = NodePath("")
 metadata/_custom_type_script = "uid://ntkhnwdxsq5b"
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_8m7sy"]
+vertices = PackedVector3Array(24.5, 10.5803, 4.25, 25.5, 10.8303, 4.25, 25.5, 10.8303, -4.25, 24.5, 10.5803, -4.25, 24.75, 10.5803, -15, -24.5, 10.5803, -15, -24.25, 10.5803, -4.25, -25.5, 10.8303, -14.5, -25.5, 10.8303, 14.5, -25.25, 10.8303, 4.25, -25.25, 10.8303, -4.25, -24.25, 10.5803, 4.25, -24.5, 10.5803, 15, 24.5, 10.5803, 15, -11.25, -6.1697, -12.5, -9.5, -6.1697, -12.75, -9.5, -6.1697, -13.75, -24.25, -6.1697, -13.75, -24.25, -6.1697, 9, -14.75, -6.1697, 9, -14.5, -6.1697, 6.75, -11, -6.1697, 6.75, -10.75, -6.1697, -9.5, -11.25, -6.1697, -9.75, -11.25, -1.1697, -12.5, -9.5, -1.1697, -12.75, -9.5, -1.1697, -13.75, -24.25, -1.1697, -13.75, -9.5, -1.1697, -5.5, -9.5, -1.1697, -9.5, -11.25, -1.1697, -9.75, -24.25, -1.1697, -5.5, -8, -6.1697, -12.5, 10.5, -6.1697, -11.25, 12.75, -6.1697, -11.5, 12, -6.1697, -13.75, -8, -6.1697, -9.75, 8.75, -6.1697, 14, 8.75, -6.1697, 11.5, 7, -6.1697, 11.25, -10.5, -6.1697, 10.75, -12.5, -6.1697, 11, -12.5, -6.1697, 14, 7, -6.1697, 8.5, -10.5, -6.1697, 7, 10, -6.1697, 8.25, 10.5, -6.1697, -7.5, -8, -1.1697, -12.5, 11.25, -1.1697, -10.5, 12.75, -1.1697, -10.75, 12.75, -1.1697, -13.75, 12.75, -1.1697, -5.5, 12.75, -1.1697, -7.75, 11.25, -1.1697, -8, -8, -1.1697, -9.75, 10.5, -6.1697, 11.25, 24.5, -6.1697, 14, 14.75, -6.1697, -11.25, 24.5, -6.1697, -13.75, 14.75, -6.1697, -7.5, 10.5, -6.1697, 8.5, 14, -1.1697, -8, 24.5, -1.1697, -5.5, 14, -1.1697, -10.5, 24.5, -1.1697, -13.75, -11, 4.3303, -12.75, -11, 4.3303, -12.25, -10.25, 4.3303, -12.5, -9, 4.3303, -12.75, -8.25, 4.3303, -12.25, -8.25, 4.3303, -12.75, -10, 6.8303, -10.75, -9, 6.8303, -11, -9.5, 6.8303, -11.75, -10.25, 6.8303, -11.25, -10, -6.1697, -11.5, -10, -6.1697, -10.75, -9.25, -6.1697, -10.75, -9.25, -6.1697, -11.5, -10, -1.1697, -11.5, -10, -1.1697, -10.75, -9.25, -1.1697, -10.75, -9.25, -1.1697, -11.5, 11.5, 1.8303, -10.5, 11.5, 1.8303, -8.25, 13.75, 1.8303, -8.25, 13.75, 1.8303, -10.5, -23, 0.8303, -2, -24.75, 0.8303, -1.75, -24.75, 0.8303, 1.75, -23, 0.8303, 2, 23, 0.8303, 2, 23, 0.8303, -2, 23, 0.8303, -4.5, -23, 0.8303, -4.5, 24.75, 0.8303, 1.75, 24.75, 0.8303, -1.75, -23, 0.8303, 4.5, 23, 0.8303, 4.5, -14.75, -1.1697, 7, -12.25, -1.1697, 6.75, -12, -1.1697, 5.75, -24.25, -1.1697, 5.75, -12.5, -1.1697, 14, -12.5, -1.1697, 11, -14.75, -1.1697, 10.75, -24.25, -1.1697, 14, -10.5, -1.1697, 7, 6.25, -1.1697, 7.75, 8.25, -1.1697, 7.5, 8, -1.1697, 5.75, 8, -1.1697, 14, 8.25, -1.1697, 12.25, 6.25, -1.1697, 12, -10.5, -1.1697, 10.75, 11.25, -1.1697, 12, 24.5, -1.1697, 14, 11.25, -1.1697, 7.75, 24.5, -1.1697, 5.75, -14.75, 5.0803, 6.75, -14.75, 5.0803, 11, -10.5, 5.0803, 11, -10.5, 5.0803, 6.75, -13.5, -6.1697, 8, -13.5, -6.1697, 9.75, -11.75, -6.1697, 9.75, -11.75, -6.1697, 8, -13.5, -1.1697, 8, -13.5, -1.1697, 9.75, -11.75, -1.1697, 9.75, -11.75, -1.1697, 8, -14.5, -6.1697, 11, -24.25, -6.1697, 14, 8.25, 4.8303, 9.5, 8.25, 4.8303, 10.25, 9.25, 4.8303, 10.25, 9, 4.8303, 9.25, 8.25, -6.1697, 9.5, 8.25, -6.1697, 10.25, 9.25, -6.1697, 10.25, 9.25, -6.1697, 9.5, 8.25, -1.1697, 9.5, 8.25, -1.1697, 10.25, 9.25, -1.1697, 10.25, 9.25, -1.1697, 9.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(6, 5, 3), PackedInt32Array(3, 5, 4), PackedInt32Array(10, 9, 7), PackedInt32Array(7, 9, 8), PackedInt32Array(6, 3, 11), PackedInt32Array(11, 3, 0), PackedInt32Array(11, 9, 6), PackedInt32Array(6, 9, 10), PackedInt32Array(0, 13, 11), PackedInt32Array(11, 13, 12), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(20, 19, 18), PackedInt32Array(22, 21, 20), PackedInt32Array(17, 14, 23), PackedInt32Array(23, 22, 17), PackedInt32Array(17, 22, 20), PackedInt32Array(17, 20, 18), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(30, 29, 28), PackedInt32Array(28, 31, 30), PackedInt32Array(30, 31, 27), PackedInt32Array(27, 24, 30), PackedInt32Array(15, 16, 32), PackedInt32Array(32, 16, 33), PackedInt32Array(33, 16, 35), PackedInt32Array(33, 35, 34), PackedInt32Array(36, 32, 33), PackedInt32Array(38, 37, 39), PackedInt32Array(39, 37, 40), PackedInt32Array(40, 37, 41), PackedInt32Array(41, 37, 42), PackedInt32Array(39, 40, 43), PackedInt32Array(43, 40, 44), PackedInt32Array(46, 45, 43), PackedInt32Array(22, 44, 21), PackedInt32Array(22, 36, 44), PackedInt32Array(44, 36, 43), PackedInt32Array(43, 36, 46), PackedInt32Array(46, 36, 33), PackedInt32Array(25, 26, 47), PackedInt32Array(47, 26, 48), PackedInt32Array(48, 26, 49), PackedInt32Array(49, 26, 50), PackedInt32Array(52, 51, 53), PackedInt32Array(53, 51, 54), PackedInt32Array(54, 51, 29), PackedInt32Array(29, 51, 28), PackedInt32Array(53, 54, 48), PackedInt32Array(48, 54, 47), PackedInt32Array(38, 55, 37), PackedInt32Array(37, 55, 56), PackedInt32Array(34, 35, 57), PackedInt32Array(57, 35, 58), PackedInt32Array(45, 46, 59), PackedInt32Array(59, 57, 58), PackedInt32Array(60, 45, 56), PackedInt32Array(56, 45, 59), PackedInt32Array(56, 59, 58), PackedInt32Array(56, 55, 60), PackedInt32Array(52, 61, 51), PackedInt32Array(51, 61, 62), PackedInt32Array(49, 50, 63), PackedInt32Array(63, 50, 64), PackedInt32Array(61, 63, 62), PackedInt32Array(62, 63, 64), PackedInt32Array(67, 66, 65), PackedInt32Array(70, 69, 68), PackedInt32Array(74, 73, 71), PackedInt32Array(71, 73, 72), PackedInt32Array(78, 77, 75), PackedInt32Array(75, 77, 76), PackedInt32Array(82, 81, 79), PackedInt32Array(79, 81, 80), PackedInt32Array(86, 85, 83), PackedInt32Array(83, 85, 84), PackedInt32Array(88, 87, 89), PackedInt32Array(89, 87, 90), PackedInt32Array(90, 87, 92), PackedInt32Array(90, 92, 91), PackedInt32Array(87, 94, 92), PackedInt32Array(92, 94, 93), PackedInt32Array(95, 91, 96), PackedInt32Array(96, 91, 92), PackedInt32Array(91, 98, 90), PackedInt32Array(90, 98, 97), PackedInt32Array(100, 99, 101), PackedInt32Array(101, 99, 102), PackedInt32Array(104, 103, 105), PackedInt32Array(105, 103, 106), PackedInt32Array(99, 105, 102), PackedInt32Array(102, 105, 106), PackedInt32Array(100, 101, 107), PackedInt32Array(107, 101, 108), PackedInt32Array(108, 101, 109), PackedInt32Array(109, 101, 110), PackedInt32Array(112, 111, 113), PackedInt32Array(113, 111, 114), PackedInt32Array(114, 111, 104), PackedInt32Array(104, 111, 103), PackedInt32Array(107, 108, 114), PackedInt32Array(114, 108, 113), PackedInt32Array(112, 115, 111), PackedInt32Array(111, 115, 116), PackedInt32Array(109, 110, 117), PackedInt32Array(117, 110, 118), PackedInt32Array(117, 118, 115), PackedInt32Array(115, 118, 116), PackedInt32Array(122, 121, 119), PackedInt32Array(119, 121, 120), PackedInt32Array(126, 125, 123), PackedInt32Array(123, 125, 124), PackedInt32Array(130, 129, 127), PackedInt32Array(127, 129, 128), PackedInt32Array(131, 41, 42), PackedInt32Array(18, 19, 131), PackedInt32Array(18, 131, 132), PackedInt32Array(132, 131, 42), PackedInt32Array(133, 136, 134), PackedInt32Array(134, 136, 135), PackedInt32Array(140, 139, 137), PackedInt32Array(137, 139, 138), PackedInt32Array(144, 143, 141), PackedInt32Array(141, 143, 142)]
 
 [sub_resource type="QuadMesh" id="QuadMesh_1t3pk"]
 
@@ -40,182 +44,182 @@ script = ExtResource("3_1hrjq")
 dimensions = Vector3i(5, 1, 3)
 metadata/_custom_type_script = "uid://kdixd6vxiddp"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="SpawnPoints" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.66671, 0.703474, 0)
+
+[node name="Marker3D2" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24301, 0.703474, 2.18487)
+
+[node name="Marker3D3" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.49327, 0.703474, -1.42455)
+
+[node name="Marker3D4" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.37989, 0.703474, 2.38518)
+
+[node name="Marker3D5" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8851, 0.703474, -1.94114)
+
+[node name="Marker3D6" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4635, 0.703474, 0.795173)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_8m7sy")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -7, 0)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(25, 0.5, 15)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0419922, 0, 0)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(25.3799, 0.5, 5)
 
-[node name="Wall" type="CSGBox3D" parent="."]
+[node name="Wall" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 1.567, -15)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(25, 0.5, 8.56653)
 
-[node name="Wall2" type="CSGBox3D" parent="."]
+[node name="Wall2" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 1.567, 15)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(25, 0.5, 8.56653)
 
-[node name="Wall5" type="CSGBox3D" parent="."]
+[node name="Wall5" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-8.74228e-08, -2, 0, -8.74228e-08, 0, 2, -2, 8.74228e-08, -8.74228e-08, 25.5, 5.38682, -9)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(6, 0.5, 5.18018)
 
-[node name="Wall8" type="CSGBox3D" parent="."]
+[node name="Wall8" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-8.74228e-08, -2, 0, -8.74228e-08, 0, 2, -2, 8.74228e-08, -8.74228e-08, 25.5, -3.05711, 1.33631e-07)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(15, 0.5, 3.50989)
 
-[node name="Wall9" type="CSGBox3D" parent="."]
+[node name="Wall9" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-8.74228e-08, -2, 0, -8.74228e-08, 0, 2, -2, 8.74228e-08, -8.74228e-08, 25.5, 5.38683, 9)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(6, 0.5, 5.18018)
 
-[node name="Wall6" type="CSGBox3D" parent="."]
+[node name="Wall6" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-8.74228e-08, -2, 0, -8.74228e-08, 0, 2, -2, 8.74228e-08, -8.74228e-08, -25.5, 5.38682, -9)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(6, 0.5, 5.18018)
 
-[node name="Wall10" type="CSGBox3D" parent="."]
+[node name="Wall10" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-8.74228e-08, -2, 0, -8.74228e-08, 0, 2, -2, 8.74228e-08, -8.74228e-08, -25.5, -3.05711, 1.33631e-07)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(15, 0.5, 3.50989)
 
-[node name="Wall11" type="CSGBox3D" parent="."]
+[node name="Wall11" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(-8.74228e-08, -2, 0, -8.74228e-08, 0, 2, -2, 8.74228e-08, -8.74228e-08, -25.5, 5.38683, 9)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(6, 0.5, 5.18018)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 9.70264, 0)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(25, 0.202637, 15)
 
-[node name="Fog" type="MeshInstance3D" parent="."]
+[node name="Fog" type="MeshInstance3D" parent="NavigationRegion3D"]
 transform = Transform3D(50, 0, 0, 0, -1.31134e-06, 1, 0, -30, -4.37114e-08, 0.313168, -1.51723, -0.261821)
 mesh = SubResource("QuadMesh_1t3pk")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_nri5q")
 
-[node name="EntranceLeft" type="Node3D" parent="."]
+[node name="EntranceLeft" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(1.57361e-07, 0, 1.2, 0, 1, 0, -1.2, 0, 1.57361e-07, -25.994, 0, 0)
 
-[node name="Wall" type="CSGBox3D" parent="EntranceLeft"]
+[node name="Wall" type="CSGBox3D" parent="NavigationRegion3D/EntranceLeft"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(7, 0.5, 5)
 
-[node name="Wall2" type="CSGBox3D" parent="EntranceLeft"]
+[node name="Wall2" type="CSGBox3D" parent="NavigationRegion3D/EntranceLeft"]
 transform = Transform3D(1.9108e-15, -4.37128e-08, 1.20513, -1, -4.37114e-08, 0, 4.37114e-08, -1, -5.26797e-08, -0.0182495, 8.65039, 0.792635)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(3.30078, 1.55969, 5.9967)
 
-[node name="pillar_square" parent="EntranceLeft" instance=ExtResource("6_4qduk")]
+[node name="pillar_square" parent="NavigationRegion3D/EntranceLeft" instance=ExtResource("6_4qduk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
 
-[node name="Cube" parent="EntranceLeft/pillar_square" index="0"]
-surface_material_override/0 = ExtResource("4_8oj8v")
-
-[node name="pillar_square2" parent="EntranceLeft" instance=ExtResource("6_4qduk")]
+[node name="pillar_square2" parent="NavigationRegion3D/EntranceLeft" instance=ExtResource("6_4qduk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
 
-[node name="Cube" parent="EntranceLeft/pillar_square2" index="0"]
-surface_material_override/0 = ExtResource("4_8oj8v")
-
-[node name="arch" parent="EntranceLeft" instance=ExtResource("7_2lj4n")]
+[node name="arch" parent="NavigationRegion3D/EntranceLeft" instance=ExtResource("7_2lj4n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 7.28393, 1.26853)
 
-[node name="Cube" parent="EntranceLeft/arch" index="0"]
+[node name="Cube" parent="NavigationRegion3D/EntranceLeft/arch" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("4_8oj8v")
 
-[node name="EntranceRight" type="Node3D" parent="."]
+[node name="EntranceRight" type="Node3D" parent="NavigationRegion3D"]
 transform = Transform3D(-5.24537e-08, 0, -1.2, 0, 1, 0, 1.2, 0, -5.24537e-08, 26.006, 0, 0)
 
-[node name="Wall" type="CSGBox3D" parent="EntranceRight"]
+[node name="Wall" type="CSGBox3D" parent="NavigationRegion3D/EntranceRight"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 3.5, 0.262781)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(7, 0.5, 5)
 
-[node name="Wall2" type="CSGBox3D" parent="EntranceRight"]
+[node name="Wall2" type="CSGBox3D" parent="NavigationRegion3D/EntranceRight"]
 transform = Transform3D(1.9108e-15, -4.37128e-08, 1.20513, -1, -4.37114e-08, 0, 4.37114e-08, -1, -5.26797e-08, -0.0182495, 8.65039, 0.792635)
 material_override = ExtResource("4_8oj8v")
 use_collision = true
 size = Vector3(3.30078, 1.55969, 5.9967)
 
-[node name="pillar_square" parent="EntranceRight" instance=ExtResource("6_4qduk")]
+[node name="pillar_square" parent="NavigationRegion3D/EntranceRight" instance=ExtResource("6_4qduk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05903, 0.150508, 1.06071)
 
-[node name="Cube" parent="EntranceRight/pillar_square" index="0"]
-surface_material_override/0 = ExtResource("4_8oj8v")
-
-[node name="pillar_square2" parent="EntranceRight" instance=ExtResource("6_4qduk")]
+[node name="pillar_square2" parent="NavigationRegion3D/EntranceRight" instance=ExtResource("6_4qduk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.059, 0.151, 1.061)
 
-[node name="Cube" parent="EntranceRight/pillar_square2" index="0"]
-surface_material_override/0 = ExtResource("4_8oj8v")
-
-[node name="arch" parent="EntranceRight" instance=ExtResource("7_2lj4n")]
+[node name="arch" parent="NavigationRegion3D/EntranceRight" instance=ExtResource("7_2lj4n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.584309, -0.0171971, 7.28393, 1.26853)
 
-[node name="Cube" parent="EntranceRight/arch" index="0"]
+[node name="Cube" parent="NavigationRegion3D/EntranceRight/arch" index="0"]
 transform = Transform3D(1, 0, 0, 0, 2.20399, 0, 0, 0, 1, 0, -1.22466, -0.437432)
 surface_material_override/0 = ExtResource("4_8oj8v")
 
-[node name="pillar_square" parent="." instance=ExtResource("6_4qduk")]
+[node name="pillar_square" parent="NavigationRegion3D" instance=ExtResource("6_4qduk")]
 transform = Transform3D(1.8569, 0, 0, 0, 1.8569, 0, 0, 0, 1.8569, -9.61689, -9.03687, -11.159)
 
-[node name="Cube" parent="pillar_square" index="0"]
-surface_material_override/0 = ExtResource("4_8oj8v")
-
-[node name="brazier" parent="pillar_square" instance=ExtResource("8_ydlmi")]
+[node name="brazier" parent="NavigationRegion3D/pillar_square" instance=ExtResource("8_ydlmi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.00017, 0)
 
-[node name="pillar_square2" parent="." instance=ExtResource("6_4qduk")]
+[node name="pillar_square2" parent="NavigationRegion3D" instance=ExtResource("6_4qduk")]
 transform = Transform3D(1.8569, 0, 0, 0, 1.8569, 0, 0, 0, 1.8569, 8.81762, -11.1697, 9.89102)
 
-[node name="Cube" parent="pillar_square2" index="0"]
-surface_material_override/0 = ExtResource("4_8oj8v")
-
-[node name="brazier" parent="pillar_square2" instance=ExtResource("8_ydlmi")]
+[node name="brazier" parent="NavigationRegion3D/pillar_square2" instance=ExtResource("8_ydlmi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.00017, 0)
 
-[node name="pillar_square3" parent="." instance=ExtResource("6_4qduk")]
+[node name="pillar_square3" parent="NavigationRegion3D" instance=ExtResource("6_4qduk")]
 transform = Transform3D(2.46366, 0, 0, 0, 1.8569, 0, 0, 0, 2.46366, -12.672, -8.37855, 8.91686)
 
-[node name="Cube" parent="pillar_square3" index="0"]
-surface_material_override/0 = ExtResource("4_8oj8v")
-
-[node name="pillar_square4" parent="." instance=ExtResource("6_4qduk")]
+[node name="pillar_square4" parent="NavigationRegion3D" instance=ExtResource("6_4qduk")]
 transform = Transform3D(1.43486, 0, 0, 0, 1.08148, 0, 0, 0, 1.43486, 12.6406, -6.09368, -9.33242)
 
-[node name="Cube" parent="pillar_square4" index="0"]
-surface_material_override/0 = ExtResource("4_8oj8v")
-
-[editable path="EntranceLeft/pillar_square"]
-[editable path="EntranceLeft/pillar_square2"]
-[editable path="EntranceLeft/arch"]
-[editable path="EntranceRight/pillar_square"]
-[editable path="EntranceRight/pillar_square2"]
-[editable path="EntranceRight/arch"]
-[editable path="pillar_square"]
-[editable path="pillar_square2"]
-[editable path="pillar_square3"]
-[editable path="pillar_square4"]
+[editable path="NavigationRegion3D/EntranceLeft/pillar_square"]
+[editable path="NavigationRegion3D/EntranceLeft/pillar_square2"]
+[editable path="NavigationRegion3D/EntranceLeft/arch"]
+[editable path="NavigationRegion3D/EntranceRight/pillar_square"]
+[editable path="NavigationRegion3D/EntranceRight/pillar_square2"]
+[editable path="NavigationRegion3D/EntranceRight/arch"]
+[editable path="NavigationRegion3D/pillar_square"]
+[editable path="NavigationRegion3D/pillar_square2"]
+[editable path="NavigationRegion3D/pillar_square3"]
+[editable path="NavigationRegion3D/pillar_square4"]
