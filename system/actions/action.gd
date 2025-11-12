@@ -63,3 +63,7 @@ func stamina_tick():
 	character.stamina.drain_stamina.rpc(sustained_stamina_cost / stamina_tick_speed)
 	await character.get_tree().create_timer(1.0 / stamina_tick_speed).timeout
 	stamina_tick()
+
+
+func _to_string() -> String:
+	return action_name

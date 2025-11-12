@@ -10,7 +10,6 @@ anchors_preset = 0
 offset_right = 200.0
 offset_bottom = 200.0
 script = ExtResource("1_1bfrm")
-map_scale = 20.0
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 2

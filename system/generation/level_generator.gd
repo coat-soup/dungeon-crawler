@@ -108,6 +108,7 @@ func generate_hallways():
 							hallways.append(hallway)
 							
 							prefab = hallway_room.prefab.instantiate()
+							prefab.level_room = hallway
 							$LevelHolder.add_child(prefab)
 							prefab.position = hallway.position * cell_size + hallway.size * cell_size * Vector3(1,0,1) / 2
 							spawned_hallway_prefabs.append(prefab)
@@ -166,6 +167,7 @@ func place_room_prefabs():
 	
 	for room in spawned_rooms:
 		var prefab : LevelRoomPrefab = room.room_data.prefab.instantiate() as LevelRoomPrefab
+		prefab.level_room = room
 		spawned_prefabs.append(prefab)
 		$LevelHolder.add_child(prefab)
 		prefab.position = room.position * cell_size + room.size * cell_size * Vector3(1,0,1) / 2

@@ -1,9 +1,37 @@
 extends Node3D
 class_name LevelRoomPrefab
 
+signal player_entered(Player)
+
+
 @export var entrances : Array[LevelRoomPrefabEntrance]
 @export var num_enemies : int = 2
 
+var level_room : LevelRoom
+
+var room_area : Area3D
+
+
+func _ready() -> void:
+	return
+	room_area = Area3D.new()
+	add_child(room_area)
+	room_area.body_entered.connect(on_room_area_entered)
+	var col = CollisionShape3D.new()
+	room_area.add_child(col)
+	col.shape = BoxShape3D.new()
+	(col.shape as BoxShape3D).size = level_room.size * LevelGenerator.cell_size
+	col.position.y += col.shape.size.y/2
+	
+	return
+	var debug_box = CSGBox3D.new()
+	col.add_child(debug_box)
+	debug_box.size = col.shape.size
+
+
+func on_room_area_entered(body : Node3D):
+	var player = body as Player
+	if player: player_entered.emit(player)
 
 
 func toggle_entrance(id: int, state: bool):

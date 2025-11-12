@@ -1,27 +1,43 @@
 extends Control
 class_name Minimap
 
-@export var map_scale : float = 30.0
+@export var map_scale : float = 20.0
 
 var rooms : Array[Control]
 var hallways : Array[Control]
 
-var visited_rooms : Array[int]
-var visited_hallways : Array[int]
+var visited_rooms : Array[bool]
+var visited_hallways : Array[bool]
 
 @onready var map_container: Control = $MapContainer
 @onready var player_marker: TextureRect = $PlayerMarker
+@export var do_revealing := true
 
 
 func _ready() -> void:
 	await get_tree().process_frame
-	Global.level_generator.finished.connect(build_map)
+	if Global.level_generator:
+		Global.level_generator.finished.connect(build_map)
 
 
 func _process(delta: float) -> void:
 	if Global.local_player:
 		map_container.position = size/2 - Vector2(Global.local_player.global_position.x, Global.local_player.global_position.z) * map_scale / Global.level_generator.cell_size
 		player_marker.rotation = -Global.local_player.rotation.y
+		
+		if do_revealing:
+			for i in range(len(rooms)):
+				if visited_rooms[i]: continue
+				var local_player_pos = global_position + size/2 - rooms[i].global_position
+				if local_player_pos.x > 0 and local_player_pos.x < rooms[i].size.x and local_player_pos.y > 0 and local_player_pos.y < rooms[i].size.y:
+					visited_rooms[i] = true
+					rooms[i].visible = true
+			for i in range(len(hallways)):
+				if visited_hallways[i]: continue
+				var local_player_pos = global_position + size/2 - hallways[i].global_position
+				if local_player_pos.x > 0 and local_player_pos.x < hallways[i].size.x and local_player_pos.y > 0 and local_player_pos.y < hallways[i].size.y:
+					visited_hallways[i] = true
+					hallways[i].visible = true
 
 
 func build_map():
@@ -47,7 +63,10 @@ func build_map():
 		text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		text.modulate = Color.BLACK
 		
+		if do_revealing: room.visible = false
+		
 		rooms.append(room)
+		visited_rooms.append(false)
 	
 	
 	for i in range(len(Global.level_generator.hallways)):
@@ -59,7 +78,10 @@ func build_map():
 		
 		create_room_borders(hallway, Global.level_generator.hallways[i], Global.level_generator.spawned_hallway_prefabs[i])
 		
+		if do_revealing: hallway.visible = false
+		
 		hallways.append(hallway)
+		visited_hallways.append(false)
 
 
 func create_room_borders(room_control : Control, room : LevelRoom, prefab : LevelRoomPrefab):
