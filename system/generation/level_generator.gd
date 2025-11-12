@@ -25,6 +25,9 @@ var spawned_hallway_prefabs : Array[LevelRoomPrefab]
 var astar : LevelAstar
 
 func _ready():
+	print("EREE")
+	Global.level_generator = self
+	
 	astar = LevelAstar.new(self)
 	graph_generator.finished_generation.connect(generate)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://db1lqpw1tim4q"]
+[gd_scene load_steps=16 format=3 uid="uid://db1lqpw1tim4q"]
 
 [ext_resource type="Script" uid="uid://cv83h2tcngfv3" path="res://ui/scripts/ui_manager.gd" id="1_hp8fa"]
 [ext_resource type="Texture2D" uid="uid://cqmkcefkf8vqf" path="res://ui/textures/hit_marker.png" id="2_1u8fv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ho1w61jqh1k4" path="res://ui/textures/shield_outline.png" id="4_xbkoe"]
 [ext_resource type="Script" uid="uid://d2ag8w6ck2est" path="res://ui/scripts/settings_panel_manager.gd" id="5_ky4nr"]
 [ext_resource type="Shader" uid="uid://dke27w30r5k8p" path="res://vfx/shaders/ui_blur.gdshader" id="8_fef28"]
+[ext_resource type="PackedScene" uid="uid://geegey0l34q5" path="res://ui/scenes/minimap.tscn" id="10_f6mhv"]
 [ext_resource type="PackedScene" uid="uid://kd4fvkpy7af2" path="res://ui/scenes/lobby_entry.tscn" id="10_yfaaw"]
 
 [sub_resource type="Animation" id="Animation_68x3x"]
@@ -349,6 +350,7 @@ offset_bottom = 363.745
 text = "REFRESH LOBBIES"
 
 [node name="OptionsPanel" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -606,3 +608,10 @@ F: Kick
 Space: Jump/Dash
 Shift: Sprint
 E: Interact"
+
+[node name="Minimap" parent="." instance=ExtResource("10_f6mhv")]
+layout_mode = 1
+offset_left = 61.0
+offset_top = 52.0
+offset_right = 261.0
+offset_bottom = 252.0

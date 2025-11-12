@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://geegey0l34q5"]
+
+[ext_resource type="Script" uid="uid://v8jyqhiheamx" path="res://ui/scripts/minimap.gd" id="1_1bfrm"]
+[ext_resource type="Texture2D" uid="uid://c1wv8epqgm0c3" path="res://ui/textures/minimap_player.png" id="2_io2ow"]
+
+[node name="Minimap" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 200.0
+script = ExtResource("1_1bfrm")
+map_scale = 20.0
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.67, 0.597305, 0.5293, 0.627451)
+
+[node name="MapContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 94.0
+offset_top = 55.0
+offset_right = 134.0
+offset_bottom = 95.0
+
+[node name="PlayerMarker" type="TextureRect" parent="."]
+modulate = Color(0.034158, 0.713151, 0.828755, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(7.5, 7.5)
+texture = ExtResource("2_io2ow")
+expand_mode = 1
