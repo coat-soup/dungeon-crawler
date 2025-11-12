@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp5exbo6vl634"]
+
+[ext_resource type="Texture2D" uid="uid://dx6d7xglvi70s" path="res://world/props/textures/spiderweb_01.png" id="1_jrvbf"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_mo0hk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p1mn1"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 1, 1, 0.498039)
+albedo_texture = ExtResource("1_jrvbf")
+texture_filter = 0
+
+[node name="SpiderWeb" type="MeshInstance3D"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("QuadMesh_mo0hk")
+surface_material_override/0 = SubResource("StandardMaterial3D_p1mn1")

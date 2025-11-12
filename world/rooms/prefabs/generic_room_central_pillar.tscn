@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://bnkcuqp7p78hv"]
+[gd_scene load_steps=21 format=3 uid="uid://bnkcuqp7p78hv"]
 
 [ext_resource type="Script" uid="uid://bboyq3btxjcad" path="res://system/generation/level_room_prefab.gd" id="1_nhdch"]
 [ext_resource type="Script" uid="uid://ntkhnwdxsq5b" path="res://system/generation/level_room_prefab_entrance.gd" id="2_oeqjq"]
 [ext_resource type="Material" uid="uid://khh6k54woa1a" path="res://world/materials/stone_wall_mat.tres" id="3_43m26"]
+[ext_resource type="Material" uid="uid://cs3rl43g8p4pu" path="res://world/materials/rough_cobble_floor_mat.tres" id="4_keo4j"]
 [ext_resource type="PackedScene" uid="uid://dkvlyhno4cx23" path="res://world/props/scenes/pillar_square.tscn" id="4_nhdch"]
 [ext_resource type="PackedScene" uid="uid://ct6xxcocgimjv" path="res://world/props/scenes/wall_torch.tscn" id="4_tvv4i"]
 [ext_resource type="PackedScene" uid="uid://brhb85u6e8n26" path="res://world/props/models/arch.glb" id="5_oeqjq"]
@@ -88,7 +89,7 @@ navigation_mesh = SubResource("NavigationMesh_8uo4m")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0.00561251, 0, 0.00997718)
-material_override = ExtResource("3_43m26")
+material_override = ExtResource("4_keo4j")
 use_collision = true
 size = Vector3(25, 0.5, 25)
 

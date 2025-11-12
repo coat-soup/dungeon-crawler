@@ -1,12 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://b0wmvlc481vr4"]
+[gd_scene load_steps=20 format=3 uid="uid://b0wmvlc481vr4"]
 
 [ext_resource type="Script" uid="uid://bboyq3btxjcad" path="res://system/generation/level_room_prefab.gd" id="1_sjlh5"]
 [ext_resource type="Material" uid="uid://khh6k54woa1a" path="res://world/materials/stone_wall_mat.tres" id="2_fq02h"]
 [ext_resource type="Script" uid="uid://ntkhnwdxsq5b" path="res://system/generation/level_room_prefab_entrance.gd" id="2_na08x"]
 [ext_resource type="Script" uid="uid://kdixd6vxiddp" path="res://system/debug/level_room_grid_viz.gd" id="3_rsywg"]
 [ext_resource type="PackedScene" uid="uid://ct6xxcocgimjv" path="res://world/props/scenes/wall_torch.tscn" id="4_dwslb"]
+[ext_resource type="Material" uid="uid://cs3rl43g8p4pu" path="res://world/materials/rough_cobble_floor_mat.tres" id="4_nri5q"]
 [ext_resource type="PackedScene" uid="uid://dkvlyhno4cx23" path="res://world/props/scenes/pillar_square.tscn" id="6_5kshj"]
 [ext_resource type="PackedScene" uid="uid://brhb85u6e8n26" path="res://world/props/models/arch.glb" id="7_1t3pk"]
+[ext_resource type="PackedScene" uid="uid://cp5exbo6vl634" path="res://world/props/scenes/spiderweb_01.tscn" id="9_13416"]
+[ext_resource type="PackedScene" uid="uid://bk6ihejjp3m13" path="res://world/props/scenes/spiderweb_02.tscn" id="10_2q1mv"]
 
 [sub_resource type="Resource" id="Resource_na08x"]
 script = ExtResource("2_na08x")
@@ -111,7 +114,7 @@ navigation_mesh = SubResource("NavigationMesh_1t3pk")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-material_override = ExtResource("2_fq02h")
+material_override = ExtResource("4_nri5q")
 use_collision = true
 size = Vector3(10, 0.5, 10)
 
@@ -392,6 +395,15 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.3006
 
 [node name="wall_torch8" parent="NavigationRegion3D" instance=ExtResource("4_dwslb")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.30087, 3.599, -8.42787)
+
+[node name="Node3D" parent="." instance=ExtResource("9_13416")]
+transform = Transform3D(1.91548, -0.287636, -0.000188798, 0.570128, 0.949262, -0.132813, 0.0767618, 0.127146, 0.991141, -0.200382, 5.23666, 8.55403)
+
+[node name="SpiderWeb" parent="." instance=ExtResource("10_2q1mv")]
+transform = Transform3D(0.0415728, -1.70828, -0.875237, 1.34447, -0.772204, 1.53324, -2.68673, -0.412853, 0.753711, -7.80087, 8.47645, 7.43271)
+
+[node name="SpiderWeb2" parent="." instance=ExtResource("9_13416")]
+transform = Transform3D(-0.0558433, -0.99961, 0, 1.64881, -0.0230278, -0.565529, 1.13062, -0.0157905, 0.824729, 9.05259, 4.87051, -7.39185)
 
 [editable path="NavigationRegion3D/Entrance/pillar_square"]
 [editable path="NavigationRegion3D/Entrance/pillar_square2"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://cuhkwocop1mx7"]
+[gd_scene load_steps=54 format=4 uid="uid://cuhkwocop1mx7"]
 
 [ext_resource type="Script" uid="uid://cg45kvo8hpusp" path="res://system/globals/game_manager.gd" id="1_0nv80"]
 [ext_resource type="Script" uid="uid://diu56yvjoii56" path="res://system/general/network_manager.gd" id="2_4p34j"]
@@ -35,6 +35,8 @@
 [ext_resource type="PackedScene" uid="uid://bs3whcbkp11s7" path="res://world/props/scenes/barrel_broken.tscn" id="32_2tyfi"]
 [ext_resource type="PackedScene" uid="uid://0l7rx2b47rju" path="res://world/props/scenes/candle_cluster.tscn" id="34_i2wsj"]
 [ext_resource type="PackedScene" uid="uid://c1hm6ldo3d14k" path="res://world/props/scenes/small_effigy.tscn" id="35_ola42"]
+[ext_resource type="PackedScene" uid="uid://d0suiyel057eq" path="res://world/props/scenes/small_animal_cage.tscn" id="36_t427j"]
+[ext_resource type="PackedScene" uid="uid://cd2f2x88bo1a6" path="res://world/props/scenes/banner.tscn" id="37_xe57u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6wf1f"]
 sky_top_color = Color(0.484482, 0.54318, 0.717929, 1)
@@ -740,6 +742,39 @@ transform = Transform3D(0.98273, -0.134254, -0.127351, 0.148262, 0.159442, 0.976
 [node name="candle_cluster" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("34_i2wsj")]
 transform = Transform3D(-0.315517, 0, -0.94892, 0, 1, 0, 0.94892, 0, -0.315517, -0.565056, 2.89464, 10.4692)
 
+[node name="small_animal_cage" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("36_t427j")]
+transform = Transform3D(0.714754, 0, -0.699377, 0, 1, 0, 0.699377, 0, 0.714754, 8.86284, 1.65788, -7.97171)
+
+[node name="small_animal_cage2" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("36_t427j")]
+transform = Transform3D(-0.500091, 0, 0.865973, 0, 1, 0, -0.865973, 0, -0.500091, -6.63862, 1.65788, 8.53086)
+
+[node name="small_animal_cage5" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("36_t427j")]
+transform = Transform3D(-0.857347, 0, 0.514739, 0, 1, 0, -0.514739, 0, -0.857347, -6.3251, 2.44164, 8.90808)
+
+[node name="Door" parent="World/Castle/NavigationRegion3D/FightRing/small_animal_cage5" index="15"]
+transform = Transform3D(0.987245, 0, -0.159209, 0, 1, 0, 0.159209, 0, 0.987245, -0.325521, 0.393731, 0.315169)
+
+[node name="small_animal_cage3" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("36_t427j")]
+transform = Transform3D(-0.933537, 0, 0.358482, 0, 1, 0, -0.358482, 0, -0.933537, -5.7757, 1.65788, 9.22511)
+
+[node name="Door" parent="World/Castle/NavigationRegion3D/FightRing/small_animal_cage3" index="15"]
+transform = Transform3D(0.885459, 0, -0.464718, 0, 1, 0, 0.464718, 0, 0.885459, -0.325521, 0.393731, 0.315169)
+
+[node name="small_animal_cage4" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("36_t427j")]
+transform = Transform3D(-0.560038, -0.816011, 0.143122, 0.048227, 0.140351, 0.988927, -0.827062, 0.560738, -0.0392483, -6.99985, 1.84708, 7.52528)
+
+[node name="Door" parent="World/Castle/NavigationRegion3D/FightRing/small_animal_cage4" index="15"]
+transform = Transform3D(-0.650721, 0, -0.759317, 0, 1, 0, 0.759317, 0, -0.650721, -0.325521, 0.393731, 0.315169)
+
+[node name="banner" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("37_xe57u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10.5682, 5.94941, -0.671422)
+
+[node name="banner2" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("37_xe57u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 14.4748, 10.3307, -3.87106)
+
+[node name="banner3" parent="World/Castle/NavigationRegion3D/FightRing" instance=ExtResource("37_xe57u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 14.4748, 10.3307, 3.12894)
+
 [node name="fern4" parent="World/Castle" instance=ExtResource("14_aald4")]
 transform = Transform3D(-0.358726, 0, 0.933443, 0, 1, 0, -0.933443, 0, -0.358726, 12.7125, 17.3041, -3.15964)
 
@@ -1121,6 +1156,9 @@ transform = Transform3D(0.597569, 0, 0, 0, 0.597569, 0, 0, 0, 0.597569, 36.5778,
 [editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square3"]
 [editable path="World/Castle/NavigationRegion3D/FightRing/Pillars/pillar_square4"]
 [editable path="World/Castle/NavigationRegion3D/FightRing/rough_floor_patch"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/small_animal_cage5"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/small_animal_cage3"]
+[editable path="World/Castle/NavigationRegion3D/FightRing/small_animal_cage4"]
 [editable path="World/Castle/Balcony/rough_floor_patch2"]
 [editable path="World/Castle/Balcony/pillar_square"]
 [editable path="World/Castle/Balcony/pillar_square2"]

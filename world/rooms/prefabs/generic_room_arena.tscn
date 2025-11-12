@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://dx2t54hl7gq1c"]
+[gd_scene load_steps=44 format=4 uid="uid://dx2t54hl7gq1c"]
 
 [ext_resource type="Script" uid="uid://bboyq3btxjcad" path="res://system/generation/level_room_prefab.gd" id="1_rwh47"]
 [ext_resource type="Script" uid="uid://ntkhnwdxsq5b" path="res://system/generation/level_room_prefab_entrance.gd" id="2_l7v61"]
@@ -11,11 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://0l7rx2b47rju" path="res://world/props/scenes/candle_cluster.tscn" id="7_37c4c"]
 [ext_resource type="PackedScene" uid="uid://brhb85u6e8n26" path="res://world/props/models/arch.glb" id="7_bv8bp"]
 [ext_resource type="PackedScene" uid="uid://bdst4tv46kcy2" path="res://world/props/scenes/brazier.tscn" id="8_7pn5m"]
+[ext_resource type="Material" uid="uid://cs3rl43g8p4pu" path="res://world/materials/rough_cobble_floor_mat.tres" id="9_m7xpn"]
 [ext_resource type="PackedScene" uid="uid://bs3whcbkp11s7" path="res://world/props/scenes/barrel_broken.tscn" id="12_7sca3"]
 [ext_resource type="PackedScene" uid="uid://7cvt4g1jdr5g" path="res://world/props/scenes/vines2.tscn" id="13_bv8bp"]
 [ext_resource type="PackedScene" uid="uid://d82npnl5j7j4" path="res://world/props/scenes/vines.tscn" id="14_7pn5m"]
 [ext_resource type="PackedScene" uid="uid://btt5dershufo2" path="res://world/props/scenes/fern.tscn" id="15_7pn5m"]
 [ext_resource type="PackedScene" uid="uid://cvj58tbs4ucoh" path="res://world/props/scenes/rock_01.tscn" id="16_sw84h"]
+[ext_resource type="PackedScene" uid="uid://d0suiyel057eq" path="res://world/props/scenes/small_animal_cage.tscn" id="17_e3msw"]
 [ext_resource type="Material" uid="uid://bn0fq2xxsmv4j" path="res://world/materials/dirt_mat.tres" id="17_sj74d"]
 [ext_resource type="Texture2D" uid="uid://dub0qdr2ia4jv" path="res://world/props/textures/stone_wall.png" id="18_hn0e2"]
 [ext_resource type="Texture2D" uid="uid://bd4iveb1ysfxy" path="res://world/props/textures/brick_wall_n.png" id="19_uc0lo"]
@@ -23,6 +25,9 @@
 [ext_resource type="PackedScene" uid="uid://2qkw2kjvnue" path="res://world/props/scenes/rock_03.tscn" id="21_uc0lo"]
 [ext_resource type="PackedScene" uid="uid://c1hm6ldo3d14k" path="res://world/props/scenes/small_effigy.tscn" id="22_xvw0y"]
 [ext_resource type="PackedScene" uid="uid://d3u5msk2b8ry1" path="res://world/props/scenes/candle.tscn" id="23_py2oa"]
+[ext_resource type="PackedScene" uid="uid://cp5exbo6vl634" path="res://world/props/scenes/spiderweb_01.tscn" id="25_o31gw"]
+[ext_resource type="PackedScene" uid="uid://bk6ihejjp3m13" path="res://world/props/scenes/spiderweb_02.tscn" id="26_1pdxq"]
+[ext_resource type="PackedScene" uid="uid://dob6g521d2bam" path="res://world/props/scenes/brazier_hanging.tscn" id="27_cg1f8"]
 
 [sub_resource type="Resource" id="Resource_clo8p"]
 script = ExtResource("2_l7v61")
@@ -242,9 +247,173 @@ transform = Transform3D(0.819642, 0, 0.572876, 0, 1, 0, -0.572876, 0, 0.819642, 
 [node name="candle_cluster" parent="NavigationRegion3D/Props/table_short" instance=ExtResource("7_37c4c")]
 transform = Transform3D(0.819642, 0, -0.572876, 0, 1, 0, 0.572876, 0, 0.819642, -0.854213, 0.997021, -0.117214)
 
+[node name="Vines4" parent="NavigationRegion3D/Props" instance=ExtResource("13_bv8bp")]
+transform = Transform3D(-0.602966, 0.369367, 0.707107, 0.522365, 0.852722, 0, -0.602966, 0.369368, -0.707107, 17.3089, 4.25077, -8.1381)
+
+[node name="Vines5" parent="NavigationRegion3D/Props" instance=ExtResource("14_7pn5m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8821, 4.0872, -7.74656)
+
+[node name="Vines6" parent="NavigationRegion3D/Props" instance=ExtResource("14_7pn5m")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 15.6233, 4.2523, -9.86873)
+
+[node name="fern5" parent="NavigationRegion3D/Props" instance=ExtResource("15_7pn5m")]
+transform = Transform3D(0.776662, 0, -0.629917, 0, 1, 0, 0.629917, 0, 0.776662, 9.71287, 0.721374, 17.2195)
+
+[node name="fern6" parent="NavigationRegion3D/Props" instance=ExtResource("15_7pn5m")]
+transform = Transform3D(-0.634622, 0, -0.229404, 0, 0.674812, 0, 0.229404, 0, -0.634622, 8.96999, 0.545303, 17.8689)
+
+[node name="Vines7" parent="NavigationRegion3D/Props" instance=ExtResource("13_bv8bp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.94747, 3.28282, 19.1457)
+
+[node name="small_effigy" parent="NavigationRegion3D/Props" instance=ExtResource("22_xvw0y")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 8.78287, 0.503315, -18.1269)
+
+[node name="candle" parent="NavigationRegion3D/Props" instance=ExtResource("23_py2oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4699, 0.490687, -18.3205)
+
+[node name="candle4" parent="NavigationRegion3D/Props" instance=ExtResource("23_py2oa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4529, 1.08327, -16.445)
+
+[node name="candle2" parent="NavigationRegion3D/Props" instance=ExtResource("23_py2oa")]
+transform = Transform3D(-0.482625, 0, 0.875827, 0, 1, 0, -0.875827, 0, -0.482625, 8.55204, 0.490687, -19.1116)
+
+[node name="candle3" parent="NavigationRegion3D/Props" instance=ExtResource("23_py2oa")]
+transform = Transform3D(-0.482625, 0, 0.875827, 0, 1, 0, -0.875827, 0, -0.482625, 5.92185, 1.08887, -18.7927)
+
+[node name="candle_cluster" parent="NavigationRegion3D/Props" instance=ExtResource("7_37c4c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.94392, 0.491033, -17.304)
+
+[node name="candle_cluster2" parent="NavigationRegion3D/Props" instance=ExtResource("7_37c4c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6364, 1.09282, -16.9303)
+
+[node name="candle_cluster3" parent="NavigationRegion3D/Props" instance=ExtResource("7_37c4c")]
+transform = Transform3D(-0.620381, 0, 0.7843, 0, 1, 0, -0.7843, 0, -0.620381, 8.69496, 0.452919, -16.109)
+
+[node name="SpiderWeb" parent="NavigationRegion3D/Props" instance=ExtResource("25_o31gw")]
+transform = Transform3D(3.80139, 0.427668, 0.959881, 5.96046e-08, 1.98385, -0.883889, -2.10169, 0.773538, 1.73617, 8.4963, 6.45859, 22.5069)
+skeleton = NodePath("../../..")
+
+[node name="SpiderWeb2" parent="NavigationRegion3D/Props" instance=ExtResource("25_o31gw")]
+transform = Transform3D(0.583502, 0.800601, 0.523373, -1.47076, 0.537645, -0.412501, -1.22327, -0.26453, 0.745603, 18.4795, 7.79081, 10.1523)
+skeleton = NodePath("../../..")
+
+[node name="SpiderWeb3" parent="NavigationRegion3D/Props" instance=ExtResource("26_1pdxq")]
+transform = Transform3D(2.24391, 0.719039, 0.396472, -1.06279, 0.589604, 1.38591, 0.722651, -1.36557, 0.807149, 22.1016, 1.24459, -5.61817)
+skeleton = NodePath("../../..")
+
+[node name="brazier_hanging" parent="NavigationRegion3D/Props" instance=ExtResource("27_cg1f8")]
+transform = Transform3D(2.307, 0, 0, 0, 2.307, 0, 0, 0, 2.307, 0, 12.061, 0)
+
+[node name="small_animal_cage" parent="NavigationRegion3D/Props" instance=ExtResource("17_e3msw")]
+transform = Transform3D(0.67532, 0, 0.737525, 0, 1, 0, -0.737525, 0, 0.67532, -22.4547, 5.5, 8.37302)
+
+[node name="small_animal_cage2" parent="NavigationRegion3D/Props" instance=ExtResource("17_e3msw")]
+transform = Transform3D(0.980226, 0, 0.19788, 0, 1, 0, -0.19788, 0, 0.980226, -22.0276, 5.5, 9.28607)
+
+[node name="Vines" parent="NavigationRegion3D/Props" instance=ExtResource("13_bv8bp")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6.71106, 11.2073, -4.55684)
+
+[node name="Vines2" parent="NavigationRegion3D/Props" instance=ExtResource("14_7pn5m")]
+transform = Transform3D(1.37878, 0, 1.37878, 0, 1.94989, 0, -1.37878, 0, 1.37878, -6.02204, 14.9414, -5.21084)
+
+[node name="Vines3" parent="NavigationRegion3D/Props" instance=ExtResource("14_7pn5m")]
+transform = Transform3D(0.179609, 0, 0.983738, 0, 1, 0, -0.983738, 0, 0.179609, 19.4127, 3.6757, 7.68042)
+
+[node name="barrel_broken3" parent="NavigationRegion3D/Props" instance=ExtResource("12_7sca3")]
+transform = Transform3D(-0.641155, -0.672204, -0.37022, -0.254179, -0.269182, 0.928943, -0.724095, 0.689698, 0.00172743, 8.51411, 6.05806, -22.2332)
+
+[node name="barrel_broken4" parent="NavigationRegion3D/Props" instance=ExtResource("12_7sca3")]
+transform = Transform3D(0.867091, -0.49664, 0.0387409, 0.349372, 0.66172, 0.663375, -0.355094, -0.561672, 0.747284, 9.29023, 6.05806, -21.5175)
+
+[node name="fern" parent="NavigationRegion3D/Props" instance=ExtResource("15_7pn5m")]
+transform = Transform3D(1.28382, 0, 0, 0, 1.28382, 0, 0, 0, 1.28382, 8.87938, 5.60272, -20.5456)
+
+[node name="fern2" parent="NavigationRegion3D/Props" instance=ExtResource("15_7pn5m")]
+transform = Transform3D(0.636608, 0, -1.11487, 0, 1.28382, 0, 1.11487, 0, 0.636608, 19.3635, 5.78383, -8.44652)
+
+[node name="fern3" parent="NavigationRegion3D/Props" instance=ExtResource("15_7pn5m")]
+transform = Transform3D(0.955076, 0.000486761, -0.379023, -0.000733258, 1.02753, -0.000528059, 0.379023, 0.000761316, 0.955076, 16.855, 5.51379, -9.78761)
+
+[node name="fern4" parent="NavigationRegion3D/Props" instance=ExtResource("15_7pn5m")]
+transform = Transform3D(0.955076, 0.000486761, -0.379023, -0.000733258, 1.02753, -0.000528059, 0.379023, 0.000761316, 0.955076, 18.6423, 5.7528, -12.5803)
+
+[node name="rock_01" parent="NavigationRegion3D/Props" instance=ExtResource("16_sw84h")]
+transform = Transform3D(0.0744418, 0, 0, 0, 0.0744418, 0, 0, 0, 0.0744418, 21.347, 6.57266, -8.8605)
+
+[node name="rock_02" parent="NavigationRegion3D/Props" instance=ExtResource("16_sw84h")]
+transform = Transform3D(-0.0249495, -0.0675211, -0.0189738, 0.0698998, -0.0255907, -0.000846086, -0.00575516, -0.0180997, 0.0719782, 18.774, 5.91933, -10.9913)
+
+[node name="rock_03" parent="NavigationRegion3D/Props" instance=ExtResource("16_sw84h")]
+transform = Transform3D(0.000896813, -0.0592394, 0.0894034, -0.0406624, -0.000775235, 0.00232374, -0.00024157, -0.0894313, -0.059241, 18.673, 6.20639, -9.38311)
+
+[node name="Rock01" parent="NavigationRegion3D/Props/rock_03" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8122, -1.86265e-09, -1.49012e-08)
+material_override = ExtResource("17_sj74d")
+
+[node name="Rock02" parent="NavigationRegion3D/Props/rock_03" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xvw0y")
+
+[node name="Rock03" parent="NavigationRegion3D/Props/rock_03" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xvw0y")
+
+[node name="Rock04" type="MeshInstance3D" parent="NavigationRegion3D/Props/rock_03"]
+transform = Transform3D(1, 0, 0, 0, 0.723232, 0.690605, 0, -0.690605, 0.723232, 19.2216, 25.6391, 3.14542)
+material_override = ExtResource("17_sj74d")
+mesh = SubResource("ArrayMesh_8a1l7")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Props/rock_03/Rock04"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Props/rock_03/Rock04/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_c5ekp")
+
+[node name="rough_floor_patch" parent="NavigationRegion3D/Props" instance=ExtResource("20_hn0e2")]
+transform = Transform3D(0.408486, -0.0116526, -0.27183, 0.014788, 0.490579, 0.00119249, 0.271677, -0.00918275, 0.40865, 8.99163, 0.554561, 18.4619)
+
+[node name="Plane" parent="NavigationRegion3D/Props/rough_floor_patch" index="0"]
+material_override = ExtResource("17_sj74d")
+
+[node name="rock_04" parent="NavigationRegion3D/Props" instance=ExtResource("21_uc0lo")]
+transform = Transform3D(0.0143493, -0.0316485, 0.0136526, -0.0294631, -0.0189371, -0.012932, 0.0178871, -0.00580372, -0.0322535, 8.14837, 0.569435, 19.4473)
+
+[node name="Rock01" parent="NavigationRegion3D/Props/rock_04" index="0"]
+material_override = SubResource("StandardMaterial3D_uc0lo")
+
+[node name="Rock02" parent="NavigationRegion3D/Props/rock_04" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_uc0lo")
+
+[node name="Rock03" parent="NavigationRegion3D/Props/rock_04" index="2"]
+transform = Transform3D(1.52397, -0.377291, -0.215949, 0.620866, 0.926095, -0.0879779, 0.213754, 0, 1.79516, 12.8712, 5.24371, 1.80532)
+material_override = ExtResource("17_sj74d")
+surface_material_override/0 = SubResource("StandardMaterial3D_uc0lo")
+
+[node name="Rock05" type="MeshInstance3D" parent="NavigationRegion3D/Props/rock_04"]
+transform = Transform3D(1.38787, -0.295875, -0.835372, 0.356225, 0.951374, -0.399913, 0.836997, 0.0857034, 1.55538, 4.78992, -22.6921, 63.5993)
+material_override = ExtResource("17_sj74d")
+mesh = SubResource("ArrayMesh_jjg5q")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_uc0lo")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Props/rock_04/Rock05"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Props/rock_04/Rock05/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pdtnw")
+
+[node name="Rock04" type="MeshInstance3D" parent="NavigationRegion3D/Props/rock_04"]
+transform = Transform3D(1.31281, 0.148678, -1.07403, 0.834686, 0.393746, 1.39278, 0.57748, -0.907116, 0.428518, -0.679749, 29.3759, 3.88333)
+material_override = ExtResource("17_sj74d")
+mesh = SubResource("ArrayMesh_jjg5q")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_uc0lo")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Props/rock_04/Rock04"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Props/rock_04/Rock04/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pdtnw")
+
 [node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-material_override = ExtResource("4_37c4c")
+material_override = ExtResource("9_m7xpn")
 use_collision = true
 size = Vector3(25, 0.5, 25)
 
@@ -874,158 +1043,18 @@ material_override = ExtResource("4_37c4c")
 use_collision = true
 size = Vector3(3, 2, 6)
 
-[node name="Vines" parent="NavigationRegion3D" instance=ExtResource("13_bv8bp")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6.71106, 11.2073, -4.55684)
-
-[node name="Vines2" parent="NavigationRegion3D" instance=ExtResource("14_7pn5m")]
-transform = Transform3D(1.37878, 0, 1.37878, 0, 1.94989, 0, -1.37878, 0, 1.37878, -6.02204, 14.9414, -5.21084)
-
-[node name="Vines3" parent="NavigationRegion3D" instance=ExtResource("14_7pn5m")]
-transform = Transform3D(0.179609, 0, 0.983738, 0, 1, 0, -0.983738, 0, 0.179609, 19.4127, 3.6757, 7.68042)
-
 [node name="pillar_square" parent="NavigationRegion3D" instance=ExtResource("6_nqpoe")]
 transform = Transform3D(0, -0.5, 0.866025, 1, -4.37114e-08, 0, 0, 0.866025, 0.5, 20.3354, 6.48897, 7.18917)
 
 [node name="pillar_square2" parent="NavigationRegion3D" instance=ExtResource("6_nqpoe")]
 transform = Transform3D(0.353553, 0.612372, 0.707107, -0.866025, 0.5, 0, -0.353553, -0.612372, 0.707107, 14.3354, 6.26572, 15.3853)
 
-[node name="barrel_broken" parent="NavigationRegion3D" instance=ExtResource("12_7sca3")]
-transform = Transform3D(-0.641155, -0.672204, -0.37022, -0.254179, -0.269182, 0.928943, -0.724095, 0.689698, 0.00172743, 8.51411, 6.05806, -22.2332)
-
-[node name="barrel_broken2" parent="NavigationRegion3D" instance=ExtResource("12_7sca3")]
-transform = Transform3D(0.867091, -0.49664, 0.0387409, 0.349372, 0.66172, 0.663375, -0.355094, -0.561672, 0.747284, 9.29023, 6.05806, -21.5175)
-
-[node name="fern" parent="NavigationRegion3D" instance=ExtResource("15_7pn5m")]
-transform = Transform3D(1.28382, 0, 0, 0, 1.28382, 0, 0, 0, 1.28382, 8.87938, 5.60272, -20.5456)
-
-[node name="fern2" parent="NavigationRegion3D" instance=ExtResource("15_7pn5m")]
-transform = Transform3D(0.636608, 0, -1.11487, 0, 1.28382, 0, 1.11487, 0, 0.636608, 19.3635, 5.78383, -8.44652)
-
-[node name="fern3" parent="NavigationRegion3D" instance=ExtResource("15_7pn5m")]
-transform = Transform3D(0.955076, 0.000486761, -0.379023, -0.000733258, 1.02753, -0.000528059, 0.379023, 0.000761316, 0.955076, 16.855, 5.51379, -9.78761)
-
-[node name="fern4" parent="NavigationRegion3D" instance=ExtResource("15_7pn5m")]
-transform = Transform3D(0.955076, 0.000486761, -0.379023, -0.000733258, 1.02753, -0.000528059, 0.379023, 0.000761316, 0.955076, 18.6423, 5.7528, -12.5803)
-
-[node name="rock_01" parent="NavigationRegion3D" instance=ExtResource("16_sw84h")]
-transform = Transform3D(0.0744418, 0, 0, 0, 0.0744418, 0, 0, 0, 0.0744418, 21.347, 6.57266, -8.8605)
-
-[node name="rock_02" parent="NavigationRegion3D" instance=ExtResource("16_sw84h")]
-transform = Transform3D(-0.0249495, -0.0675211, -0.0189738, 0.0698998, -0.0255907, -0.000846086, -0.00575516, -0.0180997, 0.0719782, 18.774, 5.91933, -10.9913)
-
-[node name="rock_03" parent="NavigationRegion3D" instance=ExtResource("16_sw84h")]
-transform = Transform3D(0.000896813, -0.0592394, 0.0894034, -0.0406624, -0.000775235, 0.00232374, -0.00024157, -0.0894313, -0.059241, 18.673, 6.20639, -9.38311)
-
-[node name="Rock01" parent="NavigationRegion3D/rock_03" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8122, -1.86265e-09, -1.49012e-08)
-material_override = ExtResource("17_sj74d")
-
-[node name="Rock02" parent="NavigationRegion3D/rock_03" index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_xvw0y")
-
-[node name="Rock03" parent="NavigationRegion3D/rock_03" index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_xvw0y")
-
-[node name="Rock04" type="MeshInstance3D" parent="NavigationRegion3D/rock_03"]
-transform = Transform3D(1, 0, 0, 0, 0.723232, 0.690605, 0, -0.690605, 0.723232, 19.2216, 25.6391, 3.14542)
-material_override = ExtResource("17_sj74d")
-mesh = SubResource("ArrayMesh_8a1l7")
-skeleton = NodePath("")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/rock_03/Rock04"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/rock_03/Rock04/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_c5ekp")
-
-[node name="Vines4" parent="NavigationRegion3D" instance=ExtResource("13_bv8bp")]
-transform = Transform3D(-0.602966, 0.369367, 0.707107, 0.522365, 0.852722, 0, -0.602966, 0.369368, -0.707107, 17.3089, 4.25077, -8.1381)
-
-[node name="Vines5" parent="NavigationRegion3D" instance=ExtResource("14_7pn5m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8821, 4.0872, -7.74656)
-
-[node name="Vines6" parent="NavigationRegion3D" instance=ExtResource("14_7pn5m")]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 15.6233, 4.2523, -9.86873)
-
 [node name="pillar_square3" parent="NavigationRegion3D" instance=ExtResource("6_nqpoe")]
 transform = Transform3D(0.260514, -0.363349, -0.894489, 0.965368, 0.111498, 0.235867, 0.0140314, -0.924957, 0.379813, 15.8073, 5.48584, -12.4722)
 
-[node name="rough_floor_patch" parent="NavigationRegion3D" instance=ExtResource("20_hn0e2")]
-transform = Transform3D(0.408486, -0.0116526, -0.27183, 0.014788, 0.490579, 0.00119249, 0.271677, -0.00918275, 0.40865, 8.99163, 0.554561, 18.4619)
-
-[node name="Plane" parent="NavigationRegion3D/rough_floor_patch" index="0"]
-material_override = ExtResource("17_sj74d")
-
-[node name="fern5" parent="NavigationRegion3D" instance=ExtResource("15_7pn5m")]
-transform = Transform3D(0.776662, 0, -0.629917, 0, 1, 0, 0.629917, 0, 0.776662, 9.71287, 0.721374, 17.2195)
-
-[node name="fern6" parent="NavigationRegion3D" instance=ExtResource("15_7pn5m")]
-transform = Transform3D(-0.634622, 0, -0.229404, 0, 0.674812, 0, 0.229404, 0, -0.634622, 8.96999, 0.545303, 17.8689)
-
-[node name="rock_04" parent="NavigationRegion3D" instance=ExtResource("21_uc0lo")]
-transform = Transform3D(0.0143493, -0.0316485, 0.0136526, -0.0294631, -0.0189371, -0.012932, 0.0178871, -0.00580372, -0.0322535, 8.14837, 0.569435, 19.4473)
-
-[node name="Rock01" parent="NavigationRegion3D/rock_04" index="0"]
-material_override = SubResource("StandardMaterial3D_uc0lo")
-
-[node name="Rock02" parent="NavigationRegion3D/rock_04" index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_uc0lo")
-
-[node name="Rock03" parent="NavigationRegion3D/rock_04" index="2"]
-transform = Transform3D(1.52397, -0.377291, -0.215949, 0.620866, 0.926095, -0.0879779, 0.213754, 0, 1.79516, 12.8712, 5.24371, 1.80532)
-material_override = ExtResource("17_sj74d")
-surface_material_override/0 = SubResource("StandardMaterial3D_uc0lo")
-
-[node name="Rock05" type="MeshInstance3D" parent="NavigationRegion3D/rock_04"]
-transform = Transform3D(1.38787, -0.295875, -0.835372, 0.356225, 0.951374, -0.399913, 0.836997, 0.0857034, 1.55538, 4.78992, -22.6921, 63.5993)
-material_override = ExtResource("17_sj74d")
-mesh = SubResource("ArrayMesh_jjg5q")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_uc0lo")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/rock_04/Rock05"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/rock_04/Rock05/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_pdtnw")
-
-[node name="Rock04" type="MeshInstance3D" parent="NavigationRegion3D/rock_04"]
-transform = Transform3D(1.31281, 0.148678, -1.07403, 0.834686, 0.393746, 1.39278, 0.57748, -0.907116, 0.428518, -0.679749, 29.3759, 3.88333)
-material_override = ExtResource("17_sj74d")
-mesh = SubResource("ArrayMesh_jjg5q")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_uc0lo")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/rock_04/Rock04"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/rock_04/Rock04/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_pdtnw")
-
-[node name="Vines7" parent="NavigationRegion3D" instance=ExtResource("13_bv8bp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.94747, 3.28282, 19.1457)
-
-[node name="small_effigy" parent="NavigationRegion3D" instance=ExtResource("22_xvw0y")]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 8.78287, 0.503315, -18.1269)
-
-[node name="candle" parent="NavigationRegion3D" instance=ExtResource("23_py2oa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4699, 0.490687, -18.3205)
-
-[node name="candle4" parent="NavigationRegion3D" instance=ExtResource("23_py2oa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4529, 1.08327, -16.445)
-
-[node name="candle2" parent="NavigationRegion3D" instance=ExtResource("23_py2oa")]
-transform = Transform3D(-0.482625, 0, 0.875827, 0, 1, 0, -0.875827, 0, -0.482625, 8.55204, 0.490687, -19.1116)
-
-[node name="candle3" parent="NavigationRegion3D" instance=ExtResource("23_py2oa")]
-transform = Transform3D(-0.482625, 0, 0.875827, 0, 1, 0, -0.875827, 0, -0.482625, 5.92185, 1.08887, -18.7927)
-
-[node name="candle_cluster" parent="NavigationRegion3D" instance=ExtResource("7_37c4c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.94392, 0.491033, -17.304)
-
-[node name="candle_cluster2" parent="NavigationRegion3D" instance=ExtResource("7_37c4c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6364, 1.09282, -16.9303)
-
-[node name="candle_cluster3" parent="NavigationRegion3D" instance=ExtResource("7_37c4c")]
-transform = Transform3D(-0.620381, 0, 0.7843, 0, 1, 0, -0.7843, 0, -0.620381, 8.69496, 0.452919, -16.109)
-
+[editable path="NavigationRegion3D/Props/rock_03"]
+[editable path="NavigationRegion3D/Props/rough_floor_patch"]
+[editable path="NavigationRegion3D/Props/rock_04"]
 [editable path="NavigationRegion3D/EntranceLeft/pillar_square"]
 [editable path="NavigationRegion3D/EntranceLeft/pillar_square2"]
 [editable path="NavigationRegion3D/EntranceLeft/pillar_square3"]
@@ -1046,6 +1075,3 @@ transform = Transform3D(-0.620381, 0, 0.7843, 0, 1, 0, -0.7843, 0, -0.620381, 8.
 [editable path="NavigationRegion3D/EntranceRight/pillar_square3"]
 [editable path="NavigationRegion3D/EntranceRight/pillar_square4"]
 [editable path="NavigationRegion3D/EntranceRight/arch"]
-[editable path="NavigationRegion3D/rock_03"]
-[editable path="NavigationRegion3D/rough_floor_patch"]
-[editable path="NavigationRegion3D/rock_04"]

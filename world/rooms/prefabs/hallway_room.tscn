@@ -1,12 +1,14 @@
-[gd_scene load_steps=16 format=4 uid="uid://bvguq1apskiyw"]
+[gd_scene load_steps=18 format=4 uid="uid://bvguq1apskiyw"]
 
 [ext_resource type="Script" uid="uid://bboyq3btxjcad" path="res://system/generation/level_room_prefab.gd" id="1_dv6ip"]
 [ext_resource type="Script" uid="uid://ntkhnwdxsq5b" path="res://system/generation/level_room_prefab_entrance.gd" id="2_cqhc3"]
 [ext_resource type="Material" uid="uid://khh6k54woa1a" path="res://world/materials/stone_wall_mat.tres" id="3_tfghp"]
 [ext_resource type="PackedScene" uid="uid://ct6xxcocgimjv" path="res://world/props/scenes/wall_torch.tscn" id="4_cqhc3"]
+[ext_resource type="Material" uid="uid://cs3rl43g8p4pu" path="res://world/materials/rough_cobble_floor_mat.tres" id="4_odc0y"]
 [ext_resource type="Script" uid="uid://kdixd6vxiddp" path="res://system/debug/level_room_grid_viz.gd" id="5_tfghp"]
 [ext_resource type="PackedScene" uid="uid://dkvlyhno4cx23" path="res://world/props/scenes/pillar_square.tscn" id="6_05pkn"]
 [ext_resource type="PackedScene" uid="uid://brhb85u6e8n26" path="res://world/props/models/arch.glb" id="7_3jqse"]
+[ext_resource type="PackedScene" uid="uid://dob6g521d2bam" path="res://world/props/scenes/brazier_hanging.tscn" id="9_2wnkc"]
 
 [sub_resource type="Resource" id="Resource_dv6ip"]
 script = ExtResource("2_cqhc3")
@@ -81,7 +83,7 @@ dimensions = Vector3i(1, 1, 1)
 metadata/_custom_type_script = "uid://kdixd6vxiddp"
 
 [node name="Floor" type="CSGBox3D" parent="."]
-material_override = ExtResource("3_tfghp")
+material_override = ExtResource("4_odc0y")
 use_collision = true
 size = Vector3(10, 0.5, 10)
 
@@ -242,6 +244,10 @@ transform = Transform3D(1.10925, 0, 1.74846e-07, 0, 1.95577, 0, -1.93948e-07, 0,
 [node name="Cube" parent="Corners/arch4" index="0"]
 transform = Transform3D(1.03135, 0, 0, 0, 1, 0, 0, 0, 0.781019, 0, 0, -0.147541)
 surface_material_override/0 = ExtResource("3_tfghp")
+
+[node name="brazier_hanging" parent="." instance=ExtResource("9_2wnkc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.91332, 0)
+visible = false
 
 [editable path="Corners/pillar_square"]
 [editable path="Corners/arch"]

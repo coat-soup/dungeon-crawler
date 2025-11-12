@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd2f2x88bo1a6"]
+
+[ext_resource type="PackedScene" uid="uid://cw8rotkfv1olx" path="res://world/props/models/banner.glb" id="1_5aqjl"]
+[ext_resource type="Texture2D" uid="uid://2bcu06wunmy5" path="res://world/props/textures/banner.png" id="2_a2ss2"]
+[ext_resource type="Texture2D" uid="uid://druj4q3knf2j2" path="res://ui/textures/shield_solid.png" id="3_dfws7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2ss2"]
+transparency = 2
+alpha_scissor_threshold = 0.828
+alpha_antialiasing_mode = 0
+cull_mode = 2
+diffuse_mode = 3
+albedo_texture = ExtResource("2_a2ss2")
+metallic_specular = 0.0
+roughness = 0.0
+texture_filter = 0
+
+[node name="banner" instance=ExtResource("1_5aqjl")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_a2ss2")
+
+[node name="Plane" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_a2ss2")
+
+[node name="Decal" type="Decal" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00545382, -1.20056, 0.337463)
+visible = false
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("3_dfws7")
+modulate = Color(0.796243, 0.796243, 0.796243, 1)

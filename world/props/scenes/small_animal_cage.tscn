@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0suiyel057eq"]
+
+[ext_resource type="PackedScene" uid="uid://tqlgtytdbm4e" path="res://world/props/models/small_animal_cage.glb" id="1_x4orw"]
+[ext_resource type="Texture2D" uid="uid://b8wqwmd80usk2" path="res://world/props/textures/small_animal_cage.png" id="2_bbv3r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lo7vf"]
+diffuse_mode = 3
+albedo_texture = ExtResource("2_bbv3r")
+metallic_specular = 0.0
+roughness = 0.0
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x4orw"]
+size = Vector3(0.75, 0.77, 0.75)
+
+[node name="small_animal_cage" instance=ExtResource("1_x4orw")]
+
+[node name="Cube_001" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_002" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_003" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_004" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_005" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_006" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_007" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_008" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_012" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_013" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_014" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_015" parent="." index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_016" parent="." index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_017" parent="." index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Door" parent="." index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.325521, 0.393731, 0.315169)
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_009" parent="Door" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_010" parent="Door" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_011" parent="Door" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="Cube_019" parent="." index="16"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lo7vf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="17"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397583, 0)
+shape = SubResource("BoxShape3D_x4orw")
