@@ -39,7 +39,6 @@ background_color = Color(0.779291, 0.779291, 0.779291, 1)
 script = ExtResource("1_sewoy")
 dungeon_size = 20
 num_rooms = 25
-debug_wait = true
 hallway_room = SubResource("Resource_tv0bk")
 condense_iterations = 30
 graph_generator = NodePath("LevelGraphGenerator")

@@ -10,6 +10,9 @@ func _ready() -> void:
 
 
 func spawn_enemies():
+	if not Global.level_generator:
+		push_warning("Cannot spawn enemies in generation. Network manager missing.")
+		return
 	for i in range(len(generator.spawned_rooms)):
 		if generator.graph_generator.spawned_nodes[i].name == "combat":
 			for j in range(generator.spawned_prefabs[i].num_enemies):

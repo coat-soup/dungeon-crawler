@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelRoomData" load_steps=3 format=3 uid="uid://b6nhjlufpauh3"]
+
+[ext_resource type="PackedScene" uid="uid://cq4qud0d2bhv6" path="res://world/rooms/prefabs/generic_room_long_rocky.tscn" id="1_55rqh"]
+[ext_resource type="Script" uid="uid://cniw8fvmn8rmm" path="res://system/generation/level_room_data.gd" id="2_nqt3h"]
+
+[resource]
+script = ExtResource("2_nqt3h")
+room_name = "GenericRoomLongRocky"
+dimensions = Vector3i(4, 2, 5)
+prefab = ExtResource("1_55rqh")
+metadata/_custom_type_script = "uid://cniw8fvmn8rmm"
