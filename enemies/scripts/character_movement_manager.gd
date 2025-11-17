@@ -35,6 +35,7 @@ var input_direction : Vector3
 
 
 func _physics_process(delta: float) -> void:
+	if not body.active: return
 	if not is_multiplayer_authority(): return
 	if not body.is_on_floor():
 		body.velocity += body.get_gravity() * delta

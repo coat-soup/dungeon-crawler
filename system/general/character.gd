@@ -7,6 +7,13 @@ class_name Character
 @export var movement_manager : CharacterMovementManager
 @export var stamina : Stamina
 
+var active : bool = true
+
 
 func _ready():
 	pass
+
+func disable_character():
+	#only really called from enemies
+	collision_layer = 0
+	active = false

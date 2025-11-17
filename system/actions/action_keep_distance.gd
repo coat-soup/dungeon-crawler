@@ -22,7 +22,7 @@ func tick():
 	flank_tick -= 1
 	if flank_tick <= 0:
 		flank_tick = 10
-		flank_rotation = deg_to_rad(randf_range(-15, 15)) if randf() > 0.5 else 0
+		flank_rotation = deg_to_rad(randf_range(-15, 15)) if randf() > 0.5 else 0.0
 	
 	if not ai_action_controller.active_target: return
 	var dir := character.global_position - ai_action_controller.active_target.global_position

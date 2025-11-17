@@ -191,9 +191,10 @@ stream = ExtResource("11_2ieo8")
 volume_db = -1.0
 max_distance = 25.0
 
-[node name="player_model" parent="." node_paths=PackedStringArray("cam_holder", "movement_manager", "weapon_manager") instance=ExtResource("12_wodsf")]
+[node name="player_model" parent="." node_paths=PackedStringArray("cam_holder", "character", "movement_manager", "weapon_manager") instance=ExtResource("12_wodsf")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 cam_holder = NodePath("../CameraPivot")
+character = NodePath("..")
 movement_manager = NodePath("../Movement")
 weapon_manager = NodePath("../WeaponManager")
 

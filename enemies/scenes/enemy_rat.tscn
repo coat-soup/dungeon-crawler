@@ -35,6 +35,7 @@ action_type = 1
 cancellable = false
 stamina_cost = 0
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://8jmn5lsekfpw"
 
 [sub_resource type="Resource" id="Resource_3agdk"]
@@ -46,6 +47,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://c3j4mokeedbn2"
 
 [sub_resource type="Resource" id="Resource_6x60x"]
@@ -57,6 +59,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://x3x62q3np3qf"
 
 [sub_resource type="Resource" id="Resource_ly86r"]
@@ -66,6 +69,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 20
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://bjtmtlxcwwpmd"
 
 [sub_resource type="Resource" id="Resource_n0bl4"]
@@ -75,6 +79,7 @@ action_type = 0
 cancellable = true
 stamina_cost = 0
 sustained_stamina_cost = 0
+cooldown = 0.0
 metadata/_custom_type_script = "uid://b6sa48cxaul1x"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_st66r"]
@@ -174,8 +179,9 @@ stream = ExtResource("24_fdqm6")
 volume_db = -1.0
 max_distance = 25.0
 
-[node name="rat" parent="." node_paths=PackedStringArray("movement_manager", "weapon_manager") instance=ExtResource("26_f82ev")]
+[node name="rat" parent="." node_paths=PackedStringArray("character", "movement_manager", "weapon_manager") instance=ExtResource("26_f82ev")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+character = NodePath("..")
 movement_manager = NodePath("../Movement")
 weapon_manager = NodePath("../WeaponManager")
 

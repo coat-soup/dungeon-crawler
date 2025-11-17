@@ -5,6 +5,8 @@ signal blocked_damage
 
 @export var weapon_manager : WeaponManager
 var face_object : Node3D
+var immunity_length : float = 2.0
+var immunity_timer : float = 0.0
 
 
 func _ready() -> void:
@@ -14,6 +16,12 @@ func _ready() -> void:
 		face_object = weapon_manager.character_model.head_rotator
 	else:
 		face_object = weapon_manager.character_model
+
+
+func _process(delta: float) -> void:
+	if immunity_timer > 0:
+		immunity_timer -= delta
+		if weapon_manager.attack_state == WeaponManager.AttackState.STUNNED: immunity_timer = 0
 
 
 @rpc("any_peer", "call_local")
@@ -26,8 +34,14 @@ func try_take_blockable_damage(amount: float, source_id : int = -1):
 		if character:
 			var angle = rad_to_deg((-face_object.global_basis.z).angle_to(face_object.global_position - character.weapon_manager.weapon.global_position)) # character.weapon_manager.weapon.swing_direction))
 			if angle < 90.0:
+				immunity_timer = immunity_length
 				weapon_manager.did_block_damage.rpc(amount)
 				blocked_damage.emit(source_id, amount)
 				did_block = true
+		
+	if not did_block and immunity_timer > 0: # block with immunity
+		weapon_manager.did_block_damage.rpc(amount)
+		blocked_damage.emit(source_id, amount)
+		did_block = true
 	
 	if not did_block: take_damage.rpc(amount, source_id)

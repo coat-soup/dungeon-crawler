@@ -203,8 +203,9 @@ stream = ExtResource("20_3p7iu")
 volume_db = -1.0
 max_distance = 25.0
 
-[node name="enemy_humanoid_model" parent="." node_paths=PackedStringArray("movement_manager", "weapon_manager") instance=ExtResource("19_st66r")]
+[node name="enemy_humanoid_model" parent="." node_paths=PackedStringArray("character", "movement_manager", "weapon_manager") instance=ExtResource("19_st66r")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+character = NodePath("..")
 movement_manager = NodePath("../Movement")
 weapon_manager = NodePath("../WeaponManager")
 

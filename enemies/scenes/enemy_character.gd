@@ -17,7 +17,9 @@ func on_took_damage(amount : int, source : int):
 
 
 func on_died():
+	disable_character()
 	if is_multiplayer_authority():
+		await get_tree().create_timer(5.0).timeout
 		queue_free()
 
 

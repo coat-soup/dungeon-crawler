@@ -34,6 +34,8 @@ func _ready() -> void:
 
 
 func process_tick():
+	if not character.active: return
+	
 	desire_to_attack = min(1, desire_to_attack + (0.1 * agression_level) / tick_speed)
 	
 	find_active_target()

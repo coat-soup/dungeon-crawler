@@ -22,7 +22,7 @@ func tick():
 	flank_tick -= 1
 	if flank_tick <= 0:
 		flank_tick = 30
-		flank_rotation = deg_to_rad(randf_range(-30, 30)) if randf() < 0.6 else 0
+		flank_rotation = deg_to_rad(randf_range(-30, 30)) if randf() < 0.6 else 0.0
 	
 	if ai_action_controller.active_target and character.weapon_manager.attack_state == 0:
 		
