@@ -18,21 +18,21 @@ void vertex() {
 
 void fragment() {
 	float depth = texture(depth_texture, SCREEN_UV).x;
-	
+
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);
 	vec4 world = INV_VIEW_MATRIX * INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	float depth_texture_y = world.y/world.w;
 	float vertex_y = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).y;
-	
+
 	float depth_blend = clamp((invert_y ? (depth_texture_y - vertex_y) : (vertex_y - depth_texture_y)) / depth_distance, 0.0, 1.0);
-	
+
 	vec4 col = texture(screen_texture, SCREEN_UV);
 	ALBEDO = mix(col, primary_color, depth_blend).rgb;
 }
 
 /*
 void fragment() {
-	
+
 	// Sample depth, but we’ll only use it as a distance measure
 	float depth = texture(depth_texture, SCREEN_UV).x;
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);

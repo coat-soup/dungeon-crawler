@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://njtqknt776fr"]
+
+[ext_resource type="PackedScene" uid="uid://c3ose342q2i8k" path="res://player/models/cloth_shirt.glb" id="1_fn7dy"]
+[ext_resource type="Shader" uid="uid://ci1bjmw45pssy" path="res://vfx/shaders/cloth_shader.tres" id="2_spu7k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fvev"]
+render_priority = 0
+shader = ExtResource("2_spu7k")
+shader_parameter/DroopStrength = 0.123
+shader_parameter/WindSpeed = 1.0
+shader_parameter/WindStrength = 0.2
+shader_parameter/WindDir = Vector3(1, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_spu7k"]
+albedo_color = Color(0.714887, 0.544199, 0.489042, 1)
+
+[node name="cloth_shirt" instance=ExtResource("1_fn7dy")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_5fvev")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Cube" index="0"]
+transform = Transform3D(1.68612, -6.00703e-08, 0, -1.17774e-08, 0.999999, 1.12056e-08, -3.76877e-08, -4.92729e-08, 0.700039, -1.99975e-10, -0.0212402, 1.59356e-08)
+radius = 0.144531
+height = 0.67627
+material = SubResource("StandardMaterial3D_spu7k")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Cube" index="1"]
+transform = Transform3D(1, 6.98492e-09, 2.23517e-08, -6.98492e-09, 1, 4.9273e-08, -2.23517e-08, -4.92734e-08, 1, -2.67012e-08, 0.40126, -1.97713e-08)
+radius = 0.0810547
+height = 0.140259
+material = SubResource("StandardMaterial3D_spu7k")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Cube" index="2"]
+transform = Transform3D(-0.153383, -0.988167, 2.23517e-08, 0.988167, -0.153383, 4.92729e-08, -4.52628e-08, 2.96448e-08, 1, -0.529837, 0.214587, 1.26915e-09)
+radius = 0.049
+height = 0.33732
+material = SubResource("StandardMaterial3D_spu7k")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Cube" index="3"]
+transform = Transform3D(0.153383, 0.988167, -1.09775e-07, 0.988167, -0.153383, 4.92729e-08, 3.18537e-08, -1.16033e-07, -1, 0.53, 0.215, 0)
+radius = 0.049
+height = 0.33732
+material = SubResource("StandardMaterial3D_spu7k")

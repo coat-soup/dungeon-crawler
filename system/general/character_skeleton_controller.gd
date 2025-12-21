@@ -60,4 +60,3 @@ func on_damaged(amount, source_id):
 				pelvis.linear_damp -= 100
 				pelvis.angular_damp -= 100
 		pelvis.apply_impulse(push_dir * 100 * attacker.weapon_manager.weapon.damage / 30)
-	Global.ui.display_chat_message("STARTING RAGDOLL FOR " + str(name))
