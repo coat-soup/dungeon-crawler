@@ -254,7 +254,6 @@ void vertex() {
 
 }
 "
-graph_offset = Vector2(-1186.17, 48.2072)
 modes/cull = 2
 nodes/vertex/0/position = Vector2(460, 40)
 nodes/vertex/2/node = SubResource("VisualShaderNodeDotProduct_4ge56")
