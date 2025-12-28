@@ -17,7 +17,6 @@ albedo_color = Color(0.714887, 0.544199, 0.489042, 1)
 [node name="cloth_shirt" instance=ExtResource("1_fn7dy")]
 
 [node name="Cube" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 surface_material_override/0 = SubResource("ShaderMaterial_5fvev")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Cube" index="0"]
