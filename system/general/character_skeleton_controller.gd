@@ -30,8 +30,8 @@ func start_leap(): leap_started.emit()
 
 func _physics_process(delta: float) -> void:
 	var velocity = movement_manager.velocity_sync * movement_manager.body.global_basis
-	animation_tree.set("parameters/walk_blendspace/blend_position", Vector2(velocity.x, velocity.z) / movement_manager.speed)
-
+	animation_tree.set("parameters/walk_blendspace/blend_position", lerp(animation_tree.get("parameters/walk_blendspace/blend_position"), Vector2(velocity.x, -velocity.z) / movement_manager.speed, delta * 10))
+	animation_tree.set("parameters/walk_time_scale/scale", lerp(animation_tree.get("parameters/walk_time_scale/scale"), Vector2(velocity.x, -velocity.z).length() / movement_manager.speed, delta * 10))
 
 func on_started_attack():
 	animation_tree.set("parameters/attack_one_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
