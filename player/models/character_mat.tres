@@ -1,9 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://62psr3wqfxmj"]
+[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://62psr3wqfxmj"]
 
 [ext_resource type="Shader" uid="uid://c3xh7db7gjn7g" path="res://vfx/shaders/character.gdshader" id="1_x7516"]
 [ext_resource type="Texture2D" uid="uid://cm2k45y43xl2g" path="res://player/textures/chainmail_midres.png" id="2_de7gd"]
 [ext_resource type="Texture2D" uid="uid://chw5sp6mc4p6d" path="res://player/textures/armour_mask_metal_knight.png" id="2_v0you"]
 [ext_resource type="Texture2D" uid="uid://couxbqpl6hjff" path="res://player/textures/clean_metal.png" id="3_de7gd"]
+[ext_resource type="Texture2D" uid="uid://dfembs0e26em1" path="res://player/models/player_model_armour_mask_casual.png" id="5_7avbn"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_x7516"]
 frequency = 0.0367
@@ -21,7 +22,7 @@ noise = SubResource("FastNoiseLite_v0you")
 [resource]
 render_priority = 0
 shader = ExtResource("1_x7516")
-shader_parameter/mask_tex_array = Array[Texture2D]([ExtResource("2_v0you")])
+shader_parameter/mask_tex_array = Array[Texture2D]([ExtResource("2_v0you"), ExtResource("5_7avbn")])
 shader_parameter/metal_metallic = 0.0
 shader_parameter/dented_heightmap = SubResource("NoiseTexture2D_de7gd")
 shader_parameter/dented_heightmap_strength = 0.03

@@ -21,6 +21,9 @@ uniform sampler2D chainmail_normal : filter_nearest;
 
 uniform sampler2D clean_metal_tex : filter_nearest;
 
+uniform sampler2D cloth_normal : filter_nearest;
+uniform sampler2D cloth_tex : filter_nearest;
+
 /**
 * ALPHA 0: SKIN
 *
@@ -86,21 +89,30 @@ void fragment() {
 	ALPHA = 1.0 - mask.g;
 	ROUGHNESS = 0.0;
 	
+	//metal
 	if(material_attributes.a == 1.0){
 		METALLIC = metal_metallic;
 		
 		height += texture(dented_heightmap, UV).r * dented_heightmap_strength * material_attributes.g;
 		NORMAL = heightToNormal(height, 3.0, VERTEX, NORMAL);
 		
-		ALBEDO *= texture(clean_metal_tex, UV * 2.0).r;
+		ALBEDO *= texture(clean_metal_tex, UV * 4.0).rgb;
 	}
 	
+	//cloth
+	if(material_attributes.a == 2.0){
+		vec4 cloth_norm = texture(cloth_normal, UV*2.0);
+		//NORMAL = cloth_norm.rgb * 3.0;
+		NORMAL_MAP = cloth_norm.rgb;
+		NORMAL_MAP_DEPTH = 1.0;
+		
+		ALBEDO *= texture(cloth_tex, UV*3.0).r;
+	}
 	
 	//cloth covered metal
 	if(material_attributes.a == 3.0){
 		height += texture(covered_metal_height, UV).r * covered_metal_height_strength;
 		NORMAL = heightToNormal(height, 3.0, VERTEX, NORMAL);
-		
 		
 		if(material_attributes.b > 0.0 && mask.b == 0.0) ALBEDO += fresnel(2.0, NORMAL, VIEW)*material_attributes.b;
 		if(mask.b > 0.4 && mask.b < 0.6) METALLIC = metal_metallic;
@@ -117,5 +129,10 @@ void fragment() {
 			if(chain_norm.a > 0.5) METALLIC = metal_metallic;
 		}
 		else NORMAL = heightToNormal(height, 3.0, VERTEX, NORMAL);
+	}
+	
+	//leather
+	if(material_attributes.a == 5.0){
+		ALBEDO *= texture(clean_metal_tex, UV * 3.0).rgb;
 	}
 }
